@@ -183,7 +183,20 @@ public static class FFMPEG
         if (!File.Exists(filepath))
             throw new CouldNotExtractInfoException("Requested filepath does not exist!", new FileSystem.InvalidPathException());
 
-        ExifData exifData = new(await ExifTool.GetTags(filepath, "Video Frame Rate", "Image Size"));
+        string tags;
+        try
+        {
+            tags = await ExifTool.GetTags(filepath, "Video Frame Rate", "Image Size");
+        }
+        catch(Command.ValidationFailedException exception)
+        {
+            string shoopies = await ExifTool.GetWarnings(filepath);
+            Output.WriteLine(shoopies);
+            string validationResult = await ExifTool.ValidateMetadata(filepath);
+            throw new ExifTool.ExifException(validationResult, exception);
+        }
+        
+        ExifData exifData = new(tags);
 
         // These fields should be filled by retrieving the file information of the videoFilepath parameter
         return new VideoInformation

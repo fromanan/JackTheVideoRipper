@@ -33,10 +33,32 @@ public static class ExifTool
     private static class Parameters
     {
         // Removes tab aligned spacing that makes the usual output formatted like a table
-        public const string COMPACT_FORMAT = "-s -s";
+        public const string COMPACT_FORMAT = "-s -s -m";
     
         // Returns only the value of the requested tags, no keys or messages
-        public const string RETURN_VALUE_ONLY = "-s -s -s";
+        public const string RETURN_VALUE_ONLY = "-s -s -s -m";
+        
+        public const string VALIDATE = "-validate -warning -a";
+    }
+
+    public static async Task<string> GetWarnings(string filepath)
+    {
+        return await GetTag(filepath, "Warning");
+    }
+    
+    public static async Task<string> GetErrors(string filepath)
+    {
+        return await GetTag(filepath, "Error");
+    }
+
+    public static async Task<string> GetWarningsAndErrors(string filepath)
+    {
+        return await GetTags(filepath, "Warning", "Error");
+    }
+
+    public static async Task<string> ValidateMetadata(string filepath)
+    {
+        return await _Command.RunCommandAsync($"{Parameters.VALIDATE} {filepath.WrapQuotes()}");
     }
 
     public static async Task<string> GetMetadataString(string filepath)
@@ -83,6 +105,19 @@ public static class ExifTool
     private static string MergeKeys(params string[] keys)
     {
         return keys.Select(k => $"-{k}").Merge(" ");
+    }
+
+    #endregion
+
+    #region Embedded Types
+
+    public class ExifException : Exception
+    {
+        public ExifException() { }
+        
+        public ExifException(string message) : base(message) { }
+        
+        public ExifException(string message, Exception innerException) : base(message, innerException) { }
     }
 
     #endregion

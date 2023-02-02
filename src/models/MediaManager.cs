@@ -1,4 +1,5 @@
-﻿using JackTheVideoRipper.extensions;
+﻿using System.Diagnostics;
+using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.models.enums;
@@ -115,10 +116,13 @@ public class MediaManager
             case ProcessRowType.Compress:
                 AddProcess(new CompressProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
+            case ProcessRowType.Repair:
+                break;
             default:
             case ProcessRowType.Convert:
             case ProcessRowType.Recode:
-            case ProcessRowType.Repair:
+                Modals.Warning($"{processRowType.ToString().WrapQuotes()} Process is not currently supported!",
+                    "Unsupported Tool Selection");
                 break;
         }
     }
@@ -356,12 +360,20 @@ public class MediaManager
         // Rows for each process required
         IEnumerable<MediaItemRow<FfmpegParameters>> mediaItemRows = repairTaskParameters.Select(CreateRepairRow);
 
-        async void Repair(MediaItemRow<FfmpegParameters> row)
+        foreach (MediaItemRow<FfmpegParameters> row in mediaItemRows)
+        {
+            Process process = FFMPEG.CreateCommand(row.ProcessParameters.ToString());
+            process.OutputDataReceived += Output.WriteData;
+            process.ErrorDataReceived += Output.WriteData;
+            process.Start();
+        }
+
+        /*async void Repair(MediaItemRow<FfmpegParameters> row)
         {
             await QueueProcessAsync(row, ProcessRowType.Repair);
         }
 
-        mediaItemRows.ForEach(Repair);
+        mediaItemRows.ForEach(Repair);*/
     }
 
     #endregion
