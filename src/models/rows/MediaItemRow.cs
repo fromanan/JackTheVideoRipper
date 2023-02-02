@@ -20,16 +20,14 @@ public struct MediaItemRow<T> : IMediaItem where T : IProcessParameters, new()
         MediaType mediaMediaType = MediaType.Video,
         T? mediaParameters = default)
     {
-        if (mediaParameters is IRequiresUrlParameters && url.IsNullOrEmpty())
+        switch (mediaParameters)
         {
-            throw new ArgumentNullException(nameof(url));
+            case IRequiresUrlParameters when url.IsNullOrEmpty():
+                throw new ArgumentNullException(nameof(url));
+            case IRequiresFileParameters when filepath.IsNullOrEmpty():
+                throw new ArgumentNullException(nameof(filepath));
         }
 
-        if (mediaParameters is IRequiresFileParameters && filepath.IsNullOrEmpty())
-        {
-            throw new ArgumentNullException(nameof(filepath));
-        }
-        
         Url = url;
         Title = title;
         Filepath = filepath;
