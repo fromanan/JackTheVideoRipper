@@ -405,14 +405,14 @@ public static class FileSystem
         return JsonConvert.SerializeObject(obj);
     }
 
-    public static void WriteJsonToFile(string filepath, object? obj)
+    public static void SerializeToDisk(string filepath, object? obj)
     {
         SaveToFile(filepath, Serialize(obj));
     }
     
     public static void SerializeAndDownload(object? obj)
     {
-        WriteJsonToFile(Settings.Data.DefaultDownloadPath, obj);
+        SerializeToDisk(Settings.Data.DefaultDownloadPath, obj);
     }
 
     public static T? Deserialize<T>(string obj)

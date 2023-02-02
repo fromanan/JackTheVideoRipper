@@ -96,7 +96,10 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Command failed to execute! (Exit Code = {0}).
+        ///   Looks up a localized string similar to Command failed to execute! (Exit Code = {0})
+        ///          Details:
+        ///            {1}
+        ///        .
         /// </summary>
         internal static string CommandFailed {
             get {

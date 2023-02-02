@@ -167,6 +167,7 @@ public static class Core
     
     public static void Crash(string message, Exception? exception = null)
     {
+        Output.SaveLogs();
         Environment.FailFast(message, exception);
     }
     

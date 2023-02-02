@@ -19,7 +19,7 @@ public class MediaStorageManager
     
     public void SaveToDisk()
     {
-        FileSystem.WriteJsonToFile(_Filepath, _mediaTable);
+        FileSystem.SerializeToDisk(_Filepath, _mediaTable);
     }
 
     public async Task AddMedia()

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.views;
 using Console = JackTheVideoRipper.models.Console;
 
@@ -12,6 +13,8 @@ public static class Output
     private static readonly Console _Console = new("Main");
     
     public static bool ConsoleAttached { get; private set; }
+
+    private static readonly LogfileModel _LogfileModel = new();
 
     #endregion
 
@@ -33,7 +36,9 @@ public static class Output
         if (sendAsNotification)
             NotificationsManager.SendNotification(new Notification(message, CallerType));
 
-        _Console.WriteOutput(CreateLog(message, color));
+        LogNode logNode = CreateLog(message, color);
+        _LogfileModel.Add(logNode);
+        _Console.WriteOutput(logNode);
     }
     
     public static void Write(object? message, Color? color = null, bool sendAsNotification = false)
@@ -42,6 +47,12 @@ public static class Output
             return;
 
         Write(message.ToString()!, color, sendAsNotification);
+    }
+
+    public static void WriteData(object sender, DataReceivedEventArgs args)
+    {
+        if (args.Data is not null)
+            WriteLine(args.Data);
     }
     
     public static void WriteLine(string message, Color? color = null, bool sendAsNotification = false)
@@ -55,6 +66,17 @@ public static class Output
             return;
         
         Write($"{message}\n", color, sendAsNotification);
+    }
+
+    public static void LogException<T>(T exception) where T : Exception
+    {
+        WriteLine($"Exception Thrown:\n{new ExceptionModel(exception, typeof(T))}");
+    }
+
+    public static void SaveLogs()
+    {
+        FileSystem.SerializeToDisk(FileSystem.MergePaths(FileSystem.Paths.Logs,
+            $"{FileSystem.TimeStampDate}.logfile"), _LogfileModel);
     }
 
     #endregion

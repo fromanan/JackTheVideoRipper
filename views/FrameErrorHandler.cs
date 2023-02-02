@@ -33,8 +33,8 @@ namespace JackTheVideoRipper.views
         {
             tbMessage.Text = _exception.Message;
             tbSource.Text = _exception.Source;
-            tbCaller.Text = nameof(_exception.TargetSite);
-            tbType.Text = _exception.GetBaseException().GetType().ToString();
+            tbCaller.Text = _exception.GetCaller();
+            tbType.Text = _exception.GetBaseTypeName();
             rtbStackTrace.Text = _exception.StackTrace;
         }
 

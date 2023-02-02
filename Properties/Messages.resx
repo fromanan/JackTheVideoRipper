@@ -91,7 +91,10 @@
         <value>Application closed due to unhandled exception.</value>
     </data>
     <data name="CommandFailed" xml:space="preserve">
-        <value>Command failed to execute! (Exit Code = {0})</value>
+        <value>Command failed to execute! (Exit Code = {0})
+          Details:
+            {1}
+        </value>
     </data>
     <data name="ClipboardInvalidUrl" xml:space="preserve">
         <value>Clipboard content is not valid url!</value>

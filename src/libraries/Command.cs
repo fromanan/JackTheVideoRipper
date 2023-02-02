@@ -36,7 +36,7 @@ public readonly struct Command
     {
         bool validationResult = _validationHandler(result.Output) && result.Succeeded;
         if (_throwOnValidationFailed && !validationResult)
-            throw new ValidationFailedException(string.Format(Messages.CommandFailed, result.ExitCode));
+            throw new ValidationFailedException(string.Format(Messages.CommandFailed, result.ExitCode, result.Output));
         return validationResult;
     }
     

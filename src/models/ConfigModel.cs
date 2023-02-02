@@ -20,7 +20,7 @@ public class ConfigModel : IConfigModel
     public virtual void WriteToDisk()
     {
         _configLock.EnterReadLock();
-        WriteJsonToFile(Filepath, this);
+        SerializeToDisk(Filepath, this);
         _configLock.ExitReadLock();
     }
 

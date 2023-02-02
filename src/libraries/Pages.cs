@@ -56,6 +56,7 @@ public static class Pages
 
     public static void OpenExceptionHandler(Exception exception)
     {
+        Output.LogException(exception);
         if (new FrameErrorHandler(exception).ShowDialog() == DialogResult.Abort)
             Core.Crash(Messages.UnhandledException, exception);
     }

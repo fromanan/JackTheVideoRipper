@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text;
+using JackTheVideoRipper.extensions;
+using Newtonsoft.Json;
 
 namespace JackTheVideoRipper.models;
 
@@ -29,13 +31,45 @@ public class ExceptionModel
         Type = type;
         StackTrace = stackTrace;
     }
+    
+    public ExceptionModel(string message, string? source, string caller, Type type, string? stackTrace)
+    {
+        Message = message;
+        Source = source;
+        Caller = caller;
+        Type = type.ToString();
+        StackTrace = stackTrace;
+    }
 
     public ExceptionModel(Exception exception)
     {
         Message = exception.Message;
         Source = exception.Source;
-        Caller = nameof(exception.TargetSite);
-        Type = exception.GetBaseException().GetType().ToString();
+        Caller = exception.GetCaller();
+        Type = exception.GetBaseTypeName();
         StackTrace = exception.StackTrace;
+    }
+    
+    public ExceptionModel(Exception exception, Type type)
+    {
+        Message = exception.Message;
+        Source = exception.Source;
+        Caller = exception.GetCaller();
+        Type = type.ToString();
+        StackTrace = exception.StackTrace;
+    }
+
+    public override string ToString()
+    {
+        StringBuilder buffer = new();
+
+        buffer.AppendLine($"Exception Type: {Type}");
+        buffer.AppendLine($"Caller: {Caller}");
+        buffer.AppendLine($"Message: {Message}");
+        buffer.AppendLine($"Source: {Source}");
+        buffer.AppendLine("Stack Trace:");
+        buffer.AppendLine(StackTrace);
+        
+        return buffer.ToString();
     }
 }

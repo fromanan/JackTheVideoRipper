@@ -182,6 +182,8 @@ public class Ripper
             return;
         }
         
+        Output.SaveLogs();
+        
         // Allow normal shutdown for all subscribers
         await Core.Shutdown();
     }
