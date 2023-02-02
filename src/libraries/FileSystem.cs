@@ -41,17 +41,69 @@ public static class FileSystem
 
     public static class Paths
     {
+        /// <summary>
+        /// Alias project root folder
+        /// </summary>
         public static readonly string AppPath       = Path.GetDirectoryName(MainModule?.FileName).ValueOrDefault();
+        
+        /// <summary>
+        /// Alias for %LocalAppData% or "C:\Users\[username]\AppData\Local"
+        /// </summary>
         public static readonly string Local         = GetSpecialFolderPath(SpecialFolder.LocalApplicationData);
+        
+        /// <summary>
+        /// Alias for %ProgramData% or "C:\ProgramData"
+        /// </summary>
         public static readonly string Common        = GetSpecialFolderPath(SpecialFolder.CommonApplicationData);
+        
+        /// <summary>
+        /// Alias for "C:\ProgramData\[program_name]\"
+        /// </summary>
         public static readonly string Root          = MergePaths(Common, AppInfo.ProgramName);
+        
+        /// <summary>
+        /// Alias for "C:\ProgramData\[program_name]\bin\"
+        /// </summary>
         public static readonly string Install       = MergePaths(Root, "bin");
+        
+        /// <summary>
+        /// Alias for "C:\Users\[username]\AppData\Local\[program_name]\"
+        /// </summary>
         public static readonly string Settings      = MergePaths(Local, AppInfo.ProgramName);
+        
+        /// <summary>
+        /// Alias for %UserProfile% or "C:\Users\[username]\"
+        /// </summary>
         public static readonly string UserProfile   = Environment.ExpandEnvironmentVariables("%userprofile%");
+        
+        /// <summary>
+        /// Alias for %UserProfile% or "C:\Users\[username]\Downloads\"
+        /// </summary>
         public static readonly string Download      = MergePaths(UserProfile, "Downloads");
+        
+        /// <summary>
+        /// Alias for "C:\Users\[username]\AppData\Local\[program_name]\UserData\"
+        /// </summary>
         public static readonly string UserData      = MergePaths(Settings, "UserData");
+        
+        /// <summary>
+        /// Alias for "C:\Users\[username]\AppData\Local\[program_name]\settings\"
+        /// </summary>
         public static readonly string Config        = MergePaths(Settings, "settings");
+        
+        /// <summary>
+        /// Alias for "C:\Users\[username]\AppData\Local\[program_name]\data\"
+        /// </summary>
         public static readonly string Data          = MergePaths(Settings, "data");
+        
+        /// <summary>
+        /// Alias for "C:\Users\[username]\AppData\Local\[program_name]\data\logs\"
+        /// </summary>
+        public static readonly string Logs          = MergePaths(Data, "logs");
+        
+        /// <summary>
+        /// Alias for "C:\Windows\System32\"
+        /// </summary>
         public static readonly string System        = Environment.SystemDirectory;
     }
 
