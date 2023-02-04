@@ -100,7 +100,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     {
         Filepath = mediaItem.Filepath;
         Filename = FileSystem.GetFilenameWithoutExtension(Filepath);
-        ViewItem = Ripper.CreateMediaViewItem(mediaItem);
+        ViewItem = Ripper.CreateMediaViewItem(mediaItem, Tag);
         ViewCollection = new Dictionary<ViewField, IViewSubItem>
         {
             { ViewField.Title,      ViewItem.SubItems[0] },
