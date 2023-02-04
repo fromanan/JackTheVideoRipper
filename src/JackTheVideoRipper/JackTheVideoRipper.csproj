@@ -221,8 +221,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\JackCrashHandler\JackCrashHandler.csproj" />
-  </ItemGroup>
-
 </Project>

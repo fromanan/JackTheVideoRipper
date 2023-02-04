@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\JackTheVideoRipper", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\JackTheVideoRipperTest", "src\JackTheVideoRipperTest\JackTheVideoRipperTest.csproj", "{A35704C5-D62F-4A72-A158-B4A5D09EADF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JackCrashHandler", "JackCrashHandler\JackCrashHandler.csproj", "{5B2E0E34-1800-423B-9949-C0FDB18939CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "src\JackCrashHandler", "src\JackCrashHandler\JackCrashHandler.csproj", "{5B2E0E34-1800-423B-9949-C0FDB18939CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
