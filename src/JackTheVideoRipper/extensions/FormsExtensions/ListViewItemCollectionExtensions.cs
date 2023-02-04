@@ -7,45 +7,33 @@ public static class ListViewItemCollectionExtensions
 {
     public static void AddRange(this ListViewItemCollection itemCollection, IEnumerable<ListViewItem> items)
     {
-        Parallel.ForEach(items, item =>
+        foreach (ListViewItem item in items)
         {
-            lock (itemCollection)
-            {
-                itemCollection.Add(item);
-            }
-        });
+            itemCollection.Add(item);
+        }
     }
     
     public static void RemoveRange(this ListViewItemCollection itemCollection, IEnumerable<ListViewItem> items)
     {
-        Parallel.ForEach(items, item =>
+        foreach (ListViewItem item in items)
         {
-            lock (itemCollection)
-            {
-                itemCollection.Remove(item);
-            }
-        });
+            itemCollection.Remove(item);
+        }
     }
     
     public static void AddRange(this ListViewItemCollection itemCollection, IEnumerable<IViewItem> items)
     {
-        Parallel.ForEach(items, item =>
+        foreach (IViewItem item in items)
         {
-            lock (itemCollection)
-            {
-                itemCollection.Add(item.As<ListViewItem>());
-            }
-        });
+            itemCollection.Add(item.As<ListViewItem>());
+        }
     }
     
     public static void RemoveRange(this ListViewItemCollection itemCollection, IEnumerable<IViewItem> items)
     {
-        Parallel.ForEach(items, item =>
+        foreach (IViewItem item in items)
         {
-            lock (itemCollection)
-            {
-                itemCollection.Remove(item.As<ListViewItem>());
-            }
-        });
+            itemCollection.Remove(item.As<ListViewItem>());
+        }
     }
 }
