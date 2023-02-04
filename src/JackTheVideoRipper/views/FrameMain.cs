@@ -278,7 +278,7 @@ namespace JackTheVideoRipper
         {
             CachedSelectedTag = FirstSelected.Tag;
         }
-        
+
         private void OnDragEnter(object? sender, DragEventArgs e)
         {
             if (e.Data is null)
@@ -303,19 +303,10 @@ namespace JackTheVideoRipper
             FrameSettings.SettingsUpdatedEvent += OnSettingsUpdated;
 
             // User Events
-            KeyDown += KeyDownHandler;
-            Click += OnFormClick;
-            listItems.Click += OnFormClick;
-            contextMenuListItems.Click += OnFormClick;
-            listItems.DragEnter += OnDragEnter;
-            listItems.DragDrop += OnDragDrop;
-            listItems.MouseClick += OnListItemsMouseClick;
+            SubscribeFormEvents();
 
             // Core Handlers
-            Load += OnFormLoad;
-            Shown += OnFormShown;
-            Shown += Ripper.OnEndStartup;
-            FormClosing += OnFormClosing;
+            SubscribeCoreHandlers();
             
             ManagerUpdated = delegate { TimerProcessLimit_Tick(); };
             _ripper.SubscribeMediaManagerEvents(ManagerUpdated, AddItem, AddItems,
@@ -328,13 +319,7 @@ namespace JackTheVideoRipper
             SubscribeSubpageActions();
             
             // Core Buttons
-            openDownloadFolderToolStripMenuItem.Click += Ripper.OnOpenDownloads;
-            exitToolStripMenuItem.Click += (_, _) => Close();
-            statusBar.DoubleClick += Ripper.OnOpenTaskManager;
-            openTaskManagerToolStripMenuItem.Click += Ripper.OnOpenTaskManager;
-            settingsToolStripMenuItem.Click += Ripper.OnOpenSettings;
-            checkForUpdatesToolStripMenuItem.Click += Ripper.OnCheckForUpdates;
-            openDependenciesFolderToolStripMenuItem.Click += Ripper.OnOpenInstallFolder;
+            SubscribeCoreButtons();
             
             // Dependencies
             SubscribeDependencies();
@@ -350,6 +335,36 @@ namespace JackTheVideoRipper
 
             // Item Context Menu
             SubscribeContextEvents();
+        }
+
+        private void SubscribeCoreHandlers()
+        {
+            Load += OnFormLoad;
+            Shown += OnFormShown;
+            Shown += Ripper.OnEndStartup;
+            FormClosing += OnFormClosing;
+        }
+
+        private void SubscribeFormEvents()
+        {
+            KeyDown += KeyDownHandler;
+            Click += OnFormClick;
+            listItems.Click += OnFormClick;
+            contextMenuListItems.Click += OnFormClick;
+            listItems.DragEnter += OnDragEnter;
+            listItems.DragDrop += OnDragDrop;
+            listItems.MouseClick += OnListItemsMouseClick;
+        }
+
+        private void SubscribeCoreButtons()
+        {
+            openDownloadFolderToolStripMenuItem.Click += Ripper.OnOpenDownloads;
+            exitToolStripMenuItem.Click += (_, _) => Close();
+            statusBar.DoubleClick += Ripper.OnOpenTaskManager;
+            openTaskManagerToolStripMenuItem.Click += Ripper.OnOpenTaskManager;
+            settingsToolStripMenuItem.Click += Ripper.OnOpenSettings;
+            checkForUpdatesToolStripMenuItem.Click += Ripper.OnCheckForUpdates;
+            openDependenciesFolderToolStripMenuItem.Click += Ripper.OnOpenInstallFolder;
         }
 
         private void SubscribeSubpageActions()
@@ -369,6 +384,8 @@ namespace JackTheVideoRipper
             downloadBatchYouTubePlaylistlToolStripMenuItem.Click += _ripper.OnBatchPlaylist;
             downloadBatchDocumentToolStripMenuItem.Click += _ripper.OnBatchDocument;
             downloadBatchManualToolStripMenuItem.Click += _ripper.OnDownloadBatch;
+
+            compressBatchToolStripMenuItem.Click += _ripper.OnCompressBulk;
         }
 
         private void SubscribeDependencies()
