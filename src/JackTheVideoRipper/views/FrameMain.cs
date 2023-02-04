@@ -23,9 +23,9 @@ namespace JackTheVideoRipper
 
         private ListView.ListViewItemCollection ViewItems => listItems.Items;
 
-        public ListViewItem FirstSelected => Selected[0];
+        public IViewItem FirstSelected => Selected[0].As<IViewItem>();
 
-        public ListViewItem LastSelected => Selected[^1];
+        public IViewItem LastSelected => Selected[^1].As<IViewItem>();
         
         public bool NoneSelected => Selected.Count <= 0;
         
@@ -276,7 +276,9 @@ namespace JackTheVideoRipper
 
         private void OnFormClick(object? sender, EventArgs args)
         {
-            CachedSelectedTag = FirstSelected.Tag.Cast<string>();
+            CachedSelectedTag = FirstSelected.Tag;
+        }
+        
         private void OnDragEnter(object? sender, DragEventArgs e)
         {
             if (e.Data is null)
@@ -306,10 +308,12 @@ namespace JackTheVideoRipper
             // User Events
             KeyDown += KeyDownHandler;
             Click += OnFormClick;
+            listItems.Click += OnFormClick;
+            contextMenuListItems.Click += OnFormClick;
             listItems.DragEnter += OnDragEnter;
             listItems.DragDrop += OnDragDrop;
             listItems.MouseClick += OnListItemsMouseClick;
-            
+
             // Core Handlers
             Load += OnFormLoad;
             Shown += OnFormShown;
