@@ -1,4 +1,5 @@
-﻿using JackTheVideoRipper.extensions;
+﻿using System.Diagnostics;
+using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.modules;
 using JackTheVideoRipper.Properties;
 
@@ -164,10 +165,19 @@ public static class Core
     {
         return InternetGetConnectedState(out int _, 0);         
     }
+
+    public static void OpenCrashHandler()
+    {
+        string crashHandlerPath = FileSystem.CreateInstallPath("JackCrashHandler.exe");
+        Process.Start(crashHandlerPath);
+    }
     
     public static void Crash(string message, Exception? exception = null)
     {
         Output.SaveLogs();
+
+        OpenCrashHandler();
+        
         Environment.FailFast(message, exception);
     }
     
