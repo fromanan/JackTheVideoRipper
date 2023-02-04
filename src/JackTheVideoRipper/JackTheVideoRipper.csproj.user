@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="external\ConsoleControl\ConsoleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="src\models\AsyncProcess.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="views\FrameAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameCheckMetadata.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameConvert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameErrorHandler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameImportPlaylist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameMediaManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameNewMedia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameNewMediaBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameNewMediaSimple.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameNotifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\FrameYTDLDependencyInstall.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\modals\BasicDropdown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\modals\BasicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\modals\FrameBasicDropdown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="views\TaskForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Urls.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
