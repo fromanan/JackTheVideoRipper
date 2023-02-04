@@ -123,7 +123,7 @@ public class Ripper
         await _mediaManager.CompressVideo(filepath);
     }
         
-    public async Task OnCompressBulk(object? sender, EventArgs e)
+    public async void OnCompressBulk(object? sender, EventArgs e)
     {
         if (SelectFolder() is not { } directoryPath)
             return;

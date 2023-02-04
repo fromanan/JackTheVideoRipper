@@ -135,6 +135,7 @@
          this.timerProcessLimit = new System.Windows.Forms.Timer(this.components);
          this.listItemRowsUpdateTimer = new System.Windows.Forms.Timer(this.components);
          this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+         this.compressBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.menuStrip.SuspendLayout();
          this.contextMenuListItems.SuspendLayout();
          this.toolBar.SuspendLayout();
@@ -415,6 +416,7 @@
             this.toolStripMenuItem4,
             this.validateBatchToolStripMenuItem,
             this.repairBatchToolStripMenuItem,
+            this.compressBatchToolStripMenuItem,
             this.toolStripSeparator3,
             this.openDownloadFolderToolStripMenuItem});
          this.youTubeToolStripMenuItem.Name = "youTubeToolStripMenuItem";
@@ -911,6 +913,13 @@
          this.splitContainer1.SplitterWidth = 3;
          this.splitContainer1.TabIndex = 4;
          // 
+         // compressBatchToolStripMenuItem
+         // 
+         this.compressBatchToolStripMenuItem.Enabled = false;
+         this.compressBatchToolStripMenuItem.Name = "compressBatchToolStripMenuItem";
+         this.compressBatchToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
+         this.compressBatchToolStripMenuItem.Text = "Compress Batch";
+         // 
          // FrameMain
          // 
          this.AllowDrop = true;
@@ -1052,6 +1061,7 @@
         private ToolStripMenuItem openConsoleToolStripMenuItem;
         private ToolStripMenuItem openHistoryToolStripMenuItem;
         private ToolStripStatusLabel toolStripStatusLabel4;
-    }
+      private ToolStripMenuItem compressBatchToolStripMenuItem;
+   }
 }
 
