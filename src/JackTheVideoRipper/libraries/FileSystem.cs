@@ -268,8 +268,8 @@ public static class FileSystem
         };
     }
 
-    public static Process CreateProcess(string bin, string parameters, string workingDir = "", bool runAsAdmin = false, 
-        bool executeShell = false, bool redirect = true, bool enableRaisingEvents = false)
+    public static Process CreateProcess(string bin, string parameters = "", string workingDir = "", 
+        bool runAsAdmin = false, bool executeShell = false, bool redirect = true, bool enableRaisingEvents = false)
     {
         if (bin.Invalid(IsValidPath))
             throw new FileSystemException(RFileSystem.EmptyBinPath);
@@ -324,7 +324,7 @@ public static class FileSystem
         return process.GetOutput();
     }
     
-    public static string RunProcess(string path, string arguments)
+    public static string RunProcess(string path, string arguments = "")
     {
         return RunProcess(CreateProcess(path, arguments));
     }
