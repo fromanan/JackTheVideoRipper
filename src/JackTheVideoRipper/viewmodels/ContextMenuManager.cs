@@ -56,6 +56,9 @@ public class ContextMenuManager
     
     private static bool ValueIfStatus(ProcessStatus? processStatus = null, bool value = true)
     {
+        if (processStatus is null)
+            return value;
+        
         return Ripper.Instance.GetSelectedStatus() == processStatus ? value : !value;
     }
 }
