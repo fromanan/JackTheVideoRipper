@@ -2,6 +2,7 @@
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.modules;
 using JackTheVideoRipper.Properties;
+using static JackTheVideoRipper.FileSystem;
 
 namespace JackTheVideoRipper;
 
@@ -85,7 +86,7 @@ public static class Core
 
     public static void CopyToClipboard(string url)
     {
-        FileSystem.SetClipboardText(url);
+        SetClipboardText(url);
     }
 
     public static async Task UpdateDependencies()
@@ -121,33 +122,33 @@ public static class Core
         switch (dependency)
         {
             case Dependencies.YouTubeDL:
-                await FileSystem.InstallProgram(Urls.YouTubeDL, Executables.YouTubeDL);
-                //await FileSystem.GetWebResourceHandle(Urls.YouTubeDL, FileSystem.Paths.Install).Run();
+                await InstallProgram(Urls.YouTubeDL, Executables.YouTubeDL);
+                //await GetWebResourceHandle(Urls.YouTubeDL, Paths.Install).Run();
                 break;
             case Dependencies.FFMPEG:
-                await FileSystem.InstallProgram(Urls.FFMPEG, Executables.FFProbe);
+                await InstallProgram(Urls.FFMPEG, Executables.FFProbe);
                 //await FFMPEG.DownloadLatest();
                 break;
             case Dependencies.Handbrake:
-                FileSystem.OpenWebPage(Urls.HandbrakeDownload);
-                //await FileSystem.InstallProgram(Urls.HandbrakeDownload, Executables.Handbrake);
+                OpenWebPage(Urls.HandbrakeDownload);
+                //await InstallProgram(Urls.HandbrakeDownload, Executables.Handbrake);
                 break;
             case Dependencies.VLC:
-                FileSystem.OpenWebPage(Urls.VLC);
-                //await FileSystem.InstallProgram(Urls.VLC, Executables.VLC);
+                OpenWebPage(Urls.VLC);
+                //await InstallProgram(Urls.VLC, Executables.VLC);
                 break;
             case Dependencies.AtomicParsley:
-                await FileSystem.InstallProgram(Urls.AtomicParsley, Executables.AtomicParsley);
+                await InstallProgram(Urls.AtomicParsley, Executables.AtomicParsley);
                 break;
             case Dependencies.Redistributables:
                 // TODO:
-                await FileSystem.GetWebResourceHandle(Urls.VS2010Redistributables).Run();
+                await GetWebResourceHandle(Urls.VS2010Redistributables).Run();
                 break;
             case Dependencies.Aria2c:
-                await FileSystem.InstallProgram(Urls.Aria2c, Executables.Aria2c);
+                await InstallProgram(Urls.Aria2c, Executables.Aria2c);
                 break;
             case Dependencies.ExifTool:
-                await FileSystem.InstallProgram(Urls.ExifTool, Executables.ExifTool);
+                await InstallProgram(Urls.ExifTool, Executables.ExifTool);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(dependency), dependency, null);
@@ -168,7 +169,7 @@ public static class Core
 
     public static void OpenCrashHandler()
     {
-        string crashHandlerPath = FileSystem.CreateInstallPath("JackCrashHandler.exe");
+        string crashHandlerPath = CreateInstallPath("JackCrashHandler.exe");
         Process.Start(crashHandlerPath);
     }
     
@@ -202,7 +203,7 @@ public static class Core
 
             string resourceUrl = $"https://static-cache.k2s.cc/thumbnail/{link.id}/{link.prefix}/{link.i}.jpeg";
 
-            FileSystem.DownloadWebFile(resourceUrl, FileSystem.CreateDownloadPath(filename, "Thumbnails"));
+            DownloadWebFile(resourceUrl, CreateDownloadPath(filename, "Thumbnails"));
                         
             Output.WriteLine($"Downloaded: {filename.WrapQuotes()} to disk!");
         });

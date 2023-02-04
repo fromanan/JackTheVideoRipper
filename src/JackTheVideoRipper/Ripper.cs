@@ -3,6 +3,7 @@ using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.views;
+using static JackTheVideoRipper.FileSystem;
 
 namespace JackTheVideoRipper;
 
@@ -98,7 +99,7 @@ public class Ripper
 
     public async void OnDropContent(string content)
     {
-        if (content.Invalid(FileSystem.IsValidUrl))
+        if (content.Invalid(IsValidUrl))
             return;
 
         await _mediaManager.DownloadFromUrl(content);
@@ -106,9 +107,9 @@ public class Ripper
 
     public async Task OnPasteContent()
     {
-        string url = FileSystem.GetClipboardText();
+        string url = GetClipboardText();
             
-        if (url.Invalid(FileSystem.IsValidUrl))
+        if (url.Invalid(IsValidUrl))
             return;
 
         await _mediaManager.DownloadFromUrl(url);
@@ -116,7 +117,7 @@ public class Ripper
 
     public async void OnCompressVideo(object? sender, EventArgs e)
     {
-        if (FileSystem.SelectFile() is not { } filepath)
+        if (SelectFile() is not { } filepath)
             return;
              
         await _mediaManager.CompressVideo(filepath);
@@ -124,7 +125,7 @@ public class Ripper
         
     public async Task OnCompressBulk(object? sender, EventArgs e)
     {
-        if (FileSystem.SelectFolder() is not { } directoryPath)
+        if (SelectFolder() is not { } directoryPath)
             return;
 
         await _mediaManager.CompressBulk(directoryPath);
@@ -132,7 +133,7 @@ public class Ripper
         
     public async void OnRecodeVideo(object? sender, EventArgs e)
     {
-        if (FileSystem.SelectFile() is not { } filepath)
+        if (SelectFile() is not { } filepath)
             return;
 
         await _mediaManager.RecodeVideo(filepath);
@@ -140,7 +141,7 @@ public class Ripper
         
     public async void OnRepairVideo(object? sender, EventArgs e)
     {
-        if (FileSystem.SelectFile() is not { } filepath)
+        if (SelectFile() is not { } filepath)
             return;
 
         await _mediaManager.RepairVideo(filepath);
@@ -285,12 +286,12 @@ public class Ripper
 
     public static void OnOpenDownloads(object? sender, EventArgs e)
     {
-        Task.Run(FileSystem.OpenDownloads);
+        Task.Run(OpenDownloads);
     }
 
     public static void OnOpenTaskManager(object? sender, EventArgs e)
     {
-        Task.Run(FileSystem.OpenTaskManager);
+        Task.Run(OpenTaskManager);
     }
 
     public static void OnCheckForUpdates(object? sender, EventArgs e)
@@ -305,7 +306,7 @@ public class Ripper
 
     public static void OnOpenInstallFolder(object? sender, EventArgs e)
     {
-        Task.Run(() => FileSystem.OpenFileExplorer(FileSystem.Paths.Install));
+        Task.Run(() => OpenFileExplorer(Paths.Install));
     }
 
     public static void OnOpenAbout(object? sender, EventArgs e)
