@@ -183,6 +183,15 @@
     <None Remove="external\procgov.dll" />
     <None Remove="external\procgov.pdb" />
     <None Remove="external\procgov.runtimeconfig.json" />
+    <None Remove="jackthevideoripper.snk" />
+    <None Remove="JackTheVideoRipper.csproj.DotSettings" />
+    <None Remove="JackTheVideoRipper.csproj.nuget.dgspec.json" />
+    <None Remove="JackTheVideoRipper.csproj.nuget.g.props" />
+    <None Remove="JackTheVideoRipper.csproj.nuget.g.targets" />
+    <None Remove="project.assets.json" />
+    <None Remove="project.nuget.cache" />
+    <None Remove="project.packagespec.json" />
+    <None Remove="rider.project.restore.info" />
   </ItemGroup>
 
   <ItemGroup>
