@@ -196,29 +196,33 @@
 
   <ItemGroup>
     <Reference Include="NovaCore">
-      <HintPath>external\NovaCore\NovaCore.dll</HintPath>
+      <HintPath>..\..\external\NovaCore\NovaCore.dll</HintPath>
     </Reference>
     <Reference Include="NovaCore.Common">
-      <HintPath>external\NovaCore\NovaCore.Common.dll</HintPath>
+      <HintPath>..\..\external\NovaCore\NovaCore.Common.dll</HintPath>
     </Reference>
     <Reference Include="NovaCore.FileSystem">
-      <HintPath>external\NovaCore\NovaCore.FileSystem.dll</HintPath>
+      <HintPath>..\..\external\NovaCore\NovaCore.FileSystem.dll</HintPath>
     </Reference>
     <Reference Include="NovaCore.Forms">
-      <HintPath>external\NovaCore\NovaCore.Forms.dll</HintPath>
+      <HintPath>..\..\external\NovaCore\NovaCore.Forms.dll</HintPath>
     </Reference>
     <Reference Include="NovaCore.Logging">
-      <HintPath>external\NovaCore\NovaCore.Logging.dll</HintPath>
+      <HintPath>..\..\external\NovaCore\NovaCore.Logging.dll</HintPath>
     </Reference>
     <Reference Include="NovaCore.Utilities">
-      <HintPath>external\NovaCore\NovaCore.Utilities.dll</HintPath>
+      <HintPath>..\..\external\NovaCore\NovaCore.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="NovaCore.Web">
-      <HintPath>external\NovaCore\NovaCore.Web.dll</HintPath>
+      <HintPath>..\..\external\NovaCore\NovaCore.Web.dll</HintPath>
     </Reference>
     <Reference Include="procgov">
-      <HintPath>external\procgov.dll</HintPath>
+      <HintPath>..\..\external\procgov.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\JackCrashHandler\JackCrashHandler.csproj" />
   </ItemGroup>
 
 </Project>
