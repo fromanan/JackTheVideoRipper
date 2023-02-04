@@ -96,6 +96,14 @@ public class Ripper
 
     #region Event Handlers
 
+    public async void OnDropContent(string content)
+    {
+        if (content.Invalid(FileSystem.IsValidUrl))
+            return;
+
+        await _mediaManager.DownloadFromUrl(content);
+    }
+
     public async Task OnPasteContent()
     {
         string url = FileSystem.GetClipboardText();

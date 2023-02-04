@@ -277,6 +277,25 @@ namespace JackTheVideoRipper
         private void OnFormClick(object? sender, EventArgs args)
         {
             CachedSelectedTag = FirstSelected.Tag.Cast<string>();
+        private void OnDragEnter(object? sender, DragEventArgs e)
+        {
+            if (e.Data is null)
+                return;
+
+            e.Effect = e.Data.GetDataPresent(DataFormats.Text) ?
+                DragDropEffects.Copy :
+                DragDropEffects.None;
+        }
+
+        private void OnDragDrop(object? sender, DragEventArgs e)
+        {
+            if (e.Data is null || !e.Data.GetDataPresent(DataFormats.Text))
+                return;
+
+            if (e.Data.GetData(DataFormats.Text) is not string content)
+                return;
+
+            _ripper.OnDropContent(content);
         }
 
         private void SubscribeEvents()
@@ -287,6 +306,8 @@ namespace JackTheVideoRipper
             // User Events
             KeyDown += KeyDownHandler;
             Click += OnFormClick;
+            listItems.DragEnter += OnDragEnter;
+            listItems.DragDrop += OnDragDrop;
             listItems.MouseClick += OnListItemsMouseClick;
             
             // Core Handlers
