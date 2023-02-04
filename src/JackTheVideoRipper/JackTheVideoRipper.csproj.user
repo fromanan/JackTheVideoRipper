@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="external\ConsoleControl\ConsoleControl.cs">
+    <Compile Update="..\..\external\ConsoleControl\ConsoleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="src\models\AsyncProcess.cs">
+    <Compile Update="models\AsyncProcess.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="views\FrameAbout.cs">
@@ -53,12 +53,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="views\FrameYTDLDependencyInstall.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="views\modals\BasicDropdown.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="views\modals\BasicForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="views\modals\FrameBasicDropdown.cs">
