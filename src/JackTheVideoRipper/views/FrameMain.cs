@@ -284,17 +284,14 @@ namespace JackTheVideoRipper
             if (e.Data is null)
                 return;
 
-            e.Effect = e.Data.GetDataPresent(DataFormats.Text) ?
+            e.Effect = e.IsText() ?
                 DragDropEffects.Copy :
                 DragDropEffects.None;
         }
 
         private void OnDragDrop(object? sender, DragEventArgs e)
         {
-            if (e.Data is null || !e.Data.GetDataPresent(DataFormats.Text))
-                return;
-
-            if (e.Data.GetData(DataFormats.Text) is not string content)
+            if (!e.IsText() || e.AsText() is not string content)
                 return;
 
             _ripper.OnDropContent(content);
