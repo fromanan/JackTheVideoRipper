@@ -76,6 +76,9 @@ public class ProcessTable
     
     public bool Contains(string tag)
     {
+        if (tag.IsNullOrEmpty())
+            throw new ProcessTableException("Tag does not have value!");
+        
         _tableLock.EnterReadLock();
         try
         {
@@ -193,4 +196,23 @@ public class ProcessTable
             } 
         }
     }
+    
+    #region Embedded Types
+
+    public class ProcessTableException : Exception
+    {
+        public ProcessTableException()
+        {
+        }
+        
+        public ProcessTableException(string message) : base(message)
+        {
+        }
+        
+        public ProcessTableException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+
+    #endregion
 }
