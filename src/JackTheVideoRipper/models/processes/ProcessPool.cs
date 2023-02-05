@@ -19,6 +19,7 @@ public class ProcessPool
     public static readonly ErrorLogger ErrorLogger = new();
     
     private bool _updating;
+    private bool _fillingQueue;
 
     private readonly Task[] _clearTasks;
 
@@ -111,6 +112,8 @@ public class ProcessPool
 
     public async Task Update()
     {
+        FillQueue();
+        
         // Skip update if we have no running or we're currently updating
         if (!_runningProcesses.HasCached || _updating)
             return;
@@ -127,7 +130,7 @@ public class ProcessPool
     
     public bool Exists(string tag)
     {
-        return _processTable.Contains(tag);
+        return tag.HasValue() && _processTable.Contains(tag);
     }
 
     public IEnumerable<T> GetOfType<T>()
@@ -140,10 +143,7 @@ public class ProcessPool
     {
         return Processes.Where(predicate);
     }
-    
-    // TODO: Create overrides for different types of processes
-    // Processes: Conversion, Validate, Repair
-    
+
     public void QueueProcess(IProcessUpdateRow processUpdateRow, Action<IViewItem> queueCallback)
     {
         if (!_processTable.TryAdd(processUpdateRow))
@@ -350,22 +350,33 @@ public class ProcessPool
         processUpdateRow.Cancel();
     }
 
-    private bool _updatingQueue = false;
-
     public async void UpdateQueue()
     {
-        if (QueueEmpty || AtCapacity || _updatingQueue)
+        if (QueueEmpty)
+            FillQueue();
+        
+        while (!AtCapacity && !NoneOnDeck)
+        {
+            if (_onDeckProcessQueue.TryDequeue(out IProcessUpdateRow? updateRow))
+                await StartProcess(updateRow);
+
+            await Task.Delay(200);
+        }
+    }
+
+    private bool NoneOnDeck => _onDeckProcessQueue.IsEmpty;
+
+    private void FillQueue()
+    {
+        if (_fillingQueue || QueueEmpty || _onDeckProcessQueue.Count == Settings.Data.MaxConcurrentDownloads)
             return;
 
-        _updatingQueue = true;
+        _fillingQueue = true;
+        Enumerable.Range(_onDeckProcessQueue.Count, Settings.Data.MaxConcurrentDownloads)
+            .ForEach(_ => _onDeckProcessQueue.Enqueue(NextProcess!));
+        _fillingQueue = false;
 
-        var processes = Enumerable
-            .Range(_runningProcesses.Count, Settings.Data.MaxConcurrentDownloads)
-            .Select(_ => NextProcess);
-
-        await Parallel.ForEachAsync(processes, StartProcess);
-
-        _updatingQueue = false;
+        UpdateQueue();
     }
 
     #endregion
@@ -382,7 +393,7 @@ public class ProcessPool
         return _runningProcesses.Remove(processUpdateRow);
     }
     
-    private async ValueTask StartProcess(IProcessUpdateRow? processUpdateRow, CancellationToken cancellationToken)
+    private async ValueTask StartProcess(IProcessUpdateRow? processUpdateRow, CancellationToken? cancellationToken = null)
     {
         if (processUpdateRow is null)
             return;
