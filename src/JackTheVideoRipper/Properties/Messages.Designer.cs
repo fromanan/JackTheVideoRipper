@@ -360,6 +360,15 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed process with tag {0}.
+        /// </summary>
+        internal static string ProcessCompletedTag {
+            get {
+                return ResourceManager.GetString("ProcessCompletedTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Process initialized.
         /// </summary>
         internal static string ProcessInitialized {
@@ -374,6 +383,15 @@ namespace JackTheVideoRipper {
         internal static string ProcessStarted {
             get {
                 return ResourceManager.GetString("ProcessStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Started process with tag {0}.
+        /// </summary>
+        internal static string ProcessStartedTag {
+            get {
+                return ResourceManager.GetString("ProcessStartedTag", resourceCulture);
             }
         }
         

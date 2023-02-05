@@ -244,12 +244,14 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     {
         History.Data.MarkStarted(Tag);
         Buffer.AddLog(Messages.ProcessStarted, ProcessLogType.Info);
+        Output.WriteLine(string.Format(Messages.ProcessStartedTag, Tag));
     }
 
     private void FinishMessage()
     {
         History.Data.MarkCompleted(Tag, result:ProcessStatus);
         Buffer.AddLog(Messages.ProcessCompleted, ProcessLogType.Info);
+        Output.WriteLine(string.Format(Messages.ProcessCompletedTag, Tag));
     }
 
     private void InitializeBuffer()

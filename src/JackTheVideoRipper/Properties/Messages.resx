@@ -132,8 +132,14 @@
     <data name="ProcessStarted" xml:space="preserve">
         <value>Process started execution</value>
     </data>
+    <data name="ProcessStartedTag" xml:space="preserve">
+        <value>Started process with tag {0}</value>
+    </data>
     <data name="ProcessCompleted" xml:space="preserve">
         <value>Process completed</value>
+    </data>
+    <data name="ProcessCompletedTag" xml:space="preserve">
+        <value>Completed process with tag {0}</value>
     </data>
     <data name="ProcessInitialized" xml:space="preserve">
         <value>Process initialized</value>
