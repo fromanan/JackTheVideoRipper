@@ -2,6 +2,7 @@
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.modules;
 using JackTheVideoRipper.views;
 using static JackTheVideoRipper.FileSystem;
 
@@ -32,6 +33,8 @@ public class Ripper
 
     #endregion
 
+    #region ViewItem Provider Functions
+
     public static IViewItem CreateViewItem(string? tag = null)
     {
         return ViewItemProvider.CreateViewItem(tag);
@@ -47,12 +50,18 @@ public class Ripper
         return ViewItemProvider.CreateMediaViewItem(mediaItem, tag);
     }
 
+    #endregion
+
+    #region Constructor
+
     public Ripper(IViewItemProvider viewItemProvider)
     {
         _viewItemProvider = viewItemProvider;
         FrameMain = new FrameMain(this);
         SubscribeEvents();
     }
+
+    #endregion
 
     private void SubscribeEvents()
     {
@@ -97,12 +106,82 @@ public class Ripper
 
     #region Event Handlers
 
-    public async void OnDropContent(string content)
+    public async void OnDropUrl(string content)
     {
         if (content.Invalid(IsValidUrl))
             return;
 
         await _mediaManager.DownloadFromUrl(content);
+    }
+    
+    // TODO: Handle folders, handle audio files (or potentially images)
+    public async void OnDropFile(string[] filepaths)
+    {
+        if (filepaths.Length == 0)
+            return;
+        
+        var options = new[]
+        {
+            FFMPEG.Operation.Compress,
+            FFMPEG.Operation.Repair,
+            FFMPEG.Operation.Recode,
+            //FFMPEG.Operation.Convert,
+            //FFMPEG.Operation.AddAudio,
+            //FFMPEG.Operation.Validate
+        };
+
+        string? selection = Modals.BasicDropdown(options.Select(o => o.ToString()), "Operation Select");
+        if (selection is null || !Enum.TryParse(selection, out FFMPEG.Operation operation))
+            return;
+        
+        // Single file operation
+        if (filepaths.Length == 1)
+        {
+            string filepath = filepaths[0];
+            if (filepath.Invalid(IsValidPath) || !Formats.IsVideoFormat(filepath))
+                return;
+
+            switch (operation)
+            {
+                case FFMPEG.Operation.Compress:
+                    await _mediaManager.CompressVideo(filepath);
+                    break;
+                case FFMPEG.Operation.Repair:
+                    await _mediaManager.RepairVideo(filepath);
+                    break;
+                case FFMPEG.Operation.Recode:
+                    await _mediaManager.RecodeVideo(filepath);
+                    break;
+                case FFMPEG.Operation.Convert:
+                    await _mediaManager.ConvertVideo(filepath);
+                    break;
+                case FFMPEG.Operation.AddAudio:
+                    await _mediaManager.AddAudio(filepath);
+                    break;
+                case FFMPEG.Operation.Validate:
+                    await _mediaManager.ValidateVideo(filepath);
+                    break;
+            }
+        }
+        else // Batch operation
+        {
+            var validPaths = filepaths.Where(f => f.Valid(IsValidPath) && Formats.IsVideoFormat(f));
+            switch (operation)
+            {
+                case FFMPEG.Operation.Compress:
+                    break;
+                case FFMPEG.Operation.Repair:
+                    break;
+                case FFMPEG.Operation.Recode:
+                    break;
+                case FFMPEG.Operation.Convert:
+                    break;
+                case FFMPEG.Operation.AddAudio:
+                    break;
+                case FFMPEG.Operation.Validate:
+                    break;
+            }
+        }
     }
 
     public async Task OnPasteContent()

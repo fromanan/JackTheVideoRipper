@@ -1,6 +1,6 @@
 ﻿namespace JackTheVideoRipper;
 
-public class Formats
+public static class Formats
 {
     public static class Video
     {
@@ -16,6 +16,16 @@ public class Formats
 
         public const string MKV = "mkv";
     }
+    
+    public static bool IsVideoFormat(string filepath)
+    {
+        return FileSystem.GetExtension(filepath).ToLower() is Video.AVI
+            or Video.MP4
+            or Video.MOV
+            or Video.M4V
+            or Video.MPEG
+            or Video.MKV;
+    }
 
     public static class Audio
     {
@@ -28,6 +38,15 @@ public class Formats
         public const string M4A = "m4a";
 
         public const string AAC = "aac";
+    }
+    
+    public static bool IsAudioFormat(string filepath)
+    {
+        return FileSystem.GetExtension(filepath).ToLower() is Audio.MP3
+            or Audio.WAV
+            or Audio.OGG
+            or Audio.M4A
+            or Audio.AAC;
     }
 
     public static class Image
@@ -49,6 +68,19 @@ public class Formats
         public const string GIF = "gif";
 
         public const string RAW = "raw";
+    }
+    
+    public static bool IsImageFormat(string filepath)
+    {
+        return FileSystem.GetExtension(filepath).ToLower() is Image.WEBP
+            or Image.JPG
+            or Image.JPEG
+            or Image.PNG
+            or Image.BMP
+            or Image.TIFF
+            or Image.TIF
+            or Image.GIF
+            or Image.RAW;
     }
 
     public static class Pixel

@@ -347,6 +347,21 @@ public class MediaManager
         await QueueProcessAsync(row, ProcessRowType.Recode);
     }
 
+    public async Task ValidateVideo(string filepath)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task AddAudio(string filepath)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task ConvertVideo(string filepath)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task RepairVideo(string filepath)
     {
         // Order list of parameters for each task necessary

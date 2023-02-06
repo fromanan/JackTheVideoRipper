@@ -247,6 +247,10 @@ public static class FFMPEG
         Repair,
         Compress,
         Recode,
+        Convert,
+        AddAudio,
+        RemoveAudio,
+        Validate,
         Audio,
         NoAudio
     }
