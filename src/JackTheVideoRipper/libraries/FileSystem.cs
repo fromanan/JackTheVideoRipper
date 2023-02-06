@@ -689,6 +689,16 @@ public static class FileSystem
     {
         return path.IndexOfAny(Path.GetInvalidPathChars()) == -1;
     }
+
+    public static bool IsFilepath(string path)
+    {
+        return path.Valid(IsValidPath) && new Uri(path).IsFile;
+    }
+    
+    public static bool IsFolder(string path)
+    {
+        return path.Valid(IsValidPath) && !IsFilepath(path);
+    }
     
     public static bool WarnIfFileExists(string filepath)
     {
