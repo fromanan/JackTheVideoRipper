@@ -308,7 +308,7 @@ namespace JackTheVideoRipper
             cbVideoEncoder.Enabled = !enabled || ExportVideo;
         }
         
-        private void Download()
+        private void Download(object? sender, EventArgs args)
         {
             if (!LastValidUrl.Invalid(FileSystem.IsValidUrl))
             {
@@ -327,7 +327,7 @@ namespace JackTheVideoRipper
             }
         }
         
-        private void Browse()
+        private void Browse(object? sender, EventArgs args)
         {
             if (LastValidUrl.IsNullOrEmpty() || Filepath.IsNullOrEmpty()) 
                 return;
@@ -336,31 +336,31 @@ namespace JackTheVideoRipper
                 Filepath = result;
         }
         
-        private void UpdateAudioEncoder()
+        private void UpdateAudioEncoder(object? sender, EventArgs args)
         {
             if (ShouldUpdateAudio)
                 Filepath = $"{Filename}.{AudioExtension}";
         }
 
-        private void UpdateAudioFormat()
+        private void UpdateAudioFormat(object? sender, EventArgs args)
         {
             if (ShouldUpdateAudio)
                 UpdateFormat(AudioFormat);
         }
         
-        private void UpdateVideoEncoder()
+        private void UpdateVideoEncoder(object? sender, EventArgs args)
         {
             if (FormatVideo) 
                 Filepath = $"{Filename}.{VideoExtension}";
         }
 
-        private void UpdateVideoFormat()
+        private void UpdateVideoFormat(object? sender, EventArgs args)
         {
             if (FormatVideo)
                 UpdateFormat(VideoFormat);
         }
         
-        private void GetCommand()
+        private void GetCommand(object? sender, EventArgs args)
         {
             if (Url.Valid(FileSystem.IsValidUrl))
             {
@@ -376,7 +376,7 @@ namespace JackTheVideoRipper
             }
         }
         
-        private void OnCheckExportAudioChanged()
+        private void OnCheckExportAudioChanged(object? sender, EventArgs args)
         {
             if (!ExportAudio && !ExportVideo)
                 ExportAudio = true;
@@ -384,7 +384,7 @@ namespace JackTheVideoRipper
             if (ExportAudio)
             {
                 ToggleAudio(true);
-                UpdateAudioEncoder();
+                UpdateAudioEncoder(sender, args);
             }
             else
             {
@@ -392,7 +392,7 @@ namespace JackTheVideoRipper
             }
         }
 
-        private void OnCheckExportVideoChanged()
+        private void OnCheckExportVideoChanged(object? sender, EventArgs args)
         {
             // We must export one of the two
             if (!ExportVideo && !ExportAudio)
@@ -401,7 +401,7 @@ namespace JackTheVideoRipper
             if (ExportVideo)
             {
                 ToggleVideo(true);
-                UpdateVideoEncoder();
+                UpdateVideoEncoder(sender, args);
             }
             else
             {
@@ -410,7 +410,7 @@ namespace JackTheVideoRipper
             }
         }
         
-        private void Cancel()
+        private void Cancel(object? sender, EventArgs args)
         {
             this.Close(DialogResult.Cancel);
         }
@@ -442,16 +442,16 @@ namespace JackTheVideoRipper
 
         private void SubscribeEvents()
         {
-            buttonDownload.Click += (_, _) => Download();
-            buttonLocationBrowse.Click += (_, _) => Browse();
-            
-            buttonCancel.Click += (_, _) => Cancel();
+            buttonDownload.Click += Download;
+            buttonLocationBrowse.Click += Browse;
+            buttonCancel.Click += Cancel;
+            buttonGetCommand.Click += GetCommand;
 
-            cbAudioEncoder.TextUpdate += (_, _) => UpdateAudioEncoder();
-            cbAudioFormat.TextUpdate += (_, _) => UpdateAudioFormat();
+            cbAudioEncoder.TextUpdate += UpdateAudioEncoder;
+            cbAudioFormat.TextUpdate += UpdateAudioFormat;
 
-            cbVideoEncoder.TextUpdate += (_, _) => UpdateVideoEncoder();
-            cbVideoFormat.TextUpdate += (_, _) => UpdateVideoFormat();
+            cbVideoEncoder.TextUpdate += UpdateVideoEncoder;
+            cbVideoFormat.TextUpdate += UpdateVideoFormat;
 
             cbVideoFormat.SelectedIndexChanged += (_, _) =>
             {
@@ -463,10 +463,8 @@ namespace JackTheVideoRipper
                 if (AudioFormatIndex == 0) AudioFormatIndex = 1;
             };
 
-            buttonGetCommand.Click += (_, _) => GetCommand();
-            
-            chkBoxExportAudio.CheckedChanged += (_, _) => OnCheckExportAudioChanged();
-            chkBoxExportVideo.CheckedChanged += (_, _) => OnCheckExportVideoChanged();
+            chkBoxExportAudio.CheckedChanged += OnCheckExportAudioChanged;
+            chkBoxExportVideo.CheckedChanged += OnCheckExportVideoChanged;
         }
 
         private void FrameNewMedia_Load(object sender, EventArgs e)

@@ -99,7 +99,7 @@ namespace JackTheVideoRipper.views
             MediaItemRow = new MediaItemRow<DownloadMediaParameters>(Url, string.Empty, Filepath, mediaType, mediaParameters);
         }
         
-        private void Download()
+        private void Download(object? sender, EventArgs args)
         {
             if (Url.Valid(FileSystem.IsValidUrl))
             {
@@ -118,7 +118,7 @@ namespace JackTheVideoRipper.views
             }
         }
         
-        private void Browse()
+        private void Browse(object? sender, EventArgs args)
         {
             if (Url.IsNullOrEmpty() || Filepath.IsNullOrEmpty()) 
                 return;
@@ -127,7 +127,7 @@ namespace JackTheVideoRipper.views
                 Filepath = result;
         }
         
-        private void GetCommand()
+        private void GetCommand(object? sender, EventArgs args)
         {
             if (Url.Valid(FileSystem.IsValidUrl))
             {
@@ -157,15 +157,14 @@ namespace JackTheVideoRipper.views
 
         private void SubscribeEvents()
         {
-            buttonDownload.Click += (_, _) => Download();
-            buttonLocationBrowse.Click += (_, _) => Browse();
+            buttonDownload.Click += Download;
+            buttonLocationBrowse.Click += Browse;
+            buttonGetCommand.Click += GetCommand;
             
             buttonCancel.Click += (_, _) =>
             {
                 this.Close(DialogResult.Cancel);
             };
-
-            buttonGetCommand.Click += (_, _) => GetCommand();
 
             textUrl.TextChanged += async (_, _) =>
             {
