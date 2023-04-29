@@ -9,6 +9,8 @@ public interface IViewItem
     public IViewSubItem this[int index] { get; }
     
     Color BackColor { get; set; }
+    
+    int ImageIndex { get; set; }
 
     void Suspend();
 
