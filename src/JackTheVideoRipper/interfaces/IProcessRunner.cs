@@ -29,6 +29,8 @@ public interface IProcessRunner
     
     bool Paused { get; }
     
+    int ProcessId { get; }
+    
     List<string> Dependencies { get; }
 
     Task<bool> Update();

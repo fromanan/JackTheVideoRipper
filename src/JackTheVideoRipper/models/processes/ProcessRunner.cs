@@ -30,6 +30,8 @@ public abstract class ProcessRunner : IProcessRunner
     
     public bool Started { get; private set; }
     
+    public int ProcessId { get; private set; }
+    
     public string ProcessFileName { get; private set; } = string.Empty;
 
     public List<string> Dependencies { get; private set; } = new();
@@ -274,6 +276,7 @@ public abstract class ProcessRunner : IProcessRunner
         Process.BeginOutputReadLine();
         Process.BeginErrorReadLine();
         Started = true;
+        ProcessId = Process.Id;
     }
     
     private void CloseProcess(bool notifyCompletion = true)
