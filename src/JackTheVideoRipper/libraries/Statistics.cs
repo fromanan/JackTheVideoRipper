@@ -116,9 +116,20 @@ public static class Statistics
         return FileSystem.GetFileSizeFormatted((long) Math.Floor(value), 2);
     }
 
+    private const string _PROCESS_COUNT_FORMAT = "Active ({0}) // Running ({1}) // Paused ({2}) // Total ({3})";
+
     public static class Toolbar
     {
         public static string ToolbarStatus => $"{Ripper.Instance.GetProgramStatus(),-20}"; // 20 chars
+
+        public static string ToolbarProcessCount
+        {
+            get
+            {
+                int[] counts = Ripper.Instance.GetProcessCounts();
+                return string.Format(_PROCESS_COUNT_FORMAT, counts[0], counts[1], counts[2], counts[3]);
+            }
+        }
 
         public static string ToolbarCpu => $@"CPU: {GetCpuUsagePercentage(),7}"; // 12 chars
 

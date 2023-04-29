@@ -64,7 +64,7 @@ public class ProcessPool
     
     public bool QueueEmpty => _processQueue.IsEmpty && _pausedProcessQueue.Empty();
     
-    public bool AtCapacity => _runningProcesses.Count == Settings.Data.MaxConcurrentDownloads;
+    public bool AtCapacity => RunningCount == Settings.Data.MaxConcurrentDownloads;
     
     public string PoolStatus
     {
@@ -110,6 +110,28 @@ public class ProcessPool
     public IEnumerable<string> FailedUrls => FailedProcesses.Select(p => p.Url);
     
     public IEnumerable<string> Urls => Processes.Select(p => p.Url);
+
+    public int ActiveCount => _runningProcesses.Count + _processQueue.Count + _onDeckProcessQueue.Count;
+
+    public int RunningCount => _runningProcesses.Count;
+
+    public int PausedCount => _pausedProcessQueue.Count;
+
+    public int TotalCount => _processTable.Count;
+
+    public int[] ProcessCounts
+    {
+        get
+        {
+            return new[]
+            {
+                ActiveCount,    //< Active
+                RunningCount,   //< Running
+                PausedCount,    //< Paused
+                TotalCount      //< Total
+            };
+        }
+    }
 
     #endregion
 

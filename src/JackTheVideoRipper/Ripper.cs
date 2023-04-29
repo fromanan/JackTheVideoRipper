@@ -70,6 +70,11 @@ public class Ripper
         return _mediaManager.GetStatus();
     }
 
+    public int[] GetProcessCounts()
+    {
+        return _mediaManager.GetProcessCounts();
+    }
+
     public ProcessStatus? GetSelectedStatus()
     {
         return Instance.GetStatus(FrameMain.CachedSelectedTag);
