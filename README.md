@@ -8,18 +8,17 @@
 
 ## Features
 
-#### Download video and/or audio with wide selection of supported formats (`mp4`, `mkv`, `mov`, `avi`, `m4v` to name a few)
+1. Download video and/or audio with wide selection of supported formats (`mp4`, `mkv`, `mov`, `avi`, `m4v` to name a few)
 
-#### Extract URLs from any document type or YouTube playlist and add URLs to queue for batch download
+2. Extract URLs from any document type or YouTube playlist and add URLs to queue for batch download
 
-#### 100+ supported streaming providers such as YouTube, DailyMotion, Vimeo, and many of the common ones
+3. 100+ supported streaming providers such as YouTube, DailyMotion, Vimeo, and many of the common ones
 
-#### Compressing media files, this works especially well with low quality videos that have been encoded with high
-  bit-rates, or those that have been upscaled.
+4. Compressing media files, this works especially well with low quality videos that have been encoded with high bit-rates, or those that have been upscaled.
 
-#### Repairing and recoding broken video files
+5. Repairing and recoding broken video files
 
-#### Verifying integrity of media files
+6. Verifying integrity of media files
 
 
 ## How Does It Work?
