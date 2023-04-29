@@ -106,7 +106,7 @@ public class MediaManager
         return _processPool.ProcessCounts;
     }
 
-    public void RemoveCompleted() => ProcessesRemoved(_processPool.RemoveCompleted());
+    public void RemoveSucceeded() => ProcessesRemoved(_processPool.RemoveSucceeded());
 
     public void RemoveFailed() => ProcessesRemoved(_processPool.RemoveFailed());
 

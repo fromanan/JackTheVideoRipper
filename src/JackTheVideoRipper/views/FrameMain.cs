@@ -459,7 +459,7 @@ namespace JackTheVideoRipper
          clearFailuresToolStripMenuItem.Click += _ripper.OnRemoveFailed;
          clearAllToolStripMenuItem.Click += (_, _) => ClearAll();
          clearAllToolStripMenuItem.Click += _ripper.OnClearAllViewItems;
-         clearSuccessesToolStripMenuItem.Click += _ripper.OnRemoveCompleted;
+         clearSuccessesToolStripMenuItem.Click += _ripper.OnRemoveSucceeded;
          pauseAllToolStripMenuItem.Click += _ripper.OnPauseAll;
          resumeAllToolStripMenuItem.Click += _ripper.OnResumeAll;
       }

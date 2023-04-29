@@ -478,9 +478,9 @@ public class ProcessPool
         Task.WhenAll(_clearTasks);
     }
 
-    public IEnumerable<IViewItem> RemoveCompleted(Action<IViewItem>? removeCallback = null)
+    public IEnumerable<IViewItem> RemoveSucceeded(Action<IViewItem>? removeCallback = null)
     {
-        return RemoveProcess(ProcessStatus.Completed, removeCallback);
+        return RemoveWhere(ProcessStatus.Succeeded, removeCallback);
     }
     
     public IEnumerable<IViewItem> RemoveFailed(Action<IViewItem>? removeCallback = null)
