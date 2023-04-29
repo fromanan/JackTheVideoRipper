@@ -522,7 +522,7 @@ namespace JackTheVideoRipper
 
          pauseProcessToolStripMenuItem.Click += (sender, _) =>
          {
-            
+            ContextAction(sender, ContextActions.Pause);
          };
 
          resumeProcessToolStripMenuItem.Click += (sender, _) =>

@@ -9,6 +9,7 @@ public enum ContextActions
     Retry,
     OpenUrl,
     Reveal,
+    Pause,
     Resume,
     Remove,
     OpenConsole,
