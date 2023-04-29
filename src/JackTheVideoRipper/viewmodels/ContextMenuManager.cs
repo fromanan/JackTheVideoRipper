@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper.models;
+﻿using JackTheVideoRipper.models.rows;
+
+namespace JackTheVideoRipper.models;
 
 public class ContextMenuManager
 {
@@ -10,21 +12,29 @@ public class ContextMenuManager
     }
     
     private ToolStripItemCollection ContextItems => _contextMenuListItems.Items;
-    
+
+    // All of the names listed here will conditionally be shown, depending on the process status
+    // All others will be visible by default
+    // NOTE: These names must match EXACTLY what is in FrameMain, otherwise it will cause exceptions
     private static readonly Dictionary<string, ProcessStatus> _ContextItemsDict = new()
     {
-        { "retryDownloadToolStripMenuItem",     ProcessStatus.Error },
-        { "stopDownloadToolStripMenuItem",      ProcessStatus.Running },
+        { "retryProcessToolStripMenuItem",      ProcessStatus.Error },
+        { "stopProcessToolStripMenuItem",       ProcessStatus.Running },
+        { "openFolderToolStripMenuItem",        ProcessStatus.Succeeded},
         { "deleteFromDiskToolStripMenuItem",    ProcessStatus.Succeeded },
-        { "resumeDownloadToolStripMenuItem",    ProcessStatus.Paused },
-        { "pauseDownloadToolStripMenuItem",     ProcessStatus.Running },
-        { "redownloadMediaToolStripMenuItem",   ProcessStatus.Completed }
+        { "openInMediaPlayerToolStripMenuItem", ProcessStatus.Succeeded },
+        { "resumeProcessToolStripMenuItem",     ProcessStatus.Paused },
+        { "pauseProcessToolStripMenuItem",      ProcessStatus.Running },
+        { "reprocessMediaToolStripMenuItem",    ProcessStatus.Completed }
     };
 
     public async Task OpenContextMenu()
     {
+        bool isDownload = Ripper.Instance.SelectedIsType<DownloadProcessUpdateRow>();
         await Parallel.ForEachAsync(_ContextItemsDict, SetContextVisibility);
-        ShowContextItem("deleteRowToolStripMenuItem");
+        ShowContextItem("removeRowToolStripMenuItem");
+        SetContextVisibility("openUrlInBrowserToolStripMenuItem", value:isDownload);
+        SetContextVisibility("copyUrlToolStripMenuItem", value:isDownload);
         ShowContextMenu();
     }
 

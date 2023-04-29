@@ -23,15 +23,15 @@ namespace JackTheVideoRipper
 
       private ListView.ListViewItemCollection ViewItems => listItems.Items;
 
-      public IViewItem FirstSelected => Selected[0].As<IViewItem>();
+      public IViewItem? FirstSelected => !NoneSelected ? Selected[0].As<IViewItem>() : null;
 
-      public IViewItem LastSelected => Selected[^1].As<IViewItem>();
+      public IViewItem? LastSelected => !NoneSelected ? Selected[^1].As<IViewItem>() : null;
 
       public bool NoneSelected => Selected.Count <= 0;
 
-      public ListViewItem FocusedItem => listItems.FocusedItem;
+      public ListViewItem? FocusedItem => listItems.FocusedItem;
 
-      public bool InItemBounds(MouseEventArgs e) => listItems.Visible && FocusedItem.InBounds(e.Location);
+      public bool InItemBounds(MouseEventArgs e) => listItems.Visible && (FocusedItem?.InBounds(e.Location) ?? false);
 
       public string CachedSelectedTag { get; private set; } = string.Empty;
 
@@ -307,7 +307,7 @@ namespace JackTheVideoRipper
 
       private void OnFormClick(object? sender, EventArgs args)
       {
-         CachedSelectedTag = FirstSelected.Tag;
+         CachedSelectedTag = FirstSelected?.Tag ?? string.Empty;
       }
 
       private void OnDragEnter(object? sender, DragEventArgs e)
@@ -479,47 +479,77 @@ namespace JackTheVideoRipper
 
       private void SubscribeContextEvents()
       {
+         // File Options
+
          openFolderToolStripMenuItem.Click += (sender, _) =>
          {
             ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Reveal));
          };
 
-         openMediaInPlayerToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenMedia));
-         };
-
-         openURLInBrowserToolStripMenuItem.Click += (sender, _) =>
+         openUrlInBrowserToolStripMenuItem.Click += (sender, _) =>
          {
             ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenUrl));
          };
 
-         openProcessInConsoleToolStripMenuItem.Click += (sender, _) =>
+         openInMediaPlayerToolStripMenuItem.Click += (sender, _) =>
+         {
+            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenMedia));
+         };
+
+         openInConsoleToolStripMenuItem.Click += (sender, _) =>
          {
             ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenConsole));
          };
+
+         // Edit Options
 
          copyUrlToolStripMenuItem.Click += (sender, _) =>
          {
             ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Copy));
          };
 
-         deleteFromDiskToolStripMenuItem.Click += (sender, _) =>
+         copyCommandToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Delete));
+            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.CopyCommand));
          };
 
-         stopDownloadToolStripMenuItem.Click += (sender, _) =>
+         // Process Options
+
+         pauseProcessToolStripMenuItem.Click += (sender, _) =>
+         {
+            
+         };
+
+         resumeProcessToolStripMenuItem.Click += (sender, _) =>
+         {
+            
+         };
+         
+         stopProcessToolStripMenuItem.Click += (sender, _) =>
          {
             ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Stop));
          };
-
-         retryDownloadToolStripMenuItem.Click += (sender, _) =>
+         
+         retryProcessToolStripMenuItem.Click += (sender, _) =>
          {
             ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Retry));
          };
 
-         deleteRowToolStripMenuItem.Click += (sender, _) =>
+         // Result Options
+
+         deleteFromDiskToolStripMenuItem.Click += (sender, _) =>
+         {
+            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Delete));
+         };
+         
+         reprocessMediaToolStripMenuItem.Click += (sender, _) =>
+         {
+            
+         };
+         
+         // Miscellaneous
+
+         removeRowToolStripMenuItem.Click += (sender, _) =>
          {
             ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Remove));
          };
