@@ -12,14 +12,13 @@ public class ProcessPool
 
     private readonly ProcessTable _processTable = new();
     private readonly ConcurrentQueue<IProcessUpdateRow> _processQueue = new();
-    private readonly IndexableQueue<IProcessUpdateRow> _pausedProcessQueue = new();
+    private readonly ConcurrentDictionary<string, IProcessUpdateRow> _pausedProcesses = new();
+    private readonly IndexableQueue<IProcessUpdateRow> _resumeProcessQueue = new();
     private readonly ProcessTable _runningProcesses = new();
     private readonly ConcurrentQueue<IProcessUpdateRow> _onDeckProcessQueue = new();
     private readonly ConcurrentHashSet<IProcessUpdateRow> _finishedProcesses = new();
 
     public static readonly ErrorLogger ErrorLogger = new();
-
-    public readonly List<int> ActiveProcessIds = new();
 
     private bool _updating;
     private bool _fillingQueue;
@@ -36,7 +35,8 @@ public class ProcessPool
         {
             new(_runningProcesses.Clear),
             new(_finishedProcesses.Clear),
-            new(_pausedProcessQueue.Clear),
+            new(_pausedProcesses.Clear),
+            new(_resumeProcessQueue.Clear),
             new(_processQueue.Clear),
             new(_processTable.Clear)
         };
@@ -60,9 +60,9 @@ public class ProcessPool
 
     public bool AnyQueued => !_processQueue.IsEmpty;
 
-    public bool AnyPaused => !_pausedProcessQueue.Empty();
+    public bool AnyPaused => !_resumeProcessQueue.Empty();
     
-    public bool QueueEmpty => _processQueue.IsEmpty && _pausedProcessQueue.Empty();
+    public bool QueueEmpty => _processQueue.IsEmpty && _resumeProcessQueue.Empty();
     
     public bool AtCapacity => RunningCount == Settings.Data.MaxConcurrentDownloads;
     
@@ -88,7 +88,7 @@ public class ProcessPool
                 return null;
             
             if (AnyPaused)
-                return _pausedProcessQueue.Dequeue();
+                return _resumeProcessQueue.Dequeue();
 
             if (!_processQueue.IsEmpty && _processQueue.TryDequeue(out IProcessUpdateRow? result))
                 return result;
@@ -103,17 +103,19 @@ public class ProcessPool
     
     public IEnumerable<IProcessUpdateRow> CompletedProcesses => GetWhereStatus(ProcessStatus.Completed);
     
+    public IEnumerable<IProcessUpdateRow> SucceededProcesses => GetWhereStatus(ProcessStatus.Succeeded);
+    
     public IEnumerable<IProcessUpdateRow> FailedProcesses => GetWhereStatus(ProcessStatus.Error);
 
     public IEnumerable<string> FailedUrls => FailedProcesses.Select(p => p.Url);
     
     public IEnumerable<string> Urls => Processes.Select(p => p.Url);
 
-    public int ActiveCount => _runningProcesses.Count + _processQueue.Count + _onDeckProcessQueue.Count;
+    public int ActiveCount => RunningCount + _processQueue.Count + _onDeckProcessQueue.Count + _resumeProcessQueue.Count;
 
     public int RunningCount => _runningProcesses.Count;
 
-    public int PausedCount => _pausedProcessQueue.Count;
+    public int PausedCount => _pausedProcesses.Count;
 
     public int TotalCount => _processTable.Count;
 
@@ -131,13 +133,16 @@ public class ProcessPool
         }
     }
 
+    public IEnumerable<int> ActiveProcessIds => _runningProcesses.Processes.Select(p => p.ProcessId);
+
     #endregion
 
     #region Public Methods
 
     public async Task Update()
     {
-        FillQueue();
+        if (!AtCapacity && !QueueEmpty)
+            UpdateQueue();
         
         // Skip update if we have no running or we're currently updating
         if (!_runningProcesses.HasCached || _updating)
@@ -160,7 +165,6 @@ public class ProcessPool
 
     public IEnumerable<T> GetOfType<T>()
     {
-        // Select(r => r as T).Where(r => r is not null) ?
         return GetWhere(row => row is T).Cast<T>();
     }
 
@@ -175,7 +179,6 @@ public class ProcessPool
             throw new ProcessPoolException(string.Format(Messages.FailedToAddProcess, processUpdateRow.Tag));
         _processQueue.Enqueue(processUpdateRow);
         processUpdateRow.Enqueue();
-        UpdateQueue();
         queueCallback(processUpdateRow.ViewItem);
     }
     
@@ -183,11 +186,9 @@ public class ProcessPool
     {
         if (processRunner is not IProcessUpdateRow processUpdateRow)
             return;
-        ActiveProcessIds.Remove(processRunner.ProcessId);
         StopProcess(processUpdateRow);
         _finishedProcesses.Add(processUpdateRow);
         ProcessCompleted(processUpdateRow);
-        UpdateQueue();
     }
 
     public bool RetryProcess(string tag)
@@ -215,7 +216,7 @@ public class ProcessPool
     public void PauseProcess(IProcessUpdateRow processUpdateRow)
     {
         StopProcess(processUpdateRow);
-        _pausedProcessQueue.Add(processUpdateRow);
+        _pausedProcesses.TryAdd(processUpdateRow.Tag, processUpdateRow);
         processUpdateRow.Pause();
     }
     
@@ -229,9 +230,8 @@ public class ProcessPool
     
     public void ResumeProcess(IProcessUpdateRow processUpdateRow)
     {
-        _pausedProcessQueue.Remove(processUpdateRow);
-        RunProcess(processUpdateRow);
-        processUpdateRow.Resume();
+        _pausedProcesses.TryRemove(processUpdateRow.Tag, out _);
+        _resumeProcessQueue.Add(processUpdateRow);
     }
     
     public bool RetryAllProcesses()
@@ -304,7 +304,6 @@ public class ProcessPool
                 StopProcess(processUpdateRow);
                 return;
             case ProcessStatus.Succeeded:
-            case ProcessStatus.Completed:
             case ProcessStatus.Error:
             case ProcessStatus.Stopped:
             case ProcessStatus.Cancelled:
@@ -333,7 +332,6 @@ public class ProcessPool
                 _runningProcesses.Remove(processes);
                 break;
             case ProcessStatus.Succeeded:
-            case ProcessStatus.Completed:
             case ProcessStatus.Error:
             case ProcessStatus.Stopped:
             case ProcessStatus.Cancelled:
@@ -354,16 +352,19 @@ public class ProcessPool
 
     public async void UpdateQueue()
     {
-        if (QueueEmpty)
-            FillQueue();
-        
+        FillQueue();
+
         while (!AtCapacity && !NoneOnDeck)
         {
-            if (_onDeckProcessQueue.TryDequeue(out IProcessUpdateRow? updateRow))
-                await StartProcess(updateRow);
-
+            await DispatchFromQueue();
             await Task.Delay(200);
         }
+    }
+
+    private async Task DispatchFromQueue()
+    {
+        if (_onDeckProcessQueue.TryDequeue(out IProcessUpdateRow? updateRow))
+            await StartProcess(updateRow);
     }
     
     public void FindOrphanedProcesses()
@@ -390,7 +391,7 @@ public class ProcessPool
 
     private void RemovePaused(IProcessUpdateRow processUpdateRow)
     {
-        _pausedProcessQueue.Remove(processUpdateRow);
+        _pausedProcesses.TryRemove(processUpdateRow.Tag, out _);
         processUpdateRow.Cancel();
     }
 
@@ -402,11 +403,16 @@ public class ProcessPool
             return;
 
         _fillingQueue = true;
-        Enumerable.Range(_onDeckProcessQueue.Count, Settings.Data.MaxConcurrentDownloads)
-            .ForEach(_ => _onDeckProcessQueue.Enqueue(NextProcess!));
+        Enumerable.Range(_onDeckProcessQueue.Count, Settings.Data.MaxConcurrentDownloads).ForEach(_ =>
+        {
+            if (NextProcess is not { } nextProcess)
+            {
+                _fillingQueue = false;
+                return;
+            }
+            _onDeckProcessQueue.Enqueue(nextProcess);
+        });
         _fillingQueue = false;
-
-        UpdateQueue();
     }
 
     private void RunProcess(IProcessUpdateRow processUpdateRow)
@@ -419,17 +425,21 @@ public class ProcessPool
         return _runningProcesses.Remove(processUpdateRow);
     }
     
-    private async ValueTask StartProcess(IProcessUpdateRow? processUpdateRow, CancellationToken? cancellationToken = null)
+    private async ValueTask StartProcess(IProcessUpdateRow processUpdateRow, CancellationToken? cancellationToken = null)
     {
-        if (processUpdateRow is null)
-            return;
-        
         RunProcess(processUpdateRow);
+
+        // Resume if we are Starting a Paused Process
+        if (processUpdateRow.Paused)
+        {
+            processUpdateRow.Resume();
+            ProcessStarted();
+            return;
+        }
 
         // Starting Process Succeeded
         if (await processUpdateRow.Start())
         {
-            ActiveProcessIds.Add(processUpdateRow.ProcessId);
             ProcessStarted();
             return;
         }
@@ -438,7 +448,7 @@ public class ProcessPool
         StopProcess(processUpdateRow);
     }
     
-    private IEnumerable<IViewItem> RemoveProcess(ProcessStatus processStatus, Action<IViewItem>? removeCallback = null)
+    private IEnumerable<IViewItem> RemoveWhere(ProcessStatus processStatus, Action<IViewItem>? removeCallback = null)
     {
         IViewItem[] results = RemoveAll(processStatus).SelectViewItems().ToArray();
         if (removeCallback is not null)
@@ -452,12 +462,12 @@ public class ProcessPool
 
     public void PauseAll()
     {
-        RunningProcesses.Pause();
+        Parallel.ForEach(RunningProcesses, PauseProcess);
     }
 
     public void ResumeAll()
     {
-        _pausedProcessQueue.Resume();
+        Parallel.ForEach(_pausedProcesses.Values, ResumeProcess);
     }
 
     public void KillAllRunning()
@@ -485,7 +495,7 @@ public class ProcessPool
     
     public IEnumerable<IViewItem> RemoveFailed(Action<IViewItem>? removeCallback = null)
     {
-        return RemoveProcess(ProcessStatus.Error, removeCallback);
+        return RemoveWhere(ProcessStatus.Error, removeCallback);
     }
 
     #endregion
