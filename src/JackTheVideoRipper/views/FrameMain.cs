@@ -477,40 +477,45 @@ namespace JackTheVideoRipper
             await _contextMenuManager.OpenContextMenu();
       }
 
+      private void ContextAction(object? sender, ContextActions contextAction)
+      {
+         ContextActionEvent(sender, new ContextActionEventArgs(contextAction));
+      }
+
       private void SubscribeContextEvents()
       {
          // File Options
 
          openFolderToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Reveal));
+            ContextAction(sender, ContextActions.Reveal);
          };
 
          openUrlInBrowserToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenUrl));
+            ContextAction(sender, ContextActions.OpenUrl);
          };
 
          openInMediaPlayerToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenMedia));
+            ContextAction(sender, ContextActions.OpenMedia);
          };
 
          openInConsoleToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenConsole));
+            ContextAction(sender, ContextActions.OpenConsole);
          };
 
          // Edit Options
 
          copyUrlToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Copy));
+            ContextAction(sender, ContextActions.CopyUrl);
          };
 
          copyCommandToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.CopyCommand));
+            ContextAction(sender, ContextActions.CopyCommand);
          };
 
          // Process Options
@@ -522,41 +527,41 @@ namespace JackTheVideoRipper
 
          resumeProcessToolStripMenuItem.Click += (sender, _) =>
          {
-            
+            ContextAction(sender, ContextActions.Resume);
          };
-         
+
          stopProcessToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Stop));
+            ContextAction(sender, ContextActions.Stop);
          };
-         
+
          retryProcessToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Retry));
+            ContextAction(sender, ContextActions.Retry);
          };
 
          // Result Options
 
          deleteFromDiskToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Delete));
+            ContextAction(sender, ContextActions.Delete);
          };
-         
+
          reprocessMediaToolStripMenuItem.Click += (sender, _) =>
          {
             
          };
-         
+
          // Miscellaneous
 
          removeRowToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Remove));
+            ContextAction(sender, ContextActions.Remove);
          };
 
          listItems.DoubleClick += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.OpenMedia));
+            ContextAction(sender, ContextActions.OpenMedia);
          };
       }
 
