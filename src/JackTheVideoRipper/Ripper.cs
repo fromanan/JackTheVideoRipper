@@ -79,6 +79,16 @@ public class Ripper
     {
         return Instance.GetStatus(FrameMain.CachedSelectedTag);
     }
+    
+    public Type? GetSelectedProcessType()
+    {
+        return _mediaManager.GetRow(FrameMain.CachedSelectedTag)?.GetType();
+    }
+
+    public bool SelectedIsType<T>()
+    {
+        return GetSelectedProcessType() == typeof(T);
+    }
 
     public ProcessStatus? GetStatus(string tag)
     {
