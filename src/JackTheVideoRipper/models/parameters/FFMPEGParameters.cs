@@ -46,6 +46,8 @@ public class FfmpegParameters : ProcessParameters<FfmpegParameters>, IRequiresFi
 
     public FfmpegParameters Output(string filepath, string? outputFormat = null)
     {
+        if (!Contains("y"))
+            AddNoValue("n");
         OutputFilepath = outputFormat is null ?
             filepath.WrapQuotes() : 
             FileSystem.ChangeExtension(filepath, outputFormat);
@@ -54,6 +56,8 @@ public class FfmpegParameters : ProcessParameters<FfmpegParameters>, IRequiresFi
     
     public FfmpegParameters OutputFromInput(FFMPEG.Operation operation, string? outputFormat = null)
     {
+        if (!Contains("y"))
+            AddNoValue("n");
         OutputFilepath = FFMPEG.GetOutputFilename(InputFilepath, operation, outputFormat);
         return Append(OutputFilepath.WrapQuotes());
     }
@@ -176,6 +180,11 @@ public class FfmpegParameters : ProcessParameters<FfmpegParameters>, IRequiresFi
     public FfmpegParameters ErrorDetect(string errorLevel = "ignore_err")
     {
         return Add("err_detect", errorLevel);
+    }
+
+    public FfmpegParameters Overwrite()
+    {
+        return AddNoValue("y");
     }
 
     #endregion
