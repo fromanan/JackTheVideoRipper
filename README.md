@@ -26,16 +26,12 @@
 
 * Verifying integrity of media files
 
-<hr>
-
 ## How Does It Work?
 
 `JackTheVideoRipper` is a GUI that manages and automates powerful tools under-the-hood to provide a streamlined,
 turn-key, point-and-click experience in order to download video, audio, or playlists in a friendly and easy way.
 The true power lies within included command-line tools `youtube-dl` and `ffmpeg` which do the heavy lifting of
 extracting and/or transcoding the media.
-
-<hr>
 
 ## Requirements
 
@@ -96,8 +92,6 @@ needed dependencies are installed correctly, before you download the source code
 The application looks for the dependencies in the same place regardless of if it is built from source or from the
 installer. If the dependencies are not installed when the application runs, the application will crash or not behave
 correctly.
-
-<hr>
 
 ## Contributing
 
