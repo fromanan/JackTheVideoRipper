@@ -92,21 +92,21 @@
          toolStripSeparator10 = new ToolStripSeparator();
          helpSupportToolStripMenuItem = new ToolStripMenuItem();
          contextMenuListItems = new ContextMenuStrip(components);
-         fileToolStripMenuItem1 = new ToolStripMenuItem();
+         fileContextMenuItem = new ToolStripMenuItem();
          openFolderToolStripMenuItem = new ToolStripMenuItem();
          openUrlInBrowserToolStripMenuItem = new ToolStripMenuItem();
          openInMediaPlayerToolStripMenuItem = new ToolStripMenuItem();
          openInConsoleToolStripMenuItem = new ToolStripMenuItem();
-         editToolStripMenuItem1 = new ToolStripMenuItem();
+         editContextMenuItem = new ToolStripMenuItem();
          copyUrlToolStripMenuItem = new ToolStripMenuItem();
          copyCommandToolStripMenuItem = new ToolStripMenuItem();
-         processToolStripMenuItem = new ToolStripMenuItem();
-         resumeProcessToolStripMenuItem = new ToolStripMenuItem();
+         processContextMenuItem = new ToolStripMenuItem();
          pauseProcessToolStripMenuItem = new ToolStripMenuItem();
-         retryProcessToolStripMenuItem = new ToolStripMenuItem();
+         resumeProcessToolStripMenuItem = new ToolStripMenuItem();
          stopProcessToolStripMenuItem = new ToolStripMenuItem();
-         resultToolStripMenuItem = new ToolStripMenuItem();
-         convertMediaToolStripMenuItem = new ToolStripMenuItem();
+         retryProcessToolStripMenuItem = new ToolStripMenuItem();
+         resultContextMenuItem = new ToolStripMenuItem();
+         convertToolStripMenuItem = new ToolStripMenuItem();
          deleteFromDiskToolStripMenuItem = new ToolStripMenuItem();
          reprocessMediaToolStripMenuItem = new ToolStripMenuItem();
          toolStripMenuItem3 = new ToolStripSeparator();
@@ -143,6 +143,8 @@
          cPath = new ColumnHeader();
          listItems = new ListView();
          splitContainer = new SplitContainer();
+         renameToolStripMenuItem = new ToolStripMenuItem();
+         moveToolStripMenuItem = new ToolStripMenuItem();
          menuStrip.SuspendLayout();
          contextMenuListItems.SuspendLayout();
          toolBar.SuspendLayout();
@@ -542,16 +544,16 @@
          // contextMenuListItems
          // 
          contextMenuListItems.ImageScalingSize = new Size(24, 24);
-         contextMenuListItems.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem1, editToolStripMenuItem1, processToolStripMenuItem, resultToolStripMenuItem, toolStripMenuItem3, removeRowToolStripMenuItem });
+         contextMenuListItems.Items.AddRange(new ToolStripItem[] { fileContextMenuItem, editContextMenuItem, processContextMenuItem, resultContextMenuItem, toolStripMenuItem3, removeRowToolStripMenuItem });
          contextMenuListItems.Name = "contextMenuListItems";
          contextMenuListItems.Size = new Size(211, 158);
          // 
-         // fileToolStripMenuItem1
+         // fileContextMenuItem
          // 
-         fileToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { openFolderToolStripMenuItem, openUrlInBrowserToolStripMenuItem, openInMediaPlayerToolStripMenuItem, openInConsoleToolStripMenuItem });
-         fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-         fileToolStripMenuItem1.Size = new Size(210, 24);
-         fileToolStripMenuItem1.Text = "File";
+         fileContextMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openFolderToolStripMenuItem, openUrlInBrowserToolStripMenuItem, openInMediaPlayerToolStripMenuItem, openInConsoleToolStripMenuItem });
+         fileContextMenuItem.Name = "fileContextMenuItem";
+         fileContextMenuItem.Size = new Size(210, 24);
+         fileContextMenuItem.Text = "File";
          // 
          // openFolderToolStripMenuItem
          // 
@@ -559,7 +561,7 @@
          openFolderToolStripMenuItem.Size = new Size(234, 26);
          openFolderToolStripMenuItem.Text = "Show in Folder";
          // 
-         // openURLInBrowserToolStripMenuItem
+         // openUrlInBrowserToolStripMenuItem
          // 
          openUrlInBrowserToolStripMenuItem.Name = "openUrlInBrowserToolStripMenuItem";
          openUrlInBrowserToolStripMenuItem.Size = new Size(234, 26);
@@ -577,49 +579,43 @@
          openInConsoleToolStripMenuItem.Size = new Size(234, 26);
          openInConsoleToolStripMenuItem.Text = "Open in Console";
          // 
-         // editToolStripMenuItem1
+         // editContextMenuItem
          // 
-         editToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { copyUrlToolStripMenuItem, copyCommandToolStripMenuItem });
-         editToolStripMenuItem1.Name = "editToolStripMenuItem1";
-         editToolStripMenuItem1.Size = new Size(210, 24);
-         editToolStripMenuItem1.Text = "Edit";
+         editContextMenuItem.DropDownItems.AddRange(new ToolStripItem[] { copyUrlToolStripMenuItem, copyCommandToolStripMenuItem });
+         editContextMenuItem.Name = "editContextMenuItem";
+         editContextMenuItem.Size = new Size(210, 24);
+         editContextMenuItem.Text = "Edit";
          // 
          // copyUrlToolStripMenuItem
          // 
          copyUrlToolStripMenuItem.Name = "copyUrlToolStripMenuItem";
-         copyUrlToolStripMenuItem.Size = new Size(199, 26);
+         copyUrlToolStripMenuItem.Size = new Size(224, 26);
          copyUrlToolStripMenuItem.Text = "Copy URL";
          // 
          // copyCommandToolStripMenuItem
          // 
          copyCommandToolStripMenuItem.Name = "copyCommandToolStripMenuItem";
-         copyCommandToolStripMenuItem.Size = new Size(199, 26);
+         copyCommandToolStripMenuItem.Size = new Size(224, 26);
          copyCommandToolStripMenuItem.Text = "Copy Command";
          // 
-         // processToolStripMenuItem
+         // processContextMenuItem
          // 
-         processToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pauseProcessToolStripMenuItem, resumeProcessToolStripMenuItem, stopProcessToolStripMenuItem, retryProcessToolStripMenuItem });
-         processToolStripMenuItem.Name = "processToolStripMenuItem";
-         processToolStripMenuItem.Size = new Size(210, 24);
-         processToolStripMenuItem.Text = "Process";
+         processContextMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pauseProcessToolStripMenuItem, resumeProcessToolStripMenuItem, stopProcessToolStripMenuItem, retryProcessToolStripMenuItem });
+         processContextMenuItem.Name = "processContextMenuItem";
+         processContextMenuItem.Size = new Size(210, 24);
+         processContextMenuItem.Text = "Process";
          // 
-         // resumeDownloadToolStripMenuItem
-         // 
-         resumeProcessToolStripMenuItem.Name = "resumeProcessToolStripMenuItem";
-         resumeProcessToolStripMenuItem.Size = new Size(224, 26);
-         resumeProcessToolStripMenuItem.Text = "Resume";
-         // 
-         // pauseDownloadToolStripMenuItem
+         // pauseProcessToolStripMenuItem
          // 
          pauseProcessToolStripMenuItem.Name = "pauseProcessToolStripMenuItem";
          pauseProcessToolStripMenuItem.Size = new Size(224, 26);
          pauseProcessToolStripMenuItem.Text = "Pause";
          // 
-         // retryProcessToolStripMenuItem
+         // resumeProcessToolStripMenuItem
          // 
-         retryProcessToolStripMenuItem.Name = "retryProcessToolStripMenuItem";
-         retryProcessToolStripMenuItem.Size = new Size(224, 26);
-         retryProcessToolStripMenuItem.Text = "Retry";
+         resumeProcessToolStripMenuItem.Name = "resumeProcessToolStripMenuItem";
+         resumeProcessToolStripMenuItem.Size = new Size(224, 26);
+         resumeProcessToolStripMenuItem.Text = "Resume";
          // 
          // stopProcessToolStripMenuItem
          // 
@@ -627,26 +623,32 @@
          stopProcessToolStripMenuItem.Size = new Size(224, 26);
          stopProcessToolStripMenuItem.Text = "Stop";
          // 
-         // resultToolStripMenuItem
+         // retryProcessToolStripMenuItem
          // 
-         resultToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { convertMediaToolStripMenuItem, deleteFromDiskToolStripMenuItem, reprocessMediaToolStripMenuItem });
-         resultToolStripMenuItem.Name = "resultToolStripMenuItem";
-         resultToolStripMenuItem.Size = new Size(210, 24);
-         resultToolStripMenuItem.Text = "Result";
+         retryProcessToolStripMenuItem.Name = "retryProcessToolStripMenuItem";
+         retryProcessToolStripMenuItem.Size = new Size(224, 26);
+         retryProcessToolStripMenuItem.Text = "Retry";
          // 
-         // convertMediaToolStripMenuItem
+         // resultContextMenuItem
          // 
-         convertMediaToolStripMenuItem.Name = "convertMediaToolStripMenuItem";
-         convertMediaToolStripMenuItem.Size = new Size(224, 26);
-         convertMediaToolStripMenuItem.Text = "Convert Media";
+         resultContextMenuItem.DropDownItems.AddRange(new ToolStripItem[] { renameToolStripMenuItem, moveToolStripMenuItem, convertToolStripMenuItem, deleteFromDiskToolStripMenuItem, reprocessMediaToolStripMenuItem });
+         resultContextMenuItem.Name = "resultContextMenuItem";
+         resultContextMenuItem.Size = new Size(210, 24);
+         resultContextMenuItem.Text = "Result";
+         // 
+         // convertToolStripMenuItem
+         // 
+         convertToolStripMenuItem.Name = "convertToolStripMenuItem";
+         convertToolStripMenuItem.Size = new Size(224, 26);
+         convertToolStripMenuItem.Text = "Convert";
          // 
          // deleteFromDiskToolStripMenuItem
          // 
          deleteFromDiskToolStripMenuItem.Name = "deleteFromDiskToolStripMenuItem";
          deleteFromDiskToolStripMenuItem.Size = new Size(224, 26);
-         deleteFromDiskToolStripMenuItem.Text = "Delete File";
+         deleteFromDiskToolStripMenuItem.Text = "Delete";
          // 
-         // redownloadMediaToolStripMenuItem
+         // reprocessMediaToolStripMenuItem
          // 
          reprocessMediaToolStripMenuItem.Name = "reprocessMediaToolStripMenuItem";
          reprocessMediaToolStripMenuItem.Size = new Size(224, 26);
@@ -913,6 +915,18 @@
          splitContainer.SplitterDistance = 599;
          splitContainer.TabIndex = 4;
          // 
+         // renameToolStripMenuItem
+         // 
+         renameToolStripMenuItem.Name = "renameToolStripMenuItem";
+         renameToolStripMenuItem.Size = new Size(224, 26);
+         renameToolStripMenuItem.Text = "Rename";
+         // 
+         // moveToolStripMenuItem
+         // 
+         moveToolStripMenuItem.Name = "moveToolStripMenuItem";
+         moveToolStripMenuItem.Size = new Size(224, 26);
+         moveToolStripMenuItem.Text = "Move";
+         // 
          // FrameMain
          // 
          AllowDrop = true;
@@ -1047,23 +1061,25 @@
       private ListView listItems;
       private SplitContainer splitContainer;
       private FlowLayoutPanel flowLayoutPanel;
-      private ToolStripMenuItem fileToolStripMenuItem1;
+      private ToolStripMenuItem fileContextMenuItem;
       private ToolStripMenuItem openFolderToolStripMenuItem;
       private ToolStripMenuItem openUrlInBrowserToolStripMenuItem;
       private ToolStripMenuItem openInMediaPlayerToolStripMenuItem;
       private ToolStripMenuItem openInConsoleToolStripMenuItem;
-      private ToolStripMenuItem processToolStripMenuItem;
-      private ToolStripMenuItem resultToolStripMenuItem;
-      private ToolStripMenuItem convertMediaToolStripMenuItem;
+      private ToolStripMenuItem processContextMenuItem;
+      private ToolStripMenuItem resultContextMenuItem;
+      private ToolStripMenuItem convertToolStripMenuItem;
       private ToolStripMenuItem deleteFromDiskToolStripMenuItem;
       private ToolStripMenuItem reprocessMediaToolStripMenuItem;
-      private ToolStripMenuItem editToolStripMenuItem1;
+      private ToolStripMenuItem editContextMenuItem;
       private ToolStripMenuItem copyUrlToolStripMenuItem;
       private ToolStripMenuItem copyCommandToolStripMenuItem;
       private ToolStripMenuItem resumeProcessToolStripMenuItem;
       private ToolStripMenuItem pauseProcessToolStripMenuItem;
       private ToolStripMenuItem retryProcessToolStripMenuItem;
       private ToolStripMenuItem stopProcessToolStripMenuItem;
+      private ToolStripMenuItem renameToolStripMenuItem;
+      private ToolStripMenuItem moveToolStripMenuItem;
    }
 }
 

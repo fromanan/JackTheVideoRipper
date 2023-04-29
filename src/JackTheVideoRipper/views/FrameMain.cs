@@ -406,7 +406,7 @@ namespace JackTheVideoRipper
       private void SubscribeSubpageActions()
       {
          aboutToolStripMenuItem.Click += Ripper.OnOpenAbout;
-         convertMediaToolStripMenuItem.Click += Ripper.OnOpenConvert;
+         convertToolStripMenuItem.Click += Ripper.OnOpenConvert;
       }
 
       private void SubscribeMediaTasks()
