@@ -3,7 +3,7 @@
 public enum ContextActions
 {
     OpenMedia,
-    Copy,
+    CopyUrl,
     Delete,
     Stop,
     Retry,

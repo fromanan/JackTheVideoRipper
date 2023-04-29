@@ -501,7 +501,7 @@ namespace JackTheVideoRipper
 
          copyUrlToolStripMenuItem.Click += (sender, _) =>
          {
-            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.Copy));
+            ContextActionEvent(sender, new ContextActionEventArgs(ContextActions.CopyUrl));
          };
 
          deleteFromDiskToolStripMenuItem.Click += (sender, _) =>
