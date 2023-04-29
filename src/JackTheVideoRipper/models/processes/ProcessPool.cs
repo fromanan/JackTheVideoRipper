@@ -232,10 +232,7 @@ public class ProcessPool
     public bool TryGetProcess(string tag, out IProcessUpdateRow? processUpdateRow)
     {
         if (Exists(tag))
-        {
             return _processTable.TryGet(tag, out processUpdateRow);
-        }
-        
         processUpdateRow = default;
         return false;
     }
@@ -333,22 +330,6 @@ public class ProcessPool
         
         return processes;
     }
-    
-    private void RemoveFinished(IProcessUpdateRow processUpdateRow)
-    {
-        _finishedProcesses.Remove(processUpdateRow);
-    }
-
-    private static void RemoveQueued(IProcessRunner processUpdateRow)
-    {
-        processUpdateRow.Cancel();
-    }
-
-    private void RemovePaused(IProcessUpdateRow processUpdateRow)
-    {
-        _pausedProcessQueue.Remove(processUpdateRow);
-        processUpdateRow.Cancel();
-    }
 
     public async void UpdateQueue()
     {
@@ -362,6 +343,25 @@ public class ProcessPool
 
             await Task.Delay(200);
         }
+    }
+    #endregion
+
+    #region Private Methods
+    
+    private void RemoveFinished(IProcessUpdateRow processUpdateRow)
+    {
+        _finishedProcesses.Remove(processUpdateRow);
+    }
+    
+    private static void RemoveQueued(IProcessRunner processUpdateRow)
+    {
+        processUpdateRow.Cancel();
+    }
+
+    private void RemovePaused(IProcessUpdateRow processUpdateRow)
+    {
+        _pausedProcessQueue.Remove(processUpdateRow);
+        processUpdateRow.Cancel();
     }
 
     private bool NoneOnDeck => _onDeckProcessQueue.IsEmpty;
@@ -378,10 +378,6 @@ public class ProcessPool
 
         UpdateQueue();
     }
-
-    #endregion
-
-    #region Private Methods
 
     private void RunProcess(IProcessUpdateRow processUpdateRow)
     {
