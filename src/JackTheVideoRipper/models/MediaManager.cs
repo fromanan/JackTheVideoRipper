@@ -230,28 +230,62 @@ public class MediaManager
         _processPool.RetryProcess(tag);
         QueueUpdated();
     }
+    
+    public void RetryProcess(IProcessUpdateRow processUpdateRow)
+    {
+        if (!processUpdateRow.Failed)
+            return;
+        _processPool.RetryProcess(processUpdateRow);
+        QueueUpdated();
+    }
 
     public void RemoveProcess(string tag)
     {
-        if (_processPool.Remove(tag) is not { } result)
+        if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? process) || process is null)
             return;
 
-        ProcessRemoved(result);
+        RemoveProcess(process);
+    }
+    
+    public void RemoveProcess(IProcessUpdateRow processUpdateRow)
+    {
+        if (processUpdateRow.Running)
+            processUpdateRow.Stop();
+        processUpdateRow.Detach();
+        _processPool.Remove(processUpdateRow);
+        ProcessRemoved(processUpdateRow.ViewItem);
+    }
+    
+    public void PauseProcess(string tag)
+    {
+        if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
+            return;
+
+        PauseProcess(result);
+    }
+    
+    public void PauseProcess(IProcessUpdateRow processUpdateRow)
+    {
+        if (!processUpdateRow.Running || processUpdateRow.Paused)
+            return;
+        processUpdateRow.Pause();
+        QueueUpdated();
     }
 
     public void ResumeProcess(string tag)
     {
-        if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is not { })
+        if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
             return;
 
-        result.Resume();
-
-        QueueUpdated();
+        ResumeProcess(result);
     }
-
-    public void RemoveSelectedProcess()
+    
+    public void ResumeProcess(IProcessUpdateRow processUpdateRow)
     {
-        _processPool.RemoveSelected();
+        if (!processUpdateRow.Paused)
+            return;
+        processUpdateRow.Resume();
+        QueueUpdated();
     }
 
     public void CopyFailedUrls()
@@ -262,11 +296,6 @@ public class MediaManager
     public void CopyAllUrls()
     {
         FileSystem.SetClipboardText(_processPool.Urls.MergeNewline());
-    }
-
-    public bool SelectedHasStatus(ProcessStatus? processStatus)
-    {
-        return Selected.ProcessStatus == processStatus;
     }
 
     public async Task PerformContextAction(ContextActions contextAction)
@@ -280,33 +309,41 @@ public class MediaManager
                 if (Selected.Completed)
                     await Common.OpenFileInMediaPlayer(Selected.Path);
                 break;
-            case ContextActions.Copy:
-                Core.CopyToClipboard(Selected.Url);
+            case ContextActions.CopyUrl:
+                if (Ripper.Instance.SelectedIsType<DownloadProcessUpdateRow>())
+                    Core.CopyToClipboard(Selected.Url);
                 break;
             case ContextActions.Delete:
-                if (Selected.Finished)
+                if (Selected.Succeeded)
                     FileSystem.DeleteFileIfExists(Selected.Path);
                 break;
             case ContextActions.Stop:
-                if (!Selected.Completed)
+                if (Selected.Running)
                     StopSelectedProcess();
                 break;
             case ContextActions.Retry:
                 if (Selected.Failed)
-                    RetryProcess(Selected.Tag);
+                    RetryProcess(Selected);
                 break;
             case ContextActions.OpenUrl:
-                await Common.OpenInBrowser(Selected.Url);
+                if (Ripper.Instance.SelectedIsType<DownloadProcessUpdateRow>())
+                    await Common.OpenInBrowser(Selected.Url);
                 break;
             case ContextActions.Reveal:
-                FileSystem.OpenFileExplorerWithFileSelected(Selected.Path);
+                if (Selected.Succeeded)
+                    FileSystem.OpenFileExplorerWithFileSelected(Selected.Path);
+                break;
+            case ContextActions.Pause:
+                if (!Selected.Paused)
+                    PauseProcess(Selected);
                 break;
             case ContextActions.Resume:
                 if (Selected.Paused)
-                    ResumeProcess(Selected.Tag);
+                    ResumeProcess(Selected);
                 break;
             case ContextActions.Remove:
-                RemoveProcess(Selected.Tag);
+                if (Selected.Completed || !Selected.Started || Modals.Confirmation("Are you sure you wish to delete a running process?"))
+                    RemoveProcess(Selected);
                 break;
             case ContextActions.OpenConsole:
                 await Selected.OpenInConsole();
@@ -318,6 +355,8 @@ public class MediaManager
                 if (Selected is ProcessUpdateRow processUpdateRow)
                     FileSystem.SetClipboardText(processUpdateRow.Command);
                 break;
+            case ContextActions.Reprocess:
+                throw new DeveloperException("Reprocess not implemented!", new NotImplementedException());
             default:
                 ArgumentOutOfRangeException innerException = new(nameof(contextAction), contextAction, null);
                 throw new MediaManagerException(Messages.ContextActionFailed, innerException);
