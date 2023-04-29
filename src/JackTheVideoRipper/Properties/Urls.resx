@@ -19,7 +19,7 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="ApplicationUpdate" xml:space="preserve">
-        <value>https://github.com/dantheman213/JackTheVideoRipper/releases</value>
+        <value>https://github.com/fromanan/JackTheVideoRipper/releases</value>
     </data>
     <data name="HandbrakeDownload" xml:space="preserve">
         <value>https://handbrake.fr/downloads.php</value>
@@ -31,7 +31,7 @@
         <value>https://www.microsoft.com/en-us/download/details.aspx?id=26999</value>
     </data>
     <data name="VersionInfo" xml:space="preserve">
-        <value>https://raw.githubusercontent.com/dantheman213/JackTheVideoRipper/master/version</value>
+        <value>https://raw.githubusercontent.com/fromanan/JackTheVideoRipper/master/version</value>
     </data>
     <data name="Aria2c" xml:space="preserve">
         <value>https://github.com/aria2/aria2/releases/latest</value>

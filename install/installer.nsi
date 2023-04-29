@@ -4,10 +4,10 @@
 #              by Vlasis K. Barkas aka Red Wine red_wine@freemail.gr Sep 2006               
 ############################################################################################
 !define APP_NAME "JackTheVideoRipper"
-!define COMP_NAME "dantheman213"
-!define WEB_SITE "https://github.com/dantheman213/JackTheVideoRipper"
 !define VERSION "0.8.1"
-!define COPYRIGHT "Dan  � 2022"
+!define COMP_NAME "fromanan"
+!define WEB_SITE "https://github.com/fromanan/JackTheVideoRipper"
+!define COPYRIGHT "Froman Interactive Media © 2023"
 !define DESCRIPTION "Download media easily with a few point and clicks."
 !define LICENSE_TXT "..\LICENSE"
 !define MAIN_APP_EXE "JackTheVideoRipper.exe"

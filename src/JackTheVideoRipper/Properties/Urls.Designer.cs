@@ -60,7 +60,7 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/dantheman213/JackTheVideoRipper/releases.
+        ///   Looks up a localized string similar to https://github.com/fromanan/JackTheVideoRipper/releases.
         /// </summary>
         internal static string ApplicationUpdate {
             get {
@@ -123,7 +123,7 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://raw.githubusercontent.com/dantheman213/JackTheVideoRipper/master/version.
+        ///   Looks up a localized string similar to https://raw.githubusercontent.com/fromanan/JackTheVideoRipper/master/version.
         /// </summary>
         internal static string VersionInfo {
             get {

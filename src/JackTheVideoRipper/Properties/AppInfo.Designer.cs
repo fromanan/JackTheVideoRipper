@@ -78,7 +78,7 @@ namespace JackTheVideoRipper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://github.com/dantheman213/JackTheVideoRipper/.
+        ///   Looks up a localized string similar to https://github.com/fromanan/JackTheVideoRipper/.
         /// </summary>
         internal static string ProgramUrl {
             get {
