@@ -38,6 +38,11 @@ public class ProcessParameters<T> : IProcessParameters where T : IProcessParamet
         return parameters.Append(ToString());
     }
 
+    public bool Contains(string parameterName)
+    {
+        return _buffer.ToString().Contains($"{(parameterName.Length == 1 ? "-" : "--")}{parameterName}");
+    }
+
     #endregion
     
     #region Protected Methods
