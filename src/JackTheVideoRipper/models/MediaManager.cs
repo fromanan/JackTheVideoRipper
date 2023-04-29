@@ -250,6 +250,11 @@ public class MediaManager
     {
         FileSystem.SetClipboardText(_processPool.FailedUrls.MergeNewline());
     }
+    
+    public void CopyAllUrls()
+    {
+        FileSystem.SetClipboardText(_processPool.Urls.MergeNewline());
+    }
 
     public bool SelectedHasStatus(ProcessStatus? processStatus)
     {

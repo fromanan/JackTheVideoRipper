@@ -453,6 +453,7 @@ namespace JackTheVideoRipper
       private void SubscribeEditMenu()
       {
          copyFailedUrlsToClipboardToolStripMenuItem.Click += _ripper.OnCopyFailedUrls;
+         copyAllUrlsToClipboardToolStripMenuItem.Click += _ripper.OnCopyAllUrls;
          retryAllToolStripMenuItem.Click += _ripper.OnRetryAll;
          stopAllToolStripMenuItem.Click += _ripper.OnStopAll;
          clearFailuresToolStripMenuItem.Click += _ripper.OnRemoveFailed;

@@ -285,6 +285,11 @@ public class Ripper
     {
         _mediaManager.CopyFailedUrls();
     }
+    
+    public void OnCopyAllUrls(object? sender, EventArgs e)
+    {
+        _mediaManager.CopyAllUrls();
+    }
 
     public void OnRetryAll(object? sender, EventArgs e)
     {

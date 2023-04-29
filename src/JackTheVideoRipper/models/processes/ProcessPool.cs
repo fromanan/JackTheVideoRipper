@@ -108,6 +108,8 @@ public class ProcessPool
     public IEnumerable<IProcessUpdateRow> FailedProcesses => GetWhereStatus(ProcessStatus.Error);
 
     public IEnumerable<string> FailedUrls => FailedProcesses.Select(p => p.Url);
+    
+    public IEnumerable<string> Urls => Processes.Select(p => p.Url);
 
     #endregion
 
