@@ -129,9 +129,9 @@ public static class FileSystem
     
     public static Version OSVersion => Environment.OSVersion.Version;
 
-    public static FileVersionInfo FileVersionInfo => FileVersionInfo.GetVersionInfo(ExecutingAssembly.Location);
+    public static Version? FileVersionInfo => ExecutingAssembly.GetName().Version;
 
-    public static string VersionInfo => FileVersionInfo.FileVersion.ValueOrDefault();
+    public static string VersionInfo => FileVersionInfo?.ToString() ?? string.Empty;
     
     public static string TimeStampDate => $"{DateTime.Now:yyyyMMddHHmmss}";
 
