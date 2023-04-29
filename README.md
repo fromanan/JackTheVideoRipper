@@ -37,8 +37,6 @@ extracting and/or transcoding the media.
 
 * Windows 10/11 (x64)
 
-<hr>
-
 ## Setup & Installation
 
 ### Downloading
@@ -80,8 +78,6 @@ All required dependencies are installed, updated, and automatically kept up-to-d
 * [yt-dlp](https://github.com/yt-dlp/yt-dlp)
 * [ffmpeg](https://www.ffmpeg.org/download.html#build-windows)
 * [AtomicParsley](http://atomicparsley.sourceforge.net)
-
-<hr>
 
 ## Building from Source
 
