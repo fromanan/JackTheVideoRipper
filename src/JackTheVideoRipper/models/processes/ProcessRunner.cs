@@ -59,6 +59,8 @@ public abstract class ProcessRunner : IProcessRunner
     
     private static Task<bool> FalseTask => Task.FromResult(false);
 
+    public string Command => $"{ProcessFileName} {ParameterString}";
+
     #endregion
 
     #region Constructor

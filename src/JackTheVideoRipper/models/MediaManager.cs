@@ -314,6 +314,10 @@ public class MediaManager
             case ContextActions.SaveLogs:
                 Selected.SaveLogs();
                 break;
+            case ContextActions.CopyCommand:
+                if (Selected is ProcessUpdateRow processUpdateRow)
+                    FileSystem.SetClipboardText(processUpdateRow.Command);
+                break;
             default:
                 ArgumentOutOfRangeException innerException = new(nameof(contextAction), contextAction, null);
                 throw new MediaManagerException(Messages.ContextActionFailed, innerException);

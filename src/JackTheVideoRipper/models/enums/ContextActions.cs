@@ -12,5 +12,6 @@ public enum ContextActions
     Resume,
     Remove,
     OpenConsole,
-    SaveLogs
+    SaveLogs,
+    CopyCommand
 }
