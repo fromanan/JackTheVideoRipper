@@ -65,4 +65,6 @@ public interface IProcessUpdateRow : IProcessRunner, IListViewItemRow
     Task OpenInConsole();
 
     void SaveLogs();
+
+    void Detach();
 }
