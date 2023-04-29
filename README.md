@@ -4,48 +4,37 @@
 
 ![](https://github.com/fromanan/JackTheVideoRipper/raw/master/docs/demo.gif)
 
-## Features
-
 <hr>
 
-* Download video and/or audio with wide selection of supported formats (`mp4`, `mkv`, `mov`, `avi`, `m4v` to name a few)
+## Features
 
+1. Download video and/or audio with wide selection of supported formats (`mp4`, `mkv`, `mov`, `avi`, `m4v` to name a few)
 
-* Extract URLs from any document type or YouTube playlist and add URLs to queue for batch download
+2. Extract URLs from any document type or YouTube playlist and add URLs to queue for batch download
 
+3. 100+ supported streaming providers such as YouTube, DailyMotion, Vimeo, and many of the common ones
 
-* 100+ supported streaming providers such as YouTube, DailyMotion, Vimeo, and many of the common ones
+4. Compressing media files, this works especially well with low quality videos that have been encoded with high bit-rates, or those that have been upscaled.
 
+5. Repairing and recoding broken video files
 
-* Compressing media files, this works especially well with low quality videos that have been encoded with high
-  bit-rates, or those that have been upscaled.
-
-
-* Repairing and recoding broken video files
-
-
-* Verifying integrity of media files
+6. Verifying integrity of media files
 
 
 ## How Does It Work?
-
-<hr>
 
 `JackTheVideoRipper` is a GUI that manages and automates powerful tools under-the-hood to provide a streamlined,
 turn-key, point-and-click experience in order to download video, audio, or playlists in a friendly and easy way.
 The true power lies within included command-line tools `youtube-dl` and `ffmpeg` which do the heavy lifting of
 extracting and/or transcoding the media.
 
-## Requirements
 
-<hr>
+## Requirements
 
 * Windows 10/11 (x64)
 
 
 ## Setup & Installation
-
-<hr>
 
 ### Downloading
 
@@ -90,21 +79,16 @@ All required dependencies are installed, updated, and automatically kept up-to-d
 
 ## Building from Source
 
-<hr>
-
 It is recommended that you first
 [download and run the Windows Installer](https://github.com/fromanan/JackTheVideoRipper/releases), so that all of the
-needed dependencies are installed correctly, before you download the source code, build, and run the application. 
+needed dependencies are installed correctly, before you download the source code, build, and run the application.
 
 The application looks for the dependencies in the same place regardless of if it is built from source or from the
 installer. If the dependencies are not installed when the application runs, the application will crash or not behave
 correctly.
 
 
-
 ## Contributing
-
-<hr>
 
 I am currently the only developer on this project and work on it in my free time. I use this project almost every day
 when I am messing around with media as I like to tinker in my spare time.
@@ -112,10 +96,10 @@ when I am messing around with media as I like to tinker in my spare time.
 I am not opposed to help though! If you find an issue please submit a bug via GitHub issues or if you would like to
 become a contributor please feel free to email me at [fromanan@pm.me](mailto:fromanan@pm.me)
 
+<hr>
+
 
 ## FAQ
-
-<hr>
 
 ##### 1. <i>What streaming providers are supported?</i>
 
@@ -139,7 +123,7 @@ This app is currently in pre-release and not everything will work correctly. Ple
 ##### 5. <i>Why is `yt-dlp` not bundled but rather downloaded when Windows Installer runs?</i>
 
 This has to do with `yt-dlp`'s features and functionality. `yt-dlp` is constantly evolving and updating to make sure
-it is working with the latest changes made by streaming providers. Because of the ever changing nature bundling the 
+it is working with the latest changes made by streaming providers. Because of the ever changing nature bundling the
 current version of `yt-dlp` doesn't make sense. It will likely be out of date already by the time a user runs the
 installer. Most other software, like bundled apps `vcredist-x86` or `ffmpeg`, are extremely stable and do not need
 to be altered frequently to work correctly.
@@ -151,6 +135,7 @@ begun to block it. The last release, as of this writing, was in December of 2021
 `youtube-dl` with lots of updates and bug fixes.
 
 <hr>
+
 
 ## Acknowledgements
 
