@@ -168,6 +168,16 @@ public class FfmpegParameters : ProcessParameters<FfmpegParameters>, IRequiresFi
         return AddNoValue("an");
     }
 
+    public FfmpegParameters IgnoreErrors()
+    {
+        return ErrorDetect();
+    }
+
+    public FfmpegParameters ErrorDetect(string errorLevel = "ignore_err")
+    {
+        return Add("err_detect", errorLevel);
+    }
+
     #endregion
 
     #region Overrides

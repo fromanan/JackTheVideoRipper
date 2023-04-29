@@ -148,6 +148,14 @@ public static class FFMPEG
         };
     }
 
+    public static FfmpegParameters RepairVideoRecode(string videoFilepath)
+    {
+        return new FfmpegParameters(videoFilepath)
+            .IgnoreErrors()
+            .Copy()
+            .OutputFromInput(Operation.Repair);
+    }
+
     public static FfmpegParameters VerifyIntegrity(string videoFilepath, string? logFilepath = null)
     {
         string outputFilepath = logFilepath ?? $"{FileSystem.TempFile}.log";
