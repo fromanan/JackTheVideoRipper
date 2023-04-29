@@ -28,69 +28,68 @@
       /// </summary>
       private void InitializeComponent()
       {
-            this.components = new System.ComponentModel.Container();
-            this.ConsoleControl = new ConsoleControl.ConsoleControl();
-            this.consoleContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consoleContextMenu.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // ConsoleControl
-            // 
-            this.ConsoleControl.AutoSize = true;
-            this.ConsoleControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ConsoleControl.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ConsoleControl.ContextMenuStrip = this.consoleContextMenu;
-            this.ConsoleControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ConsoleControl.IsInputEnabled = true;
-            this.ConsoleControl.Location = new System.Drawing.Point(0, 0);
-            this.ConsoleControl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.ConsoleControl.Name = "ConsoleControl";
-            this.ConsoleControl.Padding = new System.Windows.Forms.Padding(9, 8, 9, 8);
-            this.ConsoleControl.SendKeyboardCommandsToProcess = false;
-            this.ConsoleControl.ShowDiagnostics = false;
-            this.ConsoleControl.Size = new System.Drawing.Size(800, 450);
-            this.ConsoleControl.TabIndex = 0;
-            // 
-            // consoleContextMenu
-            // 
-            this.consoleContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.consoleContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToFileToolStripMenuItem});
-            this.consoleContextMenu.Name = "Console";
-            this.consoleContextMenu.Size = new System.Drawing.Size(135, 26);
-            // 
-            // saveToFileToolStripMenuItem
-            // 
-            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
-            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
-            this.saveToFileToolStripMenuItem.Text = "Save To File";
-            // 
-            // FrameConsole
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ConsoleControl);
-            this.DoubleBuffered = true;
-            this.KeyPreview = true;
-            this.Name = "FrameConsole";
-            this.ShowIcon = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Console";
-            this.TransparencyKey = System.Drawing.Color.Transparent;
-            this.consoleContextMenu.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+         components = new System.ComponentModel.Container();
+         ConsoleControl = new ConsoleControl.ConsoleControl();
+         consoleContextMenu = new ContextMenuStrip(components);
+         saveToFileToolStripMenuItem = new ToolStripMenuItem();
+         consoleContextMenu.SuspendLayout();
+         SuspendLayout();
+         // 
+         // ConsoleControl
+         // 
+         ConsoleControl.AutoSize = true;
+         ConsoleControl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+         ConsoleControl.AutoValidate = AutoValidate.EnableAllowFocusChange;
+         ConsoleControl.ContextMenuStrip = consoleContextMenu;
+         ConsoleControl.Dock = DockStyle.Fill;
+         ConsoleControl.IsInputEnabled = true;
+         ConsoleControl.Location = new Point(0, 0);
+         ConsoleControl.Margin = new Padding(5, 4, 5, 4);
+         ConsoleControl.Name = "ConsoleControl";
+         ConsoleControl.Padding = new Padding(10, 11, 10, 11);
+         ConsoleControl.SendKeyboardCommandsToProcess = false;
+         ConsoleControl.ShowDiagnostics = false;
+         ConsoleControl.Size = new Size(914, 600);
+         ConsoleControl.TabIndex = 0;
+         // 
+         // consoleContextMenu
+         // 
+         consoleContextMenu.ImageScalingSize = new Size(20, 20);
+         consoleContextMenu.Items.AddRange(new ToolStripItem[] { saveToFileToolStripMenuItem });
+         consoleContextMenu.Name = "Console";
+         consoleContextMenu.Size = new Size(157, 28);
+         // 
+         // saveToFileToolStripMenuItem
+         // 
+         saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
+         saveToFileToolStripMenuItem.Size = new Size(156, 24);
+         saveToFileToolStripMenuItem.Text = "Save To File";
+         // 
+         // FrameConsole
+         // 
+         AutoScaleDimensions = new SizeF(8F, 20F);
+         AutoScaleMode = AutoScaleMode.Font;
+         AutoSizeMode = AutoSizeMode.GrowAndShrink;
+         AutoValidate = AutoValidate.EnableAllowFocusChange;
+         ClientSize = new Size(914, 600);
+         Controls.Add(ConsoleControl);
+         DoubleBuffered = true;
+         KeyPreview = true;
+         Margin = new Padding(3, 4, 3, 4);
+         Name = "FrameConsole";
+         ShowIcon = false;
+         StartPosition = FormStartPosition.CenterParent;
+         Text = "Console";
+         TransparencyKey = Color.Transparent;
+         consoleContextMenu.ResumeLayout(false);
+         ResumeLayout(false);
+         PerformLayout();
       }
 
-        #endregion
+      #endregion
 
-        public ConsoleControl.ConsoleControl ConsoleControl;
-        private ContextMenuStrip consoleContextMenu;
-        private ToolStripMenuItem saveToFileToolStripMenuItem;
-    }
+      public ConsoleControl.ConsoleControl ConsoleControl;
+      private ContextMenuStrip consoleContextMenu;
+      private ToolStripMenuItem saveToFileToolStripMenuItem;
+   }
 }

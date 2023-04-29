@@ -7,14 +7,14 @@ namespace JackTheVideoRipper.views
       #region Data Members
 
       private readonly string _instanceName;
-      
+
       private static readonly Font _DefaultFont = new("Lucinda Console", 12);
-      
+
       public bool Frozen { get; private set; }
 
-      public event Action FreezeConsoleEvent = delegate {  };
-      
-      public event Action UnfreezeConsoleEvent = delegate {  };
+      public event Action FreezeConsoleEvent = delegate { };
+
+      public event Action UnfreezeConsoleEvent = delegate { };
 
       #endregion
 
@@ -51,7 +51,7 @@ namespace JackTheVideoRipper.views
       #endregion
 
       #region Private Methods
-      
+
       public async Task MoveToTop()
       {
          await Threading.RunInMainContext(Activate);
@@ -79,7 +79,7 @@ namespace JackTheVideoRipper.views
       }
 
       private bool _suspended;
-      
+
       private void OnLostFocus(object? sender, EventArgs e)
       {
          TextBox.Suspend();
@@ -105,7 +105,7 @@ namespace JackTheVideoRipper.views
       {
          if (FileSystem.SaveFileUsingDialog() is not { } filename || filename.IsNullOrEmpty())
             return;
-         
+
          // TODO: Use the results from the process?
          FileSystem.SaveToFile(filename, TextBox.Text);
       }
