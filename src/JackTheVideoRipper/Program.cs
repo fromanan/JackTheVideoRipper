@@ -44,7 +44,7 @@ namespace JackTheVideoRipper
         {
             using Mutex singleInstanceMutex = FileSystem.CreateSingleInstanceLock(out bool isOnlyInstance);
 
-            if (!isOnlyInstance)
+            if (!Debugger.IsAttached && !isOnlyInstance)
             {
                 Modals.Notification(Messages.AlreadyRunning);
                 Environment.Exit(1056);  //< An instance of the service is already running.
