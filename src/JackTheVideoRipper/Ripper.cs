@@ -63,13 +63,7 @@ public class Ripper
 
     #endregion
 
-    private void SubscribeEvents()
-    {
-        NotificationsManager.SendNotificationEvent += _ => _notificationsManager.Reset();
-        FrameMain.ContextActionEvent += OnContextAction;
-        FrameMain.DependencyActionEvent += OnUpdateDependency;
-        FrameMain.Shown += (_, _) => _notificationsManager.Start();
-    }
+    #region Public Methods
 
     public string GetProgramStatus()
     {
@@ -91,6 +85,18 @@ public class Ripper
         await _mediaManager.UpdateListItemRows();
     }
 
+    #endregion
+
+    #region Event Handlers
+    
+    private void SubscribeEvents()
+    {
+        NotificationsManager.SendNotificationEvent += _ => _notificationsManager.Reset();
+        FrameMain.ContextActionEvent += OnContextAction;
+        FrameMain.DependencyActionEvent += OnUpdateDependency;
+        FrameMain.Shown += (_, _) => _notificationsManager.Start();
+    }
+
     public void SubscribeMediaManagerEvents(Action updateEventHandler,
         Action<IViewItem> addAction,
         Action<IEnumerable<IViewItem>> addMultiAction,
@@ -103,8 +109,6 @@ public class Ripper
         _mediaManager.ProcessRemoved += removeAction;
         _mediaManager.ProcessesRemoved += removeMultiAction;
     }
-
-    #region Event Handlers
 
     public async void OnDropUrl(string content)
     {
