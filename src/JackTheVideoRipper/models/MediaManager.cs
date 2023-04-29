@@ -121,7 +121,7 @@ public class MediaManager
             default:
             case ProcessRowType.Convert:
             case ProcessRowType.Recode:
-                Modals.Warning($"{processRowType.ToString().WrapQuotes()} Process is not currently supported!",
+                Modals.Warning($"{processRowType.ToString().WrapQuotes()} Processes are not currently supported!",
                     "Unsupported Tool Selection");
                 break;
         }
