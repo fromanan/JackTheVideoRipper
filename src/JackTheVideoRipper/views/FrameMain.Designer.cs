@@ -1,1033 +1,988 @@
 ﻿namespace JackTheVideoRipper
 {
-    partial class FrameMain
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+   partial class FrameMain
+   {
+      /// <summary>
+      /// Required designer variable.
+      /// </summary>
+      private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+      /// <summary>
+      /// Clean up any resources being used.
+      /// </summary>
+      /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+      protected override void Dispose(bool disposing)
+      {
+         if (disposing && (components != null))
+         {
+            components.Dispose();
+         }
+         base.Dispose(disposing);
+      }
 
-        #region Windows Form Designer generated code
+      #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-         this.components = new System.ComponentModel.Container();
+      /// <summary>
+      /// Required method for Designer support - do not modify
+      /// the contents of this method with the code editor.
+      /// </summary>
+      private void InitializeComponent()
+      {
+         components = new System.ComponentModel.Container();
          System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrameMain));
-         this.listItems = new System.Windows.Forms.ListView();
-         this.cTitle = new System.Windows.Forms.ColumnHeader();
-         this.cStatus = new System.Windows.Forms.ColumnHeader();
-         this.cType = new System.Windows.Forms.ColumnHeader();
-         this.cSize = new System.Windows.Forms.ColumnHeader();
-         this.cProgress = new System.Windows.Forms.ColumnHeader();
-         this.cDownloadSpeed = new System.Windows.Forms.ColumnHeader();
-         this.cETA = new System.Windows.Forms.ColumnHeader();
-         this.cURL = new System.Windows.Forms.ColumnHeader();
-         this.cPath = new System.Windows.Forms.ColumnHeader();
-         this.imgList = new System.Windows.Forms.ImageList(this.components);
-         this.menuStrip = new System.Windows.Forms.MenuStrip();
-         this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-         this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.clearAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.retryAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.stopAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.pauseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.resumeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-         this.clearSuccessesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.clearFailuresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-         this.copyFailedUrlsToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.openMediaManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.openConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.openHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-         this.validateVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.recodeVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.compressVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.repairVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.youTubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.downloadVideoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.downloadAudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-         this.batchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.downloadBatchManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.continuousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.downloadBatchDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.downloadBatchYouTubePlaylistlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-         this.validateBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.repairBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-         this.openDownloadFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-         this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-         this.openDependenciesFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-         this.recommendedUtilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.vlcPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.handbrakeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.bundledUtilitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.vS2010RedistributableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.fFmpegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.atomicParsleyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.ytdlpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-         this.openTaskManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-         this.helpSupportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.contextMenuListItems = new System.Windows.Forms.ContextMenuStrip(this.components);
-         this.convertMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.redownloadMediaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-         this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.openURLInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.openMediaInPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.openProcessInConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-         this.retryDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.resumeDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.pauseDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.copyUrlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.stopDownloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.deleteFromDiskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
-         this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.toolBar = new System.Windows.Forms.ToolStrip();
-         this.toolStripButtonDownloadVideo = new System.Windows.Forms.ToolStripButton();
-         this.toolStripButtonDownloadAudio = new System.Windows.Forms.ToolStripButton();
-         this.statusBar = new System.Windows.Forms.StatusStrip();
-         this.toolbarLabelStatus = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolBarLabelCpu = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolBarLabelMemory = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolBarLabelNetwork = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
-         this.notificationStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-         this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
-         this.timerStatusBar = new System.Windows.Forms.Timer(this.components);
-         this.timerCheckForUpdates = new System.Windows.Forms.Timer(this.components);
-         this.timerProcessLimit = new System.Windows.Forms.Timer(this.components);
-         this.listItemRowsUpdateTimer = new System.Windows.Forms.Timer(this.components);
-         this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-         this.compressBatchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-         this.menuStrip.SuspendLayout();
-         this.contextMenuListItems.SuspendLayout();
-         this.toolBar.SuspendLayout();
-         this.statusBar.SuspendLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-         this.splitContainer1.Panel1.SuspendLayout();
-         this.splitContainer1.Panel2.SuspendLayout();
-         this.splitContainer1.SuspendLayout();
-         this.SuspendLayout();
-         // 
-         // listItems
-         // 
-         this.listItems.AllowDrop = true;
-         this.listItems.BackColor = System.Drawing.SystemColors.Window;
-         this.listItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.cTitle,
-            this.cStatus,
-            this.cType,
-            this.cSize,
-            this.cProgress,
-            this.cDownloadSpeed,
-            this.cETA,
-            this.cURL,
-            this.cPath});
-         this.listItems.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.listItems.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-         this.listItems.FullRowSelect = true;
-         this.listItems.Location = new System.Drawing.Point(0, 0);
-         this.listItems.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-         this.listItems.MultiSelect = false;
-         this.listItems.Name = "listItems";
-         this.listItems.Size = new System.Drawing.Size(1223, 596);
-         this.listItems.SmallImageList = this.imgList;
-         this.listItems.TabIndex = 0;
-         this.listItems.UseCompatibleStateImageBehavior = false;
-         this.listItems.View = System.Windows.Forms.View.Details;
-         // 
-         // cTitle
-         // 
-         this.cTitle.Text = "Title";
-         this.cTitle.Width = 400;
-         // 
-         // cStatus
-         // 
-         this.cStatus.Text = "Status";
-         this.cStatus.Width = 140;
-         // 
-         // cType
-         // 
-         this.cType.Text = "Type";
-         // 
-         // cSize
-         // 
-         this.cSize.Text = "Size";
-         this.cSize.Width = 130;
-         // 
-         // cProgress
-         // 
-         this.cProgress.Text = "Progress";
-         this.cProgress.Width = 120;
-         // 
-         // cDownloadSpeed
-         // 
-         this.cDownloadSpeed.Text = "Speed";
-         this.cDownloadSpeed.Width = 157;
-         // 
-         // cETA
-         // 
-         this.cETA.Text = "ETA";
-         this.cETA.Width = 147;
-         // 
-         // cURL
-         // 
-         this.cURL.Text = "URL";
-         this.cURL.Width = 300;
-         // 
-         // cPath
-         // 
-         this.cPath.Text = "Path";
-         this.cPath.Width = 300;
+         imgList = new ImageList(components);
+         menuStrip = new MenuStrip();
+         fileToolStripMenuItem = new ToolStripMenuItem();
+         settingsToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator5 = new ToolStripSeparator();
+         exitToolStripMenuItem = new ToolStripMenuItem();
+         editToolStripMenuItem = new ToolStripMenuItem();
+         clearAllToolStripMenuItem = new ToolStripMenuItem();
+         retryAllToolStripMenuItem = new ToolStripMenuItem();
+         stopAllToolStripMenuItem = new ToolStripMenuItem();
+         pauseAllToolStripMenuItem = new ToolStripMenuItem();
+         resumeAllToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator7 = new ToolStripSeparator();
+         clearSuccessesToolStripMenuItem = new ToolStripMenuItem();
+         clearFailuresToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator8 = new ToolStripSeparator();
+         copyAllUrlsToClipboardToolStripMenuItem = new ToolStripMenuItem();
+         copyFailedUrlsToClipboardToolStripMenuItem = new ToolStripMenuItem();
+         toolsToolStripMenuItem = new ToolStripMenuItem();
+         openMediaManagerToolStripMenuItem = new ToolStripMenuItem();
+         openConsoleToolStripMenuItem = new ToolStripMenuItem();
+         openHistoryToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator11 = new ToolStripSeparator();
+         validateVideoToolStripMenuItem = new ToolStripMenuItem();
+         recodeVideoToolStripMenuItem = new ToolStripMenuItem();
+         compressVideoToolStripMenuItem = new ToolStripMenuItem();
+         repairVideoToolStripMenuItem = new ToolStripMenuItem();
+         youTubeToolStripMenuItem = new ToolStripMenuItem();
+         downloadVideoToolStripMenuItem = new ToolStripMenuItem();
+         downloadAudioToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator9 = new ToolStripSeparator();
+         batchToolStripMenuItem = new ToolStripMenuItem();
+         downloadBatchManualToolStripMenuItem = new ToolStripMenuItem();
+         continuousToolStripMenuItem = new ToolStripMenuItem();
+         downloadBatchDocumentToolStripMenuItem = new ToolStripMenuItem();
+         downloadBatchYouTubePlaylistlToolStripMenuItem = new ToolStripMenuItem();
+         toolStripMenuItem4 = new ToolStripMenuItem();
+         validateBatchToolStripMenuItem = new ToolStripMenuItem();
+         repairBatchToolStripMenuItem = new ToolStripMenuItem();
+         compressBatchToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator3 = new ToolStripSeparator();
+         openDownloadFolderToolStripMenuItem = new ToolStripMenuItem();
+         helpToolStripMenuItem = new ToolStripMenuItem();
+         aboutToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator1 = new ToolStripSeparator();
+         checkForUpdatesToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator6 = new ToolStripSeparator();
+         openDependenciesFolderToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator2 = new ToolStripSeparator();
+         recommendedUtilitiesToolStripMenuItem = new ToolStripMenuItem();
+         vlcPlayerToolStripMenuItem = new ToolStripMenuItem();
+         handbrakeToolStripMenuItem = new ToolStripMenuItem();
+         bundledUtilitiesToolStripMenuItem = new ToolStripMenuItem();
+         vS2010RedistributableToolStripMenuItem = new ToolStripMenuItem();
+         fFmpegToolStripMenuItem = new ToolStripMenuItem();
+         atomicParsleyToolStripMenuItem = new ToolStripMenuItem();
+         ytdlpToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator4 = new ToolStripSeparator();
+         openTaskManagerToolStripMenuItem = new ToolStripMenuItem();
+         toolStripSeparator10 = new ToolStripSeparator();
+         helpSupportToolStripMenuItem = new ToolStripMenuItem();
+         contextMenuListItems = new ContextMenuStrip(components);
+         convertMediaToolStripMenuItem = new ToolStripMenuItem();
+         redownloadMediaToolStripMenuItem = new ToolStripMenuItem();
+         toolStripMenuItem1 = new ToolStripSeparator();
+         openFolderToolStripMenuItem = new ToolStripMenuItem();
+         openURLInBrowserToolStripMenuItem = new ToolStripMenuItem();
+         openMediaInPlayerToolStripMenuItem = new ToolStripMenuItem();
+         openProcessInConsoleToolStripMenuItem = new ToolStripMenuItem();
+         toolStripMenuItem2 = new ToolStripSeparator();
+         retryDownloadToolStripMenuItem = new ToolStripMenuItem();
+         resumeDownloadToolStripMenuItem = new ToolStripMenuItem();
+         pauseDownloadToolStripMenuItem = new ToolStripMenuItem();
+         copyUrlToolStripMenuItem = new ToolStripMenuItem();
+         stopDownloadToolStripMenuItem = new ToolStripMenuItem();
+         deleteFromDiskToolStripMenuItem = new ToolStripMenuItem();
+         toolStripMenuItem3 = new ToolStripSeparator();
+         deleteRowToolStripMenuItem = new ToolStripMenuItem();
+         toolBar = new ToolStrip();
+         toolStripButtonDownloadVideo = new ToolStripButton();
+         toolStripSeparator13 = new ToolStripSeparator();
+         toolStripButtonDownloadAudio = new ToolStripButton();
+         toolStripSeparator12 = new ToolStripSeparator();
+         toolbarLabelProcessCounts = new ToolStripLabel();
+         statusBar = new StatusStrip();
+         toolbarLabelStatus = new ToolStripStatusLabel();
+         toolbarSeparator1 = new ToolStripStatusLabel();
+         toolBarLabelCpu = new ToolStripStatusLabel();
+         toolbarSeparator2 = new ToolStripStatusLabel();
+         toolBarLabelMemory = new ToolStripStatusLabel();
+         toolbarSeparator3 = new ToolStripStatusLabel();
+         toolBarLabelNetwork = new ToolStripStatusLabel();
+         toolbarSeparator4 = new ToolStripStatusLabel();
+         notificationStatusLabel = new ToolStripStatusLabel();
+         toolStripStatusLabel4 = new ToolStripStatusLabel();
+         timerStatusBar = new System.Windows.Forms.Timer(components);
+         timerCheckForUpdates = new System.Windows.Forms.Timer(components);
+         timerProcessLimit = new System.Windows.Forms.Timer(components);
+         listItemRowsUpdateTimer = new System.Windows.Forms.Timer(components);
+         cTitle = new ColumnHeader();
+         cStatus = new ColumnHeader();
+         cType = new ColumnHeader();
+         cSize = new ColumnHeader();
+         cProgress = new ColumnHeader();
+         cDownloadSpeed = new ColumnHeader();
+         cETA = new ColumnHeader();
+         cURL = new ColumnHeader();
+         cPath = new ColumnHeader();
+         listItems = new ListView();
+         splitContainer = new SplitContainer();
+         menuStrip.SuspendLayout();
+         contextMenuListItems.SuspendLayout();
+         toolBar.SuspendLayout();
+         statusBar.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
+         splitContainer.Panel1.SuspendLayout();
+         splitContainer.Panel2.SuspendLayout();
+         splitContainer.SuspendLayout();
+         SuspendLayout();
          // 
          // imgList
          // 
-         this.imgList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-         this.imgList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgList.ImageStream")));
-         this.imgList.TransparentColor = System.Drawing.Color.Transparent;
-         this.imgList.Images.SetKeyName(0, "movie-medium.ico");
-         this.imgList.Images.SetKeyName(1, "song-medium.ico");
+         imgList.ColorDepth = ColorDepth.Depth32Bit;
+         imgList.ImageStream = (ImageListStreamer)resources.GetObject("imgList.ImageStream");
+         imgList.TransparentColor = Color.Transparent;
+         imgList.Images.SetKeyName(0, "movie-medium.ico");
+         imgList.Images.SetKeyName(1, "song-medium.ico");
+         imgList.Images.SetKeyName(2, "queued.ico");
+         imgList.Images.SetKeyName(3, "download.ico");
+         imgList.Images.SetKeyName(4, "compress.ico");
+         imgList.Images.SetKeyName(5, "completed.ico");
+         imgList.Images.SetKeyName(6, "error.ico");
+         imgList.Images.SetKeyName(7, "stopped.ico");
+         imgList.Images.SetKeyName(8, "cancelled.ico");
+         imgList.Images.SetKeyName(9, "paused.ico");
          // 
          // menuStrip
          // 
-         this.menuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
-         this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.toolsToolStripMenuItem,
-            this.youTubeToolStripMenuItem,
-            this.helpToolStripMenuItem});
-         this.menuStrip.Location = new System.Drawing.Point(0, 0);
-         this.menuStrip.Name = "menuStrip";
-         this.menuStrip.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-         this.menuStrip.Size = new System.Drawing.Size(1223, 30);
-         this.menuStrip.TabIndex = 1;
-         this.menuStrip.Text = "menuStrip1";
+         menuStrip.BackColor = SystemColors.GradientInactiveCaption;
+         menuStrip.ImageScalingSize = new Size(20, 20);
+         menuStrip.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, youTubeToolStripMenuItem, helpToolStripMenuItem });
+         menuStrip.Location = new Point(5, 5);
+         menuStrip.Name = "menuStrip";
+         menuStrip.Padding = new Padding(0, 0, 0, 5);
+         menuStrip.Size = new Size(1213, 29);
+         menuStrip.TabIndex = 1;
+         menuStrip.Text = "menuStrip1";
          // 
          // fileToolStripMenuItem
          // 
-         this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.exitToolStripMenuItem});
-         this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-         this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-         this.fileToolStripMenuItem.Text = "&File";
+         fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { settingsToolStripMenuItem, toolStripSeparator5, exitToolStripMenuItem });
+         fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+         fileToolStripMenuItem.Size = new Size(46, 24);
+         fileToolStripMenuItem.Text = "&File";
          // 
          // settingsToolStripMenuItem
          // 
-         this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-         this.settingsToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
-         this.settingsToolStripMenuItem.Text = "&Settings";
+         settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+         settingsToolStripMenuItem.Size = new Size(145, 26);
+         settingsToolStripMenuItem.Text = "&Settings";
          // 
          // toolStripSeparator5
          // 
-         this.toolStripSeparator5.Name = "toolStripSeparator5";
-         this.toolStripSeparator5.Size = new System.Drawing.Size(142, 6);
+         toolStripSeparator5.Name = "toolStripSeparator5";
+         toolStripSeparator5.Size = new Size(142, 6);
          // 
          // exitToolStripMenuItem
          // 
-         this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-         this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
-         this.exitToolStripMenuItem.Text = "E&xit";
+         exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+         exitToolStripMenuItem.Size = new Size(145, 26);
+         exitToolStripMenuItem.Text = "E&xit";
          // 
          // editToolStripMenuItem
          // 
-         this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearAllToolStripMenuItem,
-            this.retryAllToolStripMenuItem,
-            this.stopAllToolStripMenuItem,
-            this.pauseAllToolStripMenuItem,
-            this.resumeAllToolStripMenuItem,
-            this.toolStripSeparator7,
-            this.clearSuccessesToolStripMenuItem,
-            this.clearFailuresToolStripMenuItem,
-            this.toolStripSeparator8,
-            this.copyFailedUrlsToClipboardToolStripMenuItem});
-         this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-         this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
-         this.editToolStripMenuItem.Text = "&Edit";
+         editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clearAllToolStripMenuItem, retryAllToolStripMenuItem, stopAllToolStripMenuItem, pauseAllToolStripMenuItem, resumeAllToolStripMenuItem, toolStripSeparator7, clearSuccessesToolStripMenuItem, clearFailuresToolStripMenuItem, toolStripSeparator8, copyAllUrlsToClipboardToolStripMenuItem, copyFailedUrlsToClipboardToolStripMenuItem });
+         editToolStripMenuItem.Name = "editToolStripMenuItem";
+         editToolStripMenuItem.Size = new Size(49, 24);
+         editToolStripMenuItem.Text = "&Edit";
          // 
          // clearAllToolStripMenuItem
          // 
-         this.clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
-         this.clearAllToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.clearAllToolStripMenuItem.Text = "&Clear All";
+         clearAllToolStripMenuItem.Name = "clearAllToolStripMenuItem";
+         clearAllToolStripMenuItem.Size = new Size(198, 26);
+         clearAllToolStripMenuItem.Text = "&Clear All";
          // 
          // retryAllToolStripMenuItem
          // 
-         this.retryAllToolStripMenuItem.Name = "retryAllToolStripMenuItem";
-         this.retryAllToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.retryAllToolStripMenuItem.Text = "&Retry All";
+         retryAllToolStripMenuItem.Name = "retryAllToolStripMenuItem";
+         retryAllToolStripMenuItem.Size = new Size(198, 26);
+         retryAllToolStripMenuItem.Text = "&Retry All";
          // 
          // stopAllToolStripMenuItem
          // 
-         this.stopAllToolStripMenuItem.Name = "stopAllToolStripMenuItem";
-         this.stopAllToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.stopAllToolStripMenuItem.Text = "&Stop All";
+         stopAllToolStripMenuItem.Name = "stopAllToolStripMenuItem";
+         stopAllToolStripMenuItem.Size = new Size(198, 26);
+         stopAllToolStripMenuItem.Text = "&Stop All";
          // 
          // pauseAllToolStripMenuItem
          // 
-         this.pauseAllToolStripMenuItem.Name = "pauseAllToolStripMenuItem";
-         this.pauseAllToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.pauseAllToolStripMenuItem.Text = "&Pause All";
+         pauseAllToolStripMenuItem.Name = "pauseAllToolStripMenuItem";
+         pauseAllToolStripMenuItem.Size = new Size(198, 26);
+         pauseAllToolStripMenuItem.Text = "&Pause All";
          // 
          // resumeAllToolStripMenuItem
          // 
-         this.resumeAllToolStripMenuItem.Name = "resumeAllToolStripMenuItem";
-         this.resumeAllToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.resumeAllToolStripMenuItem.Text = "&Resume All";
+         resumeAllToolStripMenuItem.Name = "resumeAllToolStripMenuItem";
+         resumeAllToolStripMenuItem.Size = new Size(198, 26);
+         resumeAllToolStripMenuItem.Text = "&Resume All";
          // 
          // toolStripSeparator7
          // 
-         this.toolStripSeparator7.Name = "toolStripSeparator7";
-         this.toolStripSeparator7.Size = new System.Drawing.Size(195, 6);
+         toolStripSeparator7.Name = "toolStripSeparator7";
+         toolStripSeparator7.Size = new Size(195, 6);
          // 
          // clearSuccessesToolStripMenuItem
          // 
-         this.clearSuccessesToolStripMenuItem.Name = "clearSuccessesToolStripMenuItem";
-         this.clearSuccessesToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.clearSuccessesToolStripMenuItem.Text = "Clear &Successes";
+         clearSuccessesToolStripMenuItem.Name = "clearSuccessesToolStripMenuItem";
+         clearSuccessesToolStripMenuItem.Size = new Size(198, 26);
+         clearSuccessesToolStripMenuItem.Text = "Clear &Successes";
          // 
          // clearFailuresToolStripMenuItem
          // 
-         this.clearFailuresToolStripMenuItem.Name = "clearFailuresToolStripMenuItem";
-         this.clearFailuresToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.clearFailuresToolStripMenuItem.Text = "Clear &Failures";
+         clearFailuresToolStripMenuItem.Name = "clearFailuresToolStripMenuItem";
+         clearFailuresToolStripMenuItem.Size = new Size(198, 26);
+         clearFailuresToolStripMenuItem.Text = "Clear &Failures";
          // 
          // toolStripSeparator8
          // 
-         this.toolStripSeparator8.Name = "toolStripSeparator8";
-         this.toolStripSeparator8.Size = new System.Drawing.Size(195, 6);
+         toolStripSeparator8.Name = "toolStripSeparator8";
+         toolStripSeparator8.Size = new Size(195, 6);
+         // 
+         // copyAllUrlsToClipboardToolStripMenuItem
+         // 
+         copyAllUrlsToClipboardToolStripMenuItem.Name = "copyAllUrlsToClipboardToolStripMenuItem";
+         copyAllUrlsToClipboardToolStripMenuItem.Size = new Size(198, 26);
+         copyAllUrlsToClipboardToolStripMenuItem.Text = "Copy All Urls";
          // 
          // copyFailedUrlsToClipboardToolStripMenuItem
          // 
-         this.copyFailedUrlsToClipboardToolStripMenuItem.Name = "copyFailedUrlsToClipboardToolStripMenuItem";
-         this.copyFailedUrlsToClipboardToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
-         this.copyFailedUrlsToClipboardToolStripMenuItem.Text = "Copy Failed Urls";
+         copyFailedUrlsToClipboardToolStripMenuItem.Name = "copyFailedUrlsToClipboardToolStripMenuItem";
+         copyFailedUrlsToClipboardToolStripMenuItem.Size = new Size(198, 26);
+         copyFailedUrlsToClipboardToolStripMenuItem.Text = "Copy Failed Urls";
          // 
          // toolsToolStripMenuItem
          // 
-         this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openMediaManagerToolStripMenuItem,
-            this.openConsoleToolStripMenuItem,
-            this.openHistoryToolStripMenuItem,
-            this.toolStripSeparator11,
-            this.validateVideoToolStripMenuItem,
-            this.recodeVideoToolStripMenuItem,
-            this.compressVideoToolStripMenuItem,
-            this.repairVideoToolStripMenuItem});
-         this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-         this.toolsToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
-         this.toolsToolStripMenuItem.Text = "&Tools";
+         toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openMediaManagerToolStripMenuItem, openConsoleToolStripMenuItem, openHistoryToolStripMenuItem, toolStripSeparator11, validateVideoToolStripMenuItem, recodeVideoToolStripMenuItem, compressVideoToolStripMenuItem, repairVideoToolStripMenuItem });
+         toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+         toolsToolStripMenuItem.Size = new Size(58, 24);
+         toolsToolStripMenuItem.Text = "&Tools";
          // 
          // openMediaManagerToolStripMenuItem
          // 
-         this.openMediaManagerToolStripMenuItem.Enabled = false;
-         this.openMediaManagerToolStripMenuItem.Name = "openMediaManagerToolStripMenuItem";
-         this.openMediaManagerToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-         this.openMediaManagerToolStripMenuItem.Text = "Open Media Manager";
+         openMediaManagerToolStripMenuItem.Enabled = false;
+         openMediaManagerToolStripMenuItem.Name = "openMediaManagerToolStripMenuItem";
+         openMediaManagerToolStripMenuItem.Size = new Size(237, 26);
+         openMediaManagerToolStripMenuItem.Text = "Open Media Manager";
          // 
          // openConsoleToolStripMenuItem
          // 
-         this.openConsoleToolStripMenuItem.Name = "openConsoleToolStripMenuItem";
-         this.openConsoleToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-         this.openConsoleToolStripMenuItem.Text = "Open Console";
+         openConsoleToolStripMenuItem.Name = "openConsoleToolStripMenuItem";
+         openConsoleToolStripMenuItem.Size = new Size(237, 26);
+         openConsoleToolStripMenuItem.Text = "Open Console";
          // 
          // openHistoryToolStripMenuItem
          // 
-         this.openHistoryToolStripMenuItem.Name = "openHistoryToolStripMenuItem";
-         this.openHistoryToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-         this.openHistoryToolStripMenuItem.Text = "Open History";
+         openHistoryToolStripMenuItem.Name = "openHistoryToolStripMenuItem";
+         openHistoryToolStripMenuItem.Size = new Size(237, 26);
+         openHistoryToolStripMenuItem.Text = "Open History";
          // 
          // toolStripSeparator11
          // 
-         this.toolStripSeparator11.Name = "toolStripSeparator11";
-         this.toolStripSeparator11.Size = new System.Drawing.Size(234, 6);
+         toolStripSeparator11.Name = "toolStripSeparator11";
+         toolStripSeparator11.Size = new Size(234, 6);
          // 
          // validateVideoToolStripMenuItem
          // 
-         this.validateVideoToolStripMenuItem.Name = "validateVideoToolStripMenuItem";
-         this.validateVideoToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-         this.validateVideoToolStripMenuItem.Text = "Validate Video";
+         validateVideoToolStripMenuItem.Name = "validateVideoToolStripMenuItem";
+         validateVideoToolStripMenuItem.Size = new Size(237, 26);
+         validateVideoToolStripMenuItem.Text = "Validate Video";
          // 
          // recodeVideoToolStripMenuItem
          // 
-         this.recodeVideoToolStripMenuItem.Name = "recodeVideoToolStripMenuItem";
-         this.recodeVideoToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-         this.recodeVideoToolStripMenuItem.Text = "Recode Video";
+         recodeVideoToolStripMenuItem.Name = "recodeVideoToolStripMenuItem";
+         recodeVideoToolStripMenuItem.Size = new Size(237, 26);
+         recodeVideoToolStripMenuItem.Text = "Recode Video";
          // 
          // compressVideoToolStripMenuItem
          // 
-         this.compressVideoToolStripMenuItem.Name = "compressVideoToolStripMenuItem";
-         this.compressVideoToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-         this.compressVideoToolStripMenuItem.Text = "Compress Video";
+         compressVideoToolStripMenuItem.Name = "compressVideoToolStripMenuItem";
+         compressVideoToolStripMenuItem.Size = new Size(237, 26);
+         compressVideoToolStripMenuItem.Text = "Compress Video";
          // 
          // repairVideoToolStripMenuItem
          // 
-         this.repairVideoToolStripMenuItem.Name = "repairVideoToolStripMenuItem";
-         this.repairVideoToolStripMenuItem.Size = new System.Drawing.Size(237, 26);
-         this.repairVideoToolStripMenuItem.Text = "Repair Video";
+         repairVideoToolStripMenuItem.Name = "repairVideoToolStripMenuItem";
+         repairVideoToolStripMenuItem.Size = new Size(237, 26);
+         repairVideoToolStripMenuItem.Text = "Repair Video";
          // 
          // youTubeToolStripMenuItem
          // 
-         this.youTubeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.downloadVideoToolStripMenuItem,
-            this.downloadAudioToolStripMenuItem,
-            this.toolStripSeparator9,
-            this.batchToolStripMenuItem,
-            this.toolStripMenuItem4,
-            this.validateBatchToolStripMenuItem,
-            this.repairBatchToolStripMenuItem,
-            this.compressBatchToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.openDownloadFolderToolStripMenuItem});
-         this.youTubeToolStripMenuItem.Name = "youTubeToolStripMenuItem";
-         this.youTubeToolStripMenuItem.Size = new System.Drawing.Size(65, 24);
-         this.youTubeToolStripMenuItem.Text = "&Media";
+         youTubeToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { downloadVideoToolStripMenuItem, downloadAudioToolStripMenuItem, toolStripSeparator9, batchToolStripMenuItem, toolStripMenuItem4, validateBatchToolStripMenuItem, repairBatchToolStripMenuItem, compressBatchToolStripMenuItem, toolStripSeparator3, openDownloadFolderToolStripMenuItem });
+         youTubeToolStripMenuItem.Name = "youTubeToolStripMenuItem";
+         youTubeToolStripMenuItem.Size = new Size(65, 24);
+         youTubeToolStripMenuItem.Text = "&Media";
          // 
          // downloadVideoToolStripMenuItem
          // 
-         this.downloadVideoToolStripMenuItem.Name = "downloadVideoToolStripMenuItem";
-         this.downloadVideoToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-         this.downloadVideoToolStripMenuItem.Text = "Download &Video";
+         downloadVideoToolStripMenuItem.Name = "downloadVideoToolStripMenuItem";
+         downloadVideoToolStripMenuItem.Size = new Size(247, 26);
+         downloadVideoToolStripMenuItem.Text = "Download &Video";
          // 
          // downloadAudioToolStripMenuItem
          // 
-         this.downloadAudioToolStripMenuItem.Name = "downloadAudioToolStripMenuItem";
-         this.downloadAudioToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-         this.downloadAudioToolStripMenuItem.Text = "Download &Audio";
+         downloadAudioToolStripMenuItem.Name = "downloadAudioToolStripMenuItem";
+         downloadAudioToolStripMenuItem.Size = new Size(247, 26);
+         downloadAudioToolStripMenuItem.Text = "Download &Audio";
          // 
          // toolStripSeparator9
          // 
-         this.toolStripSeparator9.Name = "toolStripSeparator9";
-         this.toolStripSeparator9.Size = new System.Drawing.Size(244, 6);
+         toolStripSeparator9.Name = "toolStripSeparator9";
+         toolStripSeparator9.Size = new Size(244, 6);
          // 
          // batchToolStripMenuItem
          // 
-         this.batchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.downloadBatchManualToolStripMenuItem,
-            this.continuousToolStripMenuItem,
-            this.downloadBatchDocumentToolStripMenuItem,
-            this.downloadBatchYouTubePlaylistlToolStripMenuItem});
-         this.batchToolStripMenuItem.Name = "batchToolStripMenuItem";
-         this.batchToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-         this.batchToolStripMenuItem.Text = "Download &Batch";
+         batchToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { downloadBatchManualToolStripMenuItem, continuousToolStripMenuItem, downloadBatchDocumentToolStripMenuItem, downloadBatchYouTubePlaylistlToolStripMenuItem });
+         batchToolStripMenuItem.Name = "batchToolStripMenuItem";
+         batchToolStripMenuItem.Size = new Size(247, 26);
+         batchToolStripMenuItem.Text = "Download &Batch";
          // 
          // downloadBatchManualToolStripMenuItem
          // 
-         this.downloadBatchManualToolStripMenuItem.Name = "downloadBatchManualToolStripMenuItem";
-         this.downloadBatchManualToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-         this.downloadBatchManualToolStripMenuItem.Text = "&Manual";
+         downloadBatchManualToolStripMenuItem.Name = "downloadBatchManualToolStripMenuItem";
+         downloadBatchManualToolStripMenuItem.Size = new Size(199, 26);
+         downloadBatchManualToolStripMenuItem.Text = "&Manual";
          // 
          // continuousToolStripMenuItem
          // 
-         this.continuousToolStripMenuItem.Enabled = false;
-         this.continuousToolStripMenuItem.Name = "continuousToolStripMenuItem";
-         this.continuousToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-         this.continuousToolStripMenuItem.Text = "&Continuous";
+         continuousToolStripMenuItem.Enabled = false;
+         continuousToolStripMenuItem.Name = "continuousToolStripMenuItem";
+         continuousToolStripMenuItem.Size = new Size(199, 26);
+         continuousToolStripMenuItem.Text = "&Continuous";
          // 
          // downloadBatchDocumentToolStripMenuItem
          // 
-         this.downloadBatchDocumentToolStripMenuItem.Name = "downloadBatchDocumentToolStripMenuItem";
-         this.downloadBatchDocumentToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-         this.downloadBatchDocumentToolStripMenuItem.Text = "&Document";
+         downloadBatchDocumentToolStripMenuItem.Name = "downloadBatchDocumentToolStripMenuItem";
+         downloadBatchDocumentToolStripMenuItem.Size = new Size(199, 26);
+         downloadBatchDocumentToolStripMenuItem.Text = "&Document";
          // 
          // downloadBatchYouTubePlaylistlToolStripMenuItem
          // 
-         this.downloadBatchYouTubePlaylistlToolStripMenuItem.Name = "downloadBatchYouTubePlaylistlToolStripMenuItem";
-         this.downloadBatchYouTubePlaylistlToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
-         this.downloadBatchYouTubePlaylistlToolStripMenuItem.Text = "&YouTube Playlist";
+         downloadBatchYouTubePlaylistlToolStripMenuItem.Name = "downloadBatchYouTubePlaylistlToolStripMenuItem";
+         downloadBatchYouTubePlaylistlToolStripMenuItem.Size = new Size(199, 26);
+         downloadBatchYouTubePlaylistlToolStripMenuItem.Text = "&YouTube Playlist";
          // 
          // toolStripMenuItem4
          // 
-         this.toolStripMenuItem4.Enabled = false;
-         this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-         this.toolStripMenuItem4.Size = new System.Drawing.Size(247, 26);
-         this.toolStripMenuItem4.Text = "&Convert Batch";
+         toolStripMenuItem4.Enabled = false;
+         toolStripMenuItem4.Name = "toolStripMenuItem4";
+         toolStripMenuItem4.Size = new Size(247, 26);
+         toolStripMenuItem4.Text = "&Convert Batch";
          // 
          // validateBatchToolStripMenuItem
          // 
-         this.validateBatchToolStripMenuItem.Enabled = false;
-         this.validateBatchToolStripMenuItem.Name = "validateBatchToolStripMenuItem";
-         this.validateBatchToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-         this.validateBatchToolStripMenuItem.Text = "&Validate Batch";
+         validateBatchToolStripMenuItem.Enabled = false;
+         validateBatchToolStripMenuItem.Name = "validateBatchToolStripMenuItem";
+         validateBatchToolStripMenuItem.Size = new Size(247, 26);
+         validateBatchToolStripMenuItem.Text = "&Validate Batch";
          // 
          // repairBatchToolStripMenuItem
          // 
-         this.repairBatchToolStripMenuItem.Enabled = false;
-         this.repairBatchToolStripMenuItem.Name = "repairBatchToolStripMenuItem";
-         this.repairBatchToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-         this.repairBatchToolStripMenuItem.Text = "&Repair Batch";
-         // 
-         // toolStripSeparator3
-         // 
-         this.toolStripSeparator3.Name = "toolStripSeparator3";
-         this.toolStripSeparator3.Size = new System.Drawing.Size(244, 6);
-         // 
-         // openDownloadFolderToolStripMenuItem
-         // 
-         this.openDownloadFolderToolStripMenuItem.Name = "openDownloadFolderToolStripMenuItem";
-         this.openDownloadFolderToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-         this.openDownloadFolderToolStripMenuItem.Text = "&Open Download Folder";
-         // 
-         // helpToolStripMenuItem
-         // 
-         this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.checkForUpdatesToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.openDependenciesFolderToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.recommendedUtilitiesToolStripMenuItem,
-            this.bundledUtilitiesToolStripMenuItem,
-            this.toolStripSeparator4,
-            this.openTaskManagerToolStripMenuItem,
-            this.toolStripSeparator10,
-            this.helpSupportToolStripMenuItem});
-         this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-         this.helpToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
-         this.helpToolStripMenuItem.Text = "&Help";
-         // 
-         // aboutToolStripMenuItem
-         // 
-         this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-         this.aboutToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-         this.aboutToolStripMenuItem.Text = "About";
-         // 
-         // toolStripSeparator1
-         // 
-         this.toolStripSeparator1.Name = "toolStripSeparator1";
-         this.toolStripSeparator1.Size = new System.Drawing.Size(269, 6);
-         // 
-         // checkForUpdatesToolStripMenuItem
-         // 
-         this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-         this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-         this.checkForUpdatesToolStripMenuItem.Text = "Check For Updates";
-         // 
-         // toolStripSeparator6
-         // 
-         this.toolStripSeparator6.Name = "toolStripSeparator6";
-         this.toolStripSeparator6.Size = new System.Drawing.Size(269, 6);
-         // 
-         // openDependenciesFolderToolStripMenuItem
-         // 
-         this.openDependenciesFolderToolStripMenuItem.Name = "openDependenciesFolderToolStripMenuItem";
-         this.openDependenciesFolderToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-         this.openDependenciesFolderToolStripMenuItem.Text = "Open Dependencies Folder";
-         // 
-         // toolStripSeparator2
-         // 
-         this.toolStripSeparator2.Name = "toolStripSeparator2";
-         this.toolStripSeparator2.Size = new System.Drawing.Size(269, 6);
-         // 
-         // recommendedUtilitiesToolStripMenuItem
-         // 
-         this.recommendedUtilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vlcPlayerToolStripMenuItem,
-            this.handbrakeToolStripMenuItem});
-         this.recommendedUtilitiesToolStripMenuItem.Name = "recommendedUtilitiesToolStripMenuItem";
-         this.recommendedUtilitiesToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-         this.recommendedUtilitiesToolStripMenuItem.Text = "Recommended Utilities";
-         // 
-         // vlcPlayerToolStripMenuItem
-         // 
-         this.vlcPlayerToolStripMenuItem.Name = "vlcPlayerToolStripMenuItem";
-         this.vlcPlayerToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
-         this.vlcPlayerToolStripMenuItem.Text = "VLC Player";
-         // 
-         // handbrakeToolStripMenuItem
-         // 
-         this.handbrakeToolStripMenuItem.Name = "handbrakeToolStripMenuItem";
-         this.handbrakeToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
-         this.handbrakeToolStripMenuItem.Text = "Handbrake";
-         // 
-         // bundledUtilitiesToolStripMenuItem
-         // 
-         this.bundledUtilitiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vS2010RedistributableToolStripMenuItem,
-            this.fFmpegToolStripMenuItem,
-            this.atomicParsleyToolStripMenuItem,
-            this.ytdlpToolStripMenuItem});
-         this.bundledUtilitiesToolStripMenuItem.Name = "bundledUtilitiesToolStripMenuItem";
-         this.bundledUtilitiesToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-         this.bundledUtilitiesToolStripMenuItem.Text = "Bundled Utilities";
-         // 
-         // vS2010RedistributableToolStripMenuItem
-         // 
-         this.vS2010RedistributableToolStripMenuItem.Name = "vS2010RedistributableToolStripMenuItem";
-         this.vS2010RedistributableToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-         this.vS2010RedistributableToolStripMenuItem.Text = "VS 2010 Redistributable";
-         // 
-         // fFmpegToolStripMenuItem
-         // 
-         this.fFmpegToolStripMenuItem.Name = "fFmpegToolStripMenuItem";
-         this.fFmpegToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-         this.fFmpegToolStripMenuItem.Text = "FFmpeg";
-         // 
-         // atomicParsleyToolStripMenuItem
-         // 
-         this.atomicParsleyToolStripMenuItem.Name = "atomicParsleyToolStripMenuItem";
-         this.atomicParsleyToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-         this.atomicParsleyToolStripMenuItem.Text = "AtomicParsley";
-         // 
-         // ytdlpToolStripMenuItem
-         // 
-         this.ytdlpToolStripMenuItem.Name = "ytdlpToolStripMenuItem";
-         this.ytdlpToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-         this.ytdlpToolStripMenuItem.Text = "yt-dlp";
-         // 
-         // toolStripSeparator4
-         // 
-         this.toolStripSeparator4.Name = "toolStripSeparator4";
-         this.toolStripSeparator4.Size = new System.Drawing.Size(269, 6);
-         // 
-         // openTaskManagerToolStripMenuItem
-         // 
-         this.openTaskManagerToolStripMenuItem.Name = "openTaskManagerToolStripMenuItem";
-         this.openTaskManagerToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-         this.openTaskManagerToolStripMenuItem.Text = "Open Task Manager";
-         // 
-         // toolStripSeparator10
-         // 
-         this.toolStripSeparator10.Name = "toolStripSeparator10";
-         this.toolStripSeparator10.Size = new System.Drawing.Size(269, 6);
-         // 
-         // helpSupportToolStripMenuItem
-         // 
-         this.helpSupportToolStripMenuItem.Enabled = false;
-         this.helpSupportToolStripMenuItem.Name = "helpSupportToolStripMenuItem";
-         this.helpSupportToolStripMenuItem.Size = new System.Drawing.Size(272, 26);
-         this.helpSupportToolStripMenuItem.Text = "Help && Support";
-         // 
-         // contextMenuListItems
-         // 
-         this.contextMenuListItems.ImageScalingSize = new System.Drawing.Size(24, 24);
-         this.contextMenuListItems.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.convertMediaToolStripMenuItem,
-            this.redownloadMediaToolStripMenuItem,
-            this.toolStripMenuItem1,
-            this.openFolderToolStripMenuItem,
-            this.openURLInBrowserToolStripMenuItem,
-            this.openMediaInPlayerToolStripMenuItem,
-            this.openProcessInConsoleToolStripMenuItem,
-            this.toolStripMenuItem2,
-            this.retryDownloadToolStripMenuItem,
-            this.resumeDownloadToolStripMenuItem,
-            this.pauseDownloadToolStripMenuItem,
-            this.copyUrlToolStripMenuItem,
-            this.stopDownloadToolStripMenuItem,
-            this.deleteFromDiskToolStripMenuItem,
-            this.toolStripMenuItem3,
-            this.deleteRowToolStripMenuItem});
-         this.contextMenuListItems.Name = "contextMenuListItems";
-         this.contextMenuListItems.Size = new System.Drawing.Size(241, 334);
-         // 
-         // convertMediaToolStripMenuItem
-         // 
-         this.convertMediaToolStripMenuItem.Name = "convertMediaToolStripMenuItem";
-         this.convertMediaToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.convertMediaToolStripMenuItem.Text = "Convert Media";
-         // 
-         // redownloadMediaToolStripMenuItem
-         // 
-         this.redownloadMediaToolStripMenuItem.Name = "redownloadMediaToolStripMenuItem";
-         this.redownloadMediaToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.redownloadMediaToolStripMenuItem.Text = "Redownload";
-         // 
-         // toolStripMenuItem1
-         // 
-         this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-         this.toolStripMenuItem1.Size = new System.Drawing.Size(237, 6);
-         // 
-         // openFolderToolStripMenuItem
-         // 
-         this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-         this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.openFolderToolStripMenuItem.Text = "Open Folder";
-         // 
-         // openURLInBrowserToolStripMenuItem
-         // 
-         this.openURLInBrowserToolStripMenuItem.Name = "openURLInBrowserToolStripMenuItem";
-         this.openURLInBrowserToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.openURLInBrowserToolStripMenuItem.Text = "Open URL In Browser";
-         // 
-         // openMediaInPlayerToolStripMenuItem
-         // 
-         this.openMediaInPlayerToolStripMenuItem.Name = "openMediaInPlayerToolStripMenuItem";
-         this.openMediaInPlayerToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.openMediaInPlayerToolStripMenuItem.Text = "Open Media In Player";
-         // 
-         // openProcessInConsoleToolStripMenuItem
-         // 
-         this.openProcessInConsoleToolStripMenuItem.Name = "openProcessInConsoleToolStripMenuItem";
-         this.openProcessInConsoleToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.openProcessInConsoleToolStripMenuItem.Text = "Open Process in Console";
-         // 
-         // toolStripMenuItem2
-         // 
-         this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-         this.toolStripMenuItem2.Size = new System.Drawing.Size(237, 6);
-         // 
-         // retryDownloadToolStripMenuItem
-         // 
-         this.retryDownloadToolStripMenuItem.Name = "retryDownloadToolStripMenuItem";
-         this.retryDownloadToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.retryDownloadToolStripMenuItem.Text = "Retry Download";
-         // 
-         // resumeDownloadToolStripMenuItem
-         // 
-         this.resumeDownloadToolStripMenuItem.Name = "resumeDownloadToolStripMenuItem";
-         this.resumeDownloadToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.resumeDownloadToolStripMenuItem.Text = "Resume Download";
-         // 
-         // pauseDownloadToolStripMenuItem
-         // 
-         this.pauseDownloadToolStripMenuItem.Name = "pauseDownloadToolStripMenuItem";
-         this.pauseDownloadToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.pauseDownloadToolStripMenuItem.Text = "Pause Download";
-         // 
-         // copyUrlToolStripMenuItem
-         // 
-         this.copyUrlToolStripMenuItem.Name = "copyUrlToolStripMenuItem";
-         this.copyUrlToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.copyUrlToolStripMenuItem.Text = "Copy Url to Clipboard";
-         // 
-         // stopDownloadToolStripMenuItem
-         // 
-         this.stopDownloadToolStripMenuItem.Name = "stopDownloadToolStripMenuItem";
-         this.stopDownloadToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.stopDownloadToolStripMenuItem.Text = "Stop Download";
-         // 
-         // deleteFromDiskToolStripMenuItem
-         // 
-         this.deleteFromDiskToolStripMenuItem.Name = "deleteFromDiskToolStripMenuItem";
-         this.deleteFromDiskToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.deleteFromDiskToolStripMenuItem.Text = "Remove File From Disk";
-         // 
-         // toolStripMenuItem3
-         // 
-         this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-         this.toolStripMenuItem3.Size = new System.Drawing.Size(237, 6);
-         // 
-         // deleteRowToolStripMenuItem
-         // 
-         this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
-         this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(240, 24);
-         this.deleteRowToolStripMenuItem.Text = "Delete Row";
-         // 
-         // toolBar
-         // 
-         this.toolBar.ImageScalingSize = new System.Drawing.Size(34, 39);
-         this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButtonDownloadVideo,
-            this.toolStripButtonDownloadAudio});
-         this.toolBar.Location = new System.Drawing.Point(0, 30);
-         this.toolBar.Name = "toolBar";
-         this.toolBar.Size = new System.Drawing.Size(1223, 46);
-         this.toolBar.TabIndex = 2;
-         this.toolBar.Text = "toolStrip1";
-         // 
-         // toolStripButtonDownloadVideo
-         // 
-         this.toolStripButtonDownloadVideo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButtonDownloadVideo.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDownloadVideo.Image")));
-         this.toolStripButtonDownloadVideo.ImageTransparentColor = System.Drawing.Color.Black;
-         this.toolStripButtonDownloadVideo.Name = "toolStripButtonDownloadVideo";
-         this.toolStripButtonDownloadVideo.Size = new System.Drawing.Size(38, 43);
-         this.toolStripButtonDownloadVideo.ToolTipText = "Download Media as Video";
-         // 
-         // toolStripButtonDownloadAudio
-         // 
-         this.toolStripButtonDownloadAudio.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButtonDownloadAudio.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDownloadAudio.Image")));
-         this.toolStripButtonDownloadAudio.ImageTransparentColor = System.Drawing.Color.Black;
-         this.toolStripButtonDownloadAudio.Name = "toolStripButtonDownloadAudio";
-         this.toolStripButtonDownloadAudio.Size = new System.Drawing.Size(38, 43);
-         this.toolStripButtonDownloadAudio.ToolTipText = "Download Media as Audio";
-         // 
-         // statusBar
-         // 
-         this.statusBar.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.statusBar.ImageScalingSize = new System.Drawing.Size(24, 24);
-         this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolbarLabelStatus,
-            this.toolStripStatusLabel1,
-            this.toolBarLabelCpu,
-            this.toolStripStatusLabel2,
-            this.toolBarLabelMemory,
-            this.toolStripStatusLabel3,
-            this.toolBarLabelNetwork,
-            this.toolStripStatusLabel5,
-            this.notificationStatusLabel,
-            this.toolStripStatusLabel4});
-         this.statusBar.Location = new System.Drawing.Point(0, 0);
-         this.statusBar.Name = "statusBar";
-         this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-         this.statusBar.Size = new System.Drawing.Size(1223, 40);
-         this.statusBar.TabIndex = 3;
-         this.statusBar.Text = "statusStrip1";
-         // 
-         // toolbarLabelStatus
-         // 
-         this.toolbarLabelStatus.Name = "toolbarLabelStatus";
-         this.toolbarLabelStatus.Size = new System.Drawing.Size(107, 34);
-         this.toolbarLabelStatus.Text = "Initializing...     ";
-         // 
-         // toolStripStatusLabel1
-         // 
-         this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-         this.toolStripStatusLabel1.Size = new System.Drawing.Size(13, 34);
-         this.toolStripStatusLabel1.Text = "|";
-         // 
-         // toolBarLabelCpu
-         // 
-         this.toolBarLabelCpu.Name = "toolBarLabelCpu";
-         this.toolBarLabelCpu.Size = new System.Drawing.Size(86, 34);
-         this.toolBarLabelCpu.Text = "    CPU: N/A";
-         // 
-         // toolStripStatusLabel2
-         // 
-         this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-         this.toolStripStatusLabel2.Size = new System.Drawing.Size(13, 34);
-         this.toolStripStatusLabel2.Text = "|";
-         // 
-         // toolBarLabelMemory
-         // 
-         this.toolBarLabelMemory.Name = "toolBarLabelMemory";
-         this.toolBarLabelMemory.Size = new System.Drawing.Size(188, 34);
-         this.toolBarLabelMemory.Text = "      Available Memory: N/A";
-         // 
-         // toolStripStatusLabel3
-         // 
-         this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-         this.toolStripStatusLabel3.Size = new System.Drawing.Size(13, 34);
-         this.toolStripStatusLabel3.Text = "|";
-         // 
-         // toolBarLabelNetwork
-         // 
-         this.toolBarLabelNetwork.Name = "toolBarLabelNetwork";
-         this.toolBarLabelNetwork.Size = new System.Drawing.Size(172, 34);
-         this.toolBarLabelNetwork.Text = "       Network Usage: N/A";
-         // 
-         // toolStripStatusLabel5
-         // 
-         this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-         this.toolStripStatusLabel5.Size = new System.Drawing.Size(13, 34);
-         this.toolStripStatusLabel5.Text = "|";
-         // 
-         // notificationStatusLabel
-         // 
-         this.notificationStatusLabel.BackColor = System.Drawing.SystemColors.Control;
-         this.notificationStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-         this.notificationStatusLabel.Name = "notificationStatusLabel";
-         this.notificationStatusLabel.Size = new System.Drawing.Size(591, 34);
-         this.notificationStatusLabel.Spring = true;
-         this.notificationStatusLabel.Text = "Notifications";
-         this.notificationStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-         // 
-         // toolStripStatusLabel4
-         // 
-         this.toolStripStatusLabel4.Enabled = false;
-         this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-         this.toolStripStatusLabel4.Size = new System.Drawing.Size(13, 34);
-         this.toolStripStatusLabel4.Text = " ";
-         // 
-         // timerStatusBar
-         // 
-         this.timerStatusBar.Interval = 500;
-         this.timerStatusBar.Tick += new System.EventHandler(this.OnUpdateStatusBar);
-         // 
-         // timerCheckForUpdates
-         // 
-         this.timerCheckForUpdates.Enabled = true;
-         this.timerCheckForUpdates.Interval = 10000;
-         this.timerCheckForUpdates.Tick += new System.EventHandler(this.TimerCheckForUpdates_Tick);
-         // 
-         // timerProcessLimit
-         // 
-         this.timerProcessLimit.Interval = 3500;
-         this.timerProcessLimit.Tick += new System.EventHandler(this.TimerProcessLimit_Tick);
-         // 
-         // listItemRowsUpdateTimer
-         // 
-         this.listItemRowsUpdateTimer.Interval = 200;
-         this.listItemRowsUpdateTimer.Tick += new System.EventHandler(this.Update);
-         // 
-         // splitContainer1
-         // 
-         this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.splitContainer1.Location = new System.Drawing.Point(0, 76);
-         this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-         this.splitContainer1.Name = "splitContainer1";
-         this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-         // 
-         // splitContainer1.Panel1
-         // 
-         this.splitContainer1.Panel1.Controls.Add(this.listItems);
-         // 
-         // splitContainer1.Panel2
-         // 
-         this.splitContainer1.Panel2.Controls.Add(this.statusBar);
-         this.splitContainer1.Size = new System.Drawing.Size(1223, 639);
-         this.splitContainer1.SplitterDistance = 596;
-         this.splitContainer1.SplitterWidth = 3;
-         this.splitContainer1.TabIndex = 4;
+         repairBatchToolStripMenuItem.Enabled = false;
+         repairBatchToolStripMenuItem.Name = "repairBatchToolStripMenuItem";
+         repairBatchToolStripMenuItem.Size = new Size(247, 26);
+         repairBatchToolStripMenuItem.Text = "&Repair Batch";
          // 
          // compressBatchToolStripMenuItem
          // 
-         this.compressBatchToolStripMenuItem.Enabled = false;
-         this.compressBatchToolStripMenuItem.Name = "compressBatchToolStripMenuItem";
-         this.compressBatchToolStripMenuItem.Size = new System.Drawing.Size(247, 26);
-         this.compressBatchToolStripMenuItem.Text = "Compress Batch";
+         compressBatchToolStripMenuItem.Enabled = false;
+         compressBatchToolStripMenuItem.Name = "compressBatchToolStripMenuItem";
+         compressBatchToolStripMenuItem.Size = new Size(247, 26);
+         compressBatchToolStripMenuItem.Text = "Compress Batch";
+         // 
+         // toolStripSeparator3
+         // 
+         toolStripSeparator3.Name = "toolStripSeparator3";
+         toolStripSeparator3.Size = new Size(244, 6);
+         // 
+         // openDownloadFolderToolStripMenuItem
+         // 
+         openDownloadFolderToolStripMenuItem.Name = "openDownloadFolderToolStripMenuItem";
+         openDownloadFolderToolStripMenuItem.Size = new Size(247, 26);
+         openDownloadFolderToolStripMenuItem.Text = "&Open Download Folder";
+         // 
+         // helpToolStripMenuItem
+         // 
+         helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { aboutToolStripMenuItem, toolStripSeparator1, checkForUpdatesToolStripMenuItem, toolStripSeparator6, openDependenciesFolderToolStripMenuItem, toolStripSeparator2, recommendedUtilitiesToolStripMenuItem, bundledUtilitiesToolStripMenuItem, toolStripSeparator4, openTaskManagerToolStripMenuItem, toolStripSeparator10, helpSupportToolStripMenuItem });
+         helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+         helpToolStripMenuItem.Size = new Size(55, 24);
+         helpToolStripMenuItem.Text = "&Help";
+         // 
+         // aboutToolStripMenuItem
+         // 
+         aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+         aboutToolStripMenuItem.Size = new Size(272, 26);
+         aboutToolStripMenuItem.Text = "About";
+         // 
+         // toolStripSeparator1
+         // 
+         toolStripSeparator1.Name = "toolStripSeparator1";
+         toolStripSeparator1.Size = new Size(269, 6);
+         // 
+         // checkForUpdatesToolStripMenuItem
+         // 
+         checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+         checkForUpdatesToolStripMenuItem.Size = new Size(272, 26);
+         checkForUpdatesToolStripMenuItem.Text = "Check For Updates";
+         // 
+         // toolStripSeparator6
+         // 
+         toolStripSeparator6.Name = "toolStripSeparator6";
+         toolStripSeparator6.Size = new Size(269, 6);
+         // 
+         // openDependenciesFolderToolStripMenuItem
+         // 
+         openDependenciesFolderToolStripMenuItem.Name = "openDependenciesFolderToolStripMenuItem";
+         openDependenciesFolderToolStripMenuItem.Size = new Size(272, 26);
+         openDependenciesFolderToolStripMenuItem.Text = "Open Dependencies Folder";
+         // 
+         // toolStripSeparator2
+         // 
+         toolStripSeparator2.Name = "toolStripSeparator2";
+         toolStripSeparator2.Size = new Size(269, 6);
+         // 
+         // recommendedUtilitiesToolStripMenuItem
+         // 
+         recommendedUtilitiesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vlcPlayerToolStripMenuItem, handbrakeToolStripMenuItem });
+         recommendedUtilitiesToolStripMenuItem.Name = "recommendedUtilitiesToolStripMenuItem";
+         recommendedUtilitiesToolStripMenuItem.Size = new Size(272, 26);
+         recommendedUtilitiesToolStripMenuItem.Text = "Recommended Utilities";
+         // 
+         // vlcPlayerToolStripMenuItem
+         // 
+         vlcPlayerToolStripMenuItem.Name = "vlcPlayerToolStripMenuItem";
+         vlcPlayerToolStripMenuItem.Size = new Size(165, 26);
+         vlcPlayerToolStripMenuItem.Text = "VLC Player";
+         // 
+         // handbrakeToolStripMenuItem
+         // 
+         handbrakeToolStripMenuItem.Name = "handbrakeToolStripMenuItem";
+         handbrakeToolStripMenuItem.Size = new Size(165, 26);
+         handbrakeToolStripMenuItem.Text = "Handbrake";
+         // 
+         // bundledUtilitiesToolStripMenuItem
+         // 
+         bundledUtilitiesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vS2010RedistributableToolStripMenuItem, fFmpegToolStripMenuItem, atomicParsleyToolStripMenuItem, ytdlpToolStripMenuItem });
+         bundledUtilitiesToolStripMenuItem.Name = "bundledUtilitiesToolStripMenuItem";
+         bundledUtilitiesToolStripMenuItem.Size = new Size(272, 26);
+         bundledUtilitiesToolStripMenuItem.Text = "Bundled Utilities";
+         // 
+         // vS2010RedistributableToolStripMenuItem
+         // 
+         vS2010RedistributableToolStripMenuItem.Name = "vS2010RedistributableToolStripMenuItem";
+         vS2010RedistributableToolStripMenuItem.Size = new Size(250, 26);
+         vS2010RedistributableToolStripMenuItem.Text = "VS 2010 Redistributable";
+         // 
+         // fFmpegToolStripMenuItem
+         // 
+         fFmpegToolStripMenuItem.Name = "fFmpegToolStripMenuItem";
+         fFmpegToolStripMenuItem.Size = new Size(250, 26);
+         fFmpegToolStripMenuItem.Text = "FFmpeg";
+         // 
+         // atomicParsleyToolStripMenuItem
+         // 
+         atomicParsleyToolStripMenuItem.Name = "atomicParsleyToolStripMenuItem";
+         atomicParsleyToolStripMenuItem.Size = new Size(250, 26);
+         atomicParsleyToolStripMenuItem.Text = "AtomicParsley";
+         // 
+         // ytdlpToolStripMenuItem
+         // 
+         ytdlpToolStripMenuItem.Name = "ytdlpToolStripMenuItem";
+         ytdlpToolStripMenuItem.Size = new Size(250, 26);
+         ytdlpToolStripMenuItem.Text = "yt-dlp";
+         // 
+         // toolStripSeparator4
+         // 
+         toolStripSeparator4.Name = "toolStripSeparator4";
+         toolStripSeparator4.Size = new Size(269, 6);
+         // 
+         // openTaskManagerToolStripMenuItem
+         // 
+         openTaskManagerToolStripMenuItem.Name = "openTaskManagerToolStripMenuItem";
+         openTaskManagerToolStripMenuItem.Size = new Size(272, 26);
+         openTaskManagerToolStripMenuItem.Text = "Open Task Manager";
+         // 
+         // toolStripSeparator10
+         // 
+         toolStripSeparator10.Name = "toolStripSeparator10";
+         toolStripSeparator10.Size = new Size(269, 6);
+         // 
+         // helpSupportToolStripMenuItem
+         // 
+         helpSupportToolStripMenuItem.Enabled = false;
+         helpSupportToolStripMenuItem.Name = "helpSupportToolStripMenuItem";
+         helpSupportToolStripMenuItem.Size = new Size(272, 26);
+         helpSupportToolStripMenuItem.Text = "Help && Support";
+         // 
+         // contextMenuListItems
+         // 
+         contextMenuListItems.ImageScalingSize = new Size(24, 24);
+         contextMenuListItems.Items.AddRange(new ToolStripItem[] { convertMediaToolStripMenuItem, redownloadMediaToolStripMenuItem, toolStripMenuItem1, openFolderToolStripMenuItem, openURLInBrowserToolStripMenuItem, openMediaInPlayerToolStripMenuItem, openProcessInConsoleToolStripMenuItem, toolStripMenuItem2, retryDownloadToolStripMenuItem, resumeDownloadToolStripMenuItem, pauseDownloadToolStripMenuItem, copyUrlToolStripMenuItem, stopDownloadToolStripMenuItem, deleteFromDiskToolStripMenuItem, toolStripMenuItem3, deleteRowToolStripMenuItem });
+         contextMenuListItems.Name = "contextMenuListItems";
+         contextMenuListItems.Size = new Size(241, 334);
+         // 
+         // convertMediaToolStripMenuItem
+         // 
+         convertMediaToolStripMenuItem.Name = "convertMediaToolStripMenuItem";
+         convertMediaToolStripMenuItem.Size = new Size(240, 24);
+         convertMediaToolStripMenuItem.Text = "Convert Media";
+         // 
+         // redownloadMediaToolStripMenuItem
+         // 
+         redownloadMediaToolStripMenuItem.Name = "redownloadMediaToolStripMenuItem";
+         redownloadMediaToolStripMenuItem.Size = new Size(240, 24);
+         redownloadMediaToolStripMenuItem.Text = "Redownload";
+         // 
+         // toolStripMenuItem1
+         // 
+         toolStripMenuItem1.Name = "toolStripMenuItem1";
+         toolStripMenuItem1.Size = new Size(237, 6);
+         // 
+         // openFolderToolStripMenuItem
+         // 
+         openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+         openFolderToolStripMenuItem.Size = new Size(240, 24);
+         openFolderToolStripMenuItem.Text = "Open Folder";
+         // 
+         // openURLInBrowserToolStripMenuItem
+         // 
+         openURLInBrowserToolStripMenuItem.Name = "openURLInBrowserToolStripMenuItem";
+         openURLInBrowserToolStripMenuItem.Size = new Size(240, 24);
+         openURLInBrowserToolStripMenuItem.Text = "Open URL In Browser";
+         // 
+         // openMediaInPlayerToolStripMenuItem
+         // 
+         openMediaInPlayerToolStripMenuItem.Name = "openMediaInPlayerToolStripMenuItem";
+         openMediaInPlayerToolStripMenuItem.Size = new Size(240, 24);
+         openMediaInPlayerToolStripMenuItem.Text = "Open Media In Player";
+         // 
+         // openProcessInConsoleToolStripMenuItem
+         // 
+         openProcessInConsoleToolStripMenuItem.Name = "openProcessInConsoleToolStripMenuItem";
+         openProcessInConsoleToolStripMenuItem.Size = new Size(240, 24);
+         openProcessInConsoleToolStripMenuItem.Text = "Open Process in Console";
+         // 
+         // toolStripMenuItem2
+         // 
+         toolStripMenuItem2.Name = "toolStripMenuItem2";
+         toolStripMenuItem2.Size = new Size(237, 6);
+         // 
+         // retryDownloadToolStripMenuItem
+         // 
+         retryDownloadToolStripMenuItem.Name = "retryDownloadToolStripMenuItem";
+         retryDownloadToolStripMenuItem.Size = new Size(240, 24);
+         retryDownloadToolStripMenuItem.Text = "Retry Download";
+         // 
+         // resumeDownloadToolStripMenuItem
+         // 
+         resumeDownloadToolStripMenuItem.Name = "resumeDownloadToolStripMenuItem";
+         resumeDownloadToolStripMenuItem.Size = new Size(240, 24);
+         resumeDownloadToolStripMenuItem.Text = "Resume Download";
+         // 
+         // pauseDownloadToolStripMenuItem
+         // 
+         pauseDownloadToolStripMenuItem.Name = "pauseDownloadToolStripMenuItem";
+         pauseDownloadToolStripMenuItem.Size = new Size(240, 24);
+         pauseDownloadToolStripMenuItem.Text = "Pause Download";
+         // 
+         // copyUrlToolStripMenuItem
+         // 
+         copyUrlToolStripMenuItem.Name = "copyUrlToolStripMenuItem";
+         copyUrlToolStripMenuItem.Size = new Size(240, 24);
+         copyUrlToolStripMenuItem.Text = "Copy Url to Clipboard";
+         // 
+         // stopDownloadToolStripMenuItem
+         // 
+         stopDownloadToolStripMenuItem.Name = "stopDownloadToolStripMenuItem";
+         stopDownloadToolStripMenuItem.Size = new Size(240, 24);
+         stopDownloadToolStripMenuItem.Text = "Stop Download";
+         // 
+         // deleteFromDiskToolStripMenuItem
+         // 
+         deleteFromDiskToolStripMenuItem.Name = "deleteFromDiskToolStripMenuItem";
+         deleteFromDiskToolStripMenuItem.Size = new Size(240, 24);
+         deleteFromDiskToolStripMenuItem.Text = "Remove File From Disk";
+         // 
+         // toolStripMenuItem3
+         // 
+         toolStripMenuItem3.Name = "toolStripMenuItem3";
+         toolStripMenuItem3.Size = new Size(237, 6);
+         // 
+         // deleteRowToolStripMenuItem
+         // 
+         deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
+         deleteRowToolStripMenuItem.Size = new Size(240, 24);
+         deleteRowToolStripMenuItem.Text = "Delete Row";
+         // 
+         // toolBar
+         // 
+         toolBar.BackColor = SystemColors.HighlightText;
+         toolBar.GripStyle = ToolStripGripStyle.Hidden;
+         toolBar.ImageScalingSize = new Size(36, 36);
+         toolBar.Items.AddRange(new ToolStripItem[] { toolStripButtonDownloadVideo, toolStripSeparator13, toolStripButtonDownloadAudio, toolStripSeparator12, toolbarLabelProcessCounts });
+         toolBar.Location = new Point(5, 34);
+         toolBar.Name = "toolBar";
+         toolBar.Padding = new Padding(1, 0, 1, 0);
+         toolBar.Size = new Size(1213, 43);
+         toolBar.TabIndex = 2;
+         toolBar.Text = "toolStrip1";
+         // 
+         // toolStripButtonDownloadVideo
+         // 
+         toolStripButtonDownloadVideo.DisplayStyle = ToolStripItemDisplayStyle.Image;
+         toolStripButtonDownloadVideo.Image = (Image)resources.GetObject("toolStripButtonDownloadVideo.Image");
+         toolStripButtonDownloadVideo.ImageTransparentColor = Color.Black;
+         toolStripButtonDownloadVideo.Name = "toolStripButtonDownloadVideo";
+         toolStripButtonDownloadVideo.Size = new Size(40, 40);
+         toolStripButtonDownloadVideo.ToolTipText = "Download Media as Video";
+         // 
+         // toolStripSeparator13
+         // 
+         toolStripSeparator13.Name = "toolStripSeparator13";
+         toolStripSeparator13.Size = new Size(6, 43);
+         // 
+         // toolStripButtonDownloadAudio
+         // 
+         toolStripButtonDownloadAudio.DisplayStyle = ToolStripItemDisplayStyle.Image;
+         toolStripButtonDownloadAudio.Image = (Image)resources.GetObject("toolStripButtonDownloadAudio.Image");
+         toolStripButtonDownloadAudio.ImageTransparentColor = Color.Black;
+         toolStripButtonDownloadAudio.Name = "toolStripButtonDownloadAudio";
+         toolStripButtonDownloadAudio.Size = new Size(40, 40);
+         toolStripButtonDownloadAudio.ToolTipText = "Download Media as Audio";
+         // 
+         // toolStripSeparator12
+         // 
+         toolStripSeparator12.Name = "toolStripSeparator12";
+         toolStripSeparator12.Size = new Size(6, 43);
+         // 
+         // toolbarLabelProcessCounts
+         // 
+         toolbarLabelProcessCounts.Alignment = ToolStripItemAlignment.Right;
+         toolbarLabelProcessCounts.BackColor = Color.Honeydew;
+         toolbarLabelProcessCounts.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+         toolbarLabelProcessCounts.ForeColor = Color.FromArgb(0, 70, 139);
+         toolbarLabelProcessCounts.Name = "toolbarLabelProcessCounts";
+         toolbarLabelProcessCounts.Padding = new Padding(0, 0, 20, 0);
+         toolbarLabelProcessCounts.Size = new Size(383, 40);
+         toolbarLabelProcessCounts.Text = "Active (0) // Running (0) // Paused (0) // Total (0)";
+         // 
+         // statusBar
+         // 
+         statusBar.Dock = DockStyle.Fill;
+         statusBar.ImageScalingSize = new Size(20, 20);
+         statusBar.Items.AddRange(new ToolStripItem[] { toolbarLabelStatus, toolbarSeparator1, toolBarLabelCpu, toolbarSeparator2, toolBarLabelMemory, toolbarSeparator3, toolBarLabelNetwork, toolbarSeparator4, notificationStatusLabel, toolStripStatusLabel4 });
+         statusBar.Location = new Point(5, 0);
+         statusBar.MaximumSize = new Size(0, 40);
+         statusBar.Name = "statusBar";
+         statusBar.Padding = new Padding(1, 0, 13, 0);
+         statusBar.Size = new Size(1203, 30);
+         statusBar.SizingGrip = false;
+         statusBar.TabIndex = 3;
+         // 
+         // toolbarLabelStatus
+         // 
+         toolbarLabelStatus.BackColor = SystemColors.Control;
+         toolbarLabelStatus.Name = "toolbarLabelStatus";
+         toolbarLabelStatus.Size = new Size(107, 24);
+         toolbarLabelStatus.Text = "Initializing...     ";
+         // 
+         // toolbarSeparator1
+         // 
+         toolbarSeparator1.BackColor = SystemColors.Control;
+         toolbarSeparator1.Name = "toolbarSeparator1";
+         toolbarSeparator1.Size = new Size(13, 24);
+         toolbarSeparator1.Text = "|";
+         // 
+         // toolBarLabelCpu
+         // 
+         toolBarLabelCpu.BackColor = SystemColors.Control;
+         toolBarLabelCpu.Name = "toolBarLabelCpu";
+         toolBarLabelCpu.Size = new Size(86, 24);
+         toolBarLabelCpu.Text = "    CPU: N/A";
+         // 
+         // toolbarSeparator2
+         // 
+         toolbarSeparator2.BackColor = SystemColors.Control;
+         toolbarSeparator2.Name = "toolbarSeparator2";
+         toolbarSeparator2.Size = new Size(13, 24);
+         toolbarSeparator2.Text = "|";
+         // 
+         // toolBarLabelMemory
+         // 
+         toolBarLabelMemory.BackColor = SystemColors.Control;
+         toolBarLabelMemory.Name = "toolBarLabelMemory";
+         toolBarLabelMemory.Size = new Size(188, 24);
+         toolBarLabelMemory.Text = "      Available Memory: N/A";
+         // 
+         // toolbarSeparator3
+         // 
+         toolbarSeparator3.BackColor = SystemColors.Control;
+         toolbarSeparator3.Name = "toolbarSeparator3";
+         toolbarSeparator3.Size = new Size(13, 24);
+         toolbarSeparator3.Text = "|";
+         // 
+         // toolBarLabelNetwork
+         // 
+         toolBarLabelNetwork.BackColor = SystemColors.Control;
+         toolBarLabelNetwork.Name = "toolBarLabelNetwork";
+         toolBarLabelNetwork.Size = new Size(172, 24);
+         toolBarLabelNetwork.Text = "       Network Usage: N/A";
+         // 
+         // toolbarSeparator4
+         // 
+         toolbarSeparator4.AutoToolTip = true;
+         toolbarSeparator4.BackColor = SystemColors.Control;
+         toolbarSeparator4.Name = "toolbarSeparator4";
+         toolbarSeparator4.Size = new Size(13, 24);
+         toolbarSeparator4.Text = "|";
+         // 
+         // notificationStatusLabel
+         // 
+         notificationStatusLabel.BackColor = SystemColors.Control;
+         notificationStatusLabel.DisplayStyle = ToolStripItemDisplayStyle.Text;
+         notificationStatusLabel.Name = "notificationStatusLabel";
+         notificationStatusLabel.Size = new Size(571, 24);
+         notificationStatusLabel.Spring = true;
+         notificationStatusLabel.Text = "Notifications";
+         notificationStatusLabel.TextAlign = ContentAlignment.MiddleLeft;
+         // 
+         // toolStripStatusLabel4
+         // 
+         toolStripStatusLabel4.BackColor = SystemColors.Control;
+         toolStripStatusLabel4.Enabled = false;
+         toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+         toolStripStatusLabel4.Size = new Size(13, 24);
+         toolStripStatusLabel4.Text = " ";
+         // 
+         // timerStatusBar
+         // 
+         timerStatusBar.Interval = 500;
+         timerStatusBar.Tick += OnUpdateStatusBar;
+         // 
+         // timerCheckForUpdates
+         // 
+         timerCheckForUpdates.Enabled = true;
+         timerCheckForUpdates.Interval = 10000;
+         timerCheckForUpdates.Tick += TimerCheckForUpdates_Tick;
+         // 
+         // timerProcessLimit
+         // 
+         timerProcessLimit.Interval = 3500;
+         timerProcessLimit.Tick += TimerProcessLimit_Tick;
+         // 
+         // listItemRowsUpdateTimer
+         // 
+         listItemRowsUpdateTimer.Interval = 200;
+         listItemRowsUpdateTimer.Tick += Update;
+         // 
+         // cTitle
+         // 
+         cTitle.Text = "Title";
+         cTitle.Width = 350;
+         // 
+         // cStatus
+         // 
+         cStatus.Text = "Status";
+         cStatus.Width = 120;
+         // 
+         // cType
+         // 
+         cType.Text = "Type";
+         cType.Width = 63;
+         // 
+         // cSize
+         // 
+         cSize.Text = "Size";
+         cSize.Width = 100;
+         // 
+         // cProgress
+         // 
+         cProgress.Text = "Progress";
+         cProgress.Width = 80;
+         // 
+         // cDownloadSpeed
+         // 
+         cDownloadSpeed.Text = "Speed";
+         cDownloadSpeed.Width = 100;
+         // 
+         // cETA
+         // 
+         cETA.Text = "ETA";
+         cETA.Width = 80;
+         // 
+         // cURL
+         // 
+         cURL.Text = "URL";
+         cURL.Width = 160;
+         // 
+         // cPath
+         // 
+         cPath.Text = "Path";
+         cPath.Width = 160;
+         // 
+         // listItems
+         // 
+         listItems.Activation = ItemActivation.OneClick;
+         listItems.AllowDrop = true;
+         listItems.BackColor = Color.FromArgb(244, 244, 244);
+         listItems.BorderStyle = BorderStyle.None;
+         listItems.Columns.AddRange(new ColumnHeader[] { cTitle, cStatus, cType, cSize, cProgress, cDownloadSpeed, cETA, cURL, cPath });
+         listItems.Dock = DockStyle.Fill;
+         listItems.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+         listItems.FullRowSelect = true;
+         listItems.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+         listItems.HideSelection = true;
+         listItems.Location = new Point(0, 0);
+         listItems.Margin = new Padding(0);
+         listItems.MultiSelect = false;
+         listItems.Name = "listItems";
+         listItems.Size = new Size(1213, 599);
+         listItems.SmallImageList = imgList;
+         listItems.TabIndex = 0;
+         listItems.UseCompatibleStateImageBehavior = false;
+         listItems.View = View.Details;
+         // 
+         // splitContainer
+         // 
+         splitContainer.BackColor = SystemColors.Control;
+         splitContainer.Dock = DockStyle.Fill;
+         splitContainer.IsSplitterFixed = true;
+         splitContainer.Location = new Point(5, 77);
+         splitContainer.Margin = new Padding(2, 4, 2, 4);
+         splitContainer.Name = "splitContainer";
+         splitContainer.Orientation = Orientation.Horizontal;
+         // 
+         // splitContainer.Panel1
+         // 
+         splitContainer.Panel1.Controls.Add(listItems);
+         // 
+         // splitContainer.Panel2
+         // 
+         splitContainer.Panel2.Controls.Add(statusBar);
+         splitContainer.Panel2.Padding = new Padding(5, 0, 5, 0);
+         splitContainer.Size = new Size(1213, 633);
+         splitContainer.SplitterDistance = 599;
+         splitContainer.TabIndex = 4;
          // 
          // FrameMain
          // 
-         this.AllowDrop = true;
-         this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(1223, 715);
-         this.Controls.Add(this.splitContainer1);
-         this.Controls.Add(this.toolBar);
-         this.Controls.Add(this.menuStrip);
-         this.DoubleBuffered = true;
-         this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-         this.KeyPreview = true;
-         this.MainMenuStrip = this.menuStrip;
-         this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-         this.Name = "FrameMain";
-         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-         this.Text = "JackTheVideoRipper";
-         this.menuStrip.ResumeLayout(false);
-         this.menuStrip.PerformLayout();
-         this.contextMenuListItems.ResumeLayout(false);
-         this.toolBar.ResumeLayout(false);
-         this.toolBar.PerformLayout();
-         this.statusBar.ResumeLayout(false);
-         this.statusBar.PerformLayout();
-         this.splitContainer1.Panel1.ResumeLayout(false);
-         this.splitContainer1.Panel2.ResumeLayout(false);
-         this.splitContainer1.Panel2.PerformLayout();
-         ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-         this.splitContainer1.ResumeLayout(false);
-         this.ResumeLayout(false);
-         this.PerformLayout();
+         AllowDrop = true;
+         AutoScaleDimensions = new SizeF(8F, 20F);
+         AutoScaleMode = AutoScaleMode.Font;
+         BackColor = SystemColors.GradientInactiveCaption;
+         ClientSize = new Size(1223, 715);
+         Controls.Add(splitContainer);
+         Controls.Add(toolBar);
+         Controls.Add(menuStrip);
+         DoubleBuffered = true;
+         Icon = (Icon)resources.GetObject("$this.Icon");
+         KeyPreview = true;
+         MainMenuStrip = menuStrip;
+         Margin = new Padding(2, 4, 2, 4);
+         Name = "FrameMain";
+         Padding = new Padding(5);
+         StartPosition = FormStartPosition.CenterScreen;
+         Text = " JackTheVideoRipper";
+         menuStrip.ResumeLayout(false);
+         menuStrip.PerformLayout();
+         contextMenuListItems.ResumeLayout(false);
+         toolBar.ResumeLayout(false);
+         toolBar.PerformLayout();
+         statusBar.ResumeLayout(false);
+         statusBar.PerformLayout();
+         splitContainer.Panel1.ResumeLayout(false);
+         splitContainer.Panel2.ResumeLayout(false);
+         splitContainer.Panel2.PerformLayout();
+         ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
+         splitContainer.ResumeLayout(false);
+         ResumeLayout(false);
+         PerformLayout();
+      }
 
-        }
-
-        #endregion
-
-        private System.Windows.Forms.ListView listItems;
-        private System.Windows.Forms.ColumnHeader cTitle;
-        private System.Windows.Forms.ColumnHeader cSize;
-        private System.Windows.Forms.ColumnHeader cProgress;
-        private System.Windows.Forms.ColumnHeader cDownloadSpeed;
-        private System.Windows.Forms.ColumnHeader cETA;
-        private System.Windows.Forms.MenuStrip menuStrip;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem youTubeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem downloadVideoToolStripMenuItem;
-        private System.Windows.Forms.ColumnHeader cURL;
-        private System.Windows.Forms.ToolStripMenuItem downloadAudioToolStripMenuItem;
-        private System.Windows.Forms.ColumnHeader cType;
-        private System.Windows.Forms.ColumnHeader cPath;
-        private System.Windows.Forms.ContextMenuStrip contextMenuListItems;
-        private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem convertMediaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem redownloadMediaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ColumnHeader cStatus;
-        private System.Windows.Forms.ToolStripMenuItem openURLInBrowserToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openMediaInPlayerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openProcessInConsoleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem retryDownloadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem resumeDownloadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pauseDownloadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem stopDownloadToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteFromDiskToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyUrlToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip toolBar;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDownloadVideo;
-        private System.Windows.Forms.ToolStripButton toolStripButtonDownloadAudio;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.StatusStrip statusBar;
-        private System.Windows.Forms.ToolStripStatusLabel toolbarLabelStatus;
-        private System.Windows.Forms.ToolStripStatusLabel toolBarLabelCpu;
-        private System.Windows.Forms.ToolStripStatusLabel toolBarLabelMemory;
-        private System.Windows.Forms.Timer timerStatusBar;
-        private System.Windows.Forms.Timer listItemRowsUpdateTimer;
-        private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripStatusLabel toolBarLabelNetwork;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem openDownloadFolderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem batchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem downloadBatchManualToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem downloadBatchDocumentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem downloadBatchYouTubePlaylistlToolStripMenuItem;
-        private System.Windows.Forms.Timer timerCheckForUpdates;
-        private System.Windows.Forms.Timer timerProcessLimit;
-        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private SplitContainer splitContainer1;
-        private ImageList imgList;
-        private ToolStripSeparator toolStripSeparator6;
-        private ToolStripMenuItem openTaskManagerToolStripMenuItem;
-        private ToolStripMenuItem openDependenciesFolderToolStripMenuItem;
-        private ToolStripMenuItem recommendedUtilitiesToolStripMenuItem;
-        private ToolStripMenuItem vlcPlayerToolStripMenuItem;
-        private ToolStripMenuItem handbrakeToolStripMenuItem;
-        private ToolStripMenuItem bundledUtilitiesToolStripMenuItem;
-        private ToolStripMenuItem vS2010RedistributableToolStripMenuItem;
-        private ToolStripMenuItem fFmpegToolStripMenuItem;
-        private ToolStripMenuItem atomicParsleyToolStripMenuItem;
-        private ToolStripMenuItem ytdlpToolStripMenuItem;
+      #endregion
+      private System.Windows.Forms.MenuStrip menuStrip;
+      private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem youTubeToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem downloadVideoToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem downloadAudioToolStripMenuItem;
+      private System.Windows.Forms.ContextMenuStrip contextMenuListItems;
+      private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem convertMediaToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem redownloadMediaToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+      private System.Windows.Forms.ToolStripMenuItem openURLInBrowserToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem openMediaInPlayerToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem openProcessInConsoleToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+      private System.Windows.Forms.ToolStripMenuItem retryDownloadToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem resumeDownloadToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem pauseDownloadToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem stopDownloadToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem deleteFromDiskToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem copyUrlToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+      private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
+      private System.Windows.Forms.ToolStrip toolBar;
+      private System.Windows.Forms.ToolStripButton toolStripButtonDownloadVideo;
+      private System.Windows.Forms.ToolStripButton toolStripButtonDownloadAudio;
+      private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+      private System.Windows.Forms.StatusStrip statusBar;
+      private System.Windows.Forms.ToolStripStatusLabel toolbarLabelStatus;
+      private System.Windows.Forms.ToolStripStatusLabel toolBarLabelCpu;
+      private System.Windows.Forms.ToolStripStatusLabel toolBarLabelMemory;
+      private System.Windows.Forms.Timer timerStatusBar;
+      private System.Windows.Forms.Timer listItemRowsUpdateTimer;
+      private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+      private System.Windows.Forms.ToolStripStatusLabel toolBarLabelNetwork;
+      private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+      private System.Windows.Forms.ToolStripMenuItem openDownloadFolderToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+      private System.Windows.Forms.ToolStripMenuItem batchToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem downloadBatchManualToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem downloadBatchDocumentToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem downloadBatchYouTubePlaylistlToolStripMenuItem;
+      private System.Windows.Forms.Timer timerCheckForUpdates;
+      private System.Windows.Forms.Timer timerProcessLimit;
+      private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+      private ImageList imgList;
+      private ToolStripSeparator toolStripSeparator6;
+      private ToolStripMenuItem openTaskManagerToolStripMenuItem;
+      private ToolStripMenuItem openDependenciesFolderToolStripMenuItem;
+      private ToolStripMenuItem recommendedUtilitiesToolStripMenuItem;
+      private ToolStripMenuItem vlcPlayerToolStripMenuItem;
+      private ToolStripMenuItem handbrakeToolStripMenuItem;
+      private ToolStripMenuItem bundledUtilitiesToolStripMenuItem;
+      private ToolStripMenuItem vS2010RedistributableToolStripMenuItem;
+      private ToolStripMenuItem fFmpegToolStripMenuItem;
+      private ToolStripMenuItem atomicParsleyToolStripMenuItem;
+      private ToolStripMenuItem ytdlpToolStripMenuItem;
       private ToolStripMenuItem editToolStripMenuItem;
       private ToolStripMenuItem clearAllToolStripMenuItem;
       private ToolStripMenuItem retryAllToolStripMenuItem;
@@ -1035,15 +990,15 @@
       private ToolStripSeparator toolStripSeparator7;
       private ToolStripMenuItem clearFailuresToolStripMenuItem;
       private ToolStripMenuItem stopAllToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator8;
-        private ToolStripMenuItem copyFailedUrlsToClipboardToolStripMenuItem;
-        private ToolStripMenuItem pauseAllToolStripMenuItem;
-        private ToolStripMenuItem resumeAllToolStripMenuItem;
-        private ToolStripStatusLabel toolStripStatusLabel1;
-        private ToolStripStatusLabel toolStripStatusLabel2;
-        private ToolStripStatusLabel toolStripStatusLabel3;
-        private ToolStripStatusLabel toolStripStatusLabel5;
-        private ToolStripStatusLabel notificationStatusLabel;
+      private ToolStripSeparator toolStripSeparator8;
+      private ToolStripMenuItem copyFailedUrlsToClipboardToolStripMenuItem;
+      private ToolStripMenuItem copyAllUrlsToClipboardToolStripMenuItem;
+      private ToolStripMenuItem pauseAllToolStripMenuItem;
+      private ToolStripMenuItem resumeAllToolStripMenuItem;
+      private ToolStripStatusLabel toolbarSeparator1;
+      private ToolStripStatusLabel toolbarSeparator3;
+      private ToolStripStatusLabel toolbarSeparator4;
+      private ToolStripStatusLabel notificationStatusLabel;
       private ToolStripSeparator toolStripSeparator9;
       private ToolStripMenuItem toolStripMenuItem4;
       private ToolStripMenuItem toolsToolStripMenuItem;
@@ -1057,11 +1012,28 @@
       private ToolStripMenuItem validateVideoToolStripMenuItem;
       private ToolStripSeparator toolStripSeparator10;
       private ToolStripMenuItem helpSupportToolStripMenuItem;
-        private ToolStripSeparator toolStripSeparator11;
-        private ToolStripMenuItem openConsoleToolStripMenuItem;
-        private ToolStripMenuItem openHistoryToolStripMenuItem;
-        private ToolStripStatusLabel toolStripStatusLabel4;
+      private ToolStripSeparator toolStripSeparator11;
+      private ToolStripMenuItem openConsoleToolStripMenuItem;
+      private ToolStripMenuItem openHistoryToolStripMenuItem;
+      private ToolStripStatusLabel toolStripStatusLabel4;
       private ToolStripMenuItem compressBatchToolStripMenuItem;
+      private ToolStripSeparator toolStripSeparator13;
+      private ToolStripSeparator toolStripSeparator12;
+      private ToolStripLabel toolbarLabelProcessCounts;
+      private ToolStripStatusLabel toolbarSeparator2;
+      private TableLayoutPanel tableLayoutPanel1;
+      private ColumnHeader cTitle;
+      private ColumnHeader cStatus;
+      private ColumnHeader cType;
+      private ColumnHeader cSize;
+      private ColumnHeader cProgress;
+      private ColumnHeader cDownloadSpeed;
+      private ColumnHeader cETA;
+      private ColumnHeader cURL;
+      private ColumnHeader cPath;
+      private ListView listItems;
+      private SplitContainer splitContainer;
+      private FlowLayoutPanel flowLayoutPanel;
    }
 }
 
