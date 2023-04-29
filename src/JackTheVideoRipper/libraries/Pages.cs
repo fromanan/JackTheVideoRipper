@@ -1,6 +1,7 @@
 ﻿using System.Runtime.ExceptionServices;
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
+using JackTheVideoRipper.models;
 using JackTheVideoRipper.views;
 
 namespace JackTheVideoRipper;
@@ -56,6 +57,14 @@ public static class Pages
 
     public static void OpenExceptionHandler(Exception exception)
     {
+        if (exception is DeveloperException)
+        {
+            // TODO: Write to developer log instead...
+            //  And write to the standard out if running with debugger
+            Output.LogException(exception);
+            return;
+        }
+        
         Output.LogException(exception);
         if (new FrameErrorHandler(exception).ShowDialog() == DialogResult.Abort)
             Core.Crash(Messages.UnhandledException, exception);
