@@ -8,23 +8,19 @@
 
 ## Features
 
-* Download video and/or audio with wide selection of supported formats (`mp4`, `mkv`, `mov`, `avi`, `m4v` to name a few)
+#### Download video and/or audio with wide selection of supported formats (`mp4`, `mkv`, `mov`, `avi`, `m4v` to name a few)
 
+#### Extract URLs from any document type or YouTube playlist and add URLs to queue for batch download
 
-* Extract URLs from any document type or YouTube playlist and add URLs to queue for batch download
+#### 100+ supported streaming providers such as YouTube, DailyMotion, Vimeo, and many of the common ones
 
-
-* 100+ supported streaming providers such as YouTube, DailyMotion, Vimeo, and many of the common ones
-
-
-* Compressing media files, this works especially well with low quality videos that have been encoded with high
+#### Compressing media files, this works especially well with low quality videos that have been encoded with high
   bit-rates, or those that have been upscaled.
 
+#### Repairing and recoding broken video files
 
-* Repairing and recoding broken video files
+#### Verifying integrity of media files
 
-
-* Verifying integrity of media files
 
 ## How Does It Work?
 
@@ -33,9 +29,11 @@ turn-key, point-and-click experience in order to download video, audio, or playl
 The true power lies within included command-line tools `youtube-dl` and `ffmpeg` which do the heavy lifting of
 extracting and/or transcoding the media.
 
+
 ## Requirements
 
 * Windows 10/11 (x64)
+
 
 ## Setup & Installation
 
@@ -79,6 +77,7 @@ All required dependencies are installed, updated, and automatically kept up-to-d
 * [ffmpeg](https://www.ffmpeg.org/download.html#build-windows)
 * [AtomicParsley](http://atomicparsley.sourceforge.net)
 
+
 ## Building from Source
 
 It is recommended that you first
@@ -89,6 +88,7 @@ The application looks for the dependencies in the same place regardless of if it
 installer. If the dependencies are not installed when the application runs, the application will crash or not behave
 correctly.
 
+
 ## Contributing
 
 I am currently the only developer on this project and work on it in my free time. I use this project almost every day
@@ -98,6 +98,7 @@ I am not opposed to help though! If you find an issue please submit a bug via Gi
 become a contributor please feel free to email me at [fromanan@pm.me](mailto:fromanan@pm.me)
 
 <hr>
+
 
 ## FAQ
 
@@ -135,6 +136,7 @@ begun to block it. The last release, as of this writing, was in December of 2021
 `youtube-dl` with lots of updates and bug fixes.
 
 <hr>
+
 
 ## Acknowledgements
 
