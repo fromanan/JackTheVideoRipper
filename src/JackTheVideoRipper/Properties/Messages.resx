@@ -177,4 +177,7 @@
     <data name="FailedToAddProcess" xml:space="preserve">
         <value>Failed to add process with tag {0}</value>
     </data>
+    <data name="ProcessFailed" xml:space="preserve">
+        <value>Process failed with exception of type {0}: {1}</value>
+    </data>
 </root>

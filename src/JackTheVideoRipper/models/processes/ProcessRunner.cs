@@ -198,7 +198,7 @@ public abstract class ProcessRunner : IProcessRunner
 
     public void Fail<T>(T exception) where T : Exception
     {
-        Buffer.AddLog($"Process failed with exception of type {typeof(T)}: {exception}", ProcessLogType.Exception);
+        Buffer.AddLog(string.Format(Messages.ProcessFailed, typeof(T), exception), ProcessLogType.Exception);
         if (!Finished)
             Stop();
     }

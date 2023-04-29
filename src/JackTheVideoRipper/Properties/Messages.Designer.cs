@@ -369,6 +369,15 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Process failed with exception of type {0}: {1}.
+        /// </summary>
+        internal static string ProcessFailed {
+            get {
+                return ResourceManager.GetString("ProcessFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Process initialized.
         /// </summary>
         internal static string ProcessInitialized {
