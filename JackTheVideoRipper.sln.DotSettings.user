@@ -47,6 +47,7 @@
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fviews_002FFrameHistory/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fviews_002FFrameImportPlaylist/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fviews_002FFrameMain/@EntryIndexedValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fviews_002FFrameMainNew/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fviews_002FFrameMediaManager/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fviews_002FFrameNewMedia/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fviews_002FFrameNewMediaBatch/@EntryIndexedValue">False</s:Boolean>
