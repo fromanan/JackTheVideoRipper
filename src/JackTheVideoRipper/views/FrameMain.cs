@@ -549,7 +549,7 @@ namespace JackTheVideoRipper
 
          reprocessMediaToolStripMenuItem.Click += (sender, _) =>
          {
-            
+            ContextAction(sender, ContextActions.Reprocess);
          };
 
          // Miscellaneous
