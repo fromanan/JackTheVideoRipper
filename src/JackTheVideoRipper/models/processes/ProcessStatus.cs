@@ -4,29 +4,32 @@
 public enum ProcessStatus
 {
     // Created, but not queued
-    Created,
+    Created = 0,
     
     // Place into work queue
-    Queued,
+    Queued = 1,
     
     // Currently running
-    Running,
-    
-    // Process finished (Error, Stopped, Cancelled, Succeeded)
-    Completed,
-    
+    Running = 1 << 1,
+
     // Process errored out
-    Error,
+    Error = 1 << 2,
     
     // System stopped process
-    Stopped,
+    Stopped = 1 << 3,
     
     // User cancelled process
-    Cancelled,
+    Cancelled = 1 << 4,
     
     // Process succeeded
-    Succeeded,
+    Succeeded = 1 << 5,
     
     // Process paused
-    Paused
+    Paused = 1 << 6,
+    
+    // Process finished (Error, Stopped, Cancelled, Succeeded)
+    Completed = (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5),
+    
+    // Process failed (Error, Stopped, Cancelled)
+    Failed = (1 << 2) | (1 << 3) | (1 << 4)
 }

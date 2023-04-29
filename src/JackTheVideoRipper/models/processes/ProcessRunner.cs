@@ -44,16 +44,11 @@ public abstract class ProcessRunner : IProcessRunner
     
     public bool Failed => !Succeeded;
                 
-    public bool Finished => ProcessStatus is ProcessStatus.Completed
-        or ProcessStatus.Error
-        or ProcessStatus.Cancelled
-        or ProcessStatus.Stopped;
+    public bool Finished => ProcessStatus.Completed.HasFlag(ProcessStatus);
     
     public bool Paused => ProcessStatus is ProcessStatus.Paused;
 
-    public bool Errored => ProcessStatus is ProcessStatus.Cancelled
-        or ProcessStatus.Error
-        or ProcessStatus.Stopped;
+    public bool Errored => ProcessStatus.Failed.HasFlag(ProcessStatus);
     
     private static Task<bool> TrueTask => Task.FromResult(true);
     
@@ -142,7 +137,7 @@ public abstract class ProcessRunner : IProcessRunner
         if (Completed || Finished)
             return;
 
-        SetProcessStatus(Failed ? ProcessStatus.Error : ProcessStatus.Completed);
+        SetProcessStatus(Failed ? ProcessStatus.Error : ProcessStatus.Succeeded);
         
         Completed = true;
     }
@@ -245,7 +240,7 @@ public abstract class ProcessRunner : IProcessRunner
 
     #region Protected Methods
     
-    protected bool IsProcessStatus(ProcessStatus processStatus) => ProcessStatus == processStatus;
+    protected bool IsProcessStatus(ProcessStatus processStatus) => (ProcessStatus & processStatus) > 0;
     
     protected bool IsProcessStatus(params ProcessStatus[] processStatuses) => processStatuses.Any(IsProcessStatus);
 

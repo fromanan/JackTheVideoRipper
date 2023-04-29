@@ -121,11 +121,16 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     
     #endregion
 
-    #region Public Methods
+    #region IProcessUpdateRow
 
     public async Task OpenInConsole()
     {
         await _console.Open(GetInstanceName());
+    }
+    
+    public void Detach()
+    {
+        _console.Dispose();
     }
 
     #endregion
@@ -285,7 +290,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
             // General
             ProcessStatus.Queued    => Color.Bisque,
             ProcessStatus.Cancelled => Color.LightYellow,
-            ProcessStatus.Completed => Color.LightGreen,
+            ProcessStatus.Succeeded => Color.LightGreen,
             ProcessStatus.Error     => Color.LightCoral,
             ProcessStatus.Stopped   => Color.DarkSalmon,
             ProcessStatus.Created   => Color.LightGray,
@@ -305,7 +310,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
             // General
             ProcessStatus.Queued    => 2,
             ProcessStatus.Cancelled => 8,
-            ProcessStatus.Completed => 5,
+            ProcessStatus.Succeeded => 5,
             ProcessStatus.Error     => 6,
             ProcessStatus.Stopped   => 7,
             ProcessStatus.Paused    => 9,
@@ -348,11 +353,10 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     private static readonly Dictionary<ProcessStatus, ViewField> _StatusToViewFieldsDict = new()
     {
-        { ProcessStatus.Succeeded,  ViewField.None },
         { ProcessStatus.Running,    ViewField.Status },
         { ProcessStatus.Queued,     ViewField.Status },
         { ProcessStatus.Created,    ViewField.Dynamic },
-        { ProcessStatus.Completed,  ViewField.Status | ViewField.Progress | ViewField.Speed | ViewField.Eta },
+        { ProcessStatus.Succeeded,  ViewField.Status | ViewField.Progress | ViewField.Speed | ViewField.Eta },
         { ProcessStatus.Error,      ViewField.Status | ViewField.Size | ViewField.Speed | ViewField.Eta },
         { ProcessStatus.Stopped,    ViewField.Status | ViewField.Speed | ViewField.Eta },
         { ProcessStatus.Cancelled,  ViewField.Dynamic },
@@ -361,11 +365,10 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     
     private static readonly Dictionary<ProcessStatus, string> _StatusToMessageDict = new()
     {
-        { ProcessStatus.Succeeded,  Statuses.Succeeded },
         { ProcessStatus.Running,    Statuses.Starting },
         { ProcessStatus.Queued,     Statuses.Queued },
         { ProcessStatus.Created,    Statuses.Waiting },
-        { ProcessStatus.Completed,  Statuses.Complete },
+        { ProcessStatus.Succeeded,  Statuses.Succeeded },
         { ProcessStatus.Error,      Statuses.Error },
         { ProcessStatus.Stopped,    Statuses.Stopped },
         { ProcessStatus.Cancelled,  Statuses.Cancelled },
@@ -380,8 +383,6 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         switch (processStatus)
         {
             default:
-            case ProcessStatus.Succeeded:
-                return;
             case ProcessStatus.Running:
                 values = new[]
                 {
@@ -404,7 +405,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
                     Text.DefaultTime
                 };
                 break;
-            case ProcessStatus.Completed:
+            case ProcessStatus.Succeeded:
                 values = new[]
                 {
                     _StatusToMessageDict[processStatus],

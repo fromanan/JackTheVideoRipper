@@ -326,9 +326,9 @@ public class Ripper
         _mediaManager.ClearAll();
     }
 
-    public void OnRemoveCompleted(object? sender, EventArgs e)
+    public void OnRemoveSucceeded(object? sender, EventArgs e)
     {
-        _mediaManager.RemoveCompleted();
+        _mediaManager.RemoveSucceeded();
     }
 
     public void OnPauseAll(object? sender, EventArgs e)
