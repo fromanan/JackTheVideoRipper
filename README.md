@@ -4,9 +4,9 @@
 
 ![](https://github.com/fromanan/JackTheVideoRipper/raw/master/docs/demo.gif)
 
-## Features
-
 <hr>
+
+## Features
 
 * Download video and/or audio with wide selection of supported formats (`mp4`, `mkv`, `mov`, `avi`, `m4v` to name a few)
 
@@ -26,26 +26,24 @@
 
 * Verifying integrity of media files
 
+<hr>
 
 ## How Does It Work?
-
-<hr>
 
 `JackTheVideoRipper` is a GUI that manages and automates powerful tools under-the-hood to provide a streamlined,
 turn-key, point-and-click experience in order to download video, audio, or playlists in a friendly and easy way.
 The true power lies within included command-line tools `youtube-dl` and `ffmpeg` which do the heavy lifting of
 extracting and/or transcoding the media.
 
-## Requirements
-
 <hr>
+
+## Requirements
 
 * Windows 10/11 (x64)
 
+<hr>
 
 ## Setup & Installation
-
-<hr>
 
 ### Downloading
 
@@ -87,10 +85,9 @@ All required dependencies are installed, updated, and automatically kept up-to-d
 * [ffmpeg](https://www.ffmpeg.org/download.html#build-windows)
 * [AtomicParsley](http://atomicparsley.sourceforge.net)
 
+<hr>
 
 ## Building from Source
-
-<hr>
 
 It is recommended that you first
 [download and run the Windows Installer](https://github.com/fromanan/JackTheVideoRipper/releases), so that all of the
@@ -100,11 +97,9 @@ The application looks for the dependencies in the same place regardless of if it
 installer. If the dependencies are not installed when the application runs, the application will crash or not behave
 correctly.
 
-
+<hr>
 
 ## Contributing
-
-<hr>
 
 I am currently the only developer on this project and work on it in my free time. I use this project almost every day
 when I am messing around with media as I like to tinker in my spare time.
@@ -112,10 +107,9 @@ when I am messing around with media as I like to tinker in my spare time.
 I am not opposed to help though! If you find an issue please submit a bug via GitHub issues or if you would like to
 become a contributor please feel free to email me at [fromanan@pm.me](mailto:fromanan@pm.me)
 
+<hr>
 
 ## FAQ
-
-<hr>
 
 ##### 1. <i>What streaming providers are supported?</i>
 
