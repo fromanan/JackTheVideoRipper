@@ -16,6 +16,8 @@ public interface IProcessRunner
     int ExitCode { get; }
 
     bool Completed { get; }
+
+    bool Running => Started && !Completed;
     
     string ProcessFileName { get; }
     
