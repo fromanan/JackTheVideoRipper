@@ -19,6 +19,30 @@
     <Content Include="..\..\assets\app.ico">
       <Link>assets\app.ico</Link>
     </Content>
+    <Content Include="..\..\assets\colors\cancelled.ico">
+      <Link>assets\colors\cancelled.ico</Link>
+    </Content>
+    <Content Include="..\..\assets\colors\completed.ico">
+      <Link>assets\colors\completed.ico</Link>
+    </Content>
+    <Content Include="..\..\assets\colors\compress.ico">
+      <Link>assets\colors\compress.ico</Link>
+    </Content>
+    <Content Include="..\..\assets\colors\download.ico">
+      <Link>assets\colors\download.ico</Link>
+    </Content>
+    <Content Include="..\..\assets\colors\error.ico">
+      <Link>assets\colors\error.ico</Link>
+    </Content>
+    <Content Include="..\..\assets\colors\paused.ico">
+      <Link>assets\colors\paused.ico</Link>
+    </Content>
+    <Content Include="..\..\assets\colors\queued.ico">
+      <Link>assets\colors\queued.ico</Link>
+    </Content>
+    <Content Include="..\..\assets\colors\stopped.ico">
+      <Link>assets\colors\stopped.ico</Link>
+    </Content>
     <Content Include="..\..\assets\download_movie.png">
       <Link>assets\download_movie.png</Link>
     </Content>
