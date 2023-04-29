@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
@@ -17,7 +18,9 @@ public class ProcessPool
     private readonly ConcurrentHashSet<IProcessUpdateRow> _finishedProcesses = new();
 
     public static readonly ErrorLogger ErrorLogger = new();
-    
+
+    public readonly List<int> ActiveProcessIds = new();
+
     private bool _updating;
     private bool _fillingQueue;
 
@@ -158,6 +161,7 @@ public class ProcessPool
     {
         if (processRunner is not IProcessUpdateRow processUpdateRow)
             return;
+        ActiveProcessIds.Remove(processRunner.ProcessId);
         StopProcess(processUpdateRow);
         _finishedProcesses.Add(processUpdateRow);
         ProcessCompleted(processUpdateRow);
@@ -344,6 +348,15 @@ public class ProcessPool
             await Task.Delay(200);
         }
     }
+    
+    public void FindOrphanedProcesses()
+    {
+        foreach (Process process in ActiveProcessIds.Select(Process.GetProcessById))
+        {
+            Output.WriteLine($"Found process with Id: {process.Id}");
+        }
+    }
+
     #endregion
 
     #region Private Methods
@@ -399,6 +412,7 @@ public class ProcessPool
         // Starting Process Succeeded
         if (await processUpdateRow.Start())
         {
+            ActiveProcessIds.Add(processUpdateRow.ProcessId);
             ProcessStarted();
             return;
         }
