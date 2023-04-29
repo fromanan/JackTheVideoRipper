@@ -8,13 +8,15 @@ namespace JackTheVideoRipper.views
 
       private readonly string _instanceName;
 
-      private static readonly Font _DefaultFont = new("Lucinda Console", 12);
+      private static readonly Font _DefaultFont = new("Lucinda Console", 11);
 
       public bool Frozen { get; private set; }
 
       public event Action FreezeConsoleEvent = delegate { };
 
       public event Action UnfreezeConsoleEvent = delegate { };
+      
+      private bool _suspended;
 
       #endregion
 
@@ -28,14 +30,11 @@ namespace JackTheVideoRipper.views
 
       #region Constructor
 
-      public FrameConsole(string instanceName, FormClosedEventHandler? consoleCloseHandler = null)
+      public FrameConsole(string instanceName)
       {
          _instanceName = instanceName;
          InitializeComponent();
          SubscribeEvents();
-
-         if (consoleCloseHandler is not null)
-            FormClosed += consoleCloseHandler;
       }
 
       #endregion
@@ -64,6 +63,21 @@ namespace JackTheVideoRipper.views
 
       #endregion
 
+      #region Overrides
+
+      protected override void OnFormClosing(FormClosingEventArgs e)
+      {
+         base.OnFormClosing(e);
+
+         if (e.CloseReason == CloseReason.WindowsShutDown)
+            return;
+
+         Visible = false;
+         e.Cancel = true;
+      }
+
+      #endregion
+
       #region Event Handlers
 
       private void SubscribeEvents()
@@ -77,8 +91,6 @@ namespace JackTheVideoRipper.views
          TextBox.GotFocus += OnGotFocus;
          saveToFileToolStripMenuItem.Click += OnSaveToFile;
       }
-
-      private bool _suspended;
 
       private void OnLostFocus(object? sender, EventArgs e)
       {

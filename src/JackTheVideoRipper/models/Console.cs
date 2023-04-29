@@ -4,7 +4,7 @@ using JackTheVideoRipper.views;
 
 namespace JackTheVideoRipper.models;
 
-public class Console
+public class Console : IDisposable
 {
     #region Data Members
 
@@ -13,9 +13,7 @@ public class Console
     public readonly string InstanceName = string.Empty;
     
     public ConsoleControl.ConsoleControl? Control { get; private set; }
-    
-    public bool Opened { get; private set; }
-    
+
     public bool Paused { get; private set; }
     
     private readonly List<ILogNode> _logHistory = new();
@@ -25,10 +23,10 @@ public class Console
     #endregion
 
     #region Attributes
+    
+    public bool Active => Visible && !Paused;
 
     private bool Visible => _frameConsole?.Visible ?? false;
-
-    private bool Active => Opened && !Paused;
 
     #endregion
 
@@ -97,12 +95,11 @@ public class Console
     
     private async Task InitializeFrame(string? instanceName = null)
     {
-        _frameConsole = new FrameConsole(instanceName ?? InstanceName, OnCloseConsole);
+        _frameConsole = new FrameConsole(instanceName ?? InstanceName);
         _frameConsole.FreezeConsoleEvent += PauseQueue;
         _frameConsole.UnfreezeConsoleEvent += UnpauseQueue;
         Control = _frameConsole.ConsoleControl;
         await _frameConsole.OpenConsole();
-        Opened = true;
     }
 
     private async Task InitializeMessageQueue()
@@ -120,12 +117,15 @@ public class Console
             Control?.WriteLog(_messageQueue.Dequeue());
         }
     }
-    
-    private void OnCloseConsole(object? sender, FormClosedEventArgs args)
+
+    #endregion
+
+    #region IDisposable
+
+    public void Dispose()
     {
-        _frameConsole = null;
-        Control = null;
-        Opened = false;
+        GC.SuppressFinalize(this);
+        _frameConsole?.Dispose();
     }
 
     #endregion

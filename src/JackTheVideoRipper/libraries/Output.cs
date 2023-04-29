@@ -19,7 +19,7 @@ public static class Output
 
     #region Attributes
 
-    private static bool OutputAvailable => _Console.Opened && ConsoleAttached;
+    private static bool OutputAvailable => _Console.Active && ConsoleAttached;
 
     private static Type CallerType => new StackTrace().GetFrame(2)?.GetMethod()?.DeclaringType!;
 
