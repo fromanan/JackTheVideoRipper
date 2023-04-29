@@ -115,6 +115,9 @@ public class MediaManager
         switch (processRowType)
         {
             case ProcessRowType.Download:
+                // TODO: Check for option to skip or prompt for overwrite too
+                if (_downloadedUrls.Contains(mediaItem.Url))
+                    return;
                 _downloadedUrls.Add(mediaItem.Url);
                 AddProcess(new DownloadProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
