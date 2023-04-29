@@ -44,13 +44,13 @@ namespace JackTheVideoRipper
         public static async Task OpenInBrowser(string url)
         {
             if (url.Valid(FileSystem.IsValidUrl))
-                await FileSystem.GetWebResourceHandle(url).Run();
+                await Task.Run(() => FileSystem.OpenWebPage(url));
         }
 
         public static async Task OpenFileInMediaPlayer(string filepath)
         {
             if (filepath.Valid(File.Exists))
-                await FileSystem.GetWebResourceHandle(filepath).Run();
+                await Task.Run(() => FileSystem.OpenInDefaultProgram(filepath));
         }
         
         public static void RepeatInvoke(Action action, int n, int sleepTime = 300)

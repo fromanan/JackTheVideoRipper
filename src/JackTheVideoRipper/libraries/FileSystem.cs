@@ -488,11 +488,19 @@ public static class FileSystem
         OpenFileExplorer(url);
     }
 
+    public static void OpenInDefaultProgram(string filepath)
+    {
+        if (filepath.Invalid(IsValidPath))
+            return;
+        
+        OpenFileExplorer(filepath);
+    }
+
     public static void OpenFileExplorer(string directory)
     {
         bool startedSuccessfully = RunProcess(new ProcessStartInfo
         {
-            Arguments = directory,
+            Arguments = directory.WrapQuotes(),
             FileName = Executables.Explorer
         });
         
@@ -741,7 +749,7 @@ public static class FileSystem
             $"{AppInfo.ProgramPrefix}{separator}{prefix}{separator}{TimeStampDate}.{extension}");
     }
     
-    public static void OpenFile(string filepath, bool openDownloadsIfNull)
+    public static void OpenFile(string filepath, bool openDownloadsIfNull = false)
     {
         if (filepath.Valid(Exists))
         {

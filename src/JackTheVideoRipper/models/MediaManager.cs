@@ -286,7 +286,7 @@ public class MediaManager
                 await Common.OpenInBrowser(Selected.Url);
                 break;
             case ContextActions.Reveal:
-                FileSystem.OpenFolder(Selected.Path);
+                FileSystem.OpenFileExplorerWithFileSelected(Selected.Path);
                 break;
             case ContextActions.Resume:
                 if (Selected.Paused)
