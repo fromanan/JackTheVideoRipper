@@ -38,13 +38,15 @@ public class YouTubeParameters : ProcessParameters<YouTubeParameters>
     public YouTubeParameters Output(string? filename = null)
     {
         // youtube-dl doesn't like it when you provide --audio-format and extension in -o together
-        string outputFilename = filename.HasValue() ? ReplaceExtension(filename!) : YouTubeDL.DefaultFilename;
-        return Add('o', outputFilename.WrapQuotes());
-    }
+        string outputFilename = filename.HasValue() ? 
+            FileSystem.ChangeExtension(filename!, "%(ext)s") : 
+            YouTubeDL.DefaultFilename;
 
-    private static string ReplaceExtension(string filename)
-    {
-        return $"{(filename.Contains('.') ? filename.BeforeLast(".") : filename)}.%(ext)s";
+        // Appends a (N) suffix if file exists
+        if (FileSystem.Exists(outputFilename))
+            outputFilename = FileSystem.GetNextAvailableFilename(outputFilename);
+
+        return Add('o', outputFilename.WrapQuotes());
     }
     
     public YouTubeParameters AudioQuality(string qualitySpecifier = "0")
