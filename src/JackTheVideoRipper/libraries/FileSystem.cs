@@ -1153,6 +1153,20 @@ public static class FileSystem
         }
     }
 
+    public static string GetNextAvailableFilename(string filepath)
+    {
+        int i = 1;
+        string newFilepath = filepath;
+        
+        while (File.Exists(newFilepath))
+        {
+            newFilepath = ChangeExtension(filepath, $" ({i})");
+            i++;
+        }
+
+        return newFilepath;
+    }
+
     #endregion
 
     #region Clipboard Methods
