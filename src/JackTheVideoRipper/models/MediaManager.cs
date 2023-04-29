@@ -24,7 +24,7 @@ public class MediaManager
 
     public IProcessUpdateRow? GetRow(string tag) => _processPool.GetProcess(tag);
 
-    public IProcessUpdateRow Selected => _processPool.Selected;
+    public IProcessUpdateRow? Selected => _processPool.GetProcess(Ripper.SelectedTag) ?? null;
     
     public IEnumerable<string> DownloadedUrls => _downloadedUrls;
 
@@ -271,7 +271,7 @@ public class MediaManager
 
     public async Task PerformContextAction(ContextActions contextAction)
     {
-        if (Ripper.SelectedTag.IsNullOrEmpty())
+        if (Ripper.SelectedTag.IsNullOrEmpty() || Selected is null)
             return;
         
         switch (contextAction)
@@ -445,7 +445,7 @@ public class MediaManager
 
     public void StopSelectedProcess()
     {
-        Selected.Stop();
+        Selected?.Stop();
     }
 
     public static void VerifyIntegrity()

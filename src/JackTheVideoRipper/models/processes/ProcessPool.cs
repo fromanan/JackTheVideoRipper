@@ -98,8 +98,6 @@ public class ProcessPool
     }
 
     private IEnumerable<IProcessUpdateRow> Processes => _processTable.Processes;
-        
-    public IProcessUpdateRow Selected => _processTable.Get(Ripper.SelectedTag);
     
     public IEnumerable<IProcessUpdateRow> RunningProcesses => _runningProcesses.Processes;
     
@@ -263,11 +261,6 @@ public class ProcessPool
             return _processTable.TryGet(tag, out processUpdateRow);
         processUpdateRow = default;
         return false;
-    }
-
-    public void RemoveSelected()
-    {
-        Remove(Selected);
     }
 
     public IEnumerable<IProcessUpdateRow> GetWhereStatus(ProcessStatus processStatus)
