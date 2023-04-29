@@ -150,7 +150,7 @@ public class MediaManager
 
     public async Task DownloadBatch(IEnumerable<string> urls)
     {
-        await DownloadBatch(urls.MergeReturn());
+        await DownloadBatch(urls.MergeReturn().ReplaceLineEndings());
     }
     
     public async Task DownloadBatch(string urlString = "")
