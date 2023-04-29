@@ -44,9 +44,15 @@ public class CompressProcessUpdateRow : ProcessUpdateRow
         Speed = $"{ffmpegFrame.Fps} fps";
     }
 
+    // If over 100%, change message to finalizing download tasks?
     private string CalculateProgress(int frame)
     {
-        return _totalFrames > 0 ? $"{frame * 100f / _totalFrames:F2}%" : Text.DefaultProgress;
+        if (_totalFrames <= 0)
+            return Text.DefaultProgress;
+
+        float progress = frame * 100f / _totalFrames;
+        
+        return progress > 100 ? Text.ProgressComplete : $"{progress:F2}%";
     }
 
     private string CalculateEta(int frame, float fps)
