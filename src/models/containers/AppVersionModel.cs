@@ -6,7 +6,7 @@ namespace JackTheVideoRipper.models
     public class AppVersionModel
     {
         private const string _ASSEMBLY_INFO_FILE_URL =
-            "https://raw.githubusercontent.com/dantheman213/JackTheVideoRipper/master/version";
+            "https://raw.githubusercontent.com/fromanan/JackTheVideoRipper/master/version";
         
         [JsonProperty("version")]
         public string VersionString { get; set; } = string.Empty;

@@ -2,7 +2,7 @@
 {
     public partial class FrameAbout : Form
     {
-        private const string _PROJECT_URL = "https://github.com/dantheman213/JackTheVideoRipper";
+        private const string _PROJECT_URL = "https://github.com/fromanan/JackTheVideoRipper";
 
         public FrameAbout()
         {

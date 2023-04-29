@@ -2,11 +2,11 @@
 
 Download videos and audio from YouTube and hundreds of more streaming providers. Designed and developed for Windows 10.
 
-![](https://github.com/dantheman213/JackTheVideoRipper/raw/master/docs/demo.gif)
+![](https://github.com/fromanan/JackTheVideoRipper/raw/master/docs/demo.gif)
 
 ## Download
 
-Download the latest version in the [release](https://github.com/dantheman213/JackTheVideoRipper/releases) section.
+Download the latest version in the [release](https://github.com/fromanan/JackTheVideoRipper/releases) section.
 
 ## Features
 
@@ -35,7 +35,7 @@ All required dependencies are installed, updated, and maintained automatically f
 
 ## Develop
 
-It is recommended that you [download and run the Windows Installer](https://github.com/dantheman213/JackTheVideoRipper/releases) so that all dependencies are installed correctly before you download the source code, build, and run the application. If the dependencies are not installed when the application runs, the application will crash or not behave correctly.
+It is recommended that you [download and run the Windows Installer](https://github.com/fromanan/JackTheVideoRipper/releases) so that all dependencies are installed correctly before you download the source code, build, and run the application. If the dependencies are not installed when the application runs, the application will crash or not behave correctly.
 
 ## FAQs
 

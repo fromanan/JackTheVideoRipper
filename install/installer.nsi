@@ -4,10 +4,10 @@
 #              by Vlasis K. Barkas aka Red Wine red_wine@freemail.gr Sep 2006               
 ############################################################################################
 !define APP_NAME "JackTheVideoRipper"
-!define COMP_NAME "dantheman213"
-!define WEB_SITE "https://github.com/dantheman213/JackTheVideoRipper"
+!define COMP_NAME "fromanan"
+!define WEB_SITE "https://github.com/fromanan/JackTheVideoRipper"
 !define VERSION "0.8.1"
-!define COPYRIGHT "Dan  � 2022"
+!define COPYRIGHT "Froman Interactive Media © 2023"
 !define DESCRIPTION "Download media easily with a few point and clicks."
 !define LICENSE_TXT "..\LICENSE"
 !define MAIN_APP_EXE "JackTheVideoRipper.exe"
@@ -82,11 +82,7 @@ Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
 SetOutPath "$INSTDIR"
-File "..\bin\Release\net6.0-windows\JackTheVideoRipper.exe"
-File "..\bin\Release\net6.0-windows\Newtonsoft.Json.dll"
-File "..\bin\Release\net6.0-windows\System.Management.dll"
-File "..\bin\Release\net6.0-windows\JackTheVideoRipper.dll"
-File "..\bin\Release\net6.0-windows\JackTheVideoRipper.runtimeconfig.json"
+File "..\bin\Publish\win-x64\JackTheVideoRipper.exe"
 SectionEnd
 
 ######################################################################
@@ -101,6 +97,7 @@ File "deps\ffmpeg.exe"
 File "deps\ffprobe.exe"
 File "deps\vcredist_x86.exe"
 File "deps\windowsdesktop-runtime-6.0.8-win-x64.exe"
+File "deps\yt-dlp.exe"
 
 # Download latest version of youtube-dl for end-user
 # TODO: This currently runs in background and silently. On computers with slow or spotty Internet connections may be an issue
@@ -158,10 +155,6 @@ SectionEnd
 Section Uninstall
 ${INSTALL_TYPE}
 Delete "$INSTDIR\JackTheVideoRipper.exe"
-Delete "$INSTDIR\JackTheVideoRipper.dll"
-Delete "$INSTDIR\JackTheVideoRipper.runtimeconfig.json"
-Delete "$INSTDIR\Newtonsoft.Json.dll"
-Delete "$INSTDIR\System.Management.dll"
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
 Delete "$INSTDIR\${APP_NAME} website.url"
@@ -174,6 +167,7 @@ Delete "${INSTDIR_DATA_BIN}\ffmpeg.exe"
 Delete "${INSTDIR_DATA_BIN}\ffprobe.exe"
 Delete "${INSTDIR_DATA_BIN}\vcredist_x86.exe"
 Delete "${INSTDIR_DATA_BIN}\windowsdesktop-runtime-6.0.8-win-x64.exe"
+Delete "${INSTDIR_DATA_BIN}\yt-dlp.exe"
  
 RmDir /r "${INSTDIR_DATA_BASE}"
 RmDir /r "$TEMP\${APP_NAME}"
