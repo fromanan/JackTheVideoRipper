@@ -177,6 +177,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         SetViewField(() =>
         {
             UpdateRowColors(processStatus);
+            UpdateRowImage(processStatus);
             SetDefaultMessages(processStatus);
         });
         
@@ -290,6 +291,25 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
             ProcessStatus.Created   => Color.LightGray,
             ProcessStatus.Paused    => Color.DarkGray,
             _                       => Color.White
+        };
+    }
+
+    private void UpdateRowImage(ProcessStatus processStatus)
+    {
+        ViewItem.ImageIndex = processStatus switch
+        {
+            // Type Specific
+            ProcessStatus.Running when this is DownloadProcessUpdateRow => 3,
+            ProcessStatus.Running when this is CompressProcessUpdateRow => 4,
+            
+            // General
+            ProcessStatus.Queued    => 2,
+            ProcessStatus.Cancelled => 8,
+            ProcessStatus.Completed => 5,
+            ProcessStatus.Error     => 6,
+            ProcessStatus.Stopped   => 7,
+            ProcessStatus.Paused    => 9,
+            _                       => ViewItem.ImageIndex
         };
     }
 
