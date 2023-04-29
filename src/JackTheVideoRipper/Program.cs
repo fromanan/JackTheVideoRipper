@@ -29,6 +29,7 @@ namespace JackTheVideoRipper
         static Program()
         {
             Statistics.BeginStartup();
+            ConfigureGlobal();
             ConfigureExceptionHandling();
             ConfigureGraphics();
             Ripper.Instance = new Ripper(new FormsViewItemProvider());
@@ -66,6 +67,11 @@ namespace JackTheVideoRipper
                 Input.OpenConsole();
 
             await Task.WhenAll(_BackgroundTasks);
+        }
+
+        private static void ConfigureGlobal()
+        {
+            AppContext.SetSwitch("Switch.System.Reflection.Assembly.SimulatedLocationInBaseDirectory", true);
         }
 
         private static void ConfigureGraphics()
