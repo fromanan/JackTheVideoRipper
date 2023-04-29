@@ -190,8 +190,7 @@ public static class FFMPEG
         }
         catch(Command.ValidationFailedException exception)
         {
-            string shoopies = await ExifTool.GetWarnings(filepath);
-            Output.WriteLine(shoopies);
+            Output.WriteLine(await ExifTool.GetWarnings(filepath));
             string validationResult = await ExifTool.ValidateMetadata(filepath);
             throw new ExifTool.ExifException(validationResult, exception);
         }
