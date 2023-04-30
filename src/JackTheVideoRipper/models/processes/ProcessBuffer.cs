@@ -13,9 +13,21 @@ public class ProcessBuffer
     
     public int Cursor { get; set; } // where in message buffer are we
     
-    private int _resultCount;
+    private int _lineCount;
     
     public event Action<ProcessLogNode> LogAdded = delegate {  };
+
+    public int ResultCount
+    {
+        get;
+        private set;
+    }
+    
+    public int ErrorCount
+    {
+        get;
+        private set;
+    }
 
     #endregion
 
@@ -65,7 +77,9 @@ public class ProcessBuffer
         Log.Clear();
         Results = new List<string> { string.Empty };
         Cursor = 0;
-        _resultCount = 0;
+        ResultCount = 0;
+        ErrorCount = 0;
+        _lineCount = 0;
     }
 
     public void SaveLogs()
@@ -93,6 +107,11 @@ public class ProcessBuffer
         return GetResultWhere(r => r.Contains(str));
     }
 
+    public bool Contains(string str, StringComparison stringComparison = StringComparison.Ordinal)
+    {
+        return Results.Any(line => line.Contains(str, stringComparison));
+    }
+
     #endregion
 
     #region Private Methods
@@ -100,13 +119,19 @@ public class ProcessBuffer
     private void AppendResult(string? line)
     {
         if (line != null && line.HasValue())
+        {
             AddResultLine(line, ProcessLogType.Log);
+            ResultCount++;
+        }
     }
 
     private void AppendError(string? line)
     {
         if (line != null && line.HasValue())
+        {
             AddResultLine(line, ProcessLogType.Error);
+            ErrorCount++;
+        }
     }
 
     public void AddLog(string message, ProcessLogType logType)
@@ -126,7 +151,7 @@ public class ProcessBuffer
         Log.Add(logNode);
         LogAdded(logNode);
         //Log.Add($"{_resultCount} > {body}");
-        _resultCount++;
+        _lineCount++;
     }
 
     #endregion
