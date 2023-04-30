@@ -29,60 +29,60 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     #region View Item Accessors
     
-    public readonly Dictionary<ViewField, IViewSubItem> ViewCollection;
+    private readonly ViewCollection _viewCollection;
 
     public string Title
     {
-        get => ViewItem.SubItems[0].Text;
-        set => ViewItem.SubItems[0].Text = value;
+        get => _viewCollection[ViewField.Title];
+        set => _viewCollection[ViewField.Title] = value;
     }
         
     public string Status
     {
-        get => ViewItem.SubItems[1].Text;
-        set => ViewItem.SubItems[1].Text = value;
+        get => _viewCollection[ViewField.Status];
+        set => _viewCollection[ViewField.Status] = value;
     }
 
     public string MediaType
     {
-        get => ViewItem.SubItems[2].Text;
-        set => ViewItem.SubItems[2].Text = value;
+        get => _viewCollection[ViewField.MediaType];
+        set => _viewCollection[ViewField.MediaType] = value;
     }
         
     public string FileSize
     {
-        get => ViewItem.SubItems[3].Text;
-        set => ViewItem.SubItems[3].Text = value;
+        get => _viewCollection[ViewField.Size];
+        set => _viewCollection[ViewField.Size] = value;
     }
         
     public string Progress
     {
-        get => ViewItem.SubItems[4].Text;
-        set => ViewItem.SubItems[4].Text = value;
+        get => _viewCollection[ViewField.Progress];
+        set => _viewCollection[ViewField.Progress] = value;
     }
         
     public string Speed
     {
-        get => ViewItem.SubItems[5].Text;
-        set => ViewItem.SubItems[5].Text = value;
+        get => _viewCollection[ViewField.Speed];
+        set => _viewCollection[ViewField.Speed] = value;
     }
         
     public string Eta
     {
-        get => ViewItem.SubItems[6].Text;
-        set => ViewItem.SubItems[6].Text = value;
+        get => _viewCollection[ViewField.Eta];
+        set => _viewCollection[ViewField.Eta] = value;
     }
         
     public string Url
     {
-        get => ViewItem.SubItems[7].Text;
-        set => ViewItem.SubItems[7].Text = value;
+        get => _viewCollection[ViewField.Url];
+        set => _viewCollection[ViewField.Url] = value;
     }
         
     public string Path
     {
-        get => ViewItem.SubItems[8].Text;
-        set => ViewItem.SubItems[8].Text = value;
+        get => _viewCollection[ViewField.Path];
+        set => _viewCollection[ViewField.Path] = value;
     }
         
     private Color Color
@@ -101,21 +101,8 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         Filepath = mediaItem.Filepath;
         Filename = FileSystem.GetFilenameWithoutExtension(Filepath);
         ViewItem = Ripper.CreateMediaViewItem(mediaItem, Tag);
-        ViewCollection = new Dictionary<ViewField, IViewSubItem>
-        {
-            { ViewField.Title,      ViewItem.SubItems[0] },
-            { ViewField.Status,     ViewItem.SubItems[1] },
-            { ViewField.MediaType,  ViewItem.SubItems[2] },
-            { ViewField.Size,       ViewItem.SubItems[3] },
-            { ViewField.Progress,   ViewItem.SubItems[4] },
-            { ViewField.Speed,      ViewItem.SubItems[5] },
-            { ViewField.Eta,        ViewItem.SubItems[6] },
-            { ViewField.Url,        ViewItem.SubItems[7] },
-            { ViewField.Path,       ViewItem.SubItems[8] }
-        };
-
+        _viewCollection = new ViewCollection(ViewItem);
         AddToHistory(mediaItem);
-        
         InitializeBuffer();
     }
     
@@ -331,24 +318,6 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
             Speed = valueQueue.Dequeue();
         if ((fields & ViewField.Eta) > 0)
             Eta = valueQueue.Dequeue();
-    }
-
-    [Flags]
-    public enum ViewField
-    {
-        None        = 0,
-        Status      = 1<<0,
-        Size        = 1<<1,
-        Progress    = 1<<2,
-        Speed       = 1<<3,
-        Eta         = 1<<4,
-        Title       = 1<<5,
-        MediaType   = 1<<6,
-        Url         = 1<<7,
-        Path        = 1<<8,
-        Static      = (1<<5) | (1<<6) | (1<<7) | (1<<8),
-        Dynamic     = (1<<0) | (1<<1) | (1<<2) | (1<<3) | (1<<4),
-        All         = (1<<0) | (1<<1) | (1<<2) | (1<<3) | (1<<4) | (1<<5) | (1<<6) | (1<<7) | (1<<8),
     }
 
     private static readonly Dictionary<ProcessStatus, ViewField> _StatusToViewFieldsDict = new()
