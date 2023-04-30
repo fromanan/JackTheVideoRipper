@@ -23,7 +23,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     #region Attributes
     
-    private string DefaultTitle => Filename.SplitCamelCase().ReplaceUnderscore().RemoveMultiSpace().Trim();
+    private string DefaultTitle => YouTubeDL.GetDefaultTitle(Filename);
 
     #endregion
 
