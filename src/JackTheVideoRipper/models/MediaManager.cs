@@ -405,21 +405,23 @@ public class MediaManager
 
     public async Task ValidateVideo(string filepath)
     {
-        throw new NotImplementedException();
+        throw new DeveloperException($"{nameof(ValidateVideo)} not implemented", new NotImplementedException());
     }
 
     public async Task AddAudio(string filepath)
     {
-        throw new NotImplementedException();
+        throw new DeveloperException($"{nameof(AddAudio)} not implemented", new NotImplementedException());
     }
 
     public async Task ConvertVideo(string filepath)
     {
-        throw new NotImplementedException();
+        throw new DeveloperException($"{nameof(ConvertVideo)} not implemented", new NotImplementedException());
     }
 
     public async Task RepairVideo(string filepath)
     {
+        throw new DeveloperException($"{nameof(RepairVideo)} not implemented", new NotImplementedException());
+        
         // Order list of parameters for each task necessary
         IEnumerable<FfmpegParameters> repairTaskParameters = await FFMPEG.RepairVideo(filepath);
             
