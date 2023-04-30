@@ -29,8 +29,6 @@ public static class FileSystem
         new(@"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-    public static readonly string TempPath = Path.GetTempPath();
-
     public static readonly char DirectorySeparatorChar = Path.DirectorySeparatorChar;
 
     public const string RUN_AS_ADMIN = "runas";
@@ -119,6 +117,9 @@ public static class FileSystem
         /// Alias for "C:\Windows\System32\"
         /// </summary>
         public static readonly string System        = Environment.SystemDirectory;
+        
+        
+        public static readonly string Temp          = Path.GetTempPath();
     }
 
     #endregion
@@ -744,7 +745,7 @@ public static class FileSystem
 
     public static string GetTempFilename(string extension, string? prefix = null, string separator = "_")
     {
-        return MergePaths(TempPath, prefix is null ?
+        return MergePaths(Paths.Temp, prefix is null ?
             $"{AppInfo.ProgramPrefix}{separator}{TimeStampDate}.{extension}" :
             $"{AppInfo.ProgramPrefix}{separator}{prefix}{separator}{TimeStampDate}.{extension}");
     }
@@ -1043,7 +1044,7 @@ public static class FileSystem
     
     public static async Task<string?> ExtractResourceFromUrl(string url, string filepath)
     {
-        if (await DownloadWebFileAsync(url, TempPath) is not { } downloadPath || downloadPath.Invalid(Exists))
+        if (await DownloadWebFileAsync(url, Paths.Temp) is not { } downloadPath || downloadPath.Invalid(Exists))
             return null;
 
         if (await ExtractResource(downloadPath) is not { } path || path.Invalid(FolderExists))
@@ -1067,7 +1068,7 @@ public static class FileSystem
 
     public static string ExtractZip(string filepath, string? outputDirectory = null)
     {
-        outputDirectory ??= TempPath;
+        outputDirectory ??= Paths.Temp;
         string extractPath = MergePaths(outputDirectory, GetFilenameWithoutExtension(filepath));
         
         if (!Exists(filepath))
@@ -1079,7 +1080,7 @@ public static class FileSystem
     
     public static async Task<string> ExtractTarGz(string filename, string? outputDirectory = null)
     {
-        outputDirectory ??= TempPath;
+        outputDirectory ??= Paths.Temp;
         await using FileStream stream = File.OpenRead(filename);
         await ExtractTarGz(stream, outputDirectory);
         return MergePaths(outputDirectory, filename);
@@ -1087,7 +1088,7 @@ public static class FileSystem
 
     public static async Task ExtractTarGz(Stream stream, string? outputDirectory = null)
     {
-        outputDirectory ??= TempPath;
+        outputDirectory ??= Paths.Temp;
         const int chunkSize = 4096;
         
         // A GZipStream is not seekable, so copy it first to a MemoryStream
@@ -1108,7 +1109,7 @@ public static class FileSystem
 
     public static async Task<string> ExtractTar(string filename, string? outputDirectory = null)
     {
-        outputDirectory ??= TempPath;
+        outputDirectory ??= Paths.Temp;
         await using FileStream stream = File.OpenRead(filename);
         await ExtractTar(stream, outputDirectory);
         return MergePaths(outputDirectory, filename);
@@ -1128,7 +1129,7 @@ public static class FileSystem
     
     public static async Task ExtractTar(Stream stream, string? outputDirectory = null)
     {
-        outputDirectory ??= TempPath;
+        outputDirectory ??= Paths.Temp;
         byte[] buffer = new byte[100];
         while (true)
         {
