@@ -17,6 +17,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
 
     private DownloadStage _downloadStage = DownloadStage.None;
 
+    public readonly Provider Provider;
     
     private static readonly Regex _MoveFilePattern = new("Moving file \"(?<src>[^\"]+)\" to \"(?<dest>[^\"]+)\"");
 
@@ -47,6 +48,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
     public DownloadProcessUpdateRow(IMediaItem mediaItem, Action<IProcessRunner> completionCallback) :
         base(mediaItem, completionCallback)
     {
+        Provider = ProviderMap.LookupFromDomain(mediaItem.Url);
     }
         
     #endregion
