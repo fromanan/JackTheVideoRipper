@@ -15,7 +15,7 @@ namespace JackTheVideoRipper.views
       public event Action FreezeConsoleEvent = delegate { };
 
       public event Action UnfreezeConsoleEvent = delegate { };
-      
+
       private bool _suspended;
 
       #endregion

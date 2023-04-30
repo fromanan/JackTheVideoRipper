@@ -40,13 +40,13 @@
          ConsoleControl.AutoSize = true;
          ConsoleControl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
          ConsoleControl.AutoValidate = AutoValidate.EnableAllowFocusChange;
+         ConsoleControl.BackColor = Color.FromArgb(12, 12, 12);
          ConsoleControl.ContextMenuStrip = consoleContextMenu;
          ConsoleControl.Dock = DockStyle.Fill;
          ConsoleControl.IsInputEnabled = true;
          ConsoleControl.Location = new Point(0, 0);
-         ConsoleControl.Margin = new Padding(5, 4, 5, 4);
+         ConsoleControl.Margin = new Padding(0);
          ConsoleControl.Name = "ConsoleControl";
-         ConsoleControl.Padding = new Padding(10, 11, 10, 11);
          ConsoleControl.SendKeyboardCommandsToProcess = false;
          ConsoleControl.ShowDiagnostics = false;
          ConsoleControl.Size = new Size(914, 600);
