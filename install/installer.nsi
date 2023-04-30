@@ -6,7 +6,7 @@
 !define APP_NAME "JackTheVideoRipper"
 !define COMP_NAME "fromanan"
 !define WEB_SITE "https://github.com/fromanan/JackTheVideoRipper"
-!define VERSION "0.8.3"
+!define VERSION "0.8.3.1"
 !define COPYRIGHT "Froman Interactive Media © 2023"
 !define DESCRIPTION "Download media easily with a few point and clicks."
 !define LICENSE_TXT "..\LICENSE"
