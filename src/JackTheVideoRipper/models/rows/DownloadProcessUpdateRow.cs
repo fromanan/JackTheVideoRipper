@@ -43,6 +43,10 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
         base.ParameterString.Replace(OriginalUrl, Url) :
         base.ParameterString;
 
+    private bool InvalidFilesize => FileSize.IsNullOrEmpty() || FileSize is "-" or "~" || FilesizeNegligible;
+    
+    private bool FilesizeNegligible => !float.TryParse(FileSize.Split()[0], out float size) || size < 0.001f;
+
     #endregion
 
     #region Constructor
@@ -204,7 +208,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
         if (Path.IsNullOrEmpty())
             Path = GetFilepath();
 
-        if (FileSize.IsNullOrEmpty() || FileSize is "-" or "~" || IsFilesizeNegligible())
+        if (InvalidFilesize)
             FileSize = FileSystem.GetFileSizeFormatted(Path);
 
         if (Title.IsNullOrEmpty())
@@ -229,11 +233,6 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
         if (size.Contains("TeB"))
             return size.Replace("TeB", " TB");
         return size;
-    }
-    
-    private bool IsFilesizeNegligible()
-    {
-        return !float.TryParse(FileSize.Split()[0], out float size) || size < 0.001;
     }
 
     private void SendProcessCompletedNotification()
