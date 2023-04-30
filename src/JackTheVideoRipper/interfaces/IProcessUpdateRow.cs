@@ -4,56 +4,56 @@ public interface IProcessUpdateRow : IProcessRunner, IListViewItemRow
 {
     public string Title
     {
-        get => ViewItem.SubItems[0].Text;
-        set => ViewItem.SubItems[0].Text = value;
+        get;
+        set;
     }
         
     public string Status
     {
-        get => ViewItem.SubItems[1].Text;
-        set => ViewItem.SubItems[1].Text = value;
+        get;
+        set;
     }
-        
+
     public string MediaType
     {
-        get => ViewItem.SubItems[2].Text;
-        set => ViewItem.SubItems[2].Text = value;
+        get;
+        set;
     }
         
     public string FileSize
     {
-        get => ViewItem.SubItems[3].Text;
-        set => ViewItem.SubItems[3].Text = value;
+        get;
+        set;
     }
         
     public string Progress
     {
-        get => ViewItem.SubItems[4].Text;
-        set => ViewItem.SubItems[4].Text = value;
+        get;
+        set;
     }
         
     public string Speed
     {
-        get => ViewItem.SubItems[5].Text;
-        set => ViewItem.SubItems[5].Text = value;
+        get;
+        set;
     }
         
     public string Eta
     {
-        get => ViewItem.SubItems[6].Text;
-        set => ViewItem.SubItems[6].Text = value;
+        get;
+        set;
     }
         
     public string Url
     {
-        get => ViewItem.SubItems[7].Text;
-        set => ViewItem.SubItems[7].Text = value;
+        get;
+        set;
     }
         
     public string Path
     {
-        get => ViewItem.SubItems[8].Text;
-        set => ViewItem.SubItems[8].Text = value;
+        get;
+        set;
     }
         
     private Color Color
