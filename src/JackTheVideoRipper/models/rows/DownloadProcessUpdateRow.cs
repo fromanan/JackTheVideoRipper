@@ -205,8 +205,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
 
     private async Task PostDownloadTasks()
     {
-        if (Path.IsNullOrEmpty())
-            Path = GetFilepath();
+        Path = GetFilepath();
 
         if (InvalidFilesize)
             FileSize = FileSystem.GetFileSizeFormatted(Path);
@@ -214,6 +213,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
         if (Title.IsNullOrEmpty())
             await RetrieveTitle();
 
+        // Add title metadata
         await ExifTool.AddTag(Path, "Title", Title);
 
         SendProcessCompletedNotification();
