@@ -307,7 +307,7 @@ public class MediaManager
         {
             case ContextActions.OpenMedia:
                 if (Selected.Completed)
-                    await Common.OpenFileInMediaPlayer(Selected.Path);
+                    Common.OpenFileInMediaPlayer(Selected.Path);
                 break;
             case ContextActions.CopyUrl:
                 if (Ripper.Instance.SelectedIsType<DownloadProcessUpdateRow>())
@@ -327,7 +327,7 @@ public class MediaManager
                 break;
             case ContextActions.OpenUrl:
                 if (Ripper.Instance.SelectedIsType<DownloadProcessUpdateRow>())
-                    await Common.OpenInBrowser(Selected.Url);
+                    Common.OpenInBrowser(Selected.Url);
                 break;
             case ContextActions.Reveal:
                 if (Selected.Succeeded)

@@ -41,16 +41,21 @@ namespace JackTheVideoRipper
             return _NumericPattern.Remove(str).ValueOrDefault("0");
         }
 
-        public static async Task OpenInBrowser(string url)
+        public static void OpenInBrowser(string url)
         {
             if (url.Valid(FileSystem.IsValidUrl))
-                await Task.Run(() => FileSystem.OpenWebPage(url));
+                Task.Run(() => FileSystem.OpenWebPage(url));
         }
 
-        public static async Task OpenFileInMediaPlayer(string filepath)
+        public static void OpenFileInMediaPlayer(string filepath)
         {
             if (filepath.Valid(File.Exists))
-                await Task.Run(() => FileSystem.OpenInDefaultProgram(filepath));
+                Task.Run(() => FileSystem.OpenInDefaultProgram(filepath));
+        }
+
+        public static void OpenInstallFolder()
+        {
+            Task.Run(() => FileSystem.OpenFileExplorer(FileSystem.Paths.Install));
         }
         
         public static void RepeatInvoke(Action action, int n, int sleepTime = 300)

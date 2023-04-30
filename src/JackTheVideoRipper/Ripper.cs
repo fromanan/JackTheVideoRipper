@@ -409,7 +409,7 @@ public class Ripper
 
     public static void OnOpenInstallFolder(object? sender, EventArgs e)
     {
-        Task.Run(() => OpenFileExplorer(Paths.Install));
+        Common.OpenInstallFolder();
     }
 
     public static void OnOpenAbout(object? sender, EventArgs e)
