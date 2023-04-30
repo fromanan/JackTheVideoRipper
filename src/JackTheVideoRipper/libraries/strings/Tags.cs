@@ -9,4 +9,5 @@ public static class Tags
     public const string DOWNLOAD = "[download]";
     public const string INFO = "[info]";
     public const string METADATA = "[Metadata]";
+    public const string MOVE_FILES = "[MoveFiles]";
 }

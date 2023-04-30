@@ -12,7 +12,7 @@ namespace JackTheVideoRipper
         
         public static readonly string ExecutablePath = FileSystem.ProgramPath(Executables.YouTubeDL);
 
-        public const string DEFAULT_FORMAT = "%(title)s.%(ext)s";
+        public const string DEFAULT_FILENAME = "%(title)s.%(ext)s";
         
         public const StringComparison DEFAULT_COMPARISON = StringComparison.OrdinalIgnoreCase;
         
@@ -23,8 +23,6 @@ namespace JackTheVideoRipper
         #endregion
 
         #region Attributes
-
-        public static string DefaultFilename => FileSystem.CreateDownloadPath(DEFAULT_FORMAT);
 
         public static bool IsInstalled => File.Exists(ExecutablePath);
         

@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Net;
+using System.Text.RegularExpressions;
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
+using JackTheVideoRipper.libraries;
 using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.modules;
 
@@ -125,14 +127,27 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
 
     public string GetFilepath()
     {
-        if (Buffer.GetResultWhichContains(Tags.DOWNLOAD) is not { } download)
-            return Tag;
+        // TODO: Need to fix for non-youtube providers
+        if (Provider is not Provider.YouTube)
+            return Text.NotApplicable;
 
-        string line = download.After(Tags.DOWNLOAD).Trim();
+        if (Buffer.Contains(Messages.YouTubeDLAlreadyDownloaded, StringComparison.OrdinalIgnoreCase))
+        {
+            return Buffer.GetResultWhichContains(Tags.DOWNLOAD)
+                .ValueOrDefault()
+                .After(Tags.DOWNLOAD)
+                .Before(Messages.YouTubeDLAlreadyDownloaded)
+                .Trim();
+        }
+        
+        if (Buffer.GetResultWhichContains(Tags.MOVE_FILES) is not { } pathString)
+            return Text.NotApplicable;
+        
+        string line = pathString.After(Tags.MOVE_FILES).Trim();
 
-        return line.Contains(Messages.YouTubeDLAlreadyDownloaded, StringComparison.OrdinalIgnoreCase) ?
-            line.Before(Messages.YouTubeDLAlreadyDownloaded).Trim() :
-            line.After("Destination: ").Trim();
+        Match match = _MoveFilePattern.Match(line);
+
+        return match.Groups.ContainsKey("dest") ? match.Groups["dest"].Value : Text.NotApplicable;
     }
 
     #endregion

@@ -18,7 +18,7 @@ namespace JackTheVideoRipper
         
         public MediaType Type => ExportAudio && !ExportVideo ? MediaType.Audio : MediaType.Video;
 
-        private string FilePathTemplate => FileSystem.MergePaths(Filepath, YouTubeDL.DEFAULT_FORMAT);
+        private string FilePathTemplate => FileSystem.MergePaths(Filepath, YouTubeDL.DEFAULT_FILENAME);
 
         private bool EncodeVideo => cbVideoEncoder.Enabled && cbVideoEncoder.SelectedIndex > 0;
 

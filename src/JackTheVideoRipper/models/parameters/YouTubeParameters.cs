@@ -35,18 +35,32 @@ public class YouTubeParameters : ProcessParameters<YouTubeParameters>
         return Append(url.WrapQuotes());
     }
     
-    public YouTubeParameters Output(string? filename = null)
+    public YouTubeParameters Output(string? filepath = null)
     {
-        // youtube-dl doesn't like it when you provide --audio-format and extension in -o together
-        string outputFilename = filename.HasValue() ? 
-            FileSystem.ChangeExtension(filename!, "%(ext)s") : 
-            YouTubeDL.DefaultFilename;
+        string filename;
+        string directory;
+        
+        if (filepath.Valid(FileSystem.IsValidPath) && filepath is not null)
+        {
+            // youtube-dl doesn't like it when you provide --audio-format and extension in -o together
+            filename = FileSystem.ChangeExtension(FileSystem.GetFilename(filepath), "%(ext)s");
+            directory = FileSystem.GetDirectory(filepath);
+        }
+        else
+        {
+            filename = YouTubeDL.DEFAULT_FILENAME;
+            directory = Settings.Data.DefaultDownloadPath;
+        }
+
+        // Adds staging folder (temp) and final destination (home)
+        Add('P', $"home:{directory}");
+        Add('P', $"temp:{FileSystem.Paths.Temp}");
 
         // Appends a (N) suffix if file exists
-        if (FileSystem.Exists(outputFilename))
-            outputFilename = FileSystem.GetNextAvailableFilename(outputFilename);
+        /*if (FileSystem.Exists(filename))
+            filename = FileSystem.GetNextAvailableFilename(filename);*/
 
-        return Add('o', outputFilename.WrapQuotes());
+        return Add('o', filename.WrapQuotes());
     }
     
     public YouTubeParameters AudioQuality(string qualitySpecifier = "0")
