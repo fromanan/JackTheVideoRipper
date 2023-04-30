@@ -17,8 +17,15 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
 
     private DownloadStage _downloadStage = DownloadStage.None;
 
-    public string OriginalUrl => base.Url;
+    
+    private static readonly Regex _MoveFilePattern = new("Moving file \"(?<src>[^\"]+)\" to \"(?<dest>[^\"]+)\"");
 
+    #endregion
+
+    #region Attributes
+    
+    public string OriginalUrl => base.Url;
+    
     public new string Url
     {
         get => _redirected ? _redirectedUrl : OriginalUrl;
