@@ -1,123 +1,145 @@
 ﻿namespace JackTheVideoRipper
 {
-    public partial class FrameSettings : Form
-    {
-        #region Data Members
+   public partial class FrameSettings : Form
+   {
+      #region Data Members
 
-        public static event Action SettingsUpdatedEvent = delegate {};
+      public static event Action SettingsUpdatedEvent = delegate { };
 
-        #endregion
-        
-        #region Attributes
+      #endregion
 
-        private static SettingsModel CurrentSettings => Settings.Data;
+      #region Attributes
 
-        #endregion
-        
-        #region Form View Accessors
+      private static SettingsModel CurrentSettings => Settings.Data;
 
-        public int MaxConcurrentDownloads
-        {
-            get => (int) numMaxConcurrent.Value;
-            set => numMaxConcurrent.Value = value;
-        }
+      #endregion
 
-        public string DefaultDownloadPath
-        {
-            get => textLocation.Text.Trim();
-            set => textLocation.Text = value;
-        }
+      #region Form View Accessors
 
-        public bool SkipMetadata
-        {
-            get => skipMetadata.Checked;
-            set => skipMetadata.Checked = value;
-        }
-        
-        public bool StoreHistory
-        {
-            get => storeHistory.Checked;
-            set => storeHistory.Checked = value;
-        }
+      public int MaxConcurrentDownloads
+      {
+         get => (int)numMaxConcurrent.Value;
+         set => numMaxConcurrent.Value = value;
+      }
 
-        public bool EnableDeveloperMode
-        {
-            get => enableDeveloperMode.Checked;
-            set => enableDeveloperMode.Checked = value;
-        }
+      public string DefaultDownloadPath
+      {
+         get => textLocation.Text.Trim();
+         set => textLocation.Text = value;
+      }
 
-        public bool EnableMultithreadedDownloads
-        {
-            get => enableMultithreadedDownloads.Checked;
-            set => enableMultithreadedDownloads.Checked = value;
-        }
+      public string TempFolderPath
+      {
+         get => textTempFolder.Text.Trim();
+         set => textTempFolder.Text = value;
+      }
 
-        #endregion
+      public bool SkipMetadata
+      {
+         get => skipMetadata.Checked;
+         set => skipMetadata.Checked = value;
+      }
 
-        #region Constructor
+      public bool SimpleDownloads
+      {
+         get => simplifiedDownload.Checked;
+         set => simplifiedDownload.Checked = value;
+      }
 
-        public FrameSettings()
-        {
-            InitializeComponent();
-            SubscribeEvents();
-        }
+      public bool StoreHistory
+      {
+         get => storeHistory.Checked;
+         set => storeHistory.Checked = value;
+      }
 
-        #endregion
+      public bool EnableDeveloperMode
+      {
+         get => enableDeveloperMode.Checked;
+         set => enableDeveloperMode.Checked = value;
+      }
 
-        #region Private Methods
+      public bool EnableMultithreadedDownloads
+      {
+         get => enableMultithreadedDownloads.Checked;
+         set => enableMultithreadedDownloads.Checked = value;
+      }
 
-        private void LoadSettings()
-        {
-            MaxConcurrentDownloads = CurrentSettings.MaxConcurrentDownloads;
-            DefaultDownloadPath = CurrentSettings.DefaultDownloadPath;
-            SkipMetadata = CurrentSettings.SkipMetadata;
-            StoreHistory = CurrentSettings.StoreHistory;
-            EnableDeveloperMode = CurrentSettings.EnableDeveloperMode;
-            EnableMultithreadedDownloads = CurrentSettings.EnableMultiThreadedDownloads;
-        }
+      #endregion
 
-        private void SetSettings()
-        {
-            CurrentSettings.MaxConcurrentDownloads = MaxConcurrentDownloads;
-            CurrentSettings.DefaultDownloadPath = DefaultDownloadPath;
-            CurrentSettings.SkipMetadata = SkipMetadata;
-            CurrentSettings.StoreHistory = StoreHistory;
-            CurrentSettings.EnableDeveloperMode = EnableDeveloperMode;
-            CurrentSettings.EnableMultiThreadedDownloads = EnableMultithreadedDownloads;
-            
-            SettingsUpdatedEvent();
-        }
-        
-        private static void Save()
-        {
-            Settings.Save();
-        }
+      #region Constructor
 
-        #endregion
+      public FrameSettings()
+      {
+         InitializeComponent();
+         SubscribeEvents();
+      }
 
-        #region Form Events
+      #endregion
 
-        private void FrameSettings_Load(object sender, EventArgs e)
-        {
-            LoadSettings();
-        }
-        
-        private void SubscribeEvents()
-        {
-            buttonLocationBrowse.Click += (_, _) =>
-            {
-                if (FileSystem.SelectFolder(textLocation.Text.Trim()) is { } selectedPath)
-                    textLocation.Text = selectedPath;
-            };
-            
-            buttonSave.Click += (_, _) =>
-            {
-                SetSettings();
-                Save();
-                Close();
-            };
-        }
+      #region Private Methods
 
-        #endregion
-    }
+      private void LoadSettings()
+      {
+         MaxConcurrentDownloads = CurrentSettings.MaxConcurrentDownloads;
+         DefaultDownloadPath = CurrentSettings.DefaultDownloadPath;
+         TempFolderPath = CurrentSettings.TempFolderPath;
+         SimpleDownloads = CurrentSettings.SimpleDownloads;
+         SkipMetadata = CurrentSettings.SkipMetadata;
+         StoreHistory = CurrentSettings.StoreHistory;
+         EnableDeveloperMode = CurrentSettings.EnableDeveloperMode;
+         EnableMultithreadedDownloads = CurrentSettings.EnableMultiThreadedDownloads;
+      }
+
+      private void SetSettings()
+      {
+         CurrentSettings.MaxConcurrentDownloads = MaxConcurrentDownloads;
+         CurrentSettings.DefaultDownloadPath = DefaultDownloadPath;
+         CurrentSettings.TempFolderPath = TempFolderPath;
+         CurrentSettings.SimpleDownloads = SimpleDownloads;
+         CurrentSettings.SkipMetadata = SkipMetadata;
+         CurrentSettings.StoreHistory = StoreHistory;
+         CurrentSettings.EnableDeveloperMode = EnableDeveloperMode;
+         CurrentSettings.EnableMultiThreadedDownloads = EnableMultithreadedDownloads;
+
+         SettingsUpdatedEvent();
+      }
+
+      private static void Save()
+      {
+         Settings.Save();
+      }
+
+      #endregion
+
+      #region Form Events
+
+      private void FrameSettings_Load(object sender, EventArgs e)
+      {
+         LoadSettings();
+      }
+
+      private void SubscribeEvents()
+      {
+         buttonLocationBrowse.Click += (_, _) =>
+         {
+            if (FileSystem.SelectFolder(DefaultDownloadPath) is { } selectedPath)
+               DefaultDownloadPath = selectedPath;
+         };
+
+         buttonTempFolderBrowse.Click += (_, _) =>
+         {
+            if (FileSystem.SelectFolder(TempFolderPath) is { } selectedPath)
+               TempFolderPath = selectedPath;
+         };
+
+         buttonSave.Click += (_, _) =>
+         {
+            SetSettings();
+            Save();
+            Close();
+         };
+      }
+
+      #endregion
+   }
 }

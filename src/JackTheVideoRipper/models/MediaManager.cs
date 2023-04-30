@@ -194,7 +194,7 @@ public class MediaManager
 
     public async Task DownloadMediaDialog(MediaType type)
     {
-        if (Settings.Data.SkipMetadata)
+        if (Settings.Data.SimpleDownloads)
         {
             await GetNewMediaSimple(type);
         }

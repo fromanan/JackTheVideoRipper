@@ -1,224 +1,269 @@
 ﻿namespace JackTheVideoRipper
 {
-    partial class FrameSettings
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+   partial class FrameSettings
+   {
+      /// <summary>
+      /// Required designer variable.
+      /// </summary>
+      private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+      /// <summary>
+      /// Clean up any resources being used.
+      /// </summary>
+      /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+      protected override void Dispose(bool disposing)
+      {
+         if (disposing && (components != null))
+         {
+            components.Dispose();
+         }
+         base.Dispose(disposing);
+      }
 
-        #region Windows Form Designer generated code
+      #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonLocationBrowse = new System.Windows.Forms.Button();
-            this.textLocation = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.enableDeveloperMode = new System.Windows.Forms.CheckBox();
-            this.storeHistory = new System.Windows.Forms.CheckBox();
-            this.skipMetadata = new System.Windows.Forms.CheckBox();
-            this.numMaxConcurrent = new System.Windows.Forms.NumericUpDown();
-            this.enableMultithreadedDownloads = new System.Windows.Forms.CheckBox();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxConcurrent)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(186, 261);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(100, 28);
-            this.buttonCancel.TabIndex = 15;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(290, 261);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(100, 28);
-            this.buttonSave.TabIndex = 14;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.buttonLocationBrowse);
-            this.groupBox2.Controls.Add(this.textLocation);
-            this.groupBox2.Location = new System.Drawing.Point(7, 183);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(382, 66);
-            this.groupBox2.TabIndex = 16;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Default Save Location";
-            // 
-            // buttonLocationBrowse
-            // 
-            this.buttonLocationBrowse.Location = new System.Drawing.Point(310, 23);
-            this.buttonLocationBrowse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonLocationBrowse.Name = "buttonLocationBrowse";
-            this.buttonLocationBrowse.Size = new System.Drawing.Size(68, 28);
-            this.buttonLocationBrowse.TabIndex = 1;
-            this.buttonLocationBrowse.Text = "Browse";
-            this.buttonLocationBrowse.UseVisualStyleBackColor = true;
-            // 
-            // textLocation
-            // 
-            this.textLocation.Location = new System.Drawing.Point(11, 27);
-            this.textLocation.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textLocation.Name = "textLocation";
-            this.textLocation.ReadOnly = true;
-            this.textLocation.Size = new System.Drawing.Size(295, 23);
-            this.textLocation.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 22);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 15);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Max Concurrent Downloads:";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.enableMultithreadedDownloads);
-            this.groupBox1.Controls.Add(this.enableDeveloperMode);
-            this.groupBox1.Controls.Add(this.storeHistory);
-            this.groupBox1.Controls.Add(this.skipMetadata);
-            this.groupBox1.Controls.Add(this.numMaxConcurrent);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(7, 11);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(382, 156);
-            this.groupBox1.TabIndex = 18;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "General";
-            // 
-            // enableDeveloperMode
-            // 
-            this.enableDeveloperMode.AutoSize = true;
-            this.enableDeveloperMode.Location = new System.Drawing.Point(14, 96);
-            this.enableDeveloperMode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.enableDeveloperMode.Name = "enableDeveloperMode";
-            this.enableDeveloperMode.Size = new System.Drawing.Size(151, 19);
-            this.enableDeveloperMode.TabIndex = 21;
-            this.enableDeveloperMode.Text = "Enable Developer Mode";
-            this.enableDeveloperMode.UseVisualStyleBackColor = true;
-            // 
-            // storeHistory
-            // 
-            this.storeHistory.AutoSize = true;
-            this.storeHistory.Location = new System.Drawing.Point(14, 73);
-            this.storeHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.storeHistory.Name = "storeHistory";
-            this.storeHistory.Size = new System.Drawing.Size(94, 19);
-            this.storeHistory.TabIndex = 20;
-            this.storeHistory.Text = "Store History";
-            this.storeHistory.UseVisualStyleBackColor = true;
-            // 
-            // skipMetadata
-            // 
-            this.skipMetadata.AutoSize = true;
-            this.skipMetadata.Location = new System.Drawing.Point(14, 50);
-            this.skipMetadata.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.skipMetadata.Name = "skipMetadata";
-            this.skipMetadata.Size = new System.Drawing.Size(217, 19);
-            this.skipMetadata.TabIndex = 19;
-            this.skipMetadata.Text = "Skip Metadata (When Downloading)";
-            this.skipMetadata.UseVisualStyleBackColor = true;
-            // 
-            // numMaxConcurrent
-            // 
-            this.numMaxConcurrent.Location = new System.Drawing.Point(186, 21);
-            this.numMaxConcurrent.Margin = new System.Windows.Forms.Padding(2);
-            this.numMaxConcurrent.Name = "numMaxConcurrent";
-            this.numMaxConcurrent.Size = new System.Drawing.Size(70, 23);
-            this.numMaxConcurrent.TabIndex = 18;
-            // 
-            // enableMultithreadedDownloads
-            // 
-            this.enableMultithreadedDownloads.AutoSize = true;
-            this.enableMultithreadedDownloads.Location = new System.Drawing.Point(14, 119);
-            this.enableMultithreadedDownloads.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.enableMultithreadedDownloads.Name = "enableMultithreadedDownloads";
-            this.enableMultithreadedDownloads.Size = new System.Drawing.Size(201, 19);
-            this.enableMultithreadedDownloads.TabIndex = 22;
-            this.enableMultithreadedDownloads.Text = "Enable Multithreaded Downloads";
-            this.enableMultithreadedDownloads.UseVisualStyleBackColor = true;
-            // 
-            // FrameSettings
-            // 
-            this.AcceptButton = this.buttonSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(400, 304);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonSave);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "FrameSettings";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Settings";
-            this.Load += new System.EventHandler(this.FrameSettings_Load);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numMaxConcurrent)).EndInit();
-            this.ResumeLayout(false);
+      /// <summary>
+      /// Required method for Designer support - do not modify
+      /// the contents of this method with the code editor.
+      /// </summary>
+      private void InitializeComponent()
+      {
+         buttonCancel = new Button();
+         buttonSave = new Button();
+         groupBox2 = new GroupBox();
+         buttonLocationBrowse = new Button();
+         textLocation = new TextBox();
+         label1 = new Label();
+         groupBox1 = new GroupBox();
+         skipMetadata = new CheckBox();
+         enableMultithreadedDownloads = new CheckBox();
+         enableDeveloperMode = new CheckBox();
+         storeHistory = new CheckBox();
+         simplifiedDownload = new CheckBox();
+         numMaxConcurrent = new NumericUpDown();
+         groupBox3 = new GroupBox();
+         buttonTempFolderBrowse = new Button();
+         textTempFolder = new TextBox();
+         groupBox2.SuspendLayout();
+         groupBox1.SuspendLayout();
+         ((System.ComponentModel.ISupportInitialize)numMaxConcurrent).BeginInit();
+         groupBox3.SuspendLayout();
+         SuspendLayout();
+         // 
+         // buttonCancel
+         // 
+         buttonCancel.DialogResult = DialogResult.Cancel;
+         buttonCancel.FlatStyle = FlatStyle.System;
+         buttonCancel.Location = new Point(211, 424);
+         buttonCancel.Name = "buttonCancel";
+         buttonCancel.Size = new Size(114, 37);
+         buttonCancel.TabIndex = 15;
+         buttonCancel.Text = "Cancel";
+         buttonCancel.UseVisualStyleBackColor = true;
+         // 
+         // buttonSave
+         // 
+         buttonSave.FlatStyle = FlatStyle.System;
+         buttonSave.Location = new Point(331, 424);
+         buttonSave.Name = "buttonSave";
+         buttonSave.Size = new Size(114, 37);
+         buttonSave.TabIndex = 14;
+         buttonSave.Text = "Save";
+         buttonSave.UseVisualStyleBackColor = true;
+         // 
+         // groupBox2
+         // 
+         groupBox2.BackColor = SystemColors.ControlLightLight;
+         groupBox2.Controls.Add(buttonLocationBrowse);
+         groupBox2.Controls.Add(textLocation);
+         groupBox2.Location = new Point(8, 236);
+         groupBox2.Name = "groupBox2";
+         groupBox2.Size = new Size(437, 88);
+         groupBox2.TabIndex = 16;
+         groupBox2.TabStop = false;
+         groupBox2.Text = "Default Save Location";
+         // 
+         // buttonLocationBrowse
+         // 
+         buttonLocationBrowse.FlatStyle = FlatStyle.System;
+         buttonLocationBrowse.Location = new Point(356, 31);
+         buttonLocationBrowse.Name = "buttonLocationBrowse";
+         buttonLocationBrowse.Size = new Size(78, 37);
+         buttonLocationBrowse.TabIndex = 1;
+         buttonLocationBrowse.Text = "Browse";
+         buttonLocationBrowse.UseVisualStyleBackColor = true;
+         // 
+         // textLocation
+         // 
+         textLocation.Location = new Point(13, 36);
+         textLocation.Name = "textLocation";
+         textLocation.ReadOnly = true;
+         textLocation.Size = new Size(337, 27);
+         textLocation.TabIndex = 0;
+         // 
+         // label1
+         // 
+         label1.AutoSize = true;
+         label1.Location = new Point(13, 29);
+         label1.Margin = new Padding(2, 0, 2, 0);
+         label1.Name = "label1";
+         label1.Size = new Size(195, 20);
+         label1.TabIndex = 17;
+         label1.Text = "Max Concurrent Downloads:";
+         // 
+         // groupBox1
+         // 
+         groupBox1.Controls.Add(skipMetadata);
+         groupBox1.Controls.Add(enableMultithreadedDownloads);
+         groupBox1.Controls.Add(enableDeveloperMode);
+         groupBox1.Controls.Add(storeHistory);
+         groupBox1.Controls.Add(simplifiedDownload);
+         groupBox1.Controls.Add(numMaxConcurrent);
+         groupBox1.Controls.Add(label1);
+         groupBox1.Location = new Point(8, 15);
+         groupBox1.Margin = new Padding(2, 3, 2, 3);
+         groupBox1.Name = "groupBox1";
+         groupBox1.Padding = new Padding(2, 3, 2, 3);
+         groupBox1.Size = new Size(437, 215);
+         groupBox1.TabIndex = 18;
+         groupBox1.TabStop = false;
+         groupBox1.Text = "General";
+         // 
+         // skipMetadata
+         // 
+         skipMetadata.AutoSize = true;
+         skipMetadata.Location = new Point(16, 91);
+         skipMetadata.Name = "skipMetadata";
+         skipMetadata.Size = new Size(284, 24);
+         skipMetadata.TabIndex = 23;
+         skipMetadata.Text = "Skip Metadata Preview for Downloads";
+         skipMetadata.UseVisualStyleBackColor = true;
+         // 
+         // enableMultithreadedDownloads
+         // 
+         enableMultithreadedDownloads.AutoSize = true;
+         enableMultithreadedDownloads.Location = new Point(16, 181);
+         enableMultithreadedDownloads.Name = "enableMultithreadedDownloads";
+         enableMultithreadedDownloads.Size = new Size(253, 24);
+         enableMultithreadedDownloads.TabIndex = 22;
+         enableMultithreadedDownloads.Text = "Enable Multithreaded Downloads";
+         enableMultithreadedDownloads.UseVisualStyleBackColor = true;
+         // 
+         // enableDeveloperMode
+         // 
+         enableDeveloperMode.AutoSize = true;
+         enableDeveloperMode.Location = new Point(16, 151);
+         enableDeveloperMode.Name = "enableDeveloperMode";
+         enableDeveloperMode.Size = new Size(192, 24);
+         enableDeveloperMode.TabIndex = 21;
+         enableDeveloperMode.Text = "Enable Developer Mode";
+         enableDeveloperMode.UseVisualStyleBackColor = true;
+         // 
+         // storeHistory
+         // 
+         storeHistory.AutoSize = true;
+         storeHistory.Location = new Point(16, 121);
+         storeHistory.Name = "storeHistory";
+         storeHistory.Size = new Size(117, 24);
+         storeHistory.TabIndex = 20;
+         storeHistory.Text = "Store History";
+         storeHistory.UseVisualStyleBackColor = true;
+         // 
+         // simplifiedDownload
+         // 
+         simplifiedDownload.AutoSize = true;
+         simplifiedDownload.Location = new Point(16, 61);
+         simplifiedDownload.Name = "simplifiedDownload";
+         simplifiedDownload.Size = new Size(208, 24);
+         simplifiedDownload.TabIndex = 19;
+         simplifiedDownload.Text = "Simplified Download View";
+         simplifiedDownload.UseVisualStyleBackColor = true;
+         // 
+         // numMaxConcurrent
+         // 
+         numMaxConcurrent.Location = new Point(213, 28);
+         numMaxConcurrent.Margin = new Padding(2, 3, 2, 3);
+         numMaxConcurrent.Name = "numMaxConcurrent";
+         numMaxConcurrent.Size = new Size(80, 27);
+         numMaxConcurrent.TabIndex = 18;
+         // 
+         // groupBox3
+         // 
+         groupBox3.Controls.Add(buttonTempFolderBrowse);
+         groupBox3.Controls.Add(textTempFolder);
+         groupBox3.Location = new Point(8, 330);
+         groupBox3.Name = "groupBox3";
+         groupBox3.Size = new Size(437, 88);
+         groupBox3.TabIndex = 17;
+         groupBox3.TabStop = false;
+         groupBox3.Text = "Temp Folder";
+         // 
+         // buttonTempFolderBrowse
+         // 
+         buttonTempFolderBrowse.FlatStyle = FlatStyle.System;
+         buttonTempFolderBrowse.Location = new Point(356, 31);
+         buttonTempFolderBrowse.Name = "buttonTempFolderBrowse";
+         buttonTempFolderBrowse.Size = new Size(78, 37);
+         buttonTempFolderBrowse.TabIndex = 1;
+         buttonTempFolderBrowse.Text = "Browse";
+         buttonTempFolderBrowse.UseVisualStyleBackColor = true;
+         // 
+         // textTempFolder
+         // 
+         textTempFolder.Location = new Point(13, 36);
+         textTempFolder.Name = "textTempFolder";
+         textTempFolder.ReadOnly = true;
+         textTempFolder.Size = new Size(337, 27);
+         textTempFolder.TabIndex = 0;
+         // 
+         // FrameSettings
+         // 
+         AcceptButton = buttonSave;
+         AutoScaleDimensions = new SizeF(8F, 20F);
+         AutoScaleMode = AutoScaleMode.Font;
+         CancelButton = buttonCancel;
+         ClientSize = new Size(457, 472);
+         Controls.Add(groupBox3);
+         Controls.Add(groupBox1);
+         Controls.Add(groupBox2);
+         Controls.Add(buttonCancel);
+         Controls.Add(buttonSave);
+         FormBorderStyle = FormBorderStyle.FixedDialog;
+         Margin = new Padding(2, 3, 2, 3);
+         MaximizeBox = false;
+         MinimizeBox = false;
+         Name = "FrameSettings";
+         ShowInTaskbar = false;
+         StartPosition = FormStartPosition.CenterParent;
+         Text = "Settings";
+         Load += FrameSettings_Load;
+         groupBox2.ResumeLayout(false);
+         groupBox2.PerformLayout();
+         groupBox1.ResumeLayout(false);
+         groupBox1.PerformLayout();
+         ((System.ComponentModel.ISupportInitialize)numMaxConcurrent).EndInit();
+         groupBox3.ResumeLayout(false);
+         groupBox3.PerformLayout();
+         ResumeLayout(false);
+      }
 
-        }
+      #endregion
 
-        #endregion
-
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button buttonLocationBrowse;
-        private System.Windows.Forms.TextBox textLocation;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown numMaxConcurrent;
+      private System.Windows.Forms.Button buttonCancel;
+      private System.Windows.Forms.Button buttonSave;
+      private System.Windows.Forms.GroupBox groupBox2;
+      private System.Windows.Forms.Button buttonLocationBrowse;
+      private System.Windows.Forms.TextBox textLocation;
+      private System.Windows.Forms.Label label1;
+      private System.Windows.Forms.GroupBox groupBox1;
+      private System.Windows.Forms.NumericUpDown numMaxConcurrent;
+      private CheckBox simplifiedDownload;
+      private CheckBox storeHistory;
+      private CheckBox enableDeveloperMode;
+      private CheckBox enableMultithreadedDownloads;
+      private GroupBox groupBox3;
+      private Button buttonTempFolderBrowse;
+      private TextBox textTempFolder;
       private CheckBox skipMetadata;
-        private CheckBox storeHistory;
-        private CheckBox enableDeveloperMode;
-        private CheckBox enableMultithreadedDownloads;
-    }
+   }
 }

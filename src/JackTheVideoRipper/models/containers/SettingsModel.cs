@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JackTheVideoRipper.extensions;
+using Newtonsoft.Json;
 
 namespace JackTheVideoRipper
 {
@@ -21,12 +22,18 @@ namespace JackTheVideoRipper
 
         [JsonProperty("default_download_path")]
         public string DefaultDownloadPath { get; set; } = FileSystem.Paths.Download;
+        
+        [JsonProperty("temp_folder_path")]
+        public string TempFolderPath { get; set; } = FileSystem.Paths.Temp;
 
         [JsonProperty("max_concurrent_downloads")]
         public int MaxConcurrentDownloads { get; set; } = 5;
 
         [JsonProperty("last_version_youtube-dl")]
         public string LastVersionYouTubeDL { get; set; } = string.Empty;
+        
+        [JsonProperty("simple_downloads")]
+        public bool SimpleDownloads { get; set; }
         
         [JsonProperty("skip_metadata")]
         public bool SkipMetadata { get; set; }
@@ -49,10 +56,13 @@ namespace JackTheVideoRipper
 
         public override void Validate()
         {
-            if (!Directory.Exists(DefaultDownloadPath))
+            if (DefaultDownloadPath.Invalid(FileSystem.IsValidPath) || !Directory.Exists(DefaultDownloadPath))
                 DefaultDownloadPath = FileSystem.Paths.Download;
+
+            if (TempFolderPath.Invalid(FileSystem.IsValidPath) || !Directory.Exists(TempFolderPath))
+                TempFolderPath = FileSystem.Paths.Temp;
             
-            if (!Directory.Exists(LastOpenedFilepath))
+            if (LastOpenedFilepath.Invalid(FileSystem.IsValidPath) || !Directory.Exists(LastOpenedFilepath))
                 LastOpenedFilepath = FileSystem.Paths.Download;
         }
 
