@@ -124,11 +124,16 @@ public class MediaManager
             case ProcessRowType.Compress:
                 AddProcess(new CompressProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
+            case ProcessRowType.Convert:
+                AddProcess(new ConversionProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
+                break;
+            case ProcessRowType.Recode:
+                AddProcess(new RecodeProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
+                break;
             case ProcessRowType.Repair:
+                AddProcess(new RepairProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
             default:
-            case ProcessRowType.Convert:
-            case ProcessRowType.Recode:
                 Modals.Warning($"{processRowType.ToString().WrapQuotes()} Processes are not currently supported!",
                     "Unsupported Tool Selection");
                 break;
@@ -410,6 +415,23 @@ public class MediaManager
         await QueueProcessAsync(row, ProcessRowType.Download);
     }
 
+    public async Task ConvertVideo(string filepath)
+    {
+        string extension = FileSystem.GetExtension(filepath);
+
+        if (Modals.BasicDropdown(Formats.AllVideo, defaultValue: extension) is not { } choice || choice == extension)
+            return;
+        
+        string newFilepath = FileSystem.ChangeExtension(filepath, choice);
+        
+        ExifData metadata = await ExifTool.GetMetadata(filepath);
+        
+        MediaItemRow<FfmpegParameters> row = new(title:metadata.Title, filepath: filepath,
+            mediaParameters: FFMPEG.Convert(filepath, choice));
+             
+        await QueueProcessAsync(row, ProcessRowType.Convert);
+    }
+
     public async Task CompressVideo(string filepath)
     {
         string newFilepath = FFMPEG.GetOutputFilename(filepath, FFMPEG.Operation.Compress);
@@ -440,6 +462,7 @@ public class MediaManager
 
     public async Task RecodeVideo(string filepath)
     {
+        throw new DeveloperException($"{nameof(RecodeVideo)} not implemented", new NotImplementedException());
         MediaItemRow<FfmpegParameters> row = new(filepath: filepath, mediaParameters: FFMPEG.Recode(filepath));
         await QueueProcessAsync(row, ProcessRowType.Recode);
     }
@@ -454,9 +477,9 @@ public class MediaManager
         throw new DeveloperException($"{nameof(AddAudio)} not implemented", new NotImplementedException());
     }
 
-    public async Task ConvertVideo(string filepath)
+    public async Task ExtractAudio(string filepath)
     {
-        throw new DeveloperException($"{nameof(ConvertVideo)} not implemented", new NotImplementedException());
+        throw new DeveloperException($"{nameof(ExtractAudio)} not implemented", new NotImplementedException());
     }
 
     public async Task RepairVideo(string filepath)
