@@ -79,29 +79,44 @@ public abstract class ProcessRunner : IProcessRunner
         return true;
     }
 
-    public virtual Task<bool> Update()
+    public virtual async Task<bool> Update()
     {
         // Don't run updates after we've completed
         if (Paused || Finished)
-            return FalseTask;
+            return false;
 
         Buffer.Update();
 
-        return TrueTask;
+        return true;
     }
 
-    public virtual Task<bool> Start()
+    public virtual async Task<bool> Start()
     {
         if (ProcessStatus is ProcessStatus.Running)
-            return FalseTask;
+            return false;
         
         InitializeProcess();
+
+        if (!await PreRunTasks())
+            return false;
 
         StartProcess();
         
         SetProcessStatus(ProcessStatus.Running);
 
-        return TrueTask;
+        return true;
+    }
+
+    // Returns if the process should start as usual; allows validation of input / startup conditions
+    protected virtual async Task<bool> PreRunTasks()
+    {
+        return true;
+    }
+
+    // Returns if the process should exit normally; allows us to check output before confirming completion
+    protected virtual async Task<bool> PostRunTasks()
+    {
+        return true;
     }
     
     public virtual void Stop()
@@ -132,14 +147,19 @@ public abstract class ProcessRunner : IProcessRunner
         CloseProcess();
     }
     
-    protected virtual void Complete()
+    protected virtual async Task<bool> Complete()
     {
         if (Completed || Finished)
-            return;
+            return false;
+
+        if (!await PostRunTasks())
+            return false;
 
         SetProcessStatus(Failed ? ProcessStatus.Error : ProcessStatus.Succeeded);
         
         Completed = true;
+
+        return true;
     }
 
     public virtual void Enqueue()

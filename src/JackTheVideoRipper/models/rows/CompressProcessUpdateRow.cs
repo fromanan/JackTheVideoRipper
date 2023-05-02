@@ -79,13 +79,19 @@ public class CompressProcessUpdateRow : ProcessUpdateRow
     {
         return Messages.Compressing;
     }
-    
+
+    protected override async Task<bool> PreRunTasks()
+    {
+        if (Filename.EndsWith($"_{FFMPEG.GetOutputSuffix(FFMPEG.Operation.Compress)}") &&
+            !Modals.Confirmation("This file is already compressed. Continue?"))
+            return false;
+
+        return await base.PreRunTasks();
+    }
+
     private async Task LoadMetadata()
     {
         _exifData.LoadData(await ExifTool.GetMetadataString(Filepath));
         _totalFrames = _exifData.Frames > 0 ? _exifData.Frames : await FFMPEG.GetNumberOfFrames(Filepath);
-    }
-
-    {
     }
 }

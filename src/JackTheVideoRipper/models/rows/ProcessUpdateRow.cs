@@ -148,17 +148,22 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     public override async Task<bool> Start()
     {
         if (!await base.Start())
+        {
+            Stop();
             return false;
+        }
         
         StartMessage();
         await RetrieveTitle();
         return true;
     }
 
-    protected override void Complete()
+    protected override async Task<bool> Complete()
     {
-        base.Complete();
+        if (!await base.Complete())
+            return false;
         FinishMessage();
+        return true;
     }
 
     protected override bool SetProcessStatus(ProcessStatus processStatus)
