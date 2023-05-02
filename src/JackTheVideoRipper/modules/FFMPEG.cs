@@ -217,9 +217,9 @@ public static class FFMPEG
         };
     }
 
-    public static string GetOutputFilename(string inputFilename, Operation operation, string? outputFormat = null)
+    public static string GetOutputSuffix(Operation operation)
     {
-        string suffix = operation switch
+        return operation switch
         {
             Operation.Repair    => "FIXED",
             Operation.Compress  => "COMPRESSED",
@@ -228,7 +228,11 @@ public static class FFMPEG
             Operation.NoAudio   => "NO_AUDIO",
             _                   => "OUTPUT"
         };
+    }
 
+    public static string GetOutputFilename(string inputFilename, Operation operation, string? outputFormat = null)
+    {
+        string suffix = GetOutputSuffix(operation);
         string outputFilename = FileSystem.AppendSuffix(inputFilename, suffix, "_");
         return outputFormat is null
             ? outputFilename
