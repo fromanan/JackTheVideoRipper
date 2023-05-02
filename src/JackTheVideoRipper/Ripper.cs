@@ -139,7 +139,7 @@ public class Ripper
         if (filepaths.Length == 0)
             return;
         
-        var options = new[]
+        FFMPEG.Operation[] options =
         {
             FFMPEG.Operation.Compress,
             FFMPEG.Operation.Repair,
