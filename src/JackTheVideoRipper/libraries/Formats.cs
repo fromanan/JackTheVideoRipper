@@ -15,18 +15,41 @@ public static class Formats
         public const string MPEG = "mpeg";
 
         public const string MKV = "mkv";
+
+        public const string OGG = "ogg";
+
+        public const string FLV = "flv";
+
+        public const string WMV = "wmv";
     }
+    
+    public static readonly string[] AllVideo =
+    {
+        Video.AVI,
+        Video.MP4,
+        Video.MOV,
+        Video.M4V,
+        Video.MPEG,
+        Video.MKV,
+        Video.OGG,
+        Video.FLV,
+        Video.WMV
+    };
     
     public static bool IsVideoFormat(string filepath)
     {
-        return FileSystem.GetExtension(filepath).ToLower() is Video.AVI
+        return FileSystem.GetExtension(filepath).ToLower()
+            is Video.AVI
             or Video.MP4
             or Video.MOV
             or Video.M4V
             or Video.MPEG
-            or Video.MKV;
+            or Video.MKV
+            or Video.OGG
+            or Video.FLV
+            or Video.WMV;
     }
-
+    
     public static class Audio
     {
         public const string MP3 = "mp3";
@@ -40,9 +63,20 @@ public static class Formats
         public const string AAC = "aac";
     }
     
+    public static readonly string[] AllAudio =
+    {
+        Audio.MP3,
+        Audio.WAV,
+        Audio.OGG,
+        Audio.M4A,
+        Audio.AAC
+    };
+
+    
     public static bool IsAudioFormat(string filepath)
     {
-        return FileSystem.GetExtension(filepath).ToLower() is Audio.MP3
+        return FileSystem.GetExtension(filepath).ToLower()
+            is Audio.MP3
             or Audio.WAV
             or Audio.OGG
             or Audio.M4A
@@ -70,9 +104,23 @@ public static class Formats
         public const string RAW = "raw";
     }
     
+    public static readonly string[] AllImage =
+    {
+        Image.WEBP,
+        Image.JPG,
+        Image.JPEG,
+        Image.PNG,
+        Image.BMP,
+        Image.TIFF,
+        Image.TIF,
+        Image.GIF,
+        Image.RAW
+    };
+    
     public static bool IsImageFormat(string filepath)
     {
-        return FileSystem.GetExtension(filepath).ToLower() is Image.WEBP
+        return FileSystem.GetExtension(filepath).ToLower()
+            is Image.WEBP
             or Image.JPG
             or Image.JPEG
             or Image.PNG
