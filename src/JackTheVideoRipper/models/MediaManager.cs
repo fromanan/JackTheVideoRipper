@@ -306,60 +306,90 @@ public class MediaManager
         switch (contextAction)
         {
             case ContextActions.OpenMedia:
+            {
                 if (Selected.Completed)
                     Common.OpenFileInMediaPlayer(Selected.Path);
                 break;
+            }
             case ContextActions.CopyUrl:
+            {
                 if (Ripper.Instance.SelectedIsType<DownloadProcessUpdateRow>())
                     Core.CopyToClipboard(Selected.Url);
                 break;
+            }
             case ContextActions.Delete:
+            {
                 if (Selected.Succeeded)
                     FileSystem.DeleteFileIfExists(Selected.Path);
                 break;
+            }
             case ContextActions.Stop:
+            {
                 if (Selected.Running)
                     StopSelectedProcess();
                 break;
+            }
             case ContextActions.Retry:
+            {
                 if (Selected.Failed)
                     RetryProcess(Selected);
                 break;
+            }
             case ContextActions.OpenUrl:
+            {
                 if (Ripper.Instance.SelectedIsType<DownloadProcessUpdateRow>())
                     Common.OpenInBrowser(Selected.Url);
                 break;
+            }
             case ContextActions.Reveal:
+            {
                 if (Selected.Succeeded)
                     FileSystem.OpenFileExplorerWithFileSelected(Selected.Path);
                 break;
+            }
             case ContextActions.Pause:
+            {
                 if (!Selected.Paused)
                     PauseProcess(Selected);
                 break;
+            }
             case ContextActions.Resume:
+            {
                 if (Selected.Paused)
                     ResumeProcess(Selected);
                 break;
+            }
             case ContextActions.Remove:
+            {
                 if (Selected.Completed || !Selected.Started || Modals.Confirmation("Are you sure you wish to delete a running process?"))
                     RemoveProcess(Selected);
                 break;
+            }
             case ContextActions.OpenConsole:
+            {
                 await Selected.OpenInConsole();
                 break;
+            }
             case ContextActions.SaveLogs:
+            {
                 Selected.SaveLogs();
                 break;
+            }
             case ContextActions.CopyCommand:
+            {
                 if (Selected is ProcessUpdateRow processUpdateRow)
                     FileSystem.SetClipboardText(processUpdateRow.Command);
                 break;
+            }
             case ContextActions.Reprocess:
+            {
                 throw new DeveloperException("Reprocess not implemented!", new NotImplementedException());
+            }
             default:
+            {
                 ArgumentOutOfRangeException innerException = new(nameof(contextAction), contextAction, null);
                 throw new MediaManagerException(Messages.ContextActionFailed, innerException);
+            }
         }
     }
     
