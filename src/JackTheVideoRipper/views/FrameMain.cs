@@ -282,6 +282,10 @@ namespace JackTheVideoRipper
                await Output.OpenMainConsoleWindow();
                args.Handled = true;
                break;
+            case Keys.Delete:
+               ContextAction(sender, ContextActions.Remove);
+               args.Handled = true;
+               break;
          }
       }
 
