@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.rows;
 
 public class ConversionProcessUpdateRow : ProcessUpdateRow
 {
