@@ -101,12 +101,12 @@ public static class FFMPEG
     }
 
     // TODO: Was used originally for the failure, actually occurred due to encoding error from Adobe Premiere Pro
-    public static FfmpegParameters Convert(string inputFilepath)
+    public static FfmpegParameters Convert(string inputFilepath, string outputFormat)
     {
         return new FfmpegParameters(inputFilepath, hardwareAcceleration:true)
             .CopyAudio()
-            .CopyVideo(VideoCodecs.AYUV)
-            .Output(inputFilepath, Formats.Video.AVI);
+            //.CopyVideo(VideoCodecs.AYUV)
+            .Output(inputFilepath, outputFormat);
     }
 
     public static FfmpegParameters Recode(string inputFilepath)
