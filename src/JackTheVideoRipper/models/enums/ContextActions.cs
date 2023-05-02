@@ -15,5 +15,7 @@ public enum ContextActions
     OpenConsole,
     SaveLogs,
     CopyCommand,
-    Reprocess
+    Reprocess,
+    Convert,
+    Compress
 }

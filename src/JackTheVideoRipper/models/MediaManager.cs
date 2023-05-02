@@ -385,6 +385,17 @@ public class MediaManager
             {
                 throw new DeveloperException("Reprocess not implemented!", new NotImplementedException());
             }
+            case ContextActions.Compress:
+            {
+                if (Selected is ProcessUpdateRow processUpdateRow)
+                    await CompressVideo(processUpdateRow.Path);
+                break;
+            }
+            case ContextActions.Convert:
+            {
+                // Currently handled with a window
+                break;
+            }
             default:
             {
                 ArgumentOutOfRangeException innerException = new(nameof(contextAction), contextAction, null);

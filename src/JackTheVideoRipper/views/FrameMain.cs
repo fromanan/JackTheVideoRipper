@@ -555,6 +555,16 @@ namespace JackTheVideoRipper
          {
             ContextAction(sender, ContextActions.Reprocess);
          };
+         
+         convertToolStripMenuItem.Click += (sender, _) =>
+         {
+            ContextAction(sender, ContextActions.Convert);
+         };
+
+         compressToolStripMenuItem.Click += (sender, _) =>
+         {
+            ContextAction(sender, ContextActions.Compress);
+         };
 
          // Miscellaneous
 

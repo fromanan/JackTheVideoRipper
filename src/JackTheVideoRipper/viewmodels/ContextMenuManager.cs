@@ -32,6 +32,7 @@ public class ContextMenuManager
         public const string MOVE                    =   "resultContextMenuItem/moveToolStripMenuItem";
         public const string RENAME                  =   "resultContextMenuItem/renameToolStripMenuItem";
         public const string CONVERT                 =   "resultContextMenuItem/convertToolStripMenuItem";
+        public const string COMPRESS                =   "resultContextMenuItem/compressToolStripMenuItem";
         public const string REPROCESS               =   "resultContextMenuItem/reprocessMediaToolStripMenuItem";
         public const string DELETE                  =   "resultContextMenuItem/deleteFromDiskToolStripMenuItem";
         public const string RESULT_MENU             =   "resultContextMenuItem";
@@ -62,6 +63,7 @@ public class ContextMenuManager
         { ContextPaths.MOVE,                    ProcessStatus.Succeeded },
         { ContextPaths.RENAME,                  ProcessStatus.Succeeded },
         { ContextPaths.CONVERT,                 ProcessStatus.Succeeded },
+        { ContextPaths.COMPRESS,                ProcessStatus.Succeeded },
         { ContextPaths.REPROCESS,               ProcessStatus.Succeeded },
         { ContextPaths.DELETE,                  ProcessStatus.Succeeded },
         { ContextPaths.RESULT_MENU,             ProcessStatus.Succeeded },
