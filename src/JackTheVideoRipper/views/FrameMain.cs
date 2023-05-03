@@ -14,6 +14,8 @@ namespace JackTheVideoRipper
       private readonly ContextMenuManager _contextMenuManager;
 
       private readonly Ripper _ripper;
+      
+      private readonly Font _headerFont = new("Segoe UI Semibold", 9.5f);
 
       #endregion
 
@@ -125,8 +127,6 @@ namespace JackTheVideoRipper
 
          OnSettingsUpdated(); //< Load initial values (for visibility bindings)
       }
-
-      private readonly Font _headerFont = new("Segoe UI Semibold", 9.5f);
 
       private void DrawColumnHeader(object? sender, DrawListViewColumnHeaderEventArgs e)
       {
@@ -291,11 +291,11 @@ namespace JackTheVideoRipper
 
       private void OnUpdateStatusBar(object? sender, EventArgs args)
       {
-         toolbarLabelStatus.Text = Statistics.Toolbar.ToolbarStatus;
-         toolbarLabelProcessCounts.Text = Statistics.Toolbar.ToolbarProcessCount;
-         toolBarLabelCpu.Text = Statistics.Toolbar.ToolbarCpu;
-         toolBarLabelMemory.Text = Statistics.Toolbar.ToolbarMemory;
-         toolBarLabelNetwork.Text = Statistics.Toolbar.ToolbarNetwork;
+         toolbarLabelStatus.Text          = Statistics.Toolbar.ToolbarStatus;
+         toolbarLabelProcessCounts.Text   = Statistics.Toolbar.ToolbarProcessCount;
+         toolBarLabelCpu.Text             = Statistics.Toolbar.ToolbarCpu;
+         toolBarLabelMemory.Text          = Statistics.Toolbar.ToolbarMemory;
+         toolBarLabelNetwork.Text         = Statistics.Toolbar.ToolbarNetwork;
       }
 
       private void OnSettingsUpdated()
@@ -379,100 +379,106 @@ namespace JackTheVideoRipper
 
       private void SubscribeCoreHandlers()
       {
-         Load += OnFormLoad;
-         Shown += OnFormShown;
-         Shown += Ripper.OnEndStartup;
-         FormClosing += OnFormClosing;
+         Load                                                  += OnFormLoad;
+         Shown                                                 += OnFormShown;
+         Shown                                                 += Ripper.OnEndStartup;
+         FormClosing                                           += OnFormClosing;
       }
 
       private void SubscribeFormEvents()
       {
-         KeyDown += KeyDownHandler;
-         Click += OnFormClick;
-         listItems.Click += OnFormClick;
-         contextMenuListItems.Click += OnFormClick;
-         listItems.DragEnter += OnDragEnter;
-         listItems.DragDrop += OnDragDrop;
-         listItems.MouseClick += OnListItemsMouseClick;
+         KeyDown                                               += KeyDownHandler;
+         Click                                                 += OnFormClick;
+         listItems.Click                                       += OnFormClick;
+         contextMenuListItems.Click                            += OnFormClick;
+         listItems.DragEnter                                   += OnDragEnter;
+         listItems.DragDrop                                    += OnDragDrop;
+         listItems.MouseClick                                  += OnListItemsMouseClick;
       }
 
       private void SubscribeCoreButtons()
       {
-         openDownloadFolderToolStripMenuItem.Click += Ripper.OnOpenDownloads;
-         exitToolStripMenuItem.Click += (_, _) => Close();
-         statusBar.DoubleClick += Ripper.OnOpenTaskManager;
-         openTaskManagerToolStripMenuItem.Click += Ripper.OnOpenTaskManager;
-         settingsToolStripMenuItem.Click += Ripper.OnOpenSettings;
-         checkForUpdatesToolStripMenuItem.Click += Ripper.OnCheckForUpdates;
-         openDependenciesFolderToolStripMenuItem.Click += Ripper.OnOpenInstallFolder;
+         openDownloadFolderToolStripMenuItem.Click             += Ripper.OnOpenDownloads;
+         exitToolStripMenuItem.Click                           += (_, _) => Close();
+         statusBar.DoubleClick                                 += Ripper.OnOpenTaskManager;
+         openTaskManagerToolStripMenuItem.Click                += Ripper.OnOpenTaskManager;
+         settingsToolStripMenuItem.Click                       += Ripper.OnOpenSettings;
+         checkForUpdatesToolStripMenuItem.Click                += Ripper.OnCheckForUpdates;
+         openDependenciesFolderToolStripMenuItem.Click         += Ripper.OnOpenInstallFolder;
       }
 
       private void SubscribeSubpageActions()
       {
-         aboutToolStripMenuItem.Click += Ripper.OnOpenAbout;
-         convertToolStripMenuItem.Click += Ripper.OnOpenConvert;
+         aboutToolStripMenuItem.Click                          += Ripper.OnOpenAbout;
+         convertToolStripMenuItem.Click                        += Ripper.OnOpenConvert;
       }
 
       private void SubscribeMediaTasks()
       {
-         toolStripButtonDownloadVideo.Click += _ripper.OnDownloadVideo;
-         toolStripButtonDownloadAudio.Click += _ripper.OnDownloadAudio;
-         downloadVideoToolStripMenuItem.Click += _ripper.OnDownloadVideo;
-         downloadAudioToolStripMenuItem.Click += _ripper.OnDownloadAudio;
+         toolStripButtonDownloadVideo.Click                    += _ripper.OnDownloadVideo;
+         toolStripButtonDownloadAudio.Click                    += _ripper.OnDownloadAudio;
+         downloadVideoToolStripMenuItem.Click                  += _ripper.OnDownloadVideo;
+         downloadAudioToolStripMenuItem.Click                  += _ripper.OnDownloadAudio;
 
          // Download Batch
-         downloadBatchYouTubePlaylistlToolStripMenuItem.Click += _ripper.OnBatchPlaylist;
-         downloadBatchDocumentToolStripMenuItem.Click += _ripper.OnBatchDocument;
-         downloadBatchManualToolStripMenuItem.Click += _ripper.OnDownloadBatch;
-
-         compressBatchToolStripMenuItem.Click += _ripper.OnCompressBulk;
+         downloadBatchYouTubePlaylistlToolStripMenuItem.Click  += _ripper.OnBatchPlaylist;
+         downloadBatchDocumentToolStripMenuItem.Click          += _ripper.OnBatchDocument;
+         downloadBatchManualToolStripMenuItem.Click            += _ripper.OnDownloadBatch;
+         
+         // Other Batch Options
+         compressBatchToolStripMenuItem.Click                  += _ripper.OnCompressBulk;
+      }
+      
+      private void DependencyAction(object? sender, Dependencies dependency)
+      {
+         DependencyActionEvent(sender, new DependencyActionEventArgs(dependency));
       }
 
       private void SubscribeDependencies()
       {
          ytdlpToolStripMenuItem.Click += (sender, _) =>
-             DependencyActionEvent(sender, new DependencyActionEventArgs(Dependencies.YouTubeDL));
+            DependencyAction(sender, Dependencies.YouTubeDL);
          vS2010RedistributableToolStripMenuItem.Click += (sender, _) =>
-             DependencyActionEvent(sender, new DependencyActionEventArgs(Dependencies.Redistributables));
+             DependencyAction(sender, Dependencies.Redistributables);
          atomicParsleyToolStripMenuItem.Click += (sender, _) =>
-             DependencyActionEvent(sender, new DependencyActionEventArgs(Dependencies.AtomicParsley));
+             DependencyAction(sender, Dependencies.AtomicParsley);
          vlcPlayerToolStripMenuItem.Click += (sender, _) =>
-             DependencyActionEvent(sender, new DependencyActionEventArgs(Dependencies.VLC));
+             DependencyAction(sender, Dependencies.VLC);
          handbrakeToolStripMenuItem.Click += (sender, _) =>
-             DependencyActionEvent(sender, new DependencyActionEventArgs(Dependencies.Handbrake));
+             DependencyAction(sender, Dependencies.Handbrake);
          fFmpegToolStripMenuItem.Click += (sender, _) =>
-             DependencyActionEvent(sender, new DependencyActionEventArgs(Dependencies.FFMPEG));
+             DependencyAction(sender, Dependencies.FFMPEG);
       }
 
       private void SubscribeToolMenu()
       {
-         validateVideoToolStripMenuItem.Click += Ripper.OnVerifyIntegrity;
-         compressVideoToolStripMenuItem.Click += _ripper.OnCompressVideo;
-         repairVideoToolStripMenuItem.Click += _ripper.OnRepairVideo;
-         recodeVideoToolStripMenuItem.Click += _ripper.OnRecodeVideo;
-         openConsoleToolStripMenuItem.Click += Ripper.OnOpenConsole;
-         openHistoryToolStripMenuItem.Click += Ripper.OnOpenHistory;
+         validateVideoToolStripMenuItem.Click                  += Ripper.OnVerifyIntegrity;
+         compressVideoToolStripMenuItem.Click                  += _ripper.OnCompressVideo;
+         repairVideoToolStripMenuItem.Click                    += _ripper.OnRepairVideo;
+         recodeVideoToolStripMenuItem.Click                    += _ripper.OnRecodeVideo;
+         openConsoleToolStripMenuItem.Click                    += Ripper.OnOpenConsole;
+         openHistoryToolStripMenuItem.Click                    += Ripper.OnOpenHistory;
       }
 
       private void SubscribeEditMenu()
       {
-         copyFailedUrlsToClipboardToolStripMenuItem.Click += _ripper.OnCopyFailedUrls;
-         copyAllUrlsToClipboardToolStripMenuItem.Click += _ripper.OnCopyAllUrls;
-         retryAllToolStripMenuItem.Click += _ripper.OnRetryAll;
-         stopAllToolStripMenuItem.Click += _ripper.OnStopAll;
-         clearFailuresToolStripMenuItem.Click += _ripper.OnRemoveFailed;
-         clearAllToolStripMenuItem.Click += (_, _) => ClearAll();
-         clearAllToolStripMenuItem.Click += _ripper.OnClearAllViewItems;
-         clearSuccessesToolStripMenuItem.Click += _ripper.OnRemoveSucceeded;
-         pauseAllToolStripMenuItem.Click += _ripper.OnPauseAll;
-         resumeAllToolStripMenuItem.Click += _ripper.OnResumeAll;
+         copyFailedUrlsToClipboardToolStripMenuItem.Click      += _ripper.OnCopyFailedUrls;
+         copyAllUrlsToClipboardToolStripMenuItem.Click         += _ripper.OnCopyAllUrls;
+         retryAllToolStripMenuItem.Click                       += _ripper.OnRetryAll;
+         stopAllToolStripMenuItem.Click                        += _ripper.OnStopAll;
+         clearFailuresToolStripMenuItem.Click                  += _ripper.OnRemoveFailed;
+         clearAllToolStripMenuItem.Click                       += (_, _) => ClearAll();
+         clearAllToolStripMenuItem.Click                       += _ripper.OnClearAllViewItems;
+         clearSuccessesToolStripMenuItem.Click                 += _ripper.OnRemoveSucceeded;
+         pauseAllToolStripMenuItem.Click                       += _ripper.OnPauseAll;
+         resumeAllToolStripMenuItem.Click                      += _ripper.OnResumeAll;
       }
 
       private void SubscribeNotificationsBar()
       {
-         NotificationsManager.SendNotificationEvent += SetNotificationBrief;
-         NotificationsManager.ClearPushNotificationsEvent += OnClearNotifications;
-         notificationStatusLabel.MouseDown += _ripper.OnNotificationBarClicked;
+         NotificationsManager.SendNotificationEvent            += SetNotificationBrief;
+         NotificationsManager.ClearPushNotificationsEvent      += OnClearNotifications;
+         notificationStatusLabel.MouseDown                     += _ripper.OnNotificationBarClicked;
       }
 
       private async void OnListItemsMouseClick(object? sender, MouseEventArgs e)
