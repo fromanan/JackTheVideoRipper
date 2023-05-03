@@ -125,13 +125,13 @@ public class MediaManager
                 AddProcess(new CompressProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
             case ProcessRowType.Convert:
-                AddProcess(new ConversionProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
+                //AddProcess(new ConversionProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
             case ProcessRowType.Recode:
-                AddProcess(new RecodeProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
+                //AddProcess(new RecodeProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
             case ProcessRowType.Repair:
-                AddProcess(new RepairProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
+                //AddProcess(new RepairProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
             default:
                 Modals.Warning($"{processRowType.ToString().WrapQuotes()} Processes are not currently supported!",
