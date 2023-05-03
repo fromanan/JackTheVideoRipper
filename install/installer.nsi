@@ -43,6 +43,8 @@ InstallDir "$PROGRAMFILES\JackTheVideoRipper"
 ######################################################################
 
 !include "MUI.nsh"
+!include x64.nsh
+!include LogicLib.nsh
 
 !define MUI_ABORTWARNING
 !define MUI_UNABORTWARNING
@@ -103,14 +105,37 @@ File "deps\vcredist_x86.exe"
 File "deps\windowsdesktop-runtime-6.0.8-win-x64.exe"
 File "deps\yt-dlp.exe"
 
-# Download latest version of youtube-dl for end-user
-# TODO: This currently runs in background and silently. On computers with slow or spotty Internet connections may be an issue
-# This should wait until finished before continuing...
-nsExec::ExecToStack 'powershell.exe -Command "(new-object System.Net.WebClient).DownloadFile(\"https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp.exe\", \"${INSTDIR_DATA_BIN}\yt-dlp.exe\")"'
+## Run external installers
 
-# Run external installer
+# Check to see if already installed
+
+${If} ${RunningX64}
+  SetRegView 64
+  ReadRegStr $R0 HKLM "SOFTWARE\Wow6432Node\Microsoft\VisualStudio\10.0\VC\VCRedist\x64" ""
+  SetRegView LastUsed
+${Else}
+  ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\VisualStudio\10.0\VC\VCRedist\x86" ""
+${EndIf}
+
+IfFileExists $R0 +1 VCRedistInstalled
 ExecWait "${INSTDIR_DATA_BIN}\vcredist_x86.exe"
+Exec $R0
+
+VCRedistInstalled:
+
+${If} ${RunningX64}
+  SetRegView 64
+  ReadRegStr $R0 HKLM "SOFTWARE\Wow6432Node\dotnet\Setup\InstalledVersions\x64\sharedfx\Microsoft.WindowsDesktop.App" ""
+  SetRegView LastUsed
+${Else}
+  ReadRegStr $R0 HKLM "SOFTWARE\dotnet\Setup\InstalledVersions\x86\sharedfx\Microsoft.WindowsDesktop.App" ""
+${EndIf}
+
+IfFileExists $R0 +1 DesktopRuntimeInstalled
 ExecWait "${INSTDIR_DATA_BIN}\windowsdesktop-runtime-6.0.8-win-x64.exe"
+Exec $R0
+
+DesktopRuntimeInstalled:
 
 SectionEnd
 
