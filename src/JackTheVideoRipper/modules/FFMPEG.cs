@@ -217,12 +217,13 @@ public static class FFMPEG
         };
     }
 
-    public static string GetOutputSuffix(Operation operation)
+    public static string? GetOutputSuffix(Operation operation)
     {
         return operation switch
         {
             Operation.Repair    => "FIXED",
             Operation.Compress  => "COMPRESSED",
+            Operation.Convert   => null,
             Operation.Recode    => "RECODED",
             Operation.Audio     => "AUDIO",
             Operation.NoAudio   => "NO_AUDIO",
@@ -232,11 +233,13 @@ public static class FFMPEG
 
     public static string GetOutputFilename(string inputFilename, Operation operation, string? outputFormat = null)
     {
-        string suffix = GetOutputSuffix(operation);
-        string outputFilename = FileSystem.AppendSuffix(inputFilename, suffix, "_");
-        return outputFormat is null
-            ? outputFilename
-            : FileSystem.ChangeExtension(outputFilename, outputFormat);
+        string? suffix = GetOutputSuffix(operation);
+        string outputFilename = suffix is null ? 
+            inputFilename : 
+            FileSystem.AppendSuffix(inputFilename, suffix, "_");
+        return outputFormat is null ?
+            outputFilename : 
+            FileSystem.ChangeExtension(outputFilename, outputFormat);
     }
 
     #region Enums
