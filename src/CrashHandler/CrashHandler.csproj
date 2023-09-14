@@ -6,6 +6,11 @@
         <Nullable>enable</Nullable>
         <UseWindowsForms>true</UseWindowsForms>
         <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>CrashHandler</AssemblyName>
+        <RootNamespace>CrashHandler</RootNamespace>
+        <PackageId>CrashHandler</PackageId>
+        <Authors />
+        <Company>Froman Interactive Media</Company>
     </PropertyGroup>
 
     <ItemGroup>

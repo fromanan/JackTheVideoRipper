@@ -169,7 +169,7 @@ public static class Core
 
     public static void OpenCrashHandler()
     {
-        string crashHandlerPath = CreateInstallPath("JackCrashHandler.exe");
+        string crashHandlerPath = CreateInstallPath("CrashHandler.exe");
         Process.Start(crashHandlerPath);
     }
     

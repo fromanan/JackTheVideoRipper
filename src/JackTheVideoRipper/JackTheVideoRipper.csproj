@@ -245,4 +245,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="framework\" />
+  </ItemGroup>
+
 </Project>

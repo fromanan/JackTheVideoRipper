@@ -6,6 +6,14 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
+
+        <AssemblyName>Test</AssemblyName>
+
+        <RootNamespace>Test</RootNamespace>
+
+        <Authors />
+
+        <Company>Froman Interactive Media</Company>
     </PropertyGroup>
 
     <ItemGroup>
