@@ -187,9 +187,9 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     protected void UpdateViewItemFields(string status)
     {
-        ViewItem.Suspend();
+        //ViewItem.Suspend();
         UpdateStatus(status);
-        ViewItem.Resume();
+        //ViewItem.Resume();
     }
 
     protected void UpdateStatus(string statusMessage)
