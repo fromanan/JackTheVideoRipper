@@ -154,6 +154,12 @@ public static class FileSystem
     {
         return new Mutex(true, AppInfo.ProgramName, out isOnlyInstance);
     }
+    
+    public static void ConfigureFilepaths()
+    {
+        // Needed to use the filesystem's paths
+        AppContext.SetSwitch("Switch.System.Reflection.Assembly.SimulatedLocationInBaseDirectory", true);
+    }
 
     #endregion
 

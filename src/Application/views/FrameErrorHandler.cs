@@ -24,7 +24,7 @@ namespace JackTheVideoRipper.views
         
         private void FrameErrorHandler_Load(object? sender, EventArgs e)
         {
-            Text = $"Uncaught Exception | {_exception}";
+            Text = $@"Uncaught Exception | {_exception}";
             SetExceptionInformation();
             SystemSounds.Exclamation.Play();
         }

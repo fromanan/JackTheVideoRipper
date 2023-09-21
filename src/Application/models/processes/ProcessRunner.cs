@@ -192,10 +192,10 @@ public abstract class ProcessRunner : IProcessRunner
 
     #region Event Handlers
 
-    public virtual void OnProcessExit(object? o, EventArgs eventArgs)
+    public virtual async void OnProcessExit(object? o, EventArgs eventArgs)
     {
         CloseProcess();
-        Complete();
+        await Complete();
     }
 
     protected void OnApplicationExit(object? sender, EventArgs args)

@@ -164,41 +164,47 @@ public class Ripper
             {
                 case FFMPEG.Operation.Compress:
                     await _mediaManager.CompressVideo(filepath);
-                    break;
+                    return;
                 case FFMPEG.Operation.Repair:
                     await _mediaManager.RepairVideo(filepath);
-                    break;
+                    return;
                 case FFMPEG.Operation.Recode:
                     await _mediaManager.RecodeVideo(filepath);
-                    break;
+                    return;
                 case FFMPEG.Operation.Convert:
                     await _mediaManager.ConvertVideo(filepath);
-                    break;
+                    return;
                 case FFMPEG.Operation.AddAudio:
                     await _mediaManager.AddAudio(filepath);
-                    break;
+                    return;
                 case FFMPEG.Operation.Validate:
                     await _mediaManager.ValidateVideo(filepath);
-                    break;
+                    return;
             }
         }
         else // Batch operation
         {
-            var validPaths = filepaths.Where(f => f.Valid(IsValidPath) && Formats.IsVideoFormat(f));
+            IEnumerable<string> validPaths = filepaths.Where(f => f.Valid(IsValidPath) && Formats.IsVideoFormat(f));
             switch (operation)
             {
                 case FFMPEG.Operation.Compress:
-                    break;
+                    await _mediaManager.CompressBulk(validPaths);
+                    return;
                 case FFMPEG.Operation.Repair:
-                    break;
+                    throw new NotImplementedException();
+                    return;
                 case FFMPEG.Operation.Recode:
-                    break;
+                    throw new NotImplementedException();
+                    return;
                 case FFMPEG.Operation.Convert:
-                    break;
+                    throw new NotImplementedException();
+                    return;
                 case FFMPEG.Operation.AddAudio:
-                    break;
+                    throw new NotImplementedException();
+                    return;
                 case FFMPEG.Operation.Validate:
-                    break;
+                    throw new NotImplementedException();
+                    return;
             }
         }
     }
@@ -211,6 +217,11 @@ public class Ripper
             return;
 
         await _mediaManager.DownloadFromUrl(url);
+    }
+
+    public async Task OnRefresh()
+    {
+        await _mediaManager.Refresh();
     }
 
     public async void OnCompressVideo(object? sender, EventArgs e)

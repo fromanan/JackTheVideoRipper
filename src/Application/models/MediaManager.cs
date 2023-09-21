@@ -4,6 +4,7 @@ using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.parameters;
+using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.models.rows;
 using JackTheVideoRipper.modules;
 using JackTheVideoRipper.views;
@@ -90,10 +91,10 @@ public class MediaManager
     #endregion
 
     #region Public Methods
-    
-    public void OnProgramShutdown()
+
+    public async Task Refresh()
     {
-        History.Data.DownloadedUrls = DownloadedUrls.ToArray();
+        await _processPool.Refresh();
     }
 
     public string GetStatus()
@@ -138,6 +139,11 @@ public class MediaManager
                     "Unsupported Tool Selection");
                 break;
         }
+    }
+    
+    private void OnProgramShutdown()
+    {
+        History.Data.DownloadedUrls = DownloadedUrls.ToArray();
     }
 
     private void AddProcess(IProcessUpdateRow processUpdateRow)
@@ -450,12 +456,16 @@ public class MediaManager
 
     public async Task CompressBulk(string directoryPath)
     {
+        string[] filepaths = Directory.GetFiles(directoryPath, FileFilters.VideoFiles);
+        await CompressBulk(filepaths);
+    }
+    
+    public async Task CompressBulk(IEnumerable<string> filepaths)
+    {
         async ValueTask Compress(string filepath, CancellationToken token)
         {
             await CompressVideo(filepath);
         }
-
-        string[] filepaths = Directory.GetFiles(directoryPath, FileFilters.VideoFiles);
         
         await Parallel.ForEachAsync(filepaths, Compress);
     }

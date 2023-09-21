@@ -71,7 +71,7 @@ namespace JackTheVideoRipper
 
         private static void ConfigureGlobal()
         {
-            AppContext.SetSwitch("Switch.System.Reflection.Assembly.SimulatedLocationInBaseDirectory", true);
+            FileSystem.ConfigureFilepaths();
         }
 
         private static void ConfigureGraphics()

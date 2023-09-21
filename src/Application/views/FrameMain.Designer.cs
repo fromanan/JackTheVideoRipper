@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper
+﻿namespace JackTheVideoRipper.views
 {
    partial class FrameMain
    {

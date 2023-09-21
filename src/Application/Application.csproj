@@ -13,6 +13,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>jackthevideoripper.snk</AssemblyOriginatorKeyFile>
     <PublicSign>true</PublicSign>
+    <RootNamespace>JackTheVideoRipper</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

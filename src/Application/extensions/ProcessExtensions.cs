@@ -131,13 +131,24 @@ public static class ProcessExtensions
         if (process.HasExited)
             return Task.CompletedTask;
 
-        TaskCompletionSource<object?> tcs = new();
-        process.EnableRaisingEvents = true;
-        process.Exited += (_, _) => tcs.TrySetResult(null);
-        if (cancellationToken != default)
-            cancellationToken.Register(() => tcs.SetCanceled(cancellationToken));
+        TaskCompletionSource<object?> completionSource = new();
 
-        return process.HasExited ? Task.CompletedTask : tcs.Task;
+        void OnProcessExited(object? sender, EventArgs eventArgs)
+        {
+            completionSource.TrySetResult(null);
+        }
+
+        void OnProcessCancelled()
+        {
+            completionSource.SetCanceled(cancellationToken);
+        }
+        
+        process.EnableRaisingEvents = true;
+        process.Exited += OnProcessExited;
+        if (cancellationToken != default)
+            cancellationToken.Register(OnProcessCancelled);
+
+        return process.HasExited ? Task.CompletedTask : completionSource.Task;
     }
 
     public static IEnumerable<ProcessThread> GetThreads(this Process process)

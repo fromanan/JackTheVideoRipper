@@ -4,7 +4,7 @@ using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.modules;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.rows;
 
 public class CompressProcessUpdateRow : ProcessUpdateRow
 {

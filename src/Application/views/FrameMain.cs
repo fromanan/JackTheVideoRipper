@@ -3,7 +3,7 @@ using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
 
-namespace JackTheVideoRipper
+namespace JackTheVideoRipper.views
 {
    public partial class FrameMain : Form
    {
@@ -107,7 +107,7 @@ namespace JackTheVideoRipper
       {
          string notificationMessage = notification.ShortenedMessage ?? notification.Message;
 
-         Threading.RunInMainContext(() =>
+         UpdateViewElement(() =>
          {
             NotificationStatus = $@"[{notification.DateQueued:T}]: {notificationMessage.TruncateEllipse(60)}";
          });
@@ -116,6 +116,16 @@ namespace JackTheVideoRipper
       #endregion
 
       #region Private Methods
+      
+      private static void UpdateViewElement(Action action)
+      {
+         Threading.RunInMainContext(action);
+      }
+
+      private static async Task UpdateViewElementAsync(Action action)
+      {
+         await Threading.RunInMainContext(action);
+      }
 
       private void InitializeViews()
       {
@@ -175,7 +185,7 @@ namespace JackTheVideoRipper
          if (item is not ListViewItem listViewItem)
             return;
 
-         Threading.RunInMainContext(() => ViewItems.Add(listViewItem));
+         UpdateViewElement(() => ViewItems.Add(listViewItem));
       }
 
       private void AddItems(IEnumerable<IViewItem> items)
@@ -183,7 +193,7 @@ namespace JackTheVideoRipper
          if (items.Cast<ListViewItem>() is not { } listViewItems)
             return;
 
-         Threading.RunInMainContext(() => ViewItems.AddRange(listViewItems));
+         UpdateViewElement(() => ViewItems.AddRange(listViewItems));
       }
 
       private void RemoveItem(IViewItem item)
@@ -191,7 +201,7 @@ namespace JackTheVideoRipper
          if (item is not ListViewItem listViewItem)
             return;
 
-         Threading.RunInMainContext(() => ViewItems.Remove(listViewItem));
+         UpdateViewElement(() => ViewItems.Remove(listViewItem));
       }
 
       private void RemoveItems(IEnumerable<IViewItem> items)
@@ -199,7 +209,7 @@ namespace JackTheVideoRipper
          if (items.Cast<ListViewItem>() is not { } listViewItems)
             return;
 
-         Threading.RunInMainContext(() => ViewItems.RemoveRange(listViewItems));
+         UpdateViewElement(() => ViewItems.RemoveRange(listViewItems));
       }
 
       private void StopUpdates()
@@ -273,19 +283,37 @@ namespace JackTheVideoRipper
       {
          switch (args.KeyCode)
          {
-            // Ctrl + V
+            // Ctrl + C -- Copy
+            case Keys.C when args is { Control: true }:
+               ContextAction(sender, ContextActions.CopyUrl);
+               args.Handled = true;
+               return;
+            // Ctrl + V -- Paste
             case Keys.V when args is { Control: true }:
                await _ripper.OnPasteContent();
                args.Handled = true;
                return;
+            // Ctrl + R -- Refresh
+            case Keys.R when args is { Control: true }:
+               await _ripper.OnRefresh();
+               args.Handled = true;
+               return;
+            // Ctrl + O -- Open
+            case Keys.O when args is { Control: true }:
+               ContextAction(sender, ContextActions.OpenMedia);
+               return;
+            // Ctrl + E -- Explorer
+            case Keys.E when args is { Control: true }:
+               ContextAction(sender, ContextActions.Reveal);
+               return;
             case Keys.Oemtilde:
                await Output.OpenMainConsoleWindow();
                args.Handled = true;
-               break;
+               return;
             case Keys.Delete:
                ContextAction(sender, ContextActions.Remove);
                args.Handled = true;
-               break;
+               return;
          }
       }
 
@@ -306,7 +334,7 @@ namespace JackTheVideoRipper
 
       private void OnClearNotifications()
       {
-         Threading.RunInMainContext(() => NotificationStatus = string.Empty);
+         UpdateViewElement(() => NotificationStatus = string.Empty);
       }
 
       private void OnFormClick(object? sender, EventArgs args)
