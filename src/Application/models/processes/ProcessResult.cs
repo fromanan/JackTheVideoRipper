@@ -22,7 +22,7 @@ public record ProcessResult
 
     public bool Failed => ExitCode > 0;
 
-    public bool Succeeded => ExitCode == 0;
+    public bool Succeeded => ExitCode is 0;
 
     public bool Invalid => ExitCode < 0;
 

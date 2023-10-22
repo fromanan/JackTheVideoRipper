@@ -136,7 +136,7 @@ public class Ripper
     // TODO: Handle folders, handle audio files (or potentially images)
     public async void OnDropFile(string[] filepaths)
     {
-        if (filepaths.Length == 0)
+        if (filepaths.Length is 0)
             return;
         
         FFMPEG.Operation[] options =
@@ -154,7 +154,7 @@ public class Ripper
             return;
         
         // Single file operation
-        if (filepaths.Length == 1)
+        if (filepaths.Length is 1)
         {
             string filepath = filepaths[0];
             if (filepath.Invalid(IsValidPath) || !Formats.IsVideoFormat(filepath))

@@ -532,7 +532,7 @@ public static class FileSystem
         catch (Win32Exception win32Exception)
         {
             // User Cancelled
-            if (win32Exception.NativeErrorCode == 1223)
+            if (win32Exception.NativeErrorCode is 1223)
                 return;
             throw new ProcessFailedToStartException(RFileSystem.CouldNotStartTaskManager, win32Exception);
         }

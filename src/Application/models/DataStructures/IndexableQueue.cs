@@ -65,6 +65,6 @@ public class IndexableQueue<T> : List<T>
 
     public bool Empty()
     {
-        return Length == 0;
+        return Length is 0;
     }
 }

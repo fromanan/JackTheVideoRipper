@@ -455,12 +455,12 @@ namespace JackTheVideoRipper
 
             cbVideoFormat.SelectedIndexChanged += (_, _) =>
             {
-                if (VideoFormatIndex == 0) VideoFormatIndex = 1;
+                if (VideoFormatIndex is 0) VideoFormatIndex = 1;
             };
 
             cbAudioFormat.SelectedIndexChanged += (_, _) =>
             {
-                if (AudioFormatIndex == 0) AudioFormatIndex = 1;
+                if (AudioFormatIndex is 0) AudioFormatIndex = 1;
             };
 
             chkBoxExportAudio.CheckedChanged += OnCheckExportAudioChanged;

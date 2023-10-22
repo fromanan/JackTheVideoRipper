@@ -40,7 +40,7 @@ public class ProcessParameters<T> : IProcessParameters where T : IProcessParamet
 
     public bool Contains(string parameterName)
     {
-        return _buffer.ToString().Contains($"{(parameterName.Length == 1 ? "-" : "--")}{parameterName}");
+        return _buffer.ToString().Contains($"{(parameterName.Length is 1 ? "-" : "--")}{parameterName}");
     }
 
     #endregion
@@ -49,7 +49,7 @@ public class ProcessParameters<T> : IProcessParameters where T : IProcessParamet
     
     protected T AddNoValue(string parameter)
     {
-        _buffer.Append($" {(parameter.Length == 1 ? "-" : "--")}{parameter}");
+        _buffer.Append($" {(parameter.Length is 1 ? "-" : "--")}{parameter}");
         return (T)(IProcessParameters) this;
     }
     
@@ -61,7 +61,7 @@ public class ProcessParameters<T> : IProcessParameters where T : IProcessParamet
     
     protected T Add(string paramName, object paramValue)
     {
-        _buffer.Append($" {(paramName.Length == 1 ? "-" : "--")}{paramName} {paramValue}");
+        _buffer.Append($" {(paramName.Length is 1 ? "-" : "--")}{paramName} {paramValue}");
         return (T)(IProcessParameters) this;
     }
     

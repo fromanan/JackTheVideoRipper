@@ -170,7 +170,7 @@ public abstract class ProcessRunner : IProcessRunner
     // Returns if the process succeeded / can proceed
     public virtual bool HandleExitCode(int exitCode)
     {
-        return exitCode == 0;
+        return exitCode is 0;
     }
     
     public virtual void Pause()
