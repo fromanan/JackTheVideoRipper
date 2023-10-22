@@ -56,11 +56,11 @@
     <Content Include="..\..\assets\song-medium.ico">
       <Link>assets\song-medium.ico</Link>
     </Content>
-    <Content Include="..\..\external\ConsoleControl\resources\Console.ico">
-      <Link>ConsoleControl\resources\Console.ico</Link>
+    <Content Include="..\..\external\ConsoleControl\source\ConsoleControl\resources\Console.ico">
+      <Link>ConsoleControl\source\ConsoleControl\resources\Console.ico</Link>
     </Content>
-    <Content Include="..\..\external\ConsoleControl\resources\ConsoleControl.bmp">
-      <Link>ConsoleControl\resources\ConsoleControl.bmp</Link>
+    <Content Include="..\..\external\ConsoleControl\source\ConsoleControl\resources\ConsoleControl.bmp">
+      <Link>ConsoleControl\source\ConsoleControl\resources\ConsoleControl.bmp</Link>
     </Content>
   </ItemGroup>
 
@@ -131,26 +131,27 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Executables.resx</DependentUpon>
     </Compile>
-    <Compile Include="..\..\external\ConsoleControl\ConsoleControl.cs">
-      <Link>ConsoleControl\ConsoleControl.cs</Link>
+    <Compile Include="..\..\external\ConsoleControl\source\ConsoleControlAPI\Imports.cs">
+      <Link>ConsoleControl\source\ConsoleControlAPI\Imports.cs</Link>
     </Compile>
-    <Compile Include="..\..\external\ConsoleControl\ConsoleControl.designer.cs">
-      <Link>ConsoleControl\ConsoleControl.designer.cs</Link>
+    <Compile Include="..\..\external\ConsoleControl\source\ConsoleControlAPI\ProcessEventArgs.cs">
+      <Link>ConsoleControl\source\ConsoleControlAPI\ProcessEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\..\external\ConsoleControl\ConsoleEventArgs.cs">
-      <Link>ConsoleControl\ConsoleEventArgs.cs</Link>
+    <Compile Include="..\..\external\ConsoleControl\source\ConsoleControlAPI\ProcessInterface.cs">
+      <Link>ConsoleControl\source\ConsoleControlAPI\ProcessInterface.cs</Link>
     </Compile>
-    <Compile Include="..\..\external\ConsoleControl\Imports.cs">
-      <Link>ConsoleControl\Imports.cs</Link>
+    <Compile Include="..\..\external\ConsoleControl\source\ConsoleControl\ConsoleControl.cs">
+      <Link>ConsoleControl\source\ConsoleControl\ConsoleControl.cs</Link>
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="..\..\external\ConsoleControl\KeyMapping.cs">
-      <Link>ConsoleControl\KeyMapping.cs</Link>
+    <Compile Include="..\..\external\ConsoleControl\source\ConsoleControl\ConsoleControl.designer.cs">
+      <Link>ConsoleControl\source\ConsoleControl\ConsoleControl.designer.cs</Link>
     </Compile>
-    <Compile Include="..\..\external\ConsoleControl\ProcessEventArgs.cs">
-      <Link>ConsoleControl\ProcessEventArgs.cs</Link>
+    <Compile Include="..\..\external\ConsoleControl\source\ConsoleControl\ConsoleEventArgs.cs">
+      <Link>ConsoleControl\source\ConsoleControl\ConsoleEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\..\external\ConsoleControl\ProcessInterface.cs">
-      <Link>ConsoleControl\ProcessInterface.cs</Link>
+    <Compile Include="..\..\external\ConsoleControl\source\ConsoleControl\KeyMapping.cs">
+      <Link>ConsoleControl\source\ConsoleControl\KeyMapping.cs</Link>
     </Compile>
   </ItemGroup>
 
@@ -198,8 +199,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Executables.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\..\external\ConsoleControl\ConsoleControl.resx">
-      <Link>ConsoleControl\ConsoleControl.resx</Link>
+    <EmbeddedResource Include="..\..\external\ConsoleControl\source\ConsoleControl\ConsoleControl.resx">
+      <Link>ConsoleControl\source\ConsoleControl\ConsoleControl.resx</Link>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -247,6 +248,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="..\..\external\ConsoleControl\source\Dependencies\">
+      <Link>ConsoleControl\source\Dependencies</Link>
+    </Folder>
     <Folder Include="framework\" />
   </ItemGroup>
 
