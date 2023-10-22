@@ -8,12 +8,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>JackTheVideoRipper.Program</StartupObject>
     <ApplicationIcon>..\..\assets\app.ico</ApplicationIcon>
-    <AssemblyVersion>0.8.3.2</AssemblyVersion>
-    <FileVersion>0.8.3.2</FileVersion>
+    <AssemblyVersion>0.8.3.3</AssemblyVersion>
+    <FileVersion>0.8.3.3</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>jackthevideoripper.snk</AssemblyOriginatorKeyFile>
     <PublicSign>true</PublicSign>
     <RootNamespace>JackTheVideoRipper</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <PackageId>Rippr.io</PackageId>
+    <Version>0.8.3.3</Version>
+    <Title>Rippr.io</Title>
+    <Authors>Froman Interactive Media</Authors>
+    <PackageProjectUrl>https://github.com/fromanan/JackTheVideoRipper</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/fromanan/JackTheVideoRipper</RepositoryUrl>
+    <Company>Froman Interactive Media</Company>
+    <Product>Rippr.io</Product>
+    <NeutralLanguage>en</NeutralLanguage>
+    <AssemblyName>JackTheVideoRipper</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
