@@ -1,0 +1,3 @@
+[submodule "external/ConsoleControl"]
+	path = external/ConsoleControl
+	url = https://github.com/fromanan/consolecontrol.git
