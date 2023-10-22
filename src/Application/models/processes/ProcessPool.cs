@@ -1,7 +1,10 @@
 ﻿using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Diagnostics;
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
+using JackTheVideoRipper.models.DataStructures;
+using JackTheVideoRipper.views;
 
 namespace JackTheVideoRipper.models.processes;
 
@@ -16,6 +19,7 @@ public class ProcessPool
     private readonly ProcessTable _runningProcesses = new();
     private readonly ConcurrentQueue<IProcessUpdateRow> _onDeckProcessQueue = new();
     private readonly ConcurrentHashSet<IProcessUpdateRow> _finishedProcesses = new();
+    private readonly ConcurrentList<MediaWorker> _mediaWorkers = new(5);
     
     private readonly Task[] _clearTasks;
 
@@ -143,7 +147,63 @@ public class ProcessPool
 
     #endregion
 
+    #region Worker Methods
+
+    private void InitializeWorkers()
+    {
+        foreach (MediaWorker worker in _mediaWorkers)
+        {
+            worker.InitializeWorker();
+            worker.ProgressChanged += OnUpdateWorker;
+            worker.RunWorkerCompleted += OnWorkerComplete;
+        }
+    }
+
+    private void OnUpdateWorker(object? sender, ProgressChangedEventArgs args)
+    {
+        // Progress is passed as an integer, all other decimal places will be truncated
+        float progress = args.ProgressPercentage / MediaWorker.PROGRESS_PRECISION_FACTOR;
+
+        if (args.UserState is not ProcessUpdateArgs updateArgs)
+            return;
+        
+        // TODO: Check if updateArgs.Completed
+        
+        // TODO: Send progress/updateArgs to the view
+        
+        // TODO: Queue updates... use dictionary and push to when updating, then every tick update the view all together,
+        //          when a new update hits, only save the latest
+    }
+
+    private void OnWorkerComplete(object? sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
+    {
+        if (sender is not MediaWorker worker)
+            return;
+        
+        worker.Claimed = false;
+        
+        // TODO: Final update on the view to set at 100% and get the size where applicable...
+    }
+
+    // TODO: Call from the StartProcess method
+    private async Task RunTaskOnWorker(ProcessRunner processRunner)
+    {
+        (await GetNextAvailableWorker()).RunWorkerAsync(processRunner);
+    }
+
+    private async Task<MediaWorker> GetNextAvailableWorker()
+    {
+        return await _mediaWorkers.Next(w => w is { Claimed: false, IsBusy: false }, 500);
+    }
+
+    #endregion
+
     #region Public Methods
+
+    public void Initialize()
+    {
+        InitializeWorkers();
+    }
 
     public async Task Update()
     {
