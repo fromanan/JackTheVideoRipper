@@ -143,7 +143,7 @@
          cETA = new ColumnHeader();
          cURL = new ColumnHeader();
          cPath = new ColumnHeader();
-         listItems = new ListView();
+         listItems = new SmoothListView();
          splitContainer = new SplitContainer();
          compressToolStripMenuItem = new ToolStripMenuItem();
          menuStrip.SuspendLayout();
@@ -1065,7 +1065,7 @@
       private ColumnHeader cETA;
       private ColumnHeader cURL;
       private ColumnHeader cPath;
-      private ListView listItems;
+      private SmoothListView listItems;
       private SplitContainer splitContainer;
       private FlowLayoutPanel flowLayoutPanel;
       private ToolStripMenuItem fileContextMenuItem;
