@@ -134,9 +134,9 @@
          skipMetadata.AutoSize = true;
          skipMetadata.Location = new Point(16, 91);
          skipMetadata.Name = "skipMetadata";
-         skipMetadata.Size = new Size(284, 24);
+         skipMetadata.Size = new Size(182, 24);
          skipMetadata.TabIndex = 23;
-         skipMetadata.Text = "Skip Metadata Preview for Downloads";
+         skipMetadata.Text = "Skip Metadata Preview";
          skipMetadata.UseVisualStyleBackColor = true;
          // 
          // enableMultithreadedDownloads
@@ -174,9 +174,9 @@
          simplifiedDownload.AutoSize = true;
          simplifiedDownload.Location = new Point(16, 61);
          simplifiedDownload.Name = "simplifiedDownload";
-         simplifiedDownload.Size = new Size(208, 24);
+         simplifiedDownload.Size = new Size(111, 24);
          simplifiedDownload.TabIndex = 19;
-         simplifiedDownload.Text = "Simplified Download View";
+         simplifiedDownload.Text = "Quick Mode";
          simplifiedDownload.UseVisualStyleBackColor = true;
          // 
          // numMaxConcurrent
@@ -249,14 +249,14 @@
 
       #endregion
 
-      private System.Windows.Forms.Button buttonCancel;
-      private System.Windows.Forms.Button buttonSave;
-      private System.Windows.Forms.GroupBox groupBox2;
-      private System.Windows.Forms.Button buttonLocationBrowse;
-      private System.Windows.Forms.TextBox textLocation;
-      private System.Windows.Forms.Label label1;
-      private System.Windows.Forms.GroupBox groupBox1;
-      private System.Windows.Forms.NumericUpDown numMaxConcurrent;
+      private Button buttonCancel;
+      private Button buttonSave;
+      private GroupBox groupBox2;
+      private Button buttonLocationBrowse;
+      private TextBox textLocation;
+      private Label label1;
+      private GroupBox groupBox1;
+      private NumericUpDown numMaxConcurrent;
       private CheckBox simplifiedDownload;
       private CheckBox storeHistory;
       private CheckBox enableDeveloperMode;
