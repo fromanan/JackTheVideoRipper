@@ -16,13 +16,13 @@ public class ProcessPool
     private readonly ProcessTable _runningProcesses = new();
     private readonly ConcurrentQueue<IProcessUpdateRow> _onDeckProcessQueue = new();
     private readonly ConcurrentHashSet<IProcessUpdateRow> _finishedProcesses = new();
+    
+    private readonly Task[] _clearTasks;
 
     public static readonly ErrorLogger ErrorLogger = new();
 
     private bool _updating;
     private bool _fillingQueue;
-
-    private readonly Task[] _clearTasks;
 
     #endregion
 
@@ -45,9 +45,9 @@ public class ProcessPool
 
     #region Events
 
-    public event Action<IProcessUpdateRow> ProcessCompleted = delegate {  };
+    public event Action<IProcessUpdateRow> ProcessCompleted = delegate { };
     
-    public event Action ProcessStarted = delegate {  };
+    public event Action ProcessStarted = delegate { };
 
     #endregion
 

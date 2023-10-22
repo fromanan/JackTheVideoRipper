@@ -2,9 +2,7 @@
 
 public class IndexableQueue<T> : List<T>
 {
-    private readonly ReaderWriterLockSlim _queueLock = new();
-
-    private new int Count => base.Count;
+    private readonly ReaderWriterLockSlim _accessLock = new();
 
     public int Length
     {
@@ -12,14 +10,14 @@ public class IndexableQueue<T> : List<T>
         {
             int length;
             
-            _queueLock.EnterReadLock();
+            _accessLock.EnterReadLock();
             try
             {
                 length = Count;
             }
             finally
             {
-                _queueLock.ExitReadLock();
+                _accessLock.ExitReadLock();
             }
             
             return length;
@@ -37,14 +35,14 @@ public class IndexableQueue<T> : List<T>
     {
         T nextProcess;
         
-        _queueLock.EnterReadLock();
+        _accessLock.EnterReadLock();
         try
         {
             nextProcess = this.First();
         }
         finally
         {
-            _queueLock.ExitReadLock();
+            _accessLock.ExitReadLock();
         }
 
         return nextProcess;
@@ -52,14 +50,14 @@ public class IndexableQueue<T> : List<T>
 
     public void Pop()
     {
-        _queueLock.EnterWriteLock();
+        _accessLock.EnterWriteLock();
         try
         {
             RemoveAt(0);
         }
         finally
         {
-            _queueLock.ExitWriteLock();
+            _accessLock.ExitWriteLock();
         }
     }
 
