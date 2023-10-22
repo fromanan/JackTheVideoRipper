@@ -79,15 +79,15 @@ public abstract class ProcessRunner : IProcessRunner
         return true;
     }
 
-    public virtual async Task<bool> Update()
+    public virtual async Task<ProcessUpdateArgs> Update()
     {
         // Don't run updates after we've completed
         if (Paused || Finished)
-            return false;
+            return ProcessUpdateArgs.Default;
 
         Buffer.Update();
 
-        return true;
+        return ProcessUpdateArgs.Done;
     }
 
     public virtual async Task<bool> Start()

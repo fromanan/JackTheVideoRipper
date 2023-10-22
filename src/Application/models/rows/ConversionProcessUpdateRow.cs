@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.interfaces;
+using JackTheVideoRipper.models.processes;
 
 namespace JackTheVideoRipper.models.rows;
 
@@ -20,7 +21,7 @@ public class ConversionProcessUpdateRow : ProcessUpdateRow
         throw new NotImplementedException();
     }
 
-    protected override void SetProgressText(IReadOnlyList<string> tokens)
+    protected override RowUpdateArgs? SetProgressText(IReadOnlyList<string> tokens)
     {
         throw new NotImplementedException();
     }

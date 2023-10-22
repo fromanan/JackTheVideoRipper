@@ -131,17 +131,17 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         return GetStatus();
     }
 
-    public override async Task<bool> Update()
+    public override async Task<ProcessUpdateArgs> Update()
     {
-        if (!await base.Update())
-            return false;
+        if (!(await base.Update()).Completed)
+            return ProcessUpdateArgs.Default;
 
         if (GetProcessStatus() is not { } status || status.IsNullOrEmpty())
-            return false;
+            return ProcessUpdateArgs.Default;
         
         SetViewField(() => UpdateViewItemFields(status));
         
-        return true;
+        return ProcessUpdateArgs.Done;
     }
 
     public override async Task<bool> Start()
@@ -184,25 +184,26 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     #region Protected Methods
 
-    protected void UpdateViewItemFields(string status)
+    protected ProcessUpdateArgs UpdateViewItemFields(string status)
     {
         //ViewItem.Suspend();
-        UpdateStatus(status);
+        return new ProcessUpdateArgs(Completed, UpdateStatus(status));
         //ViewItem.Resume();
     }
 
-    protected void UpdateStatus(string statusMessage)
+    protected RowUpdateArgs? UpdateStatus(string statusMessage)
     {
         Status = statusMessage;
 
         if (Buffer.TokenizedProcessLine is not {Length: > 0} tokens)
-            return;
+            return default;
             
-        // download messages stream fast, bump the cursor up to one of the latest messages, if it exists...
-        // only start skipping cursor ahead once download messages have started otherwise important info could be skipped
+        // Download messages stream fast, bump the cursor up to one of the latest messages, if it exists...
+        //  only start skipping cursor ahead once download messages have started
+        //  otherwise important info could be skipped
         Buffer.SkipToEnd();
 
-        SetProgressText(tokens);
+        return SetProgressText(tokens);
     }
     
     protected async Task RetrieveTitle()
@@ -219,7 +220,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     
     protected abstract Task<string> GetTitle();
 
-    protected abstract void SetProgressText(IReadOnlyList<string> tokens);
+    protected abstract RowUpdateArgs? SetProgressText(IReadOnlyList<string> tokens);
 
     protected abstract string? GetStatus();
 

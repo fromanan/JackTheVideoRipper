@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.processes;
 
 namespace JackTheVideoRipper.interfaces;
 
@@ -35,7 +36,7 @@ public interface IProcessRunner
     
     List<string> Dependencies { get; }
 
-    Task<bool> Update();
+    Task<ProcessUpdateArgs> Update();
 
     Task<bool> Start();
 

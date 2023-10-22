@@ -5,6 +5,7 @@ using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.libraries;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.modules;
 
 namespace JackTheVideoRipper.models.rows;
@@ -67,14 +68,24 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
     }
 
     // Extract elements of CLI output from YouTube-DL
-    protected override void SetProgressText(IReadOnlyList<string> tokens)
+    protected override RowUpdateArgs? SetProgressText(IReadOnlyList<string> tokens)
     {
         if (tokens.Count < 8 || _downloadStage != DownloadStage.Downloading)
-            return;
+            return default;
+        
+        // TODO: Remove these in favor of task-based update
         Progress = tokens[1];
         FileSize = FormatSize(tokens[3]);
         Speed = tokens[5];
         Eta = tokens[7];
+
+        return new RowUpdateArgs
+        {
+            Progress = tokens[1],
+            FileSize = FormatSize(tokens[3]),
+            Speed = tokens[5],
+            Eta = tokens[7]
+        };
     }
     
     protected override async Task<string> GetTitle()

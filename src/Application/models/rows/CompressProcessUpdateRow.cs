@@ -2,6 +2,7 @@
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.modules;
 
 namespace JackTheVideoRipper.models.rows;
@@ -29,19 +30,28 @@ public class CompressProcessUpdateRow : ProcessUpdateRow
         return await base.Start();
     }
 
-    protected override void SetProgressText(IReadOnlyList<string> tokens)
+    protected override RowUpdateArgs? SetProgressText(IReadOnlyList<string> tokens)
     {
         if (tokens.Count < 8)
-            return;
+            return null;
 
         if (!tokens[0].Contains("frame"))
-            return;
+            return null;
 
+        // TODO: Remove...
         FfmpegFrame ffmpegFrame = new(tokens);
         Progress = CalculateProgress(ffmpegFrame.Frame);
         Eta = CalculateEta(ffmpegFrame.Frame, ffmpegFrame.Fps);
         FileSize = FileSystem.GetFileSizeFormatted(ffmpegFrame.Size);
         Speed = $"{ffmpegFrame.Fps} fps";
+
+        return new RowUpdateArgs
+        {
+            Progress = CalculateProgress(ffmpegFrame.Frame),
+            Eta = CalculateEta(ffmpegFrame.Frame, ffmpegFrame.Fps),
+            FileSize = FileSystem.GetFileSizeFormatted(ffmpegFrame.Size),
+            Speed = $"{ffmpegFrame.Fps} fps"
+        };
     }
 
     // If over 100%, change message to finalizing download tasks?
