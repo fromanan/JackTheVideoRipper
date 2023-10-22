@@ -109,13 +109,19 @@ public abstract class ProcessRunner : IProcessRunner
         return true;
     }
 
-    // Returns if the process should start as usual; allows validation of input / startup conditions
+    /// <summary>
+    /// Function that runs prior to any external task. Allows validation of input / startup conditions
+    /// </summary>
+    /// <returns>If the process should start as usual</returns>
     protected virtual async Task<bool> PreRunTasks()
     {
         return true;
     }
 
-    // Returns if the process should exit normally; allows us to check output before confirming completion
+    /// <summary>
+    /// Function that runs after any external task. Allows us to check output before confirming completion.
+    /// </summary>
+    /// <returns>If the process should exit normally</returns>
     protected virtual async Task<bool> PostRunTasks()
     {
         return true;
