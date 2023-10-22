@@ -31,6 +31,8 @@ public abstract class ProcessRunner : IProcessRunner
     public bool Started { get; private set; }
     
     public int ProcessId { get; private set; }
+
+    public float Progress { get; protected set; } = -1;
     
     public string ProcessFileName { get; private set; } = string.Empty;
 

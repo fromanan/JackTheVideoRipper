@@ -34,6 +34,8 @@ public interface IProcessRunner
     
     int ProcessId { get; }
     
+    float Progress { get; }
+    
     List<string> Dependencies { get; }
 
     Task<ProcessUpdateArgs> Update();
