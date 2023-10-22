@@ -23,6 +23,8 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
     public readonly Provider Provider;
     
     private static readonly Regex _MoveFilePattern = new("Moving file \"(?<src>[^\"]+)\" to \"(?<dest>[^\"]+)\"");
+    
+    public override MediaProcessType ProcessType { get; init; } = MediaProcessType.Download;
 
     #endregion
 

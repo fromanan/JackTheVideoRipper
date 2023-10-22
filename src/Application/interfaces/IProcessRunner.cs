@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.processes;
 
 namespace JackTheVideoRipper.interfaces;
@@ -13,6 +14,8 @@ public interface IProcessRunner
     Guid Guid { get; }
     
     ProcessBuffer Buffer { get; }
+    
+    MediaProcessType ProcessType { get; init; }
 
     int ExitCode { get; }
 

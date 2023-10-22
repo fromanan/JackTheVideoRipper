@@ -1,11 +1,14 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.interfaces;
+using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.processes;
 
 namespace JackTheVideoRipper.models.rows;
 
 public class RecodeProcessUpdateRow : ProcessUpdateRow
 {
+    public override MediaProcessType ProcessType { get; init; } = MediaProcessType.Recode;
+    
     public RecodeProcessUpdateRow(IMediaItem mediaItem, Action<IProcessRunner> completionCallback)
         : base(mediaItem, completionCallback)
     {

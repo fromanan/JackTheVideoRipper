@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
+using JackTheVideoRipper.models.enums;
 
 namespace JackTheVideoRipper.models.processes;
 
@@ -19,6 +20,8 @@ public abstract class ProcessRunner : IProcessRunner
     public Guid Guid { get; } = new();
 
     public ProcessBuffer Buffer { get; } = new();
+    
+    public abstract MediaProcessType ProcessType { get; init; }
     
     public bool Completed { get; private set; }
 

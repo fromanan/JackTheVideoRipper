@@ -2,6 +2,7 @@
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.modules;
 
@@ -12,6 +13,8 @@ public class CompressProcessUpdateRow : ProcessUpdateRow
     private int _totalFrames;
 
     private readonly ExifData _exifData = new();
+
+    public override MediaProcessType ProcessType { get; init; } = MediaProcessType.Compress;
     
     public CompressProcessUpdateRow(IMediaItem mediaItem, Action<IProcessRunner> completionCallback) :
         base(mediaItem, completionCallback)
