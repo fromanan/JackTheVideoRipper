@@ -18,4 +18,10 @@ public static class Tasks
         await Task.Delay(tickInMilliseconds);
         await Threading.RunInMainContext(action);
     }
+
+    public static async Task<T> YieldAfter<T>(Func<T> func, int delayInMilliseconds)
+    {
+        await Task.Delay(delayInMilliseconds);
+        return func.Invoke();
+    }
 }
