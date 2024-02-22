@@ -123,6 +123,15 @@ namespace JackTheVideoRipper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unsupported Tool Selection.
+        /// </summary>
+        internal static string UnsupportedTool {
+            get {
+                return ResourceManager.GetString("UnsupportedTool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verify Exit.
         /// </summary>
         internal static string VerifyExit {

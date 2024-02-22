@@ -42,4 +42,7 @@
     <data name="GenerateCommand" xml:space="preserve">
         <value>Generate Command</value>
     </data>
+    <data name="UnsupportedTool" xml:space="preserve">
+        <value>Unsupported Tool Selection</value>
+    </data>
 </root>
