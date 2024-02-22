@@ -2,9 +2,7 @@
 
 public static class Tasks
 {
-    private const int _DEFAULT_TICK = 300;
-    
-    public static async Task WaitUntil(Func<bool> predicate, int tickInMilliseconds = _DEFAULT_TICK)
+    public static async Task WaitUntil(Func<bool> predicate, int tickInMilliseconds = Global.Configurations.DEFAULT_TASK_TICK)
     {
         while (!predicate())
         {
@@ -13,7 +11,7 @@ public static class Tasks
         }
     }
 
-    public static async Task StartAfter(Action action, int tickInMilliseconds = _DEFAULT_TICK)
+    public static async Task StartAfter(Action action, int tickInMilliseconds = Global.Configurations.DEFAULT_TASK_TICK)
     {
         await Task.Delay(tickInMilliseconds);
         await Threading.RunInMainContext(action);

@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper;
+﻿using JackTheVideoRipper.framework;
+
+namespace JackTheVideoRipper;
 
 public static class Config
 {

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.modules;
 using JackTheVideoRipper.Properties;
 using JackTheVideoRipper.views;
@@ -7,7 +8,7 @@ using static JackTheVideoRipper.FileSystem;
 
 namespace JackTheVideoRipper;
 
-public static class Core
+internal static class Core
 {
     public static string ApplicationTitle => $@"{AppInfo.ProgramName} {Common.GetAppVersion()}";
 
@@ -92,11 +93,10 @@ public static class Core
 
     public static async Task UpdateDependencies()
     {
-        await Task.Delay(100);
-        /*await Parallel.ForEachAsync(Enum.GetValues<Dependencies>(), async (d, _) =>
+        await Parallel.ForEachAsync(Enum.GetValues<Dependencies>(), async (d, _) =>
         {
             await UpdateDependency(d);
-        });*/
+        });
     }
 
     public static async Task UpdateDependency(Dependencies dependency)
@@ -109,7 +109,7 @@ public static class Core
             case Dependencies.VLC:
             case Dependencies.AtomicParsley:
             case Dependencies.Redistributables:
-            case Dependencies.Aria2c:
+            case Dependencies.Aria2C:
             case Dependencies.ExifTool:
                 await DownloadDependency(dependency);
                 break;
@@ -145,7 +145,7 @@ public static class Core
                 // TODO:
                 await GetWebResourceHandle(Urls.VS2010Redistributables).Run();
                 break;
-            case Dependencies.Aria2c:
+            case Dependencies.Aria2C:
                 await InstallProgram(Urls.Aria2c, Executables.Aria2c);
                 break;
             case Dependencies.ExifTool:

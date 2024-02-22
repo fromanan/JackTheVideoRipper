@@ -5,7 +5,7 @@ using Console = JackTheVideoRipper.models.Console;
 
 namespace JackTheVideoRipper;
 
-public static class Output
+internal static class Output
 {
     #region Data Members
 
@@ -15,9 +15,11 @@ public static class Output
 
     private static readonly LogfileModel _LogfileModel = new();
 
+    private static readonly TextWriter _StandardOut = System.Console.Out;
+
     #endregion
 
-    #region Attributes
+    #region Properties
 
     private static bool OutputAvailable => _Console.Active && ConsoleAttached;
 
@@ -29,8 +31,8 @@ public static class Output
 
     public static void Write(string message, Color? color = null, bool sendAsNotification = false)
     {
-        if (Program.VerboseDebugMode)
-            System.Console.Write(message);
+        if (Global.Configurations.VerboseDebugMode)
+            _StandardOut.Write(message);
         
         if (sendAsNotification)
             NotificationsManager.SendNotification(new Notification(message, CallerType));

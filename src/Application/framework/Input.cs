@@ -3,7 +3,7 @@ using Microsoft.Win32.SafeHandles;
 
 namespace JackTheVideoRipper;
 
-public static class Input
+internal static class Input
 {
     #region Data Members
 
@@ -13,7 +13,7 @@ public static class Input
 
     #endregion
 
-    #region Attributes
+    #region Properties
     
     public static IntPtr StandardInputHandle => GetStdHandle(-10);
 

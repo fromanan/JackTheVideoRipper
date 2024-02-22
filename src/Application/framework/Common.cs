@@ -58,7 +58,7 @@ namespace JackTheVideoRipper
             Task.Run(() => FileSystem.OpenFileExplorer(FileSystem.Paths.Install));
         }
         
-        public static void RepeatInvoke(Action action, int n, int sleepTime = 300)
+        public static void RepeatInvoke(Action action, int n, int sleepTime = Global.Configurations.DEFAULT_TASK_TICK)
         {
             for (int i = 0; i < n; i++)
             {

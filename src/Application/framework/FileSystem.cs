@@ -5,10 +5,12 @@ using System.Management;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Reflection;
+using System.Runtime.Versioning;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.processes;
@@ -124,7 +126,7 @@ public static class FileSystem
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public static string TempFile => Path.GetTempFileName();
     
@@ -204,7 +206,7 @@ public static class FileSystem
     {
         if (folderPath.Valid(FolderExists))
         {
-            OpenFileExplorer(folderPath!);
+            OpenFileExplorer(folderPath!.WrapQuotes());
         }
         else
         {
@@ -255,7 +257,7 @@ public static class FileSystem
         {
             WorkingDirectory = downloadDirectory,
             UseShellExecute = useShellExecute
-        }, timeoutPeriod: 60000);
+        }, timeoutPeriod: Global.Configurations.WEB_REQUEST_TIMEOUT_PERIOD);
     }
 
     public static Process CreateProcess(ProcessStartInfo processStartInfo, bool enableRaisingEvents = false)
@@ -500,14 +502,14 @@ public static class FileSystem
         if (filepath.Invalid(IsValidPath))
             return;
         
-        OpenFileExplorer(filepath);
+        OpenFileExplorer(filepath.WrapQuotes());
     }
 
-    public static void OpenFileExplorer(string directory)
+    public static void OpenFileExplorer(string argString)
     {
         bool startedSuccessfully = RunProcess(new ProcessStartInfo
         {
-            Arguments = directory.WrapQuotes(),
+            Arguments = argString,
             FileName = Executables.Explorer
         });
         
@@ -549,7 +551,7 @@ public static class FileSystem
 
     public static void OpenFileExplorerWithFileSelected(string filePath)
     {
-        OpenFileExplorer($"/select, {filePath.WrapQuotes()}");
+        OpenFileExplorer($"/select,{filePath.WrapQuotes()}");
     }
     
     public static async Task<bool> InstallProgram(string downloadUrl, string filename)
@@ -798,7 +800,8 @@ public static class FileSystem
 
     public static string AppendSuffix(string filepath, string suffix, string separator = "")
     {
-        return $"{GetFilepathWithoutExtension(filepath)}{separator}{suffix}.{GetExtension(filepath)}";
+        string suffixString = suffix.HasValue() ? $"{separator}{suffix}" : string.Empty;
+        return $"{GetFilepathWithoutExtension(filepath)}{suffixString}.{GetExtension(filepath)}";
     }
 
     public static string GetDirectory(string? path)
@@ -1210,12 +1213,11 @@ public static class FileSystem
 
     #region Threading Methods
 
+    [SupportedOSPlatform("windows")]
     public static Thread RunSTA(ThreadStart threadStart, bool startThread = true, bool blockCaller = true)
     {
         Thread thread = new(threadStart);
-        #pragma warning disable CA1416
         thread.SetApartmentState(ApartmentState.STA);
-        #pragma warning restore CA1416
         if (startThread)
             thread.Start();
         if (startThread && blockCaller)
@@ -1223,25 +1225,23 @@ public static class FileSystem
         return thread;
     }
     
+    [SupportedOSPlatform("windows")]
     public static T RunSTA<T>(Func<T> func)
     {
         T result = default!;
         Thread thread = new(() => result = func());
-        #pragma warning disable CA1416
         thread.SetApartmentState(ApartmentState.STA);
-        #pragma warning restore CA1416
         thread.Start();
         thread.Join();
         return result;
     }
     
+    [SupportedOSPlatform("windows")]
     public static async Task<T> RunSTAAsync<T>(Func<T> func)
     {
         T result = default!;
         Thread thread = new(() => result = func());
-        #pragma warning disable CA1416
         thread.SetApartmentState(ApartmentState.STA);
-        #pragma warning restore CA1416
         thread.Start();
         await Task.Run(thread.Join);
         return result;
