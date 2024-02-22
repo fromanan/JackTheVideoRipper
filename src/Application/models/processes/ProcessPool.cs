@@ -49,10 +49,11 @@ public class ProcessPool
     #endregion
 
     #region Events
+    
+    public event Action ProcessStarted = delegate { };
 
     public event Action<IProcessUpdateRow> ProcessCompleted = delegate { };
     
-    public event Action ProcessStarted = delegate { };
 
     #endregion
 
