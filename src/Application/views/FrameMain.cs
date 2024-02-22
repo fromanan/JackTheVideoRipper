@@ -15,8 +15,6 @@ namespace JackTheVideoRipper.views
       private readonly ContextMenuManager _contextMenuManager;
 
       private readonly Ripper _ripper;
-      
-      private readonly Font _headerFont = new("Segoe UI Semibold", 9.5f);
 
       #endregion
 
