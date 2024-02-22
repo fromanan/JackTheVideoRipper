@@ -396,7 +396,8 @@ public class MediaManager
             }
             case ContextActions.Reprocess:
             {
-                throw new DeveloperException("Reprocess not implemented!", new NotImplementedException());
+                NotImplemented("Reprocess");
+                break;
             }
             case ContextActions.Compress:
             {
@@ -474,19 +475,19 @@ public class MediaManager
 
     public async Task RecodeVideo(string filepath)
     {
-        throw new DeveloperException($"{nameof(RecodeVideo)} not implemented", new NotImplementedException());
+        NotImplemented(nameof(RecodeVideo));
         MediaItemRow<FfmpegParameters> row = new(filepath: filepath, mediaParameters: FFMPEG.Recode(filepath));
         await QueueProcessAsync(row, ProcessRowType.Recode);
     }
 
     public async Task ValidateVideo(string filepath)
     {
-        throw new DeveloperException($"{nameof(ValidateVideo)} not implemented", new NotImplementedException());
+        NotImplemented(nameof(ValidateVideo));
     }
 
     public async Task AddAudio(string filepath)
     {
-        throw new DeveloperException($"{nameof(AddAudio)} not implemented", new NotImplementedException());
+        NotImplemented(nameof(AddAudio));
     }
 
     public async Task ExtractAudio(string filepath)
@@ -496,7 +497,7 @@ public class MediaManager
 
     public async Task RepairVideo(string filepath)
     {
-        throw new DeveloperException($"{nameof(RepairVideo)} not implemented", new NotImplementedException());
+        NotImplemented(nameof(RepairVideo));
         
         // Order list of parameters for each task necessary
         IEnumerable<FfmpegParameters> repairTaskParameters = await FFMPEG.RepairVideo(filepath);
