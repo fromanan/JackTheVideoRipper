@@ -46,6 +46,7 @@ public class MediaManager
     
     public event IViewItemEnumerableAction ProcessesRemoved = delegate { };
     
+    public event Action<IEnumerable<ProcessUpdateArgs>> ProcessPoolUpdated = delegate { };
 
     #endregion
 
@@ -557,6 +558,7 @@ public class MediaManager
 
     private void InitializeProcessPool()
     {
+        _processPool.Updated += updates => ProcessPoolUpdated.Invoke(updates);
         _processPool.ProcessStarted += OnProcessStarted;
         _processPool.ProcessCompleted += OnProcessCompleted;
         _processPool.Initialize();
