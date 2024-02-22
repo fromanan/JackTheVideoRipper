@@ -180,4 +180,13 @@
     <data name="ProcessFailed" xml:space="preserve">
         <value>Process failed with exception of type {0}: {1}</value>
     </data>
+    <data name="UnsupportedProcess" xml:space="preserve">
+        <value>{0} Processes are not currently supported!</value>
+    </data>
+    <data name="DeleteRunningProcess" xml:space="preserve">
+        <value>Are you sure you wish to delete a running process?</value>
+    </data>
+    <data name="NotImplemented" xml:space="preserve">
+        <value>{0} not implemented</value>
+    </data>
 </root>

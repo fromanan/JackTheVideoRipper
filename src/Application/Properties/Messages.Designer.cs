@@ -135,6 +135,15 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you wish to delete a running process?.
+        /// </summary>
+        internal static string DeleteRunningProcess {
+            get {
+                return ResourceManager.GetString("DeleteRunningProcess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find {0} on your system... Some functions may not be available or proceed correctly. Please reinstall this app..
         /// </summary>
         internal static string DependencyMissing {
@@ -333,6 +342,15 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} not implemented.
+        /// </summary>
+        internal static string NotImplemented {
+            get {
+                return ResourceManager.GetString("NotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (no video metadata could be extracted).
         /// </summary>
         internal static string NoVideoMetadata {
@@ -473,6 +491,15 @@ namespace JackTheVideoRipper {
         internal static string UnhandledException {
             get {
                 return ResourceManager.GetString("UnhandledException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Processes are not currently supported!.
+        /// </summary>
+        internal static string UnsupportedProcess {
+            get {
+                return ResourceManager.GetString("UnsupportedProcess", resourceCulture);
             }
         }
         
