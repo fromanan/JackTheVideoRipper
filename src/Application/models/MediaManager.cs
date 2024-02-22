@@ -136,6 +136,9 @@ public class MediaManager
             case ProcessRowType.Repair:
                 //AddProcess(new RepairProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
+            case ProcessRowType.Extract:
+                AddProcess(new ExtractProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
+                break;
             default:
                 Modals.Warning(string.Format(Messages.UnsupportedProcess, processRowType.ToString().WrapQuotes()),
                     Captions.UnsupportedTool);
@@ -478,6 +481,12 @@ public class MediaManager
         NotImplemented(nameof(RecodeVideo));
         MediaItemRow<FfmpegParameters> row = new(filepath: filepath, mediaParameters: FFMPEG.Recode(filepath));
         await QueueProcessAsync(row, ProcessRowType.Recode);
+    }
+
+    public async Task ExtractAudio(string filepath)
+    {
+        MediaItemRow<FfmpegParameters> row = new(filepath: filepath, mediaParameters: FFMPEG.ExtractAudio(filepath));
+        await QueueProcessAsync(row, ProcessRowType.Extract);
     }
 
     public async Task ValidateVideo(string filepath)
