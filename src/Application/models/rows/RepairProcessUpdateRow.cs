@@ -1,36 +1,20 @@
-﻿using System.Diagnostics;
-using JackTheVideoRipper.interfaces;
+﻿using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.enums;
-using JackTheVideoRipper.models.processes;
+using JackTheVideoRipper.modules;
 
 namespace JackTheVideoRipper.models.rows;
 
-public class RepairProcessUpdateRow : ProcessUpdateRow
+public class RepairProcessUpdateRow : FFMPEGProcessRow
 {
     public override MediaProcessType ProcessType { get; init; } = MediaProcessType.Repair;
+
+    public override FFMPEG.Operation OperationType { get; init; } = FFMPEG.Operation.Repair;
     
     public RepairProcessUpdateRow(IMediaItem mediaItem, Action<IProcessRunner> completionCallback) :
-        base(mediaItem, completionCallback)
-    {
-    }
+        base(mediaItem, completionCallback) { }
 
-    protected override Process CreateProcess()
+    protected override string GetStatus()
     {
-        throw new NotImplementedException();
-    }
-
-    protected override Task<string> GetTitle()
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override RowUpdateArgs? SetProgressText(IReadOnlyList<string> tokens)
-    {
-        throw new NotImplementedException();
-    }
-
-    protected override string? GetStatus()
-    {
-        throw new NotImplementedException();
+        return Messages.Compressing;
     }
 }
