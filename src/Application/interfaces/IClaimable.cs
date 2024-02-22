@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper.models;
+﻿namespace JackTheVideoRipper.interfaces;
 
 public interface IClaimable
 {
