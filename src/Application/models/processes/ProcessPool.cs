@@ -20,7 +20,7 @@ public class ProcessPool
     private readonly ProcessTable _runningProcesses = new();
     private readonly ConcurrentQueue<IProcessUpdateRow> _onDeckProcessQueue = new();
     private readonly ConcurrentHashSet<IProcessUpdateRow> _finishedProcesses = new();
-    private readonly ConcurrentList<MediaWorker> _mediaWorkers = new(5);
+    private readonly ClaimableConcurrentList<MediaWorker> _mediaWorkers = new(5);
     
     private readonly Task[] _clearTasks;
 
