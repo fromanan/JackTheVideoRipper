@@ -36,13 +36,14 @@ public class MediaManager
 
     public event Action QueueUpdated = delegate { };
 
-    public event Action<IViewItem> ProcessAdded = delegate { };
+    public event IViewItemAction ProcessAdded = delegate { };
     
-    public event Action<IEnumerable<IViewItem>> ProcessesAdded = delegate { };
+    public event IViewItemEnumerableAction ProcessesAdded = delegate { };
 
-    public event Action<IViewItem> ProcessRemoved = delegate { };
+    public event IViewItemAction ProcessRemoved = delegate { };
     
-    public event Action<IEnumerable<IViewItem>> ProcessesRemoved = delegate { };
+    public event IViewItemEnumerableAction ProcessesRemoved = delegate { };
+    
 
     #endregion
 

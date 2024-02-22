@@ -122,7 +122,7 @@ public class ProcessTable
         return result;
     }
     
-    public bool Remove(IEnumerable<IProcessUpdateRow> processUpdateRows)
+    public bool Remove(IProcessUpdateRowEnumerable processUpdateRows)
     {
         bool[] result = processUpdateRows.Select(Remove).ToArray();
         if (result.Any())
@@ -175,7 +175,7 @@ public class ProcessTable
         }
     }
 
-    public IEnumerable<IProcessUpdateRow> Cached
+    public IProcessUpdateRowEnumerable Cached
     {
         get
         {

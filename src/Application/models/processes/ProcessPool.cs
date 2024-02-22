@@ -74,15 +74,15 @@ public class ProcessPool
     
     private bool NoneOnDeck => _onDeckProcessQueue.IsEmpty;
 
-    private IEnumerable<IProcessUpdateRow> Processes => _processTable.Processes;
+    private IProcessUpdateRowEnumerable Processes => _processTable.Processes;
     
-    public IEnumerable<IProcessUpdateRow> RunningProcesses => _runningProcesses.Cached;
+    public IProcessUpdateRowEnumerable RunningProcesses => _runningProcesses.Cached;
     
-    public IEnumerable<IProcessUpdateRow> CompletedProcesses => GetWhereStatus(ProcessStatus.Completed);
+    public IProcessUpdateRowEnumerable CompletedProcesses => GetWhereStatus(ProcessStatus.Completed);
     
-    public IEnumerable<IProcessUpdateRow> SucceededProcesses => GetWhereStatus(ProcessStatus.Succeeded);
+    public IProcessUpdateRowEnumerable SucceededProcesses => GetWhereStatus(ProcessStatus.Succeeded);
     
-    public IEnumerable<IProcessUpdateRow> FailedProcesses => GetWhereStatus(ProcessStatus.Error);
+    public IProcessUpdateRowEnumerable FailedProcesses => GetWhereStatus(ProcessStatus.Error);
 
     public IEnumerable<string> FailedUrls => FailedProcesses.Select(p => p.Url);
     
@@ -288,7 +288,7 @@ public class ProcessPool
         await StartProcess(updateRow);
     }
     
-    public void QueueProcess(IProcessUpdateRow processUpdateRow, Action<IViewItem> queueCallback)
+    public void QueueProcess(IProcessUpdateRow processUpdateRow, IViewItemAction queueCallback)
     {
         if (!_processTable.TryAdd(processUpdateRow))
             throw new ProcessPoolException(string.Format(Messages.FailedToAddProcess, processUpdateRow.Tag));
@@ -447,7 +447,7 @@ public class ProcessPool
         return GetWhere(row => row is T).Cast<T>();
     }
 
-    public IEnumerable<IProcessUpdateRow> GetWhere(Func<IProcessUpdateRow, bool> predicate)
+    public IProcessUpdateRowEnumerable GetWhere(Func<IProcessUpdateRow, bool> predicate)
     {
         return Processes.Where(predicate);
     }
@@ -465,27 +465,27 @@ public class ProcessPool
         return false;
     }
 
-    public IEnumerable<IProcessUpdateRow> GetWhereStatus(ProcessStatus processStatus)
+    public IProcessUpdateRowEnumerable GetWhereStatus(ProcessStatus processStatus)
     {
         return GetWhere(p => p.ProcessStatus == processStatus);
     }
     
-    public IEnumerable<IProcessUpdateRow> GetWhereStatus(params ProcessStatus[] statuses)
+    public IProcessUpdateRowEnumerable GetWhereStatus(params ProcessStatus[] statuses)
     {
         return GetWhereStatus(statuses.Aggregate(0u, (i, status) => i | (uint) status));
     }
     
-    public IEnumerable<IProcessUpdateRow> GetWhereStatus(uint status)
+    public IProcessUpdateRowEnumerable GetWhereStatus(uint status)
     {
         return GetWhere(p => ((uint)p.ProcessStatus & status) > 0);
     }
     
-    public IEnumerable<IProcessUpdateRow> GetFinished(ProcessStatus processStatus)
+    public IProcessUpdateRowEnumerable GetFinished(ProcessStatus processStatus)
     {
         return _finishedProcesses.Where(p => p.ProcessStatus == processStatus);
     }
     
-    private IEnumerable<IViewItem> RemoveWhere(ProcessStatus processStatus, Action<IViewItem>? removeCallback = null)
+    private IViewItemEnumerable RemoveWhere(ProcessStatus processStatus, IViewItemAction? removeCallback = null)
     {
         IViewItem[] results = RemoveAll(processStatus).SelectViewItems().ToArray();
         if (removeCallback is not null)
@@ -525,12 +525,12 @@ public class ProcessPool
         Task.WhenAll(_clearTasks);
     }
 
-    public IEnumerable<IViewItem> RemoveSucceeded(Action<IViewItem>? removeCallback = null)
+    public IViewItemEnumerable RemoveSucceeded(IViewItemAction? removeCallback = null)
     {
         return RemoveWhere(ProcessStatus.Succeeded, removeCallback);
     }
     
-    public IEnumerable<IViewItem> RemoveFailed(Action<IViewItem>? removeCallback = null)
+    public IViewItemEnumerable RemoveFailed(IViewItemAction? removeCallback = null)
     {
         return RemoveWhere(ProcessStatus.Error, removeCallback);
     }
@@ -551,9 +551,9 @@ public class ProcessPool
         return results.Any();
     }
     
-    public IEnumerable<IProcessUpdateRow> RemoveAll(ProcessStatus processStatus)
+    public IProcessUpdateRowEnumerable RemoveAll(ProcessStatus processStatus)
     {
-        IEnumerable<IProcessUpdateRow> processes = Array.Empty<IProcessUpdateRow>();
+        IProcessUpdateRowEnumerable processes = Array.Empty<IProcessUpdateRow>();
         
         switch (processStatus)
         {

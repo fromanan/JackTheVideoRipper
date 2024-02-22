@@ -179,7 +179,7 @@ namespace JackTheVideoRipper
          Threading.RunInMainContext(() => ViewItems.Add(listViewItem));
       }
 
-      private void AddItems(IEnumerable<IViewItem> items)
+      private void AddItems(IViewItemEnumerable items)
       {
          if (items.Cast<ListViewItem>() is not { } listViewItems)
             return;
@@ -195,7 +195,7 @@ namespace JackTheVideoRipper
          Threading.RunInMainContext(() => ViewItems.Remove(listViewItem));
       }
 
-      private void RemoveItems(IEnumerable<IViewItem> items)
+      private void RemoveItems(IViewItemEnumerable items)
       {
          if (items.Cast<ListViewItem>() is not { } listViewItems)
             return;

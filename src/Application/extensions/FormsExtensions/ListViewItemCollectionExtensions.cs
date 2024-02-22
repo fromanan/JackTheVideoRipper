@@ -21,7 +21,7 @@ public static class ListViewItemCollectionExtensions
         }
     }
     
-    public static void AddRange(this ListViewItemCollection itemCollection, IEnumerable<IViewItem> items)
+    public static void AddRange(this ListViewItemCollection itemCollection, IViewItemEnumerable items)
     {
         foreach (IViewItem item in items)
         {
@@ -29,7 +29,7 @@ public static class ListViewItemCollectionExtensions
         }
     }
     
-    public static void RemoveRange(this ListViewItemCollection itemCollection, IEnumerable<IViewItem> items)
+    public static void RemoveRange(this ListViewItemCollection itemCollection, IViewItemEnumerable items)
     {
         foreach (IViewItem item in items)
         {
