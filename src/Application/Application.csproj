@@ -26,6 +26,13 @@
     <NeutralLanguage>en</NeutralLanguage>
     <AssemblyName>JackTheVideoRipper</AssemblyName>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <!-- CS0067: Event is never used -->
+    <!-- CS1998: Async method lacks 'await' operators and will run synchronously -->
+    <!-- CA1416:  -->
+    <NoWarn>CS0067, CS1998, CA1416, CA2211</NoWarn>
+  </PropertyGroup>
 
   <ItemGroup>
     <Content Include="..\..\assets\app.ico">
