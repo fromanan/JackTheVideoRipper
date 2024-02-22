@@ -6,7 +6,6 @@ using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.libraries;
 using JackTheVideoRipper.models.enums;
-using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.modules;
 
 namespace JackTheVideoRipper.models.rows;
