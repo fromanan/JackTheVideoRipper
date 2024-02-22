@@ -6,22 +6,26 @@ public class TimedQueue<T>
 {
     private readonly Timer _updateTimer;
     
-    private int _updatePeriod;
-
     private readonly Action<T> _updateAction;
     
-    private bool _started;
+    private const int _DEFAULT_UPDATE_PERIOD = 500;
+    private const int _DEFAULT_QUEUE_TICK = 200;
 
-    private bool _updating;
+    public int UpdatePeriod
+    {
+        set => _updateTimer.Change(0, value);
+    }
     
+    private bool _started;
+    private bool _updating;
     private bool _paused;
+    private bool Active => _started && !_paused;
 
     private readonly Queue<T> _notificationQueue = new();
 
-    public TimedQueue(Action<T> updateAction, int updatePeriod = 500)
+    public TimedQueue(Action<T> updateAction, int updatePeriod = _DEFAULT_UPDATE_PERIOD)
     {
         _updateAction = updateAction;
-        _updatePeriod = updatePeriod;
         _updateTimer = new Timer(Update, null, 0, updatePeriod);
     }
     
@@ -58,13 +62,13 @@ public class TimedQueue<T>
         
         _updating = true;
         
-        if (!_started || _paused)
-            await Tasks.WaitUntil(() => _started && !_paused);
+        if (!Active)
+            await Tasks.WaitUntil(() => Active);
         
         while (_notificationQueue.Count > 0)
         {
             _updateAction(_notificationQueue.Dequeue());
-            await Task.Delay(200);
+            await Task.Delay(_DEFAULT_QUEUE_TICK);
             if (_paused)
                 break;
         }

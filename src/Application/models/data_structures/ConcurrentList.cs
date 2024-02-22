@@ -1,14 +1,15 @@
 ﻿using System.Collections;
+using JackTheVideoRipper.interfaces;
 
 namespace JackTheVideoRipper.models.DataStructures;
 
-public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable
+public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable, new()
 {
     #region Data Members
 
-    private readonly ReaderWriterLockSlim _accessLock = new();
+    protected readonly ReaderWriterLockSlim AccessLock = new();
     
-    private readonly List<T> _data;
+    protected readonly List<T> Data;
 
     #endregion
 
@@ -16,51 +17,31 @@ public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable
 
     public ConcurrentList()
     {
-        _data = new List<T>();
+        Data = new List<T>();
     }
     
     public ConcurrentList(int size)
     {
-        _data = new List<T>(new T[size]);
+        Data = Enumerable.Range(0, size).Select(_ => new T()).ToList();
     }
 
     #endregion
 
     #region Public Methods
 
-    public async Task<T> Next(Func<T, bool> predicate, int tickInMilliseconds)
-    {
-        await Tasks.WaitUntil(Where(predicate).Any, tickInMilliseconds);
-        
-        T result = First(predicate);
-
-        _accessLock.EnterWriteLock();
-        
-        try
-        {
-            result.Claimed = true;
-        }
-        finally
-        {
-            _accessLock.ExitWriteLock();
-        }
-        
-        return result;
-    }
-
     public IEnumerable<T> Where(Func<T, bool> predicate)
     {
         IEnumerable<T> result;
 
-        _accessLock.EnterReadLock();
+        AccessLock.EnterReadLock();
             
         try
         {
-            result = _data.Where(predicate);
+            result = Data.Where(predicate);
         }
         finally
         {
-            _accessLock.ExitReadLock();
+            AccessLock.ExitReadLock();
         }
             
         return result;
@@ -70,15 +51,15 @@ public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable
     {
         T result;
 
-        _accessLock.EnterReadLock();
+        AccessLock.EnterReadLock();
             
         try
         {
-            result = _data.First(predicate);
+            result = Data.First(predicate);
         }
         finally
         {
-            _accessLock.ExitReadLock();
+            AccessLock.ExitReadLock();
         }
             
         return result;
@@ -92,15 +73,15 @@ public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable
     {
         List<T>.Enumerator result;
 
-        _accessLock.EnterReadLock();
+        AccessLock.EnterReadLock();
             
         try
         {
-            result = _data.GetEnumerator();
+            result = Data.GetEnumerator();
         }
         finally
         {
-            _accessLock.ExitReadLock();
+            AccessLock.ExitReadLock();
         }
             
         return result;
@@ -119,14 +100,14 @@ public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable
         {
             int length;
             
-            _accessLock.EnterReadLock();
+            AccessLock.EnterReadLock();
             try
             {
                 length = Count;
             }
             finally
             {
-                _accessLock.ExitReadLock();
+                AccessLock.ExitReadLock();
             }
             
             return length;
@@ -139,15 +120,15 @@ public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable
         {
             T result;
 
-            _accessLock.EnterReadLock();
+            AccessLock.EnterReadLock();
             
             try
             {
-                result = _data[index];
+                result = Data[index];
             }
             finally
             {
-                _accessLock.ExitReadLock();
+                AccessLock.ExitReadLock();
             }
             
             return result;
