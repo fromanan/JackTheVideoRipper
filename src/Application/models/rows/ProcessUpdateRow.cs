@@ -135,10 +135,10 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     public override async Task<ProcessUpdateArgs> Update()
     {
         if (!(await base.Update()).Completed)
-            return ProcessUpdateArgs.Default;
+            return ProcessUpdateArgs.Default(this);
 
         if (GetProcessStatus() is not { } status || status.IsNullOrEmpty())
-            return ProcessUpdateArgs.Default;
+            return ProcessUpdateArgs.Default(this);
         
         SetViewField(() => UpdateViewItemFields(status));
         
@@ -188,7 +188,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     protected ProcessUpdateArgs UpdateViewItemFields(string status)
     {
         //ViewItem.Suspend();
-        return new ProcessUpdateArgs(Completed, UpdateStatus(status));
+        return new ProcessUpdateArgs(this, Completed, UpdateStatus(status));
         //ViewItem.Resume();
     }
 
