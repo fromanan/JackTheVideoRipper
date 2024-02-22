@@ -317,6 +317,8 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         Queue<string> valueQueue = new(values);
         if ((fields & ViewField.Status) > 0)
             Status = valueQueue.Dequeue();
+        if ((fields & ViewField.MediaType) > 0)
+            MediaType = valueQueue.Dequeue();
         if ((fields & ViewField.Size) > 0)
             FileSize = valueQueue.Dequeue();
         if ((fields & ViewField.Progress) > 0)
@@ -325,6 +327,10 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
             Speed = valueQueue.Dequeue();
         if ((fields & ViewField.Eta) > 0)
             Eta = valueQueue.Dequeue();
+        if ((fields & ViewField.Url) > 0)
+            Url = valueQueue.Dequeue();
+        if ((fields & ViewField.Path) > 0)
+            Path = valueQueue.Dequeue();
     }
 
     private static readonly Dictionary<ProcessStatus, ViewField> _StatusToViewFieldsDict = new()
