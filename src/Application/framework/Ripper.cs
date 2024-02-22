@@ -2,11 +2,12 @@
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.modules;
 using JackTheVideoRipper.views;
 using static JackTheVideoRipper.FileSystem;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 /**
  * Serves as interface between view and model
@@ -25,11 +26,15 @@ public class Ripper
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public static string SelectedTag => Instance.FrameMain.CachedSelectedTag;
     
     public static IViewItemProvider ViewItemProvider => Instance._viewItemProvider;
+
+    public static bool Active => Instance.FrameMain.Visible;
+    
+    public static bool Visible => Instance.FrameMain.Visible;
 
     #endregion
 
@@ -99,6 +104,11 @@ public class Ripper
     {
         await _mediaManager.UpdateListItemRows();
     }
+    
+    public bool WaitForNextDispatch(int millisecondsTimeout)
+    {
+        return _mediaManager.WaitForNextDispatch(millisecondsTimeout);
+    }
 
     #endregion
 
@@ -113,16 +123,18 @@ public class Ripper
     }
 
     public void SubscribeMediaManagerEvents(Action updateEventHandler,
-        Action<IViewItem> addAction,
-        Action<IEnumerable<IViewItem>> addMultiAction,
-        Action<IViewItem> removeAction,
-        Action<IEnumerable<IViewItem>> removeMultiAction)
+        IViewItemAction addAction,
+        IViewItemEnumerableAction addMultiAction,
+        IViewItemAction removeAction,
+        IViewItemEnumerableAction removeMultiAction,
+        Action<IEnumerable<ProcessUpdateArgs>> processPoolUpdatedAction)
     {
         _mediaManager.QueueUpdated += updateEventHandler;
         _mediaManager.ProcessAdded += addAction;
         _mediaManager.ProcessesAdded += addMultiAction;
         _mediaManager.ProcessRemoved += removeAction;
         _mediaManager.ProcessesRemoved += removeMultiAction;
+        _mediaManager.ProcessPoolUpdated += processPoolUpdatedAction;
     }
 
     public async void OnDropUrl(string content)
@@ -144,12 +156,13 @@ public class Ripper
             FFMPEG.Operation.Compress,
             FFMPEG.Operation.Repair,
             FFMPEG.Operation.Recode,
+            FFMPEG.Operation.Extract,
             //FFMPEG.Operation.Convert,
             //FFMPEG.Operation.AddAudio,
             //FFMPEG.Operation.Validate
         };
 
-        string? selection = Modals.BasicDropdown(options.Select(o => o.ToString()), "Operation Select");
+        string? selection = Modals.BasicDropdown(options.SelectStrings(), "Operation Select");
         if (selection is null || !Enum.TryParse(selection, out FFMPEG.Operation operation))
             return;
         
@@ -170,6 +183,9 @@ public class Ripper
                     return;
                 case FFMPEG.Operation.Recode:
                     await _mediaManager.RecodeVideo(filepath);
+                    return;
+                case FFMPEG.Operation.Extract:
+                    await _mediaManager.ExtractAudio(filepath);
                     return;
                 case FFMPEG.Operation.Convert:
                     await _mediaManager.ConvertVideo(filepath);
@@ -224,7 +240,7 @@ public class Ripper
         await _mediaManager.Refresh();
     }
 
-    public async void OnCompressVideo(object? sender, EventArgs e)
+    public async void OnCompressVideo(object? sender, EventArgs args)
     {
         if (SelectFile() is not { } filepath)
             return;
@@ -232,7 +248,7 @@ public class Ripper
         await _mediaManager.CompressVideo(filepath);
     }
         
-    public async void OnCompressBulk(object? sender, EventArgs e)
+    public async void OnCompressBulk(object? sender, EventArgs args)
     {
         if (SelectFolder() is not { } directoryPath)
             return;
@@ -240,7 +256,7 @@ public class Ripper
         await _mediaManager.CompressBulk(directoryPath);
     }
         
-    public async void OnRecodeVideo(object? sender, EventArgs e)
+    public async void OnRecodeVideo(object? sender, EventArgs args)
     {
         if (SelectFile() is not { } filepath)
             return;
@@ -248,7 +264,7 @@ public class Ripper
         await _mediaManager.RecodeVideo(filepath);
     }
         
-    public async void OnRepairVideo(object? sender, EventArgs e)
+    public async void OnRepairVideo(object? sender, EventArgs args)
     {
         if (SelectFile() is not { } filepath)
             return;
@@ -256,12 +272,12 @@ public class Ripper
         await _mediaManager.RepairVideo(filepath);
     }
     
-    public async void OnDownloadVideo(object? sender, EventArgs e)
+    public async void OnDownloadVideo(object? sender, EventArgs args)
     {
         await _mediaManager.DownloadMediaDialog(MediaType.Video);
     }
     
-    public async void OnDownloadAudio(object? sender, EventArgs e)
+    public async void OnDownloadAudio(object? sender, EventArgs args)
     {
         await _mediaManager.DownloadMediaDialog(MediaType.Audio);
     }
@@ -275,14 +291,14 @@ public class Ripper
         _mediaManager.ResumeAll();
     }
 
-    public async void OnContextAction(object? sender, ContextActionEventArgs e)
+    public async void OnContextAction(object? sender, ContextActionEventArgs args)
     {
-        await _mediaManager.PerformContextAction(e.ContextAction);
+        await _mediaManager.PerformContextAction(args.ContextAction);
     }
 
-    public void OnNotificationBarClicked(object? sender, MouseEventArgs e)
+    public void OnNotificationBarClicked(object? sender, MouseEventArgs args)
     {
-        if (e.IsRightClick())
+        if (args.IsRightClick())
         {
             NotificationsManager.ClearPushNotifications();
         }
@@ -292,11 +308,11 @@ public class Ripper
         }
     }
 
-    public async void OnApplicationClosing(object? sender, FormClosingEventArgs e)
+    public async void OnApplicationClosing(object? sender, FormClosingEventArgs args)
     {
         if (_mediaManager.OnFormClosing())
         {
-            e.Cancel = true;
+            args.Cancel = true;
             return;
         }
         
@@ -307,128 +323,128 @@ public class Ripper
     }
     
     // Edit Menu
-    public void OnCopyFailedUrls(object? sender, EventArgs e)
+    public void OnCopyFailedUrls(object? sender, EventArgs args)
     {
         _mediaManager.CopyFailedUrls();
     }
     
-    public void OnCopyAllUrls(object? sender, EventArgs e)
+    public void OnCopyAllUrls(object? sender, EventArgs args)
     {
         _mediaManager.CopyAllUrls();
     }
 
-    public void OnRetryAll(object? sender, EventArgs e)
+    public void OnRetryAll(object? sender, EventArgs args)
     {
         _mediaManager.RetryAll();
     }
 
-    public void OnStopAll(object? sender, EventArgs e)
+    public void OnStopAll(object? sender, EventArgs args)
     {
         _mediaManager.StopAll();
     }
 
-    public void OnRemoveFailed(object? sender, EventArgs e)
+    public void OnRemoveFailed(object? sender, EventArgs args)
     {
         _mediaManager.RemoveFailed();
     }
 
-    public void OnClearAll(object? sender, EventArgs e)
+    public void OnClearAll(object? sender, EventArgs args)
     {
         _mediaManager.ClearAll();
     }
 
-    public void OnRemoveSucceeded(object? sender, EventArgs e)
+    public void OnRemoveSucceeded(object? sender, EventArgs args)
     {
         _mediaManager.RemoveSucceeded();
     }
 
-    public void OnPauseAll(object? sender, EventArgs e)
+    public void OnPauseAll(object? sender, EventArgs args)
     {
         _mediaManager.PauseAll();
     }
 
-    public void OnResumeAll(object? sender, EventArgs e)
+    public void OnResumeAll(object? sender, EventArgs args)
     {
         _mediaManager.ResumeAll();
     }
     
-    public async void OnBatchPlaylist(object? sender, EventArgs e)
+    public async void OnBatchPlaylist(object? sender, EventArgs args)
     {
         await _mediaManager.BatchPlaylist();
     }
 
-    public async void OnBatchDocument(object? sender, EventArgs e)
+    public async void OnBatchDocument(object? sender, EventArgs args)
     {
         await _mediaManager.BatchDocument();
     }
 
-    public async void OnDownloadBatch(object? sender, EventArgs e)
+    public async void OnDownloadBatch(object? sender, EventArgs args)
     {
         await _mediaManager.DownloadBatch();
     }
 
-    public static void OnVerifyIntegrity(object? sender, EventArgs e)
+    public static void OnVerifyIntegrity(object? sender, EventArgs args)
     {
         MediaManager.VerifyIntegrity();
     }
 
-    public static async void OnOpenConsole(object? sender, EventArgs e)
+    public static async void OnOpenConsole(object? sender, EventArgs args)
     {
         await Output.OpenMainConsoleWindow();
     }
 
-    public static void OnOpenHistory(object? sender, EventArgs e)
+    public static void OnOpenHistory(object? sender, EventArgs args)
     {
         Pages.OpenPageBackground<FrameHistory>();
     }
     
-    public static async void OnUpdateDependency(object? sender, DependencyActionEventArgs e)
+    public static async void OnUpdateDependency(object? sender, DependencyActionEventArgs args)
     {
-        await Core.UpdateDependency(e.Dependency);
+        await Core.UpdateDependency(args.Dependency);
     }
 
-    public static void OnEndStartup(object? sender, EventArgs e)
+    public static void OnEndStartup(object? sender, EventArgs args)
     {
         Statistics.EndStartup();
         Output.WriteLine(Statistics.StartupMessage, sendAsNotification:true);
     }
     
-    public void OnClearAllViewItems(object? sender, EventArgs e)
+    public void OnClearAllViewItems(object? sender, EventArgs args)
     {
         _mediaManager.ClearAll();
     }
 
-    public static void OnOpenDownloads(object? sender, EventArgs e)
+    public static void OnOpenDownloads(object? sender, EventArgs args)
     {
         Task.Run(OpenDownloads);
     }
 
-    public static void OnOpenTaskManager(object? sender, EventArgs e)
+    public static void OnOpenTaskManager(object? sender, EventArgs args)
     {
         Task.Run(OpenTaskManager);
     }
 
-    public static void OnCheckForUpdates(object? sender, EventArgs e)
+    public static void OnCheckForUpdates(object? sender, EventArgs args)
     {
         Task.Run(Core.CheckForUpdates);
     }
 
-    public static void OnOpenSettings(object? sender, EventArgs e)
+    public static void OnOpenSettings(object? sender, EventArgs args)
     {
         Pages.OpenPage<FrameSettings>();
     }
 
-    public static void OnOpenInstallFolder(object? sender, EventArgs e)
+    public static void OnOpenInstallFolder(object? sender, EventArgs args)
     {
         Common.OpenInstallFolder();
     }
 
-    public static void OnOpenAbout(object? sender, EventArgs e)
+    public static void OnOpenAbout(object? sender, EventArgs args)
     {
         Pages.OpenPage<FrameAbout>();
     }
 
-    public static void OnOpenConvert(object? sender, EventArgs e)
+    public static void OnOpenConvert(object? sender, EventArgs args)
     {
         Pages.OpenPage<FrameConvert>();
     }
