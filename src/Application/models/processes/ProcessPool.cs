@@ -156,7 +156,7 @@ public class ProcessPool
         {
             worker.InitializeWorker(Global.Configurations.WORKER_UPDATE_FREQUENCY);
             worker.ProgressChanged += OnUpdateWorker;
-            worker.RunWorkerCompleted += OnWorkerComplete;
+            worker.RunWorkerCompleted += OnCompleteWorker;
         }
     }
 
@@ -176,7 +176,7 @@ public class ProcessPool
         //          when a new update hits, only save the latest
     }
 
-    private void OnWorkerComplete(object? sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
+    private void OnCompleteWorker(object? sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
     {
         if (sender is not MediaWorker worker)
             return;
