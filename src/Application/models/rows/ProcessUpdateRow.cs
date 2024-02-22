@@ -277,8 +277,8 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         Color = processStatus switch
         {
             // Type Specific
-            ProcessStatus.Running when this is DownloadProcessUpdateRow => Color.Turquoise,
-            ProcessStatus.Running when this is CompressProcessUpdateRow => Color.MediumPurple,
+            ProcessStatus.Running when this is DownloadProcessUpdateRow   => Color.Turquoise,
+            ProcessStatus.Running when this is CompressProcessUpdateRow   => Color.MediumPurple,
             ProcessStatus.Running when this is ConversionProcessUpdateRow => Color.SaddleBrown,
             
             // General
@@ -312,7 +312,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         };
     }
 
-    private void SetValues(ViewField fields, params string[] values)
+    public void SetValues(ViewField fields, params string[] values)
     {
         Queue<string> valueQueue = new(values);
         if ((fields & ViewField.Status) > 0)
@@ -329,26 +329,26 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     private static readonly Dictionary<ProcessStatus, ViewField> _StatusToViewFieldsDict = new()
     {
-        { ProcessStatus.Running,    ViewField.Status },
-        { ProcessStatus.Queued,     ViewField.Status },
-        { ProcessStatus.Created,    ViewField.Dynamic },
+        { ProcessStatus.Running,    ViewField.Status                                                        },
+        { ProcessStatus.Queued,     ViewField.Status                                                        },
+        { ProcessStatus.Created,    ViewField.Dynamic                                                       },
         { ProcessStatus.Succeeded,  ViewField.Status | ViewField.Progress | ViewField.Speed | ViewField.Eta },
-        { ProcessStatus.Error,      ViewField.Status | ViewField.Size | ViewField.Speed | ViewField.Eta },
-        { ProcessStatus.Stopped,    ViewField.Status | ViewField.Speed | ViewField.Eta },
-        { ProcessStatus.Cancelled,  ViewField.Dynamic },
-        { ProcessStatus.Paused,     ViewField.Status | ViewField.Speed | ViewField.Eta }
+        { ProcessStatus.Error,      ViewField.Status | ViewField.Size     | ViewField.Speed | ViewField.Eta },
+        { ProcessStatus.Stopped,    ViewField.Status                      | ViewField.Speed | ViewField.Eta },
+        { ProcessStatus.Cancelled,  ViewField.Dynamic                                                       },
+        { ProcessStatus.Paused,     ViewField.Status                      | ViewField.Speed | ViewField.Eta }
     };
     
     private static readonly Dictionary<ProcessStatus, string> _StatusToMessageDict = new()
     {
-        { ProcessStatus.Running,    Statuses.Starting },
-        { ProcessStatus.Queued,     Statuses.Queued },
-        { ProcessStatus.Created,    Statuses.Waiting },
+        { ProcessStatus.Running,    Statuses.Starting  },
+        { ProcessStatus.Queued,     Statuses.Queued    },
+        { ProcessStatus.Created,    Statuses.Waiting   },
         { ProcessStatus.Succeeded,  Statuses.Succeeded },
-        { ProcessStatus.Error,      Statuses.Error },
-        { ProcessStatus.Stopped,    Statuses.Stopped },
+        { ProcessStatus.Error,      Statuses.Error     },
+        { ProcessStatus.Stopped,    Statuses.Stopped   },
         { ProcessStatus.Cancelled,  Statuses.Cancelled },
-        { ProcessStatus.Paused,     Statuses.Paused }
+        { ProcessStatus.Paused,     Statuses.Paused    }
     };
 
     private void SetDefaultMessages(ProcessStatus processStatus)
