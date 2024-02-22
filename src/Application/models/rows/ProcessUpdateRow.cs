@@ -194,7 +194,8 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     protected RowUpdateArgs? UpdateStatus(string statusMessage)
     {
-        Status = statusMessage;
+        // TODO:
+        //Status = statusMessage;
 
         if (Buffer.TokenizedProcessLine is not {Length: > 0} tokens)
             return default;
