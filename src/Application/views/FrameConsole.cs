@@ -20,7 +20,7 @@ namespace JackTheVideoRipper.views
 
       #endregion
 
-      #region Attributes
+      #region Properties
 
       public bool InItemBounds(MouseEventArgs e) => ConsoleControl.Bounds.Contains(e.Location);
 

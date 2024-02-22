@@ -14,7 +14,7 @@ public class HistoryModel : ConfigModel
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public override string Filepath => HistoryFilepath;
 

@@ -22,7 +22,7 @@ public class Console : IDisposable
 
     #endregion
 
-    #region Attributes
+    #region Properties
     
     public bool Active => Visible && !Paused;
 

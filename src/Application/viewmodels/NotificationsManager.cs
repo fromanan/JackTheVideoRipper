@@ -21,7 +21,7 @@ public class NotificationsManager
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     private IEnumerable<Notification> Notifications => _notifications.Values.SelectMany(n => n);
 

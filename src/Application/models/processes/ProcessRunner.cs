@@ -43,7 +43,7 @@ public abstract class ProcessRunner : IProcessRunner
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public bool ProcessRunning => Started && !ProcessExited;
     

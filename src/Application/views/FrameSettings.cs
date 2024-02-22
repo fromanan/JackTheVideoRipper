@@ -8,7 +8,7 @@
 
       #endregion
 
-      #region Attributes
+      #region Properties
 
       private static SettingsModel CurrentSettings => Settings.Data;
 

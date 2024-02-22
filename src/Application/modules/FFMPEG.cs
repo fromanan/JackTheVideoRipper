@@ -31,7 +31,7 @@ public static class FFMPEG
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public static bool IsInstalled => File.Exists(ExecutablePath);
 

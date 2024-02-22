@@ -12,7 +12,7 @@ namespace JackTheVideoRipper
 
         #endregion
 
-        #region Attributes
+        #region Properties
 
         public override string Filepath => SettingsFilepath;
 

@@ -47,7 +47,7 @@ namespace JackTheVideoRipper
         [JsonProperty("_filename")]
         public string? Filename { get; set; }
 
-        #region Attributes
+        #region Properties
 
         [JsonIgnore]
         public IEnumerable<MediaFormatItem> AvailableFormats => RequestedFormats.Take(2).Concat(Formats);
@@ -102,7 +102,7 @@ namespace JackTheVideoRipper
         [JsonProperty("fps")]
         public string? Fps { get; set; }
 
-        #region Attributes
+        #region Properties
 
         [JsonIgnore]
         public bool HasVideo => Width.HasValue() && Height.HasValue();

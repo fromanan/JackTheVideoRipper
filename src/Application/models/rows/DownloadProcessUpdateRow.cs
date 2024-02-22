@@ -28,7 +28,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
 
     #endregion
 
-    #region Attributes
+    #region Properties
     
     public string OriginalUrl => base.Url;
     

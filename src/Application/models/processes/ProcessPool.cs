@@ -55,7 +55,7 @@ public class ProcessPool
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public static int MaxConcurrentDownloads => Settings.Data.MaxConcurrentDownloads;
 

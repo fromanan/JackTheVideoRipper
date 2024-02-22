@@ -12,7 +12,7 @@ public class HistoryTable
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public List<HistoryItem> HistoryItems => _historyItems.Values.ToList();
 

@@ -20,7 +20,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     #endregion
 
-    #region Attributes
+    #region Properties
     
     private string DefaultTitle => YouTubeDL.GetDefaultTitle(Filename);
 

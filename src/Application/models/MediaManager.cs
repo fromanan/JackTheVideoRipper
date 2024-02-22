@@ -21,7 +21,7 @@ public class MediaManager
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public IProcessUpdateRow? GetRow(string tag) => _processPool.GetProcess(tag);
 

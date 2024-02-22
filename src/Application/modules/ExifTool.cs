@@ -15,7 +15,7 @@ public static class ExifTool
     
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public static bool IsInstalled => File.Exists(ExecutablePath);
 

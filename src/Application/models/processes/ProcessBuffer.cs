@@ -31,7 +31,7 @@ public class ProcessBuffer
 
     #endregion
 
-    #region Attributes
+    #region Properties
 
     public bool AtEndOfBuffer => Cursor >= Results.Count - 1;
     

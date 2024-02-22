@@ -17,7 +17,7 @@ namespace JackTheVideoRipper
 
       #endregion
 
-      #region Attributes
+      #region Properties
 
       private ListView.SelectedListViewItemCollection Selected => listItems.SelectedItems;
 
