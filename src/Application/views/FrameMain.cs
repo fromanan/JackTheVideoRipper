@@ -145,12 +145,8 @@ namespace JackTheVideoRipper.views
          args.DrawBackground();
 
          // Draw text in a different font
-         TextRenderer.DrawText(e.Graphics,
-            e.Header!.Text,
-            _headerFont,
-            e.Bounds,
-            SystemColors.ControlText,
-            TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+         TextRenderer.DrawText(args.Graphics, args.Header?.Text, Global.Fonts.Header, args.Bounds,
+            SystemColors.ControlText, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
       }
 
       private static void DrawItem(object? sender, DrawListViewItemEventArgs args)
