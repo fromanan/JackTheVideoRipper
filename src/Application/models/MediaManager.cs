@@ -52,8 +52,7 @@ public class MediaManager
     public MediaManager()
     {
         Core.ShutdownEvent += OnProgramShutdown;
-        _processPool.ProcessCompleted += OnProcessCompleted;
-        _processPool.ProcessStarted += OnProcessStarted;
+        InitializeProcessPool();
     }
 
     #endregion
@@ -538,6 +537,22 @@ public class MediaManager
         }
 
         mediaItemRows.ForEach(Repair);*/
+
+        MediaItemRow<FfmpegParameters> CreateRepairRow(FfmpegParameters parameters)
+        {
+            return new MediaItemRow<FfmpegParameters>(filepath: parameters.OutputFilepath, mediaParameters: parameters);
+        }
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private void InitializeProcessPool()
+    {
+        _processPool.ProcessStarted += OnProcessStarted;
+        _processPool.ProcessCompleted += OnProcessCompleted;
+        _processPool.Initialize();
     }
 
     #endregion
