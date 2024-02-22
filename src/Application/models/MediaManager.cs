@@ -495,6 +495,11 @@ public class MediaManager
         throw new DeveloperException($"{nameof(ExtractAudio)} not implemented", new NotImplementedException());
     }
 
+    private static void Experimental(string name)
+    {
+        Output.WriteLine($"Warning: '{name}' is experimental and may not function exactly as intended. Proceed with caution.");
+    }
+
     public async Task RepairVideo(string filepath)
     {
         NotImplemented(nameof(RepairVideo));
