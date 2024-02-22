@@ -77,10 +77,10 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
             return default;
         
         // TODO: Remove these in favor of task-based update
-        Progress = tokens[1];
+        /*Progress = tokens[1];
         FileSize = FormatSize(tokens[3]);
         Speed = tokens[5];
-        Eta = tokens[7];
+        Eta = tokens[7];*/
 
         return new RowUpdateArgs
         {
