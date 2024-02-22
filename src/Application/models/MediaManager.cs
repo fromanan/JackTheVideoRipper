@@ -137,8 +137,8 @@ public class MediaManager
                 //AddProcess(new RepairProcessUpdateRow(mediaItem, _processPool.OnCompleteProcess));
                 break;
             default:
-                Modals.Warning($"{processRowType.ToString().WrapQuotes()} Processes are not currently supported!",
-                    "Unsupported Tool Selection");
+                Modals.Warning(string.Format(Messages.UnsupportedProcess, processRowType.ToString().WrapQuotes()),
+                    Captions.UnsupportedTool);
                 break;
         }
     }
@@ -374,7 +374,7 @@ public class MediaManager
             }
             case ContextActions.Remove:
             {
-                if (Selected.Completed || !Selected.Started || Modals.Confirmation("Are you sure you wish to delete a running process?"))
+                if (Selected.Completed || !Selected.Started || Modals.Confirmation(Messages.DeleteRunningProcess))
                     RemoveProcess(Selected);
                 break;
             }
@@ -492,7 +492,7 @@ public class MediaManager
 
     public async Task ExtractAudio(string filepath)
     {
-        throw new DeveloperException($"{nameof(ExtractAudio)} not implemented", new NotImplementedException());
+        throw new DeveloperException(string.Format(Messages.NotImplemented, name), new NotImplementedException());
     }
 
     private static void Experimental(string name)
