@@ -176,7 +176,7 @@ namespace JackTheVideoRipper.views
 
         private void FrameNewMediaSimple_Load(object sender, EventArgs args)
         {
-            if (_startType == MediaType.Audio)
+            if (_startType is MediaType.Audio)
                 ExportVideo = false;
         }
 
