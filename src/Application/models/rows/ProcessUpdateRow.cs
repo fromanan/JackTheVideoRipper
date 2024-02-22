@@ -140,9 +140,9 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         if (GetProcessStatus() is not { } status || status.IsNullOrEmpty())
             return ProcessUpdateArgs.Default(this);
         
-        SetViewField(() => UpdateViewItemFields(status));
-        
-        return ProcessUpdateArgs.Done;
+        //SetViewField(() => UpdateViewItemFields(status));
+
+        return UpdateViewItemFields(status);
     }
 
     public override async Task<bool> Start()
@@ -448,11 +448,15 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     #endregion
 
     #region Static Methods
+    
+    public static readonly AutoResetEvent UpdateViewHandle = new(true);
 
     // TODO: Currently this is causing deadlock on the main thread, unless we run in the background as so...
     protected static void SetViewField(Action setValueAction)
     {
-        Task.Run(() => Threading.RunInMainContext(setValueAction));
+        UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
+        Threading.RunInMainContext(setValueAction);
+        UpdateViewHandle.Reset();
     }
 
     #endregion
