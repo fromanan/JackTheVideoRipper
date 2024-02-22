@@ -6,5 +6,6 @@ public enum MediaProcessType
     Convert,
     Download,
     Recode,
-    Repair
+    Repair,
+    Extract
 }

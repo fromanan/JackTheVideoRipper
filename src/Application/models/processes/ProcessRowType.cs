@@ -6,5 +6,6 @@ public enum ProcessRowType
     Convert,
     Compress,
     Repair,
-    Recode
+    Recode,
+    Extract
 }

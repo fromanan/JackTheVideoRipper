@@ -17,5 +17,6 @@ public enum ContextActions
     CopyCommand,
     Reprocess,
     Convert,
-    Compress
+    Compress,
+    Extract
 }
