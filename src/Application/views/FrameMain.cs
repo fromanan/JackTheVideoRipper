@@ -220,10 +220,10 @@ namespace JackTheVideoRipper.views
             EndInvoke(_rowUpdateTask);
 
          // Disable all timers
-         CheckForUpdates = false;
-         UpdateListViewRows = false;
-         UpdateStatusBar = false;
-         UpdateProcessLimit = false;
+         CheckForUpdates      = false;
+         UpdateListViewRows   = false;
+         UpdateStatusBar      = false;
+         UpdateProcessLimit   = false;
       }
 
       #endregion
@@ -233,8 +233,8 @@ namespace JackTheVideoRipper.views
       private void InitializeTimers()
       {
          // Initiate the Update Loop
-         UpdateListViewRows = true;
-         UpdateStatusBar = true;
+         UpdateListViewRows   = true;
+         UpdateStatusBar      = true;
       }
 
       private async void TimerCheckForUpdates_Tick(object sender, EventArgs args)
@@ -468,15 +468,15 @@ namespace JackTheVideoRipper.views
          ytdlpToolStripMenuItem.Click += (sender, _) =>
             DependencyAction(sender, Dependencies.YouTubeDL);
          vS2010RedistributableToolStripMenuItem.Click += (sender, _) =>
-             DependencyAction(sender, Dependencies.Redistributables);
+            DependencyAction(sender, Dependencies.Redistributables);
          atomicParsleyToolStripMenuItem.Click += (sender, _) =>
-             DependencyAction(sender, Dependencies.AtomicParsley);
+            DependencyAction(sender, Dependencies.AtomicParsley);
          vlcPlayerToolStripMenuItem.Click += (sender, _) =>
-             DependencyAction(sender, Dependencies.VLC);
+            DependencyAction(sender, Dependencies.VLC);
          handbrakeToolStripMenuItem.Click += (sender, _) =>
-             DependencyAction(sender, Dependencies.Handbrake);
+            DependencyAction(sender, Dependencies.Handbrake);
          fFmpegToolStripMenuItem.Click += (sender, _) =>
-             DependencyAction(sender, Dependencies.FFMPEG);
+            DependencyAction(sender, Dependencies.FFMPEG);
       }
 
       private void SubscribeToolMenu()
