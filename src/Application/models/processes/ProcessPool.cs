@@ -276,7 +276,7 @@ public class ProcessPool
         while (!AtCapacity && !NoneOnDeck)
         {
             await DispatchFromQueue();
-            await Task.Delay(200);
+            await Task.Delay(Global.Configurations.PROCESS_POOL_UPDATE_FREQUENCY);
         }
     }
 
