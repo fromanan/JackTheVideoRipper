@@ -2,9 +2,9 @@
 
 namespace JackTheVideoRipper.models.processes;
 
-public record ProcessUpdateArgs(bool Completed, RowUpdateArgs? RowUpdateArgs = null)
+public record ProcessUpdateArgs(object? Sender, bool Completed, RowUpdateArgs? RowUpdateArgs = null)
 {
-    public static readonly ProcessUpdateArgs Default = new(false);
+    public static ProcessUpdateArgs Default(object? sender = null) => new(sender, false);
 
-    public static readonly ProcessUpdateArgs Done = new(true);
+    public static ProcessUpdateArgs Done(object? sender = null) => new(sender, true);
 }

@@ -54,10 +54,6 @@ public abstract class ProcessRunner : IProcessRunner
     public bool Paused => ProcessStatus is ProcessStatus.Paused;
 
     public bool Errored => ProcessStatus.Failed.HasFlag(ProcessStatus);
-    
-    private static Task<bool> TrueTask => Task.FromResult(true);
-    
-    private static Task<bool> FalseTask => Task.FromResult(false);
 
     public string Command => $"{ProcessFileName} {ParameterString}";
 
@@ -88,11 +84,11 @@ public abstract class ProcessRunner : IProcessRunner
     {
         // Don't run updates after we've completed
         if (Paused || Finished)
-            return ProcessUpdateArgs.Default;
+            return ProcessUpdateArgs.Default();
 
         Buffer.Update();
 
-        return ProcessUpdateArgs.Done;
+        return ProcessUpdateArgs.Done();
     }
 
     public virtual async Task<bool> Start()
