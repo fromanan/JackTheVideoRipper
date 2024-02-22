@@ -22,7 +22,7 @@ namespace JackTheVideoRipper.views
             bSaveDetails.Click += OnSaveDetailsClicked;
         }
         
-        private void FrameErrorHandler_Load(object? sender, EventArgs e)
+        private void FrameErrorHandler_Load(object? sender, EventArgs args)
         {
             Text = $@"Uncaught Exception | {_exception}";
             SetExceptionInformation();
@@ -38,17 +38,17 @@ namespace JackTheVideoRipper.views
             rtbStackTrace.Text = _exception.StackTrace;
         }
 
-        private void OnContinueClicked(object? sender, EventArgs e)
+        private void OnContinueClicked(object? sender, EventArgs args)
         {
             this.Close(DialogResult.Continue);
         }
 
-        private void OnQuitClicked(object? sender, EventArgs e)
+        private void OnQuitClicked(object? sender, EventArgs args)
         {
             this.Close(DialogResult.Abort);
         }
 
-        private void OnSaveDetailsClicked(object? sender, EventArgs e)
+        private void OnSaveDetailsClicked(object? sender, EventArgs args)
         {
             _exception.SaveToFile();
         }

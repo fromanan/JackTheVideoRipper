@@ -115,7 +115,7 @@ namespace JackTheVideoRipper
 
       #region Form Events
 
-      private void FrameSettings_Load(object sender, EventArgs e)
+      private void FrameSettings_Load(object sender, EventArgs args)
       {
          LoadSettings();
       }

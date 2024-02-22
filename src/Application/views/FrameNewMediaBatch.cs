@@ -102,18 +102,18 @@ namespace JackTheVideoRipper
 
         #region Event Handlers
 
-        private void FrameNewMediaBatch_Load(object sender, EventArgs e)
+        private void FrameNewMediaBatch_Load(object sender, EventArgs args)
         {
             Filepath = Settings.Data.DefaultDownloadPath;
             ResetSelectorIndices();
         }
         
-        private void ButtonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs args)
         {
             Close();
         }
 
-        private void ButtonDownload_Click(object sender, EventArgs e)
+        private void ButtonDownload_Click(object sender, EventArgs args)
         {
             if (Urls.IsNullOrEmpty())
                 return;
@@ -123,13 +123,13 @@ namespace JackTheVideoRipper
             this.Close(DialogResult.OK);
         }
 
-        private void ButtonLocationBrowse_Click(object sender, EventArgs e)
+        private void ButtonLocationBrowse_Click(object sender, EventArgs args)
         {
             if (FileSystem.SelectFolder() is { } filepath)
                 Filepath = filepath;
         }
         
-        private void ChkBoxExportAudio_CheckedChanged(object sender, EventArgs e)
+        private void ChkBoxExportAudio_CheckedChanged(object sender, EventArgs args)
         {
             if (!ExportAudio && !ExportVideo)
                 ExportAudio = true;
@@ -145,7 +145,7 @@ namespace JackTheVideoRipper
             }
         }
 
-        private void ChkBoxExportVideo_CheckedChanged(object sender, EventArgs e)
+        private void ChkBoxExportVideo_CheckedChanged(object sender, EventArgs args)
         {
             // We must export one of the two
             if (!ExportVideo && !ExportAudio)

@@ -22,7 +22,7 @@ namespace JackTheVideoRipper.views
 
       #region Properties
 
-      public bool InItemBounds(MouseEventArgs e) => ConsoleControl.Bounds.Contains(e.Location);
+      public bool InItemBounds(MouseEventArgs args) => ConsoleControl.Bounds.Contains(args.Location);
 
       private RichTextBox TextBox => ConsoleControl.InternalRichTextBox;
 
@@ -65,15 +65,15 @@ namespace JackTheVideoRipper.views
 
       #region Overrides
 
-      protected override void OnFormClosing(FormClosingEventArgs e)
+      protected override void OnFormClosing(FormClosingEventArgs args)
       {
-         base.OnFormClosing(e);
+         base.OnFormClosing(args);
 
-         if (e.CloseReason == CloseReason.WindowsShutDown)
+         if (args.CloseReason == CloseReason.WindowsShutDown)
             return;
 
          Visible = false;
-         e.Cancel = true;
+         args.Cancel = true;
       }
 
       #endregion
@@ -92,28 +92,28 @@ namespace JackTheVideoRipper.views
          saveToFileToolStripMenuItem.Click += OnSaveToFile;
       }
 
-      private void OnLostFocus(object? sender, EventArgs e)
+      private void OnLostFocus(object? sender, EventArgs args)
       {
          TextBox.Suspend();
          _suspended = true;
-         UpdateConsoleFrozen(sender, e);
+         UpdateConsoleFrozen(sender, args);
       }
 
-      private void OnGotFocus(object? sender, EventArgs e)
+      private void OnGotFocus(object? sender, EventArgs args)
       {
          TextBox.Resume();
          _suspended = false;
-         UpdateConsoleFrozen(sender, e);
+         UpdateConsoleFrozen(sender, args);
       }
 
-      private void FrameConsole_Load(object? sender, EventArgs e)
+      private void FrameConsole_Load(object? sender, EventArgs args)
       {
          Text = _instanceName.HasValue() ? $"Console | {_instanceName}" : "Console";
          AllowTransparency = false;
          TextBox.Font = _DefaultFont;
       }
 
-      private void OnSaveToFile(object? sender, EventArgs e)
+      private void OnSaveToFile(object? sender, EventArgs args)
       {
          if (FileSystem.SaveFileUsingDialog() is not { } filename || filename.IsNullOrEmpty())
             return;

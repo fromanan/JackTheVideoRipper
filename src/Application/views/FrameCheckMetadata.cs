@@ -7,7 +7,7 @@
             InitializeComponent();
         }
 
-        private void timerPostLoad_Tick(object sender, EventArgs e)
+        private void timerPostLoad_Tick(object sender, EventArgs args)
         {
             // Timeout
             Close();

@@ -34,12 +34,12 @@ namespace JackTheVideoRipper
 
         #region Form Events
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs args)
         {
             Close();
         }
 
-        private void buttonImport_Click(object sender, EventArgs e)
+        private void buttonImport_Click(object sender, EventArgs args)
         {
             Url = TextUrl;
             this.Close(DialogResult.OK);

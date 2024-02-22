@@ -32,7 +32,7 @@ namespace JackTheVideoRipper
 
       public ListViewItem FocusedItem => listItems.FocusedItem;
 
-      public bool InItemBounds(MouseEventArgs e) => listItems.Visible && FocusedItem.InBounds(e.Location);
+      public bool InItemBounds(MouseEventArgs args) => listItems.Visible && FocusedItem.InBounds(args.Location);
 
       public string CachedSelectedTag { get; private set; } = string.Empty;
 
@@ -129,23 +129,23 @@ namespace JackTheVideoRipper
 
       private readonly Font _headerFont = new(DefaultFont.FontFamily, 9.5f, FontStyle.Bold);
 
-      private void DrawColumnHeader(object? sender, DrawListViewColumnHeaderEventArgs e)
+      private void DrawColumnHeader(object? sender, DrawListViewColumnHeaderEventArgs args)
       {
          // Draw default background
-         e.DrawBackground();
+         args.DrawBackground();
 
          // Draw text in a different font
-         TextRenderer.DrawText(e.Graphics,
-            e.Header!.Text,
+         TextRenderer.DrawText(args.Graphics,
+            args.Header!.Text,
             _headerFont,
-            e.Bounds,
+            args.Bounds,
             SystemColors.ControlText,
             TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
       }
 
-      private void DrawItem(object? sender, DrawListViewItemEventArgs e)
+      private void DrawItem(object? sender, DrawListViewItemEventArgs args)
       {
-         e.DrawDefault = true;
+         args.DrawDefault = true;
       }
 
       private async void Update(object? sender, EventArgs args)
@@ -227,14 +227,14 @@ namespace JackTheVideoRipper
          UpdateStatusBar = true;
       }
 
-      private async void TimerCheckForUpdates_Tick(object sender, EventArgs e)
+      private async void TimerCheckForUpdates_Tick(object sender, EventArgs args)
       {
          CheckForUpdates = false;
          await Ripper.OnCheckForApplicationUpdates();
          CheckForUpdates = true;
       }
 
-      private void TimerProcessLimit_Tick(object? sender = null, EventArgs? e = null)
+      private void TimerProcessLimit_Tick(object? sender = null, EventArgs? args = null)
       {
          UpdateProcessLimit = true;
       }
@@ -243,23 +243,23 @@ namespace JackTheVideoRipper
 
       #region Form Events
 
-      private void OnFormLoad(object? sender, EventArgs e)
+      private void OnFormLoad(object? sender, EventArgs args)
       {
          InitializeViews();
          Threading.InitializeScheduler();
          InitializeTimers();
       }
 
-      private void OnFormShown(object? sender, EventArgs e)
+      private void OnFormShown(object? sender, EventArgs args)
       {
 
       }
 
-      private void OnFormClosing(object? sender, FormClosingEventArgs e)
+      private void OnFormClosing(object? sender, FormClosingEventArgs args)
       {
          // Tells you if user cancelled
-         _ripper.OnApplicationClosing(sender, e);
-         if (e.Cancel)
+         _ripper.OnApplicationClosing(sender, args);
+         if (args.Cancel)
             return;
 
          // Make sure our updates don't continue while we close, signal completion
@@ -311,24 +311,24 @@ namespace JackTheVideoRipper
          CachedSelectedTag = FirstSelected.Tag;
       }
 
-      private void OnDragEnter(object? sender, DragEventArgs e)
+      private void OnDragEnter(object? sender, DragEventArgs args)
       {
-         if (e.Data is null)
+         if (args.Data is null)
             return;
 
-         e.Effect = e.IsValidDroppable() ?
+         args.Effect = args.IsValidDroppable() ?
              DragDropEffects.Copy :
              DragDropEffects.None;
       }
 
-      private void OnDragDrop(object? sender, DragEventArgs e)
+      private void OnDragDrop(object? sender, DragEventArgs args)
       {
-         if (e.IsText() && e.AsText() is string content)
+         if (args.IsText() && args.AsText() is string content)
          {
             _ripper.OnDropUrl(content);
          }
 
-         if (e.IsFile() && e.AsFile() is string[] { Length: > 0 } filepaths)
+         if (args.IsFile() && args.AsFile() is string[] { Length: > 0 } filepaths)
          {
             _ripper.OnDropFile(filepaths);
          }
@@ -472,9 +472,9 @@ namespace JackTheVideoRipper
          notificationStatusLabel.MouseDown += _ripper.OnNotificationBarClicked;
       }
 
-      private async void OnListItemsMouseClick(object? sender, MouseEventArgs e)
+      private async void OnListItemsMouseClick(object? sender, MouseEventArgs args)
       {
-         if (e.IsRightClick() && InItemBounds(e))
+         if (args.IsRightClick() && InItemBounds(args))
             await _contextMenuManager.OpenContextMenu();
       }
 

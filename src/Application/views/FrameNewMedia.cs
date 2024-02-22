@@ -430,11 +430,11 @@ namespace JackTheVideoRipper
 
         #region Timer Events
 
-        private void TimerPostLoad_Tick(object sender, EventArgs e)
+        private void TimerPostLoad_Tick(object sender, EventArgs args)
         {
             timerPostLoad.Enabled = false;
             CopyUrlFromClipboard();
-            TextUrl_TextChanged(sender, e);
+            TextUrl_TextChanged(sender, args);
         }
 
         #endregion
@@ -468,13 +468,13 @@ namespace JackTheVideoRipper
             chkBoxExportVideo.CheckedChanged += OnCheckExportVideoChanged;
         }
 
-        private void FrameNewMedia_Load(object sender, EventArgs e)
+        private void FrameNewMedia_Load(object sender, EventArgs args)
         {
             if (_startType == MediaType.Audio)
                 ExportVideo = false;
         }
 
-        private async void TextUrl_TextChanged(object sender, EventArgs e)
+        private async void TextUrl_TextChanged(object sender, EventArgs args)
         {
             await Input.WaitForFinishTyping(() => Url).ContinueWith(async _ =>
             {

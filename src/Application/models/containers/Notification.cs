@@ -13,11 +13,11 @@ public struct Notification
     
     public string[] ViewItemArray => new[] {DateQueued.ToString()!, SenderName, SenderGuid.ToString(), Message};
 
-    public Notification(string message, Type T, string? shortenedMessage = null)
+    public Notification(string message, Type type, string? shortenedMessage = null)
     {
         Message = message;
-        SenderName = T.Name;
-        SenderGuid = T.GUID;
+        SenderName = type.Name;
+        SenderGuid = type.GUID;
         ShortenedMessage = shortenedMessage;
     }
     

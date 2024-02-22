@@ -174,7 +174,7 @@ namespace JackTheVideoRipper.views
             };
         }
 
-        private void FrameNewMediaSimple_Load(object sender, EventArgs e)
+        private void FrameNewMediaSimple_Load(object sender, EventArgs args)
         {
             if (_startType == MediaType.Audio)
                 ExportVideo = false;
