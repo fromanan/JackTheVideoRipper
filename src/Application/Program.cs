@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using JackTheVideoRipper.framework;
 
 namespace JackTheVideoRipper
 {

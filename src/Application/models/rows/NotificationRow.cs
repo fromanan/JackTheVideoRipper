@@ -1,4 +1,5 @@
-﻿using JackTheVideoRipper.interfaces;
+﻿using JackTheVideoRipper.framework;
+using JackTheVideoRipper.interfaces;
 
 namespace JackTheVideoRipper.models;
 

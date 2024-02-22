@@ -1,4 +1,5 @@
 ﻿using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.Properties;

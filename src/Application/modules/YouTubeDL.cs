@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.parameters;
 using Nager.PublicSuffix;

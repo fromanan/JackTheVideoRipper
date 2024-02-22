@@ -1,4 +1,5 @@
-﻿using JackTheVideoRipper.models.rows;
+﻿using JackTheVideoRipper.framework;
+using JackTheVideoRipper.models.rows;
 
 namespace JackTheVideoRipper.models;
 

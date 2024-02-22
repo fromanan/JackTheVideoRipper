@@ -1,4 +1,5 @@
 ﻿using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 
 namespace JackTheVideoRipper.views
 {

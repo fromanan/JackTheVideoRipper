@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.DataStructures;
 using JackTheVideoRipper.views;
