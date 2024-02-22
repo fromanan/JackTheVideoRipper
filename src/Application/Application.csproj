@@ -269,7 +269,9 @@
     <Folder Include="..\..\external\ConsoleControl\source\Dependencies\">
       <Link>ConsoleControl\source\Dependencies</Link>
     </Folder>
-    <Folder Include="framework\" />
+    <Folder Include="..\..\external\ConsoleControl\source\Extensions\">
+      <Link>ConsoleControl\source\Extensions</Link>
+    </Folder>
   </ItemGroup>
 
 </Project>
