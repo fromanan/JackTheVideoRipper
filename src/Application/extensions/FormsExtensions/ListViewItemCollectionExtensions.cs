@@ -36,4 +36,11 @@ public static class ListViewItemCollectionExtensions
             itemCollection.Remove(item.As<ListViewItem>());
         }
     }
+
+    public static IViewItem[] ToArray(this ListViewItemCollection itemCollection)
+    {
+        IViewItem[] array = new IViewItem[itemCollection.Count];
+        itemCollection.CopyTo(array, 0);
+        return array;
+    }
 }
