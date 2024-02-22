@@ -133,22 +133,22 @@ public static class ProcessExtensions
 
         TaskCompletionSource<object?> completionSource = new();
 
-        void OnProcessExited(object? sender, EventArgs eventArgs)
-        {
-            completionSource.TrySetResult(null);
-        }
-
-        void OnProcessCancelled()
-        {
-            completionSource.SetCanceled(cancellationToken);
-        }
-        
         process.EnableRaisingEvents = true;
         process.Exited += OnProcessExited;
         if (cancellationToken != default)
             cancellationToken.Register(OnProcessCancelled);
 
         return process.HasExited ? Task.CompletedTask : completionSource.Task;
+
+        void OnProcessCancelled()
+        {
+            completionSource.SetCanceled(cancellationToken);
+        }
+
+        void OnProcessExited(object? sender, EventArgs eventArgs)
+        {
+            completionSource.TrySetResult(null);
+        }
     }
 
     public static IEnumerable<ProcessThread> GetThreads(this Process process)
