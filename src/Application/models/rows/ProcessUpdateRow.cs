@@ -183,6 +183,15 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     #endregion
 
+    #region Public Methods
+
+    public int CompareProgress(string progress)
+    {
+        return (int) (float.Parse(Progress.Remove("%")) - float.Parse(progress.Remove("%")));
+    }
+
+    #endregion
+
     #region Protected Methods
 
     protected ProcessUpdateArgs UpdateViewItemFields(string status)

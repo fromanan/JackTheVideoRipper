@@ -67,4 +67,6 @@ public interface IProcessUpdateRow : IProcessRunner, IListViewItemRow
     void SaveLogs();
 
     void Detach();
+    
+    int CompareProgress(string progress);
 }
