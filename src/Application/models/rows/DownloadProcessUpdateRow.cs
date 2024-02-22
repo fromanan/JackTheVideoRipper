@@ -84,6 +84,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
 
         return new RowUpdateArgs
         {
+            Tag = Tag,
             Progress = tokens[1],
             FileSize = FormatSize(tokens[3]),
             Speed = tokens[5],
