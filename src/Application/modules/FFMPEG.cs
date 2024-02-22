@@ -175,10 +175,16 @@ public static class FFMPEG
     
     public static FfmpegParameters ExtractAudio(string filepath)
     {
+        // ffmpeg -i video.mp4 -map 0:a -acodec libmp3lame out.mp3
+        /*return new FfmpegParameters(filepath)
+            .MapAudio(false)
+            .AudioCodec("libmp3lame")
+            .OutputFromInput(Operation.Extract, Formats.Audio.MP3);*/
+        
         return new FfmpegParameters(filepath)
             .NoVideo()
             .AudioCodec()
-            .OutputFromInput(Operation.NoAudio);
+            .OutputFromInput(Operation.Extract, Formats.Audio.AAC);
     }
     
     public static Process CreateCommand(string parameters)
@@ -227,6 +233,7 @@ public static class FFMPEG
             Operation.Recode    => "RECODED",
             Operation.Audio     => "AUDIO",
             Operation.NoAudio   => "NO_AUDIO",
+            Operation.Extract   => null,
             _                   => "OUTPUT"
         };
     }
@@ -266,7 +273,8 @@ public static class FFMPEG
         RemoveAudio,
         Validate,
         Audio,
-        NoAudio
+        NoAudio,
+        Extract
     }
 
     #endregion
