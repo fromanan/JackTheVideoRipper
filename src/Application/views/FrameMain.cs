@@ -121,9 +121,9 @@ namespace JackTheVideoRipper.views
          Threading.RunInMainContext(action);
       }
 
-      private static async Task UpdateViewElementAsync(Action action)
+      private static async Task UpdateViewElementAsync(Action action, CancellationToken? token = null)
       {
-         await Threading.RunInMainContext(action);
+         await Threading.RunInMainContext(action, token);
       }
 
       private void InitializeViews()
