@@ -8,6 +8,6 @@ public enum Dependencies
     VLC,
     AtomicParsley,
     Redistributables,
-    Aria2c,
+    Aria2C,
     ExifTool
 }
