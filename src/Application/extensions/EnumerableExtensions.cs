@@ -1,8 +1,13 @@
 ﻿namespace JackTheVideoRipper.extensions;
 
-public static class IEnumerableExtensions
+public static class EnumerableExtensions
 {
     public static string Merge<T>(this IEnumerable<T> enumerable, string separator = "")
+    {
+        return string.Join(separator, enumerable);
+    }
+    
+    public static string Merge<T>(this IEnumerable<T> enumerable, char separator)
     {
         return string.Join(separator, enumerable);
     }
@@ -21,7 +26,7 @@ public static class IEnumerableExtensions
     {
         foreach (T element in enumerable)
         {
-            action.Invoke(element);
+            action(element);
         }
     }
 
@@ -48,5 +53,10 @@ public static class IEnumerableExtensions
     public static bool Empty<T>(this IEnumerable<T> enumerable)
     {
         return !enumerable.Any();
+    }
+
+    public static IEnumerable<string> SelectStrings<T>(this IEnumerable<T> enumerable)
+    {
+        return enumerable.Select(e => e?.ToString() ?? "N/A");
     }
 }
