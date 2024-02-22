@@ -18,7 +18,7 @@ public static class ConsoleControlExtensions
     {
         if (!consoleControl.Visible)
             return;
-        consoleControl.WriteOutput($"{line}\r\n", color ?? DEFAULT_COLOR);
+        consoleControl.WriteOutput($"{line}{ConsoleControl.ConsoleControl.FORMS_NEWLINE}", color ?? DEFAULT_COLOR);
     }
     
     public static void WriteLog(this ConsoleControl.ConsoleControl consoleControl, ILogNode logNode)
