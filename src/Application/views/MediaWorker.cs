@@ -17,7 +17,9 @@ public class MediaWorker : BackgroundWorker, IClaimable
     /// <summary>
     /// Sleep delay between update cycles
     /// </summary>
-    private const int _UPDATE_FREQUENCY = 1000;
+    private const int _DEFAULT_UPDATE_FREQUENCY = 1000;
+
+    private int _updateFrequency;
 
     /// <summary>
     /// Used in passing the progress back to the ProcessPool since it only uses whole numbers 1-100
@@ -33,8 +35,9 @@ public class MediaWorker : BackgroundWorker, IClaimable
     /// Called prior to running, but after instantiating the class (we may do that at runtime when the containing class
     ///     is created, if the instance is a property)
     /// </summary>
-    public void InitializeWorker()
+    public void InitializeWorker(int updateFrequencyInMilliseconds = _DEFAULT_UPDATE_FREQUENCY)
     {
+        _updateFrequency = updateFrequencyInMilliseconds;
         WorkerReportsProgress = true;
         WorkerSupportsCancellation = true;
         DoWork += DoMediaWork;
@@ -57,7 +60,7 @@ public class MediaWorker : BackgroundWorker, IClaimable
         
             ReportProgress((int)(processRunner.Progress * PROGRESS_PRECISION_FACTOR), updateArgs);
 
-            Thread.Sleep(_UPDATE_FREQUENCY);
+            Thread.Sleep(_updateFrequency);
         }
 
         Claimed = false;
