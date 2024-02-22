@@ -11,8 +11,6 @@ public class NotificationsManager
 
     private readonly Timer? _clearNotificationsTimer;
 
-    private int _notificationClearTime = 5000; //< May want to be set by user later?
-
     private readonly Dictionary<Guid, List<Notification>> _notifications = new();
         
     private FrameNotifications? _frameNotifications;
@@ -43,7 +41,7 @@ public class NotificationsManager
     {
         QueueNotificationEvent += QueueNotification;
         SendNotificationEvent += AppendNotification;
-        _clearNotificationsTimer = new Timer(ClearPushNotifications, null, 0, _notificationClearTime);
+        _clearNotificationsTimer = new Timer(ClearPushNotifications, null, 0, Global.Configurations.NOTIFICATION_CLEAR_TIME);
         _notificationQueue = new TimedQueue<Notification>(PostNotification);
     }
 
@@ -58,7 +56,7 @@ public class NotificationsManager
 
     public void Reset()
     {
-        _clearNotificationsTimer?.Change(_notificationClearTime, _notificationClearTime);
+        _clearNotificationsTimer?.Change(Global.Configurations.NOTIFICATION_CLEAR_TIME, Global.Configurations.NOTIFICATION_CLEAR_TIME);
     }
 
     public void Clear()
