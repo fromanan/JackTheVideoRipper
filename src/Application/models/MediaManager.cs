@@ -8,7 +8,9 @@ using JackTheVideoRipper.models.parameters;
 using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.models.rows;
 using JackTheVideoRipper.modules;
+using JackTheVideoRipper.Properties;
 using JackTheVideoRipper.views;
+
 
 namespace JackTheVideoRipper.models;
 
@@ -158,12 +160,13 @@ public class MediaManager
     private async ValueTask QueueProcessAsync(IMediaItem row, ProcessRowType processRowType, 
         CancellationToken? cancellationToken = null)
     {
+        await Threading.RunInMainContext(AddProcessTask, cancellationToken);
+        return;
+
         void AddProcessTask()
         {
             AddRow(row, processRowType);
         }
-        
-        await Threading.RunInMainContext(AddProcessTask, cancellationToken);
     }
 
     public IEnumerable<DownloadMediaItem> FilterExistingUrls(IEnumerable<DownloadMediaItem> items)
@@ -181,14 +184,15 @@ public class MediaManager
         if (FrameNewMediaBatch.GetMedia(urlString) is not { } items)
             return;
 
+        await Parallel.ForEachAsync(FilterExistingUrls(items), QueueDownloadTask);
+        
+        QueueUpdated();
+        return;
+
         async ValueTask QueueDownloadTask(DownloadMediaItem row, CancellationToken token)
         {
             await QueueProcessAsync(row, ProcessRowType.Download, token);
         }
-
-        await Parallel.ForEachAsync(FilterExistingUrls(items), QueueDownloadTask);
-        
-        QueueUpdated();
     }
 
     public async Task BatchDocument()
@@ -467,12 +471,13 @@ public class MediaManager
     
     public async Task CompressBulk(IEnumerable<string> filepaths)
     {
+        await Parallel.ForEachAsync(filepaths, Compress);
+        return;
+
         async ValueTask Compress(string filepath, CancellationToken token)
         {
             await CompressVideo(filepath);
         }
-        
-        await Parallel.ForEachAsync(filepaths, Compress);
     }
 
     public async Task RecodeVideo(string filepath)
@@ -498,7 +503,7 @@ public class MediaManager
         NotImplemented(nameof(AddAudio));
     }
 
-    public async Task ExtractAudio(string filepath)
+    private static void NotImplemented(string name)
     {
         throw new DeveloperException(string.Format(Messages.NotImplemented, name), new NotImplementedException());
     }
@@ -514,11 +519,6 @@ public class MediaManager
         
         // Order list of parameters for each task necessary
         IEnumerable<FfmpegParameters> repairTaskParameters = await FFMPEG.RepairVideo(filepath);
-            
-        MediaItemRow<FfmpegParameters> CreateRepairRow(FfmpegParameters parameters)
-        {
-            return new MediaItemRow<FfmpegParameters>(filepath: parameters.OutputFilepath, mediaParameters: parameters);
-        }
 
         // Rows for each process required
         IEnumerable<MediaItemRow<FfmpegParameters>> mediaItemRows = repairTaskParameters.Select(CreateRepairRow);
@@ -530,6 +530,8 @@ public class MediaManager
             process.ErrorDataReceived += Output.WriteData;
             process.Start();
         }
+
+        return;
 
         /*async void Repair(MediaItemRow<FfmpegParameters> row)
         {
