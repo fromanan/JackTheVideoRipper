@@ -106,26 +106,40 @@ namespace JackTheVideoRipper.views
 
       public void SetNotificationBrief(Notification notification)
       {
-         string notificationMessage = notification.ShortenedMessage ?? notification.Message;
+         UpdateViewElement(SetNotificationStatus);
+         return;
 
-         UpdateViewElement(() =>
+         void SetNotificationStatus()
          {
+            string notificationMessage = notification.ShortenedMessage ?? notification.Message;
             NotificationStatus = $@"[{notification.DateQueued:T}]: {notificationMessage.TruncateEllipse(60)}";
-         });
+         }
       }
 
       #endregion
 
       #region Private Methods
       
+      public static readonly AutoResetEvent UpdateViewHandle = new(true);
+      
       private static void UpdateViewElement(Action action)
       {
+         if (!Ripper.Visible)
+            return;
+         
+         UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
          Threading.RunInMainContext(action);
+         UpdateViewHandle.Reset();
       }
 
       private static async Task UpdateViewElementAsync(Action action, CancellationToken? token = null)
       {
+         if (!Ripper.Visible)
+            return;
+         
+         UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
          await Threading.RunInMainContext(action, token);
+         UpdateViewHandle.Reset();
       }
 
       private void InitializeViews()
@@ -137,6 +151,88 @@ namespace JackTheVideoRipper.views
          listItems.DrawItem += DrawItem;
 
          OnSettingsUpdated(); //< Load initial values (for visibility bindings)
+      }
+      
+      private void UpdateView(IEnumerable<ProcessUpdateArgs> updateArgsEnumerable)
+      {
+         if (!Visible/* || !_ripper.WaitForNextDispatch(Global.Configurations.VIEW_UPDATE_TIMEOUT)*/)
+            return;
+         
+         //SuspendLayout();
+         
+         foreach (ProcessUpdateArgs args in updateArgsEnumerable)
+         {
+            if (args.Sender is not ProcessUpdateRow processUpdateRow || args.RowUpdateArgs is not { } updateArgs)
+               continue;
+
+            if (updateArgs.Progress is not null && processUpdateRow.CompareProgress(updateArgs.Progress) > 0)
+               continue;
+            
+            //ViewItem? item = ViewItems.ToArray().FirstOrDefault(v => v.Tag == args.RowUpdateArgs.Tag) as ViewItem;
+
+            SetFields(processUpdateRow, updateArgs);
+         }
+         
+         //ResumeLayout();
+         
+         Invalidate();
+      }
+
+      private static void SetFields(ProcessUpdateRow processUpdateRow, RowUpdateArgs updateArgs)
+      {
+         ViewField flags = 0;
+         List<string> values = new(8);
+
+         if (updateArgs.Status is not null)
+         {
+            flags |= ViewField.Status;
+            values.Add(updateArgs.Status);
+         }
+
+         if (updateArgs.MediaType is not null)
+         {
+            flags |= ViewField.MediaType;
+            values.Add(updateArgs.MediaType);
+         }
+
+         if (updateArgs.FileSize is not null)
+         {
+            flags |= ViewField.Size;
+            values.Add(updateArgs.FileSize);
+         }
+
+         if (updateArgs.Progress is not null)
+         {
+            flags |= ViewField.Progress;
+            values.Add(updateArgs.Progress);
+         }
+
+         if (updateArgs.Speed is not null)
+         {
+            flags |= ViewField.Speed;
+            values.Add(updateArgs.Speed);
+         }
+
+         if (updateArgs.Eta is not null)
+         {
+            flags |= ViewField.Eta;
+            values.Add(updateArgs.Eta);
+         }
+
+         if (updateArgs.Url is not null)
+         {
+            flags |= ViewField.Url;
+            values.Add(updateArgs.Url);
+         }
+
+         if (updateArgs.Path is not null)
+         {
+            flags |= ViewField.Path;
+            values.Add(updateArgs.Path);
+         }
+         
+         if (flags > 0)
+            UpdateViewElement(() => processUpdateRow.SetValues(flags, values.ToArray()));
       }
 
       private static void DrawColumnHeader(object? sender, DrawListViewColumnHeaderEventArgs args)
@@ -375,7 +471,7 @@ namespace JackTheVideoRipper.views
 
          ManagerUpdated = delegate { TimerProcessLimit_Tick(); };
          _ripper.SubscribeMediaManagerEvents(ManagerUpdated, AddItem, AddItems,
-             RemoveItem, RemoveItems);
+             RemoveItem, RemoveItems, UpdateView);
 
          // Edit Menu
          SubscribeEditMenu();

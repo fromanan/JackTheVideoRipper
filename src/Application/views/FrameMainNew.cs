@@ -348,7 +348,7 @@ namespace JackTheVideoRipper
 
          ManagerUpdated = delegate { TimerProcessLimit_Tick(); };
          _ripper.SubscribeMediaManagerEvents(ManagerUpdated, AddItem, AddItems,
-             RemoveItem, RemoveItems);
+             RemoveItem, RemoveItems, null!);
 
          // Edit Menu
          SubscribeEditMenu();

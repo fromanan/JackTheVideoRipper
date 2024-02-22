@@ -64,5 +64,7 @@ public class MediaWorker : BackgroundWorker, IClaimable
         }
 
         Claimed = false;
+
+        args.Result = ProcessUpdateArgs.Done(processRunner);
     }
 }

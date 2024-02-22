@@ -21,6 +21,7 @@ public class ProcessPool
     private readonly ConcurrentQueue<IProcessUpdateRow> _onDeckProcessQueue = new();
     private readonly ConcurrentHashSet<IProcessUpdateRow> _finishedProcesses = new();
     private readonly ClaimableConcurrentList<MediaWorker> _mediaWorkers = new(5);
+    private readonly UpdateBuffer<ProcessUpdateArgs> _updateBuffer = new();
     
     private readonly Task[] _clearTasks;
 
@@ -54,6 +55,7 @@ public class ProcessPool
 
     public event Action<IProcessUpdateRow> ProcessCompleted = delegate { };
     
+    public event Action<IEnumerable<ProcessUpdateArgs>> Updated = delegate { };
 
     #endregion
 
@@ -166,15 +168,10 @@ public class ProcessPool
         // Progress is passed as an integer, all other decimal places will be truncated
         float progress = args.ProgressPercentage / MediaWorker.PROGRESS_PRECISION_FACTOR;
 
-        if (args.UserState is not ProcessUpdateArgs updateArgs)
+        if (args.UserState is not ProcessUpdateArgs updateArgs || updateArgs.Completed)
             return;
-        
-        // TODO: Check if updateArgs.Completed
-        
-        // TODO: Send progress/updateArgs to the view
-        
-        // TODO: Queue updates... use dictionary and push to when updating, then every tick update the view all together,
-        //          when a new update hits, only save the latest
+
+        QueueUpdate(updateArgs);
     }
 
     private void OnCompleteWorker(object? sender, RunWorkerCompletedEventArgs runWorkerCompletedEventArgs)
@@ -184,18 +181,37 @@ public class ProcessPool
         
         worker.Claimed = false;
         
-        // TODO: Final update on the view to set at 100% and get the size where applicable...
+        if (runWorkerCompletedEventArgs.Result is ProcessUpdateArgs updateArgs)
+            QueueUpdate(updateArgs);
     }
 
-    // TODO: Call from the StartProcess method
-    private async Task RunTaskOnWorker(ProcessRunner processRunner)
+    private async Task RunTaskOnWorker(IProcessRunner processRunner)
     {
         (await GetNextAvailableWorker()).RunWorkerAsync(processRunner);
     }
 
     private async Task<MediaWorker> GetNextAvailableWorker()
     {
-        return await _mediaWorkers.Next(w => w is { Claimed: false, IsBusy: false }, 500);
+        return await _mediaWorkers.Next(w => w is { Claimed: false, IsBusy: false },
+            Global.Configurations.WORKER_QUEUE_CHECK_FREQUENCY);
+    }
+
+    private async void QueueUpdate(ProcessUpdateArgs args)
+    {
+        _updateBuffer.Add(args.RowUpdateArgs?.Tag ?? string.Empty, args);
+    }
+    
+    public readonly AutoResetEvent DispatchHandle = new(true);
+
+    public bool WaitForNextDispatch(int millisecondsTimeout)
+    {
+        return DispatchHandle.WaitOne(millisecondsTimeout);
+    }
+    
+    private async void DispatchUpdates(IEnumerable<ProcessUpdateArgs> processUpdateArgsEnumerable)
+    {
+        Updated.Invoke(processUpdateArgsEnumerable);
+        DispatchHandle.Set();
     }
 
     #endregion
@@ -205,6 +221,7 @@ public class ProcessPool
     public void Initialize()
     {
         InitializeWorkers();
+        _updateBuffer.OnBufferDispatched += DispatchUpdates;
     }
 
     public async Task Update()
@@ -216,9 +233,9 @@ public class ProcessPool
         if (!AnyRunning || _updating)
             return;
         
-        _updating = true;
+        /*_updating = true;
         await RunningProcesses.Update();
-        _updating = false;
+        _updating = false;*/
     }
 
     public void OnCompleteProcess(IProcessRunner processRunner)
@@ -328,6 +345,8 @@ public class ProcessPool
     private async ValueTask StartProcess(IProcessUpdateRow processUpdateRow, CancellationToken? cancellationToken = null)
     {
         RunProcess(processUpdateRow);
+
+        await RunTaskOnWorker(processUpdateRow);
 
         // Resume if we are Starting a Paused/Suspended Process
         if (processUpdateRow.Paused)
