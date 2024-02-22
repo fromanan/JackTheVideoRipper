@@ -6,6 +6,7 @@ using JackTheVideoRipper.models.enums;
 
 namespace JackTheVideoRipper
 {
+   [Obsolete("Older experimental design left for reference")]
    public partial class FrameMainNew : Form
    {
       #region Data Members
