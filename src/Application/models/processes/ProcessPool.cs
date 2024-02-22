@@ -154,7 +154,7 @@ public class ProcessPool
     {
         foreach (MediaWorker worker in _mediaWorkers)
         {
-            worker.InitializeWorker();
+            worker.InitializeWorker(Global.Configurations.WORKER_UPDATE_FREQUENCY);
             worker.ProgressChanged += OnUpdateWorker;
             worker.RunWorkerCompleted += OnWorkerComplete;
         }
