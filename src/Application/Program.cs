@@ -33,10 +33,6 @@ namespace JackTheVideoRipper
             // Ensures all required folders are present
             Task.Run(FileSystem.InitializeFileSystem)
         };
-        
-        public static bool VerboseDebugMode => Debugger.IsAttached;
-
-        public static bool CatchExceptions = true;
 
         #endregion
 
@@ -81,7 +77,7 @@ namespace JackTheVideoRipper
         private static async Task StartBackgroundTasks()
         {
             // Allows us to read out the console values
-            if (VerboseDebugMode)
+            if (Global.Configurations.VerboseDebugMode)
                 Input.OpenConsole();
 
             await Task.WhenAll(_BackgroundTasks);
@@ -104,7 +100,7 @@ namespace JackTheVideoRipper
         private static void ConfigureExceptionHandling()
         {
             // We want our IDE to access the exceptions
-            if (!CatchExceptions)
+            if (!Global.Configurations.CatchExceptions)
                 return;
             
             // Add the event handler for handling UI thread exceptions to the event.
