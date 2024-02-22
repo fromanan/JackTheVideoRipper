@@ -9,6 +9,12 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=I_003A_005CGitHub_005CJackTheVideoRipper_005Cexternal_005CProcessGovernor_005Cprocgov_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=I_003A_005CGitHub_005CJackTheVideoRipper_005Cexternal_005CProcessGovernor_005Cprocgov_005CAsproLock_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=I_003A_005CGitHub_005CJackTheVideoRipper_005Cexternal_005Cprocgov_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Aframework_002Ff_003ARipper_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Amodels_002Fd_003Aparameters_002Ff_003AFFMPEGParameters_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Amodels_002Fd_003Arows_002Ff_003AFFMPEGProcessRow_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Amodels_002Ff_003AMediaManager_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Ff_003AProgram_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">VISIBLE_FILES</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/SweaWarningsMode/@EntryValue">ShowAndRun</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=Constants/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AA_BB" /&gt;</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateConstants/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="_" Suffix="" Style="AA_BB" /&gt;</s:String>
@@ -22,6 +28,9 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=39036b4f_002Dbe0c_002D4536_002D8cf9_002D50c7758bce50/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;JackTheVideoRipperTest&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;Project Location="I:\GitHub\JackTheVideoRipper\tests\JackTheVideoRipperTest" Presentation="&amp;lt;JackTheVideoRipperTest&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
+	
+	
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002Fexternal_002FConsoleControl_002FConsoleControl/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002FProperties_002FAppInfo/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=JackTheVideoRipper_002FProperties_002FCaptions/@EntryIndexedValue">False</s:Boolean>
