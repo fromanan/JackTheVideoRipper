@@ -1,6 +1,6 @@
 ﻿using JackTheVideoRipper.models.containers;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 internal static class History
 {
