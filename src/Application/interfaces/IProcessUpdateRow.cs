@@ -26,7 +26,7 @@ public interface IProcessUpdateRow : IProcessRunner, IListViewItemRow
         set;
     }
         
-    public string Progress
+    public new string Progress
     {
         get;
         set;

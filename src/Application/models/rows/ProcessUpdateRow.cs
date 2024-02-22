@@ -55,7 +55,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         set => _viewCollection[ViewField.Size] = value;
     }
         
-    public string Progress
+    public new string Progress
     {
         get => _viewCollection[ViewField.Progress];
         set => _viewCollection[ViewField.Progress] = value;
