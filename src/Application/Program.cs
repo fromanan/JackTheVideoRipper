@@ -9,13 +9,28 @@ namespace JackTheVideoRipper
 
         private static readonly Task[] _BackgroundTasks =
         {
+            //
             Core.LoadConfigurationFiles(),
+            
+            //
             Statistics.InitializeCounters(),
+            
+            //
             Core.CheckForUpdates(),
+            
+            //
             YouTubeDL.StartupTasks(),
-            Core.UpdateDependencies(),
+            
+            // TODO: Web Requests Broken (downloads specifically)
+            //Core.UpdateDependencies(),
+            
+            //
             Task.Run(Core.CheckDependencies),
+            
+            //
             Core.CheckForYouTubeDLUpdates(),
+            
+            // Ensures all required folders are present
             Task.Run(FileSystem.InitializeFileSystem)
         };
         
@@ -33,6 +48,8 @@ namespace JackTheVideoRipper
             ConfigureGlobal();
             ConfigureExceptionHandling();
             ConfigureGraphics();
+            
+            // Inject the Windows Forms implementation
             Ripper.Instance = new Ripper(new FormsViewItemProvider());
         }
 
