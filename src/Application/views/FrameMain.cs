@@ -3,6 +3,8 @@ using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.models.processes;
+using JackTheVideoRipper.models.rows;
 
 namespace JackTheVideoRipper.views
 {

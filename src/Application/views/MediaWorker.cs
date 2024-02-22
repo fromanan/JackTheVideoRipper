@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using JackTheVideoRipper.models;
+using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.processes;
 
 namespace JackTheVideoRipper.views;
