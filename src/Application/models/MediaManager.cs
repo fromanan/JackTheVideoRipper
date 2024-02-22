@@ -95,6 +95,11 @@ public class MediaManager
 
     #region Public Methods
 
+    public bool WaitForNextDispatch(int millisecondsTimeout)
+    {
+        return _processPool.WaitForNextDispatch(millisecondsTimeout);
+    }
+
     public async Task Refresh()
     {
         await _processPool.Refresh();
