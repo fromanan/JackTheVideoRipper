@@ -1,9 +1,12 @@
 ﻿using JackTheVideoRipper.extensions;
-using JackTheVideoRipper.models.DataStructures;
+using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.models.data_structures;
+using JackTheVideoRipper.models.rows;
 using JackTheVideoRipper.views;
 using Timer = System.Threading.Timer;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.viewmodels;
 
 public class NotificationsManager
 {

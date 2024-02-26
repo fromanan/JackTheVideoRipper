@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper;
+﻿using JackTheVideoRipper.models;
+
+namespace JackTheVideoRipper.interfaces;
 
 public interface IConfigModel
 {

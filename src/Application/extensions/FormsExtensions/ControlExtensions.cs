@@ -1,5 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
+// ReSharper disable once CheckNamespace
 namespace System.Windows.Forms;
 
 public static class ControlExtensions

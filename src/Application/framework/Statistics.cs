@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.extensions;
-using JackTheVideoRipper.framework;
 using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.viewmodels;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 public static class Statistics
 {

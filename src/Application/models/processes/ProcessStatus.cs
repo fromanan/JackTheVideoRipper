@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper;
+﻿namespace JackTheVideoRipper.models.processes;
 
 [Flags]
 public enum ProcessStatus

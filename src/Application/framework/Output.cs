@@ -1,9 +1,10 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.viewmodels;
 using Console = JackTheVideoRipper.models.Console;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 internal static class Output
 {

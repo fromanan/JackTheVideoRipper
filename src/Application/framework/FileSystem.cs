@@ -10,7 +10,6 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using JackTheVideoRipper.extensions;
-using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.processes;
@@ -19,7 +18,7 @@ using Nager.PublicSuffix;
 using Newtonsoft.Json;
 using SpecialFolder = System.Environment.SpecialFolder;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 public static class FileSystem
 {

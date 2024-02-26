@@ -1,6 +1,8 @@
 ﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.models.rows;
 
 namespace JackTheVideoRipper.views
 {

@@ -2,7 +2,9 @@
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.viewmodels;
 
 namespace JackTheVideoRipper
 {

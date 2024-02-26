@@ -1,7 +1,7 @@
 ﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.processes;
 
 public class ProcessTable
 {

@@ -3,7 +3,7 @@ using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.processes;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 public readonly struct Command
 {

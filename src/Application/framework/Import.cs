@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace JackTheVideoRipper
+namespace JackTheVideoRipper.framework
 {
     internal static class Import
     {

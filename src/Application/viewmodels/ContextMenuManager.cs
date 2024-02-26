@@ -1,7 +1,9 @@
 ﻿using JackTheVideoRipper.framework;
+using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.models.rows;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.viewmodels;
 
 public class ContextMenuManager
 {

@@ -1,9 +1,8 @@
 ﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
-using JackTheVideoRipper.models.parameters;
 using JackTheVideoRipper.modules;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.models.parameters;
 
 public struct DownloadMediaParameters : IProcessParameters, IRequiresUrlParameters
 {

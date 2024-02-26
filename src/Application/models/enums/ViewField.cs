@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper.models;
+﻿namespace JackTheVideoRipper.models.enums;
 
 [Flags]
 public enum ViewField

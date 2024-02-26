@@ -1,6 +1,9 @@
 ﻿using System.Text.Json.Serialization;
+using JackTheVideoRipper.framework;
+using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.models;
+
 using static FileSystem;
 
 [Serializable]

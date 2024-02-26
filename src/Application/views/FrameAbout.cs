@@ -1,4 +1,6 @@
 ﻿using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
+using JackTheVideoRipper.modules;
 using JackTheVideoRipper.Properties;
 
 namespace JackTheVideoRipper

@@ -1,7 +1,7 @@
 ﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.views.modals;
 
-namespace JackTheVideoRipper.viewmodels;
+namespace JackTheVideoRipper.viewmodels.modals;
 
 public class BasicDropdownModal
 {

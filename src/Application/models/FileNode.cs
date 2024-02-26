@@ -1,7 +1,8 @@
 ﻿using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.modules;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.models;
 
 public class FileNode
 {

@@ -1,4 +1,6 @@
 ﻿using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.models.processes;
+using JackTheVideoRipper.models.rows;
 
 namespace JackTheVideoRipper.models;
 

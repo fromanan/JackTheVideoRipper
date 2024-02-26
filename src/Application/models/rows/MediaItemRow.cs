@@ -2,7 +2,7 @@
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.enums;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.rows;
 
 public struct MediaItemRow<T> : IMediaItem where T : IProcessParameters, new()
 {

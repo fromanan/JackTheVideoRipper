@@ -1,6 +1,6 @@
 ﻿using JackTheVideoRipper.models.enums;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.models;
 
 public class ContextActionEventArgs : EventArgs
 {

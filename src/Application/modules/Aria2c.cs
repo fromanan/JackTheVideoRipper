@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper.modules;
+﻿using JackTheVideoRipper.framework;
+
+namespace JackTheVideoRipper.modules;
 
 public static class Aria2c
 {

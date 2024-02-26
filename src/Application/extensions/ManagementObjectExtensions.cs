@@ -1,4 +1,5 @@
 ﻿using System.Management;
+using JackTheVideoRipper.framework;
 
 namespace JackTheVideoRipper.extensions;
 

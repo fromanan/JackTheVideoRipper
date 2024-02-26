@@ -3,7 +3,7 @@ using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 using Newtonsoft.Json;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.processes;
 
 [Serializable]
 public class ProcessLog

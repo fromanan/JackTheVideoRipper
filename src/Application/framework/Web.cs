@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using JackTheVideoRipper.extensions;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 public static class Web
 {

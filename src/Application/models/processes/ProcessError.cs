@@ -1,7 +1,7 @@
 ﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.models.processes;
 
 public readonly struct ProcessError
 {

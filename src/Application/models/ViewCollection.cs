@@ -1,4 +1,5 @@
 ﻿using JackTheVideoRipper.interfaces;
+using JackTheVideoRipper.models.enums;
 
 namespace JackTheVideoRipper.models;
 

@@ -1,4 +1,6 @@
-﻿using JackTheVideoRipper.models;
+﻿using JackTheVideoRipper.framework;
+using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
 
 namespace JackTheVideoRipper.extensions;
 

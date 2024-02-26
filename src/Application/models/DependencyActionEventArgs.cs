@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper.models;
+﻿using JackTheVideoRipper.models.enums;
+
+namespace JackTheVideoRipper.models;
 
 public class DependencyActionEventArgs : EventArgs
 {

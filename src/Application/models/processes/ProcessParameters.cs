@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.processes;
 
 public class ProcessParameters<T> : IProcessParameters where T : IProcessParameters
 {

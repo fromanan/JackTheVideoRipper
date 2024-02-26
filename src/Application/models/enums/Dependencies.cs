@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper;
+﻿namespace JackTheVideoRipper.models.enums;
 
 public enum Dependencies
 {

@@ -1,8 +1,9 @@
 ﻿using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.modules;
-using static JackTheVideoRipper.FileSystem;
+using static JackTheVideoRipper.framework.FileSystem;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.models.containers;
 
 public struct MetaData
 {

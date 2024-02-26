@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper;
+﻿namespace JackTheVideoRipper.models.data_structures;
 
 public class IndexableQueue<T> : List<T>
 {

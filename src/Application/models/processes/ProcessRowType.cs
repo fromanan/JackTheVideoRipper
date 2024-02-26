@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper.models.enums;
+﻿namespace JackTheVideoRipper.models.processes;
 
 public enum ProcessRowType
 {

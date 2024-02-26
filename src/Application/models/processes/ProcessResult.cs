@@ -3,22 +3,14 @@ using JackTheVideoRipper.models.enums;
 
 namespace JackTheVideoRipper.models.processes;
 
-public record ProcessResult
+public record ProcessResult(int ExitCode = -1, string Output = "")
 {
-    public ProcessResult(int exitCode = -1, string output = "")
+    public ProcessResult(ExitCode exitCode, string output = "") : this(exitCode.Cast<int>(), output)
     {
-        ExitCode = exitCode;
-        Output = output;
-    }
-
-    public ProcessResult(ExitCode exitCode, string output = "")
-    {
-        ExitCode = exitCode.Cast<int>();
-        Output = output;
     }
     
-    public readonly int ExitCode;
-    public readonly string Output;
+    public readonly int ExitCode = ExitCode;
+    public readonly string Output = Output;
 
     public bool Failed => ExitCode > 0;
 

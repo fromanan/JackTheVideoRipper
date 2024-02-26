@@ -1,5 +1,6 @@
 ﻿using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.models.processes;
 using Newtonsoft.Json;
 
 namespace JackTheVideoRipper.models.containers;

@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper
+﻿using JackTheVideoRipper.framework;
+
+namespace JackTheVideoRipper
 {
     public partial class FrameConvert : Form
     {

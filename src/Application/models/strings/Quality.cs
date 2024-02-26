@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper;
+﻿namespace JackTheVideoRipper.models.strings;
 
 public static class Quality
 {

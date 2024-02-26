@@ -1,14 +1,15 @@
-﻿namespace JackTheVideoRipper
+﻿using JackTheVideoRipper.framework;
+
+namespace JackTheVideoRipper.modules;
+
+internal static class AtomicParsley
 {
-    internal static class AtomicParsley
+    private static readonly string _ExecutablePath = FileSystem.ProgramPath(Executables.AtomicParsley);
+
+    public static bool IsInstalled => File.Exists(_ExecutablePath);
+
+    public static async Task DownloadLatest()
     {
-        private static readonly string _ExecutablePath = FileSystem.ProgramPath(Executables.AtomicParsley);
-
-        public static bool IsInstalled => File.Exists(_ExecutablePath);
-
-        public static async Task DownloadLatest()
-        {
-            await FileSystem.GetWebResourceHandle(Urls.AtomicParsley, FileSystem.Paths.Install).Run();
-        }
+        await FileSystem.GetWebResourceHandle(Urls.AtomicParsley, FileSystem.Paths.Install).Run();
     }
 }

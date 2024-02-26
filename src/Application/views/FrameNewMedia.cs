@@ -1,8 +1,13 @@
 ﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.models.parameters;
+using JackTheVideoRipper.models.rows;
+using JackTheVideoRipper.modules;
 using JackTheVideoRipper.Properties;
+using JackTheVideoRipper.viewmodels;
 
 namespace JackTheVideoRipper
 {

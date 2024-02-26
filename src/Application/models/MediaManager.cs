@@ -3,6 +3,7 @@ using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.containers;
+using JackTheVideoRipper.models.data_structures;
 using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.parameters;
 using JackTheVideoRipper.models.processes;

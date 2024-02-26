@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper.libraries;
+﻿namespace JackTheVideoRipper.framework;
 
 public static class ProviderMap
 {

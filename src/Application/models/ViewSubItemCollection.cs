@@ -1,4 +1,4 @@
-﻿using JackTheVideoRipper.extensions.FormsExtensions;
+﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.interfaces;
 
 namespace JackTheVideoRipper.models;

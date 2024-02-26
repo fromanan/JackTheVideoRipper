@@ -1,8 +1,6 @@
-﻿using JackTheVideoRipper.interfaces;
+﻿namespace JackTheVideoRipper.extensions;
 
-namespace JackTheVideoRipper.extensions;
-
-public static class IProcessUpdateRowExtensions
+public static class ProcessUpdateRowExtensions
 {
     public static void Pause(this IProcessUpdateRowEnumerable processUpdateRows)
     {

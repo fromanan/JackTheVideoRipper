@@ -1,7 +1,6 @@
-﻿using JackTheVideoRipper.extensions;
-using Nager.PublicSuffix;
+﻿using Nager.PublicSuffix;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.framework;
 
 public static class VideoProxy
 {

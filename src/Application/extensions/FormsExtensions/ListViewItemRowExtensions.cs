@@ -2,7 +2,7 @@
 
 namespace JackTheVideoRipper.extensions;
 
-public static class IListViewItemRowExtensions
+public static class ListViewItemRowExtensions
 {
     public static IViewItemEnumerable SelectViewItems(this IEnumerable<IListViewItemRow> listViewItemRows)
     {

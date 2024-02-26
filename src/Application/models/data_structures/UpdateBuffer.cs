@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using Timer = System.Threading.Timer;
 
-namespace JackTheVideoRipper.models.DataStructures;
+namespace JackTheVideoRipper.models.data_structures;
 
 public class UpdateBuffer<T>
 {

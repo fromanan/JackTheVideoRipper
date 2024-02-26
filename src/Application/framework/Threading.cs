@@ -1,4 +1,4 @@
-﻿namespace JackTheVideoRipper;
+﻿namespace JackTheVideoRipper.framework;
 
 public static class Threading
 {

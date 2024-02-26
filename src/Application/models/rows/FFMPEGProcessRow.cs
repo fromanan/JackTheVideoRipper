@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.models.enums;

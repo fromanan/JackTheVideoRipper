@@ -1,4 +1,5 @@
 ﻿using JackTheVideoRipper.models;
+using JackTheVideoRipper.modules;
 
 namespace JackTheVideoRipper
 {

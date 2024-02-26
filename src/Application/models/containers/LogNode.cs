@@ -1,7 +1,7 @@
 ﻿using JackTheVideoRipper.interfaces;
 using Newtonsoft.Json;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.containers;
 
 [Serializable]
 public readonly struct LogNode : ILogNode

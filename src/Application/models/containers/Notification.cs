@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper.models;
+﻿using JackTheVideoRipper.models.rows;
+
+namespace JackTheVideoRipper.models.containers;
 
 public struct Notification
 {

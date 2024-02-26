@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.framework;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.processes;
 
 public class ProcessBuffer
 {

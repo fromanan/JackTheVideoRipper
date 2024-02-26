@@ -2,7 +2,7 @@
 using JackTheVideoRipper.extensions;
 using Newtonsoft.Json;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.containers;
 
 [Serializable]
 public class ExceptionModel

@@ -4,18 +4,16 @@ namespace JackTheVideoRipper.models;
 
 public readonly struct ViewSubItem : IViewSubItem
 {
-    private readonly ListViewItem.ListViewSubItem _listViewSubItem;
-
-    public ListViewItem.ListViewSubItem ListViewSubItem => _listViewSubItem;
+    public ListViewItem.ListViewSubItem ListViewSubItem { get; }
 
     public ViewSubItem(ListViewItem.ListViewSubItem listViewSubItem)
     {
-        _listViewSubItem = listViewSubItem;
+        ListViewSubItem = listViewSubItem;
     }
 
     public string Text
     {
-        get => _listViewSubItem.Text;
-        set => _listViewSubItem.Text = value;
+        get => ListViewSubItem.Text;
+        set => ListViewSubItem.Text = value;
     }
 }

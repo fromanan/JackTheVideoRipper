@@ -2,6 +2,7 @@
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.viewmodels;
 
 namespace JackTheVideoRipper.views;
 

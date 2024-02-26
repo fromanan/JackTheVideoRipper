@@ -4,9 +4,12 @@ using System.Text.RegularExpressions;
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
-using JackTheVideoRipper.libraries;
+using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.models.enums;
+using JackTheVideoRipper.models.processes;
+using JackTheVideoRipper.models.strings;
 using JackTheVideoRipper.modules;
+using JackTheVideoRipper.viewmodels;
 
 namespace JackTheVideoRipper.models.rows;
 

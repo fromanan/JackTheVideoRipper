@@ -1,6 +1,6 @@
 ﻿namespace JackTheVideoRipper.models.enums;
 
-public enum ExitCode : int
+public enum ExitCode
 {
     Generic                 = 1,
     AccessDenied            = 2,

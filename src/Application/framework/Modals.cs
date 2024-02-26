@@ -1,8 +1,10 @@
 ﻿using JackTheVideoRipper.models;
+using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.Properties;
 using JackTheVideoRipper.viewmodels;
+using JackTheVideoRipper.viewmodels.modals;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 public static class Modals
 {

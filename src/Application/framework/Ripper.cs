@@ -4,8 +4,9 @@ using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.modules;
+using JackTheVideoRipper.viewmodels;
 using JackTheVideoRipper.views;
-using static JackTheVideoRipper.FileSystem;
+using static JackTheVideoRipper.framework.FileSystem;
 
 namespace JackTheVideoRipper.framework;
 

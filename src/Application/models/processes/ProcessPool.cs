@@ -4,7 +4,7 @@ using System.Diagnostics;
 using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
-using JackTheVideoRipper.models.DataStructures;
+using JackTheVideoRipper.models.data_structures;
 using JackTheVideoRipper.views;
 
 namespace JackTheVideoRipper.models.processes;

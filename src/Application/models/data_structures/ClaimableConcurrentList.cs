@@ -1,6 +1,7 @@
-﻿using JackTheVideoRipper.interfaces;
+﻿using JackTheVideoRipper.framework;
+using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper.models.DataStructures;
+namespace JackTheVideoRipper.models.data_structures;
 
 public class ClaimableConcurrentList<T> : ConcurrentList<T> where T : IClaimable, new()
 {

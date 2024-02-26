@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper.models.DataStructures;
+namespace JackTheVideoRipper.models.data_structures;
 
 public class ConcurrentList<T> : IReadOnlyList<T> where T : IClaimable, new()
 {

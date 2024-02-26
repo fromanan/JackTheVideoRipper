@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 public static class Tools
 {

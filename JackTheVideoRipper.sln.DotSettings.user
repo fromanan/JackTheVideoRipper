@@ -10,10 +10,10 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=I_003A_005CGitHub_005CJackTheVideoRipper_005Cexternal_005CProcessGovernor_005Cprocgov_005CAsproLock_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=I_003A_005CGitHub_005CJackTheVideoRipper_005Cexternal_005Cprocgov_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Aframework_002Ff_003ARipper_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Amodels_002Fd_003Aparameters_002Ff_003AFFMPEGParameters_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Amodels_002Fd_003Aparameters_002Ff_003AFFMPEGParameters_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Amodels_002Fd_003Arows_002Ff_003AFFMPEGProcessRow_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Fd_003Amodels_002Ff_003AMediaManager_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Ff_003AProgram_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=48153FA6_002D8334_002D423C_002DA8FB_002D64BB3D0BFB8C_002Ff_003AProgram_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">VISIBLE_FILES</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/SweaWarningsMode/@EntryValue">ShowAndRun</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=Constants/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AA_BB" /&gt;</s:String>

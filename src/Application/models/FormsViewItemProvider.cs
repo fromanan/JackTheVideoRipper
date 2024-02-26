@@ -1,7 +1,7 @@
-﻿using JackTheVideoRipper.interfaces;
-using JackTheVideoRipper.models;
+﻿using JackTheVideoRipper.framework;
+using JackTheVideoRipper.interfaces;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.models;
 
 public class FormsViewItemProvider : IViewItemProvider
 {

@@ -1,13 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace JackTheVideoRipper
+namespace JackTheVideoRipper.models.containers;
+
+internal class PlaylistInfoItem
 {
-    internal class PlaylistInfoItem
-    {
-        [JsonProperty("id")]
-        public string? Id { get; set; }
+    [JsonProperty("id")]
+    public string? Id { get; set; }
         
-        [JsonProperty("title")]
-        public string? Title { get; set; }
-    }
+    [JsonProperty("title")]
+    public string? Title { get; set; }
 }

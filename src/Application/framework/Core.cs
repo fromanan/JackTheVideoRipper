@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using JackTheVideoRipper.extensions;
-using JackTheVideoRipper.framework;
+using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.modules;
 using JackTheVideoRipper.Properties;
 using JackTheVideoRipper.views;
-using static JackTheVideoRipper.FileSystem;
+using static JackTheVideoRipper.framework.FileSystem;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 internal static class Core
 {

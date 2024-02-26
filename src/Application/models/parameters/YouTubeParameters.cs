@@ -1,5 +1,6 @@
 ﻿using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.framework;
+using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.modules;
 
 namespace JackTheVideoRipper.models.parameters;

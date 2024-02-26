@@ -1,6 +1,6 @@
 ﻿using static System.Windows.Forms.ListViewItem;
 
-namespace JackTheVideoRipper.extensions.FormsExtensions;
+namespace JackTheVideoRipper.extensions;
 
 public static class ListViewSubItemCollectionExtensions
 {

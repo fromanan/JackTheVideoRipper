@@ -1,9 +1,10 @@
 ﻿using System.Text.RegularExpressions;
 using JackTheVideoRipper.extensions;
+using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.models.enums;
-using JackTheVideoRipper.Properties;
+using JackTheVideoRipper.models.strings;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.viewmodels;
 
 public class FormatManager
 {
@@ -12,8 +13,8 @@ public class FormatManager
     private readonly List<string> _videoFormatList = new();
     private readonly List<string> _audioFormatList = new();
     
-    private readonly string[] AudioFormatRows = {"Bitrate / Sample Rate / Format / Codec"};
-    private readonly string[] VideoFormatRows = {"Resolution / Bitrate / Format / Type / Additional Info"};
+    private readonly string[] _audioFormatRows = {"Bitrate / Sample Rate / Format / Codec"};
+    private readonly string[] _videoFormatRows = {"Resolution / Bitrate / Format / Type / Additional Info"};
     
     public void ResetAvailableFormats()
     {
@@ -44,12 +45,14 @@ public class FormatManager
 
     public string? GetVideoFormatId(string videoFormat)
     {
-        return _availableVideoFormats.TryGetValue(videoFormat, out string? videoFormatId) ? videoFormatId : null;
+        //return _availableVideoFormats.TryGetValue(videoFormat, out string? videoFormatId) ? videoFormatId : null;
+        return _availableVideoFormats.GetValueOrDefault(videoFormat);
     }
     
     public string? GetAudioFormatId(string audioFormat)
     {
-        return _availableAudioFormats.TryGetValue(audioFormat, out string? audioFormatId) ? audioFormatId : null;
+        //return _availableAudioFormats.TryGetValue(audioFormat, out string? audioFormatId) ? audioFormatId : null;
+        return _availableAudioFormats.GetValueOrDefault(audioFormat);
     }
 
     public bool HasRecommendedVideoFormat => RecommendedVideoFormat.HasValue();
@@ -121,7 +124,7 @@ public class FormatManager
 
     public IEnumerable<string> GetAudioFormatRows()
     {
-        var audioFormatRows = AudioFormatRows.ToList();
+        List<string> audioFormatRows = _audioFormatRows.ToList();
 
         if (HasRecommendedAudioFormat)
             audioFormatRows.Add(RecommendedAudioFormat);
@@ -131,7 +134,7 @@ public class FormatManager
 
     public IEnumerable<string> GetVideoFormatRows()
     {
-        var videoFormatRows = VideoFormatRows.ToList();
+        List<string> videoFormatRows = _videoFormatRows.ToList();
 
         if (HasRecommendedVideoFormat)
             videoFormatRows.Add(RecommendedVideoFormat);

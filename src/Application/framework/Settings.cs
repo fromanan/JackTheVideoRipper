@@ -1,4 +1,6 @@
-﻿namespace JackTheVideoRipper.framework;
+﻿using JackTheVideoRipper.models.containers;
+
+namespace JackTheVideoRipper.framework;
 
 internal static class Settings
 {

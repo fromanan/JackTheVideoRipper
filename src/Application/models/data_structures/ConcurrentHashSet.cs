@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using JackTheVideoRipper.extensions;
 
-namespace JackTheVideoRipper.models;
+namespace JackTheVideoRipper.models.data_structures;
 
 public class ConcurrentHashSet<T> : IEnumerable<T> where T : notnull
 {

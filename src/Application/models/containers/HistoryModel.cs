@@ -1,6 +1,6 @@
-﻿using JackTheVideoRipper.extensions;
+﻿using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
-using JackTheVideoRipper.views;
+using JackTheVideoRipper.models.processes;
 using Newtonsoft.Json;
 
 namespace JackTheVideoRipper.models.containers;

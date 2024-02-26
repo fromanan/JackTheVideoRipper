@@ -4,7 +4,7 @@ using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
 using JackTheVideoRipper.views;
 
-namespace JackTheVideoRipper;
+namespace JackTheVideoRipper.framework;
 
 public static class Pages
 {
