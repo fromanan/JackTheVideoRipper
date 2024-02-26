@@ -57,6 +57,14 @@ internal static class Input
     // https://stackoverflow.com/questions/33776387/dont-raise-textchanged-while-continuous-typing
     public static async Task WaitForFinishTyping<T>(Func<T> valueGenerator) where T : IComparable
     {
+        _TaskTypeQueue.Add(IsStillTyping());
+        if (await _TaskTypeQueue[^1])
+            return;
+
+        // typing appears to have stopped, continue
+        _TaskTypeQueue.Clear();
+        return;
+
         async Task<bool> IsStillTyping()
         {
             Application.DoEvents();
@@ -67,13 +75,6 @@ internal static class Input
 
             return oldValue.Equals(valueGenerator.Invoke()) || taskCount != _TaskTypeQueue.Count - 1;
         }
-
-        _TaskTypeQueue.Add(IsStillTyping());
-        if (await _TaskTypeQueue[^1])
-            return;
-
-        // typing appears to have stopped, continue
-        _TaskTypeQueue.Clear();
     }
 
     #endregion
