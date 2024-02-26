@@ -79,7 +79,7 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
         {
             Tag = Tag,
             Progress = tokens[1],
-            FileSize = FormatSize(tokens[3]),
+            FileSize = Utils.FormatSize(tokens[3]),
             Speed = tokens[5],
             Eta = tokens[7]
         };
@@ -228,19 +228,6 @@ public class DownloadProcessUpdateRow : ProcessUpdateRow
             
         // Update history information
         History.Data.UpdateFileInformation(Tag, Path, FileSize);
-    }
-
-    private static string FormatSize(string size)
-    {
-        if (size.Contains("KiB"))
-            return size.Replace("KiB", " KB");
-        if (size.Contains("MiB"))
-            return size.Replace("MiB", " MB");
-        if (size.Contains("GiB"))
-            return size.Replace("GiB", " GB");
-        if (size.Contains("TeB"))
-            return size.Replace("TeB", " TB");
-        return size;
     }
 
     private void SendProcessCompletedNotification()
