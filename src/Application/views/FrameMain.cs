@@ -2,710 +2,322 @@
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.models;
-using JackTheVideoRipper.models.enums;
 using JackTheVideoRipper.models.processes;
 using JackTheVideoRipper.models.rows;
 
-namespace JackTheVideoRipper.views
+namespace JackTheVideoRipper.views;
+
+public partial class FrameMain : Form
 {
-   public partial class FrameMain : Form
+   #region Data Members
+
+   private IAsyncResult? _rowUpdateTask;
+
+   private readonly ContextMenuManager _contextMenuManager;
+
+   private readonly Ripper _ripper;
+
+   #endregion
+
+   #region Properties
+
+   private ListView.SelectedListViewItemCollection Selected => listItems.SelectedItems;
+
+   private ListView.ListViewItemCollection ViewItems => listItems.Items;
+
+   public IViewItem? FirstSelected => !NoneSelected ? Selected[0].As<IViewItem>() : null;
+
+   public IViewItem? LastSelected => !NoneSelected ? Selected[^1].As<IViewItem>() : null;
+
+   public bool NoneSelected => Selected.Count <= 0;
+
+   public ListViewItem? FocusedItem => listItems.FocusedItem;
+
+   public bool InItemBounds(MouseEventArgs args) => listItems.Visible && (FocusedItem?.InBounds(args.Location) ?? false);
+
+   public string CachedSelectedTag { get; private set; } = string.Empty;
+
+   private bool IsUpdating => _rowUpdateTask is not null && !_rowUpdateTask.IsCompleted;
+
+   #endregion
+
+   #region Events
+
+   private event Action ManagerUpdated = delegate { };
+
+   public event Action<object?, ContextActionEventArgs> ContextActionEvent = delegate { };
+
+   public event Action<object?, DependencyActionEventArgs> DependencyActionEvent = delegate { };
+
+   #endregion
+
+   #region Form View Accessors
+
+   private string NotificationStatus
    {
-      #region Data Members
+      set => notificationStatusLabel.Text = value;
+   }
 
-      private IAsyncResult? _rowUpdateTask;
+   private bool UpdateListViewRows
+   {
+      get => listItemRowsUpdateTimer.Enabled;
+      set => listItemRowsUpdateTimer.Enabled = value;
+   }
 
-      private readonly ContextMenuManager _contextMenuManager;
+   private bool UpdateStatusBar
+   {
+      get => timerStatusBar.Enabled;
+      set => timerStatusBar.Enabled = value;
+   }
 
-      private readonly Ripper _ripper;
+   private bool CheckForUpdates
+   {
+      get => timerCheckForUpdates.Enabled;
+      set => timerCheckForUpdates.Enabled = value;
+   }
 
-      #endregion
+   private bool UpdateProcessLimit
+   {
+      get => timerProcessLimit.Enabled;
+      set => timerProcessLimit.Enabled = value;
+   }
 
-      #region Properties
+   #endregion
 
-      private ListView.SelectedListViewItemCollection Selected => listItems.SelectedItems;
+   #region Constructor
 
-      private ListView.ListViewItemCollection ViewItems => listItems.Items;
+   public FrameMain(Ripper ripper)
+   {
+      // Needed for SubscribeEvents() calls (must come before)
+      _ripper = ripper;
 
-      public IViewItem? FirstSelected => !NoneSelected ? Selected[0].As<IViewItem>() : null;
+      InitializeComponent();
 
-      public IViewItem? LastSelected => !NoneSelected ? Selected[^1].As<IViewItem>() : null;
+      SubscribeEvents();
 
-      public bool NoneSelected => Selected.Count <= 0;
+      // Must come after InitializeComponents() call
+      _contextMenuManager = new ContextMenuManager(contextMenuListItems);
+   }
 
-      public ListViewItem? FocusedItem => listItems.FocusedItem;
+   #endregion
 
-      public bool InItemBounds(MouseEventArgs args) => listItems.Visible && (FocusedItem?.InBounds(args.Location) ?? false);
+   #region Public Methods
 
-      public string CachedSelectedTag { get; private set; } = string.Empty;
+   public void SetNotificationBrief(Notification notification)
+   {
+      UpdateViewElement(SetNotificationStatus);
+      return;
 
-      private bool IsUpdating => _rowUpdateTask is not null && !_rowUpdateTask.IsCompleted;
-
-      #endregion
-
-      #region Events
-
-      private event Action ManagerUpdated = delegate { };
-
-      public event Action<object?, ContextActionEventArgs> ContextActionEvent = delegate { };
-
-      public event Action<object?, DependencyActionEventArgs> DependencyActionEvent = delegate { };
-
-      #endregion
-
-      #region Form View Accessors
-
-      private string NotificationStatus
+      void SetNotificationStatus()
       {
-         set => notificationStatusLabel.Text = value;
+         string notificationMessage = notification.ShortenedMessage ?? notification.Message;
+         NotificationStatus = $@"[{notification.DateQueued:T}]: {notificationMessage.TruncateEllipse(60)}";
+      }
+   }
+
+   #endregion
+
+   #region Private Methods
+      
+   public static readonly AutoResetEvent UpdateViewHandle = new(true);
+      
+   private static void UpdateViewElement(Action action)
+   {
+      if (!Ripper.Visible)
+         return;
+         
+      UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
+      Threading.RunInMainContext(action);
+      UpdateViewHandle.Reset();
+   }
+
+   private static async Task UpdateViewElementAsync(Action action, CancellationToken? token = null)
+   {
+      if (!Ripper.Visible)
+         return;
+         
+      UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
+      await Threading.RunInMainContext(action, token);
+      UpdateViewHandle.Reset();
+   }
+
+   private void InitializeViews()
+   {
+      Text = $@" {Core.ApplicationTitle}";
+
+      listItems.OwnerDraw = true;
+      listItems.DrawColumnHeader += DrawColumnHeader;
+      listItems.DrawItem += DrawItem;
+
+      OnSettingsUpdated(); //< Load initial values (for visibility bindings)
+   }
+      
+   private void UpdateView(IEnumerable<ProcessUpdateArgs> updateArgsEnumerable)
+   {
+      if (!Visible/* || !_ripper.WaitForNextDispatch(Global.Configurations.VIEW_UPDATE_TIMEOUT)*/)
+         return;
+         
+      // TODO: Removed-- Causes Flickering
+      //SuspendLayout();
+         
+      foreach (ProcessUpdateArgs args in updateArgsEnumerable)
+      {
+         if (args.Sender is not ProcessUpdateRow processUpdateRow || args.RowUpdateArgs is not { } updateArgs)
+            continue;
+
+         if (updateArgs.Progress is not null && processUpdateRow.CompareProgress(updateArgs.Progress) > 0)
+            continue;
+            
+         //ViewItem? item = ViewItems.ToArray().FirstOrDefault(v => v.Tag == args.RowUpdateArgs.Tag) as ViewItem;
+
+         SetFields(processUpdateRow, updateArgs);
+      }
+         
+      // TODO: Removed-- Causes Flickering
+      //ResumeLayout();
+         
+      Invalidate();
+   }
+
+   private static void SetFields(ProcessUpdateRow processUpdateRow, RowUpdateArgs updateArgs)
+   {
+      ViewField flags = 0;
+      List<string> values = new(8);
+
+      if (updateArgs.Status is not null)
+      {
+         flags |= ViewField.Status;
+         values.Add(updateArgs.Status);
       }
 
-      private bool UpdateListViewRows
+      if (updateArgs.MediaType is not null)
       {
-         get => listItemRowsUpdateTimer.Enabled;
-         set => listItemRowsUpdateTimer.Enabled = value;
+         flags |= ViewField.MediaType;
+         values.Add(updateArgs.MediaType);
       }
 
-      private bool UpdateStatusBar
+      if (updateArgs.FileSize is not null)
       {
-         get => timerStatusBar.Enabled;
-         set => timerStatusBar.Enabled = value;
+         flags |= ViewField.Size;
+         values.Add(updateArgs.FileSize);
       }
 
-      private bool CheckForUpdates
+      if (updateArgs.Progress is not null)
       {
-         get => timerCheckForUpdates.Enabled;
-         set => timerCheckForUpdates.Enabled = value;
+         flags |= ViewField.Progress;
+         values.Add(updateArgs.Progress);
       }
 
-      private bool UpdateProcessLimit
+      if (updateArgs.Speed is not null)
       {
-         get => timerProcessLimit.Enabled;
-         set => timerProcessLimit.Enabled = value;
+         flags |= ViewField.Speed;
+         values.Add(updateArgs.Speed);
       }
 
-      #endregion
-
-      #region Constructor
-
-      public FrameMain(Ripper ripper)
+      if (updateArgs.Eta is not null)
       {
-         // Needed for SubscribeEvents() calls (must come before)
-         _ripper = ripper;
-
-         InitializeComponent();
-
-         SubscribeEvents();
-
-         // Must come after InitializeComponents() call
-         _contextMenuManager = new ContextMenuManager(contextMenuListItems);
+         flags |= ViewField.Eta;
+         values.Add(updateArgs.Eta);
       }
 
-      #endregion
-
-      #region Public Methods
-
-      public void SetNotificationBrief(Notification notification)
+      if (updateArgs.Url is not null)
       {
-         UpdateViewElement(SetNotificationStatus);
+         flags |= ViewField.Url;
+         values.Add(updateArgs.Url);
+      }
+
+      if (updateArgs.Path is not null)
+      {
+         flags |= ViewField.Path;
+         values.Add(updateArgs.Path);
+      }
+         
+      if (flags > 0)
+         UpdateViewElement(() => processUpdateRow.SetValues(flags, values.ToArray()));
+   }
+
+   private static void DrawColumnHeader(object? sender, DrawListViewColumnHeaderEventArgs args)
+   {
+      // Draw default background
+      args.DrawBackground();
+
+      // Draw text in a different font
+      TextRenderer.DrawText(args.Graphics, args.Header?.Text, Global.Fonts.Header, args.Bounds,
+         SystemColors.ControlText, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+   }
+
+   private static void DrawItem(object? sender, DrawListViewItemEventArgs args)
+   {
+      args.DrawDefault = true;
+   }
+
+   private async void Update(object? sender, EventArgs args)
+   {
+      if (!Core.IsConnectedToInternet())
+         await _ripper.OnConnectionLost();
+
+      if (IsUpdating)
          return;
 
-         void SetNotificationStatus()
-         {
-            string notificationMessage = notification.ShortenedMessage ?? notification.Message;
-            NotificationStatus = $@"[{notification.DateQueued:T}]: {notificationMessage.TruncateEllipse(60)}";
-         }
-      }
+      Application.DoEvents();
 
-      #endregion
-
-      #region Private Methods
-      
-      public static readonly AutoResetEvent UpdateViewHandle = new(true);
-      
-      private static void UpdateViewElement(Action action)
-      {
-         if (!Ripper.Visible)
-            return;
-         
-         UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
-         Threading.RunInMainContext(action);
-         UpdateViewHandle.Reset();
-      }
-
-      private static async Task UpdateViewElementAsync(Action action, CancellationToken? token = null)
-      {
-         if (!Ripper.Visible)
-            return;
-         
-         UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
-         await Threading.RunInMainContext(action, token);
-         UpdateViewHandle.Reset();
-      }
-
-      private void InitializeViews()
-      {
-         Text = $@" {Core.ApplicationTitle}";
-
-         listItems.OwnerDraw = true;
-         listItems.DrawColumnHeader += DrawColumnHeader;
-         listItems.DrawItem += DrawItem;
-
-         OnSettingsUpdated(); //< Load initial values (for visibility bindings)
-      }
-      
-      private void UpdateView(IEnumerable<ProcessUpdateArgs> updateArgsEnumerable)
-      {
-         if (!Visible/* || !_ripper.WaitForNextDispatch(Global.Configurations.VIEW_UPDATE_TIMEOUT)*/)
-            return;
-         
-         //SuspendLayout();
-         
-         foreach (ProcessUpdateArgs args in updateArgsEnumerable)
-         {
-            if (args.Sender is not ProcessUpdateRow processUpdateRow || args.RowUpdateArgs is not { } updateArgs)
-               continue;
-
-            if (updateArgs.Progress is not null && processUpdateRow.CompareProgress(updateArgs.Progress) > 0)
-               continue;
-            
-            //ViewItem? item = ViewItems.ToArray().FirstOrDefault(v => v.Tag == args.RowUpdateArgs.Tag) as ViewItem;
-
-            SetFields(processUpdateRow, updateArgs);
-         }
-         
-         //ResumeLayout();
-         
-         Invalidate();
-      }
-
-      private static void SetFields(ProcessUpdateRow processUpdateRow, RowUpdateArgs updateArgs)
-      {
-         ViewField flags = 0;
-         List<string> values = new(8);
-
-         if (updateArgs.Status is not null)
-         {
-            flags |= ViewField.Status;
-            values.Add(updateArgs.Status);
-         }
-
-         if (updateArgs.MediaType is not null)
-         {
-            flags |= ViewField.MediaType;
-            values.Add(updateArgs.MediaType);
-         }
-
-         if (updateArgs.FileSize is not null)
-         {
-            flags |= ViewField.Size;
-            values.Add(updateArgs.FileSize);
-         }
-
-         if (updateArgs.Progress is not null)
-         {
-            flags |= ViewField.Progress;
-            values.Add(updateArgs.Progress);
-         }
-
-         if (updateArgs.Speed is not null)
-         {
-            flags |= ViewField.Speed;
-            values.Add(updateArgs.Speed);
-         }
-
-         if (updateArgs.Eta is not null)
-         {
-            flags |= ViewField.Eta;
-            values.Add(updateArgs.Eta);
-         }
-
-         if (updateArgs.Url is not null)
-         {
-            flags |= ViewField.Url;
-            values.Add(updateArgs.Url);
-         }
-
-         if (updateArgs.Path is not null)
-         {
-            flags |= ViewField.Path;
-            values.Add(updateArgs.Path);
-         }
-         
-         if (flags > 0)
-            UpdateViewElement(() => processUpdateRow.SetValues(flags, values.ToArray()));
-      }
-
-      private static void DrawColumnHeader(object? sender, DrawListViewColumnHeaderEventArgs args)
-      {
-         // Draw default background
-         args.DrawBackground();
-
-         // Draw text in a different font
-         TextRenderer.DrawText(args.Graphics, args.Header?.Text, Global.Fonts.Header, args.Bounds,
-            SystemColors.ControlText, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
-      }
-
-      private static void DrawItem(object? sender, DrawListViewItemEventArgs args)
-      {
-         args.DrawDefault = true;
-      }
-
-      private async void Update(object? sender, EventArgs args)
-      {
-         if (!Core.IsConnectedToInternet())
-            await _ripper.OnConnectionLost();
-
-         if (IsUpdating)
-            return;
-
-         Application.DoEvents();
-
-         _rowUpdateTask = UpdateModuleAsync(_ripper.Update);
-      }
-
-      private IAsyncResult? UpdateModuleAsync(Func<Task> updateModuleAction)
-      {
-         return Visible ? BeginInvoke(updateModuleAction, null) : default;
-      }
-
-      private void ClearAll()
-      {
-         ViewItems.Clear();
-      }
-
-      private void AddItem(IViewItem item)
-      {
-         if (item is not ListViewItem listViewItem)
-            return;
-
-         UpdateViewElement(() => ViewItems.Add(listViewItem));
-      }
-
-      private void AddItems(IViewItemEnumerable items)
-      {
-         if (items.Cast<ListViewItem>() is not { } listViewItems)
-            return;
-
-         UpdateViewElement(() => ViewItems.AddRange(listViewItems));
-      }
-
-      private void RemoveItem(IViewItem item)
-      {
-         if (item is not ListViewItem listViewItem)
-            return;
-
-         UpdateViewElement(() => ViewItems.Remove(listViewItem));
-      }
-
-      private void RemoveItems(IViewItemEnumerable items)
-      {
-         if (items.Cast<ListViewItem>() is not { } listViewItems)
-            return;
-
-         UpdateViewElement(() => ViewItems.RemoveRange(listViewItems));
-      }
-
-      private void StopUpdates()
-      {
-         // Cancel currently running update
-         if (_rowUpdateTask is not null)
-            EndInvoke(_rowUpdateTask);
-
-         // Disable all timers
-         CheckForUpdates      = false;
-         UpdateListViewRows   = false;
-         UpdateStatusBar      = false;
-         UpdateProcessLimit   = false;
-      }
-
-      #endregion
-
-      #region Timer Events
-
-      private void InitializeTimers()
-      {
-         // Initiate the Update Loop
-         UpdateListViewRows   = true;
-         UpdateStatusBar      = true;
-      }
-
-      private async void TimerCheckForUpdates_Tick(object sender, EventArgs args)
-      {
-         CheckForUpdates = false;
-         await Ripper.OnCheckForApplicationUpdates();
-         CheckForUpdates = true;
-      }
-
-      private void TimerProcessLimit_Tick(object? sender = null, EventArgs? args = null)
-      {
-         UpdateProcessLimit = true;
-      }
-
-      #endregion
-
-      #region Form Events
-
-      private void OnFormLoad(object? sender, EventArgs args)
-      {
-         InitializeViews();
-         Threading.InitializeScheduler();
-         InitializeTimers();
-      }
-
-      private void OnFormShown(object? sender, EventArgs args)
-      {
-
-      }
-
-      private void OnFormClosing(object? sender, FormClosingEventArgs args)
-      {
-         // Tells you if user cancelled
-         _ripper.OnApplicationClosing(sender, args);
-         if (args.Cancel)
-            return;
-
-         // Make sure our updates don't continue while we close, signal completion
-         StopUpdates();
-      }
-
-      #endregion
-
-      #region Event Handlers
-
-      private async void KeyDownHandler(object? sender, KeyEventArgs args)
-      {
-         switch (args.KeyCode)
-         {
-            // Ctrl + C -- Copy
-            case Keys.C when args is { Control: true }:
-               ContextAction(sender, ContextActions.CopyUrl);
-               args.Handled = true;
-               return;
-            // Ctrl + V -- Paste
-            case Keys.V when args is { Control: true }:
-               await _ripper.OnPasteContent();
-               args.Handled = true;
-               return;
-            // Ctrl + R -- Refresh
-            case Keys.R when args is { Control: true }:
-               await _ripper.OnRefresh();
-               args.Handled = true;
-               return;
-            // Ctrl + O -- Open
-            case Keys.O when args is { Control: true }:
-               ContextAction(sender, ContextActions.OpenMedia);
-               return;
-            // Ctrl + E -- Explorer
-            case Keys.E when args is { Control: true }:
-               ContextAction(sender, ContextActions.Reveal);
-               return;
-            case Keys.Oemtilde:
-               await Output.OpenMainConsoleWindow();
-               args.Handled = true;
-               return;
-            case Keys.Delete:
-               ContextAction(sender, ContextActions.Remove);
-               args.Handled = true;
-               return;
-         }
-      }
-
-      private void OnUpdateStatusBar(object? sender, EventArgs args)
-      {
-         toolbarLabelStatus.Text          = Statistics.Toolbar.ToolbarStatus;
-         toolbarLabelProcessCounts.Text   = Statistics.Toolbar.ToolbarProcessCount;
-         toolBarLabelCpu.Text             = Statistics.Toolbar.ToolbarCpu;
-         toolBarLabelMemory.Text          = Statistics.Toolbar.ToolbarMemory;
-         toolBarLabelNetwork.Text         = Statistics.Toolbar.ToolbarNetwork;
-      }
-
-      private void OnSettingsUpdated()
-      {
-         openConsoleToolStripMenuItem.Visible = Settings.Data.EnableDeveloperMode;
-         openHistoryToolStripMenuItem.Visible = Settings.Data.StoreHistory;
-      }
-
-      private void OnClearNotifications()
-      {
-         UpdateViewElement(() => NotificationStatus = string.Empty);
-      }
-
-      private void OnFormClick(object? sender, EventArgs args)
-      {
-         CachedSelectedTag = FirstSelected?.Tag ?? string.Empty;
-      }
-
-      private void OnDragEnter(object? sender, DragEventArgs args)
-      {
-         if (args.Data is null)
-            return;
-
-         args.Effect = args.IsValidDroppable() ?
-             DragDropEffects.Copy :
-             DragDropEffects.None;
-      }
-
-      private void OnDragDrop(object? sender, DragEventArgs args)
-      {
-         if (args.IsText() && args.AsText() is string content)
-         {
-            _ripper.OnDropUrl(content);
-         }
-
-         if (args.IsFile() && args.AsFile() is string[] { Length: > 0 } filepaths)
-         {
-            _ripper.OnDropFile(filepaths);
-         }
-      }
-
-      private void SubscribeEvents()
-      {
-         // Bind to Settings Being Updated
-         FrameSettings.SettingsUpdatedEvent += OnSettingsUpdated;
-
-         // User Events
-         SubscribeFormEvents();
-
-         // Core Handlers
-         SubscribeCoreHandlers();
-
-         ManagerUpdated = delegate { TimerProcessLimit_Tick(); };
-         _ripper.SubscribeMediaManagerEvents(ManagerUpdated, AddItem, AddItems,
-             RemoveItem, RemoveItems, UpdateView);
-
-         // Edit Menu
-         SubscribeEditMenu();
-
-         // Subpages
-         SubscribeSubpageActions();
-
-         // Core Buttons
-         SubscribeCoreButtons();
-
-         // Dependencies
-         SubscribeDependencies();
-
-         // Media Downloads
-         SubscribeMediaTasks();
-
-         // Tools
-         SubscribeToolMenu();
-
-         // Notifications
-         SubscribeNotificationsBar();
-
-         // Item Context Menu
-         SubscribeContextEvents();
-      }
-
-      private void SubscribeCoreHandlers()
-      {
-         Load                                                  += OnFormLoad;
-         Shown                                                 += OnFormShown;
-         Shown                                                 += Ripper.OnEndStartup;
-         FormClosing                                           += OnFormClosing;
-      }
-
-      private void SubscribeFormEvents()
-      {
-         KeyDown                                               += KeyDownHandler;
-         Click                                                 += OnFormClick;
-         listItems.Click                                       += OnFormClick;
-         contextMenuListItems.Click                            += OnFormClick;
-         listItems.DragEnter                                   += OnDragEnter;
-         listItems.DragDrop                                    += OnDragDrop;
-         listItems.MouseClick                                  += OnListItemsMouseClick;
-      }
-
-      private void SubscribeCoreButtons()
-      {
-         openDownloadFolderToolStripMenuItem.Click             += Ripper.OnOpenDownloads;
-         exitToolStripMenuItem.Click                           += (_, _) => Close();
-         statusBar.DoubleClick                                 += Ripper.OnOpenTaskManager;
-         openTaskManagerToolStripMenuItem.Click                += Ripper.OnOpenTaskManager;
-         settingsToolStripMenuItem.Click                       += Ripper.OnOpenSettings;
-         checkForUpdatesToolStripMenuItem.Click                += Ripper.OnCheckForUpdates;
-         openDependenciesFolderToolStripMenuItem.Click         += Ripper.OnOpenInstallFolder;
-      }
-
-      private void SubscribeSubpageActions()
-      {
-         aboutToolStripMenuItem.Click                          += Ripper.OnOpenAbout;
-         convertToolStripMenuItem.Click                        += Ripper.OnOpenConvert;
-      }
-
-      private void SubscribeMediaTasks()
-      {
-         toolStripButtonDownloadVideo.Click                    += _ripper.OnDownloadVideo;
-         toolStripButtonDownloadAudio.Click                    += _ripper.OnDownloadAudio;
-         downloadVideoToolStripMenuItem.Click                  += _ripper.OnDownloadVideo;
-         downloadAudioToolStripMenuItem.Click                  += _ripper.OnDownloadAudio;
-
-         // Download Batch
-         downloadBatchYouTubePlaylistlToolStripMenuItem.Click  += _ripper.OnBatchPlaylist;
-         downloadBatchDocumentToolStripMenuItem.Click          += _ripper.OnBatchDocument;
-         downloadBatchManualToolStripMenuItem.Click            += _ripper.OnDownloadBatch;
-         
-         // Other Batch Options
-         compressBatchToolStripMenuItem.Click                  += _ripper.OnCompressBulk;
-      }
-      
-      private void DependencyAction(object? sender, Dependencies dependency)
-      {
-         DependencyActionEvent(sender, new DependencyActionEventArgs(dependency));
-      }
-
-      private void SubscribeDependencies()
-      {
-         ytdlpToolStripMenuItem.Click += (sender, _) =>
-            DependencyAction(sender, Dependencies.YouTubeDL);
-         vS2010RedistributableToolStripMenuItem.Click += (sender, _) =>
-            DependencyAction(sender, Dependencies.Redistributables);
-         atomicParsleyToolStripMenuItem.Click += (sender, _) =>
-            DependencyAction(sender, Dependencies.AtomicParsley);
-         vlcPlayerToolStripMenuItem.Click += (sender, _) =>
-            DependencyAction(sender, Dependencies.VLC);
-         handbrakeToolStripMenuItem.Click += (sender, _) =>
-            DependencyAction(sender, Dependencies.Handbrake);
-         fFmpegToolStripMenuItem.Click += (sender, _) =>
-            DependencyAction(sender, Dependencies.FFMPEG);
-      }
-
-      private void SubscribeToolMenu()
-      {
-         validateVideoToolStripMenuItem.Click                  += Ripper.OnVerifyIntegrity;
-         compressVideoToolStripMenuItem.Click                  += _ripper.OnCompressVideo;
-         repairVideoToolStripMenuItem.Click                    += _ripper.OnRepairVideo;
-         recodeVideoToolStripMenuItem.Click                    += _ripper.OnRecodeVideo;
-         openConsoleToolStripMenuItem.Click                    += Ripper.OnOpenConsole;
-         openHistoryToolStripMenuItem.Click                    += Ripper.OnOpenHistory;
-      }
-
-      private void SubscribeEditMenu()
-      {
-         copyFailedUrlsToClipboardToolStripMenuItem.Click      += _ripper.OnCopyFailedUrls;
-         copyAllUrlsToClipboardToolStripMenuItem.Click         += _ripper.OnCopyAllUrls;
-         retryAllToolStripMenuItem.Click                       += _ripper.OnRetryAll;
-         stopAllToolStripMenuItem.Click                        += _ripper.OnStopAll;
-         clearFailuresToolStripMenuItem.Click                  += _ripper.OnRemoveFailed;
-         clearAllToolStripMenuItem.Click                       += (_, _) => ClearAll();
-         clearAllToolStripMenuItem.Click                       += _ripper.OnClearAllViewItems;
-         clearSuccessesToolStripMenuItem.Click                 += _ripper.OnRemoveSucceeded;
-         pauseAllToolStripMenuItem.Click                       += _ripper.OnPauseAll;
-         resumeAllToolStripMenuItem.Click                      += _ripper.OnResumeAll;
-      }
-
-      private void SubscribeNotificationsBar()
-      {
-         NotificationsManager.SendNotificationEvent            += SetNotificationBrief;
-         NotificationsManager.ClearPushNotificationsEvent      += OnClearNotifications;
-         notificationStatusLabel.MouseDown                     += _ripper.OnNotificationBarClicked;
-      }
-
-      private async void OnListItemsMouseClick(object? sender, MouseEventArgs args)
-      {
-         if (args.IsRightClick() && InItemBounds(args))
-            await _contextMenuManager.OpenContextMenu();
-      }
-
-      private void ContextAction(object? sender, ContextActions contextAction)
-      {
-         ContextActionEvent(sender, new ContextActionEventArgs(contextAction));
-      }
-
-      private void SubscribeContextEvents()
-      {
-         // File Options
-
-         openFolderToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Reveal);
-         };
-
-         openUrlInBrowserToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.OpenUrl);
-         };
-
-         openInMediaPlayerToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.OpenMedia);
-         };
-
-         openInConsoleToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.OpenConsole);
-         };
-
-         // Edit Options
-
-         copyUrlToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.CopyUrl);
-         };
-
-         copyCommandToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.CopyCommand);
-         };
-
-         // Process Options
-
-         pauseProcessToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Pause);
-         };
-
-         resumeProcessToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Resume);
-         };
-
-         stopProcessToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Stop);
-         };
-
-         retryProcessToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Retry);
-         };
-
-         // Result Options
-
-         deleteFromDiskToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Delete);
-         };
-
-         reprocessMediaToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Reprocess);
-         };
-         
-         convertToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Convert);
-         };
-
-         compressToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Compress);
-         };
-
-         // Miscellaneous
-
-         removeRowToolStripMenuItem.Click += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.Remove);
-         };
-
-         listItems.DoubleClick += (sender, _) =>
-         {
-            ContextAction(sender, ContextActions.OpenMedia);
-         };
-      }
-
-      #endregion
+      _rowUpdateTask = UpdateModuleAsync(_ripper.Update);
    }
+
+   private IAsyncResult? UpdateModuleAsync(Func<Task> updateModuleAction)
+   {
+      return Visible ? BeginInvoke(updateModuleAction, null) : default;
+   }
+
+   private void ClearAll()
+   {
+      ViewItems.Clear();
+   }
+
+   private void AddItem(IViewItem item)
+   {
+      if (item is not ListViewItem listViewItem)
+         return;
+
+      UpdateViewElement(() => ViewItems.Add(listViewItem));
+   }
+
+   private void AddItems(IViewItemEnumerable items)
+   {
+      if (items.Cast<ListViewItem>() is not { } listViewItems)
+         return;
+
+      UpdateViewElement(() => ViewItems.AddRange(listViewItems));
+   }
+
+   private void RemoveItem(IViewItem item)
+   {
+      if (item is not ListViewItem listViewItem)
+         return;
+
+      UpdateViewElement(() => ViewItems.Remove(listViewItem));
+   }
+
+   private void RemoveItems(IViewItemEnumerable items)
+   {
+      if (items.Cast<ListViewItem>() is not { } listViewItems)
+         return;
+
+      UpdateViewElement(() => ViewItems.RemoveRange(listViewItems));
+   }
+
+   private void StopUpdates()
+   {
+      // Cancel currently running update
+      if (_rowUpdateTask is not null)
+         EndInvoke(_rowUpdateTask);
+
+      // Disable all timers
+      CheckForUpdates      = false;
+      UpdateListViewRows   = false;
+      UpdateStatusBar      = false;
+      UpdateProcessLimit   = false;
+   }
+
+   #endregion
 }
