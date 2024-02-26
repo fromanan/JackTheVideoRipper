@@ -518,6 +518,11 @@ public static class FileSystem
             throw new ProcessFailedToStartException(RFileSystem.CouldNotStartExplorer);
         }
     }
+    
+    public static void OpenFileExplorerWithFileSelected(string filePath)
+    {
+        OpenFileExplorer($"/select,{filePath.WrapQuotes()}");
+    }
 
     public static void OpenTaskManager()
     {
@@ -549,11 +554,6 @@ public static class FileSystem
         }
     }
 
-    public static void OpenFileExplorerWithFileSelected(string filePath)
-    {
-        OpenFileExplorer($"/select,{filePath.WrapQuotes()}");
-    }
-    
     public static async Task<bool> InstallProgram(string downloadUrl, string filename)
     {
         if (CreateInstallPath(filename) is not { } installPath)
