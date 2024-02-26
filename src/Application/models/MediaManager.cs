@@ -12,7 +12,6 @@ using JackTheVideoRipper.modules;
 using JackTheVideoRipper.Properties;
 using JackTheVideoRipper.views;
 
-
 namespace JackTheVideoRipper.models;
 
 public class MediaManager

@@ -315,6 +315,7 @@ public class ProcessPool
         queueCallback(processUpdateRow.ViewItem);
     }
     
+    // TODO: Recovery
     public void FindOrphanedProcesses()
     {
         Parallel.ForEach(ActiveProcessIds.Select(Process.GetProcessById), process =>
@@ -342,7 +343,8 @@ public class ProcessPool
         _fillingQueue = false;
     }
 
-    private async ValueTask StartProcess(IProcessUpdateRow processUpdateRow, CancellationToken? cancellationToken = null)
+    //private async ValueTask StartProcess(IProcessUpdateRow processUpdateRow, CancellationToken? cancellationToken = null)
+    private async ValueTask StartProcess(IProcessUpdateRow processUpdateRow)
     {
         RunProcess(processUpdateRow);
 
@@ -560,15 +562,15 @@ public class ProcessPool
         IProcessUpdateRow[] erroredProcesses = GetWhereStatus(ProcessStatus.Error).ToArray();
         List<bool> results = new(erroredProcesses.Length);
 
+        Parallel.ForEach(erroredProcesses, AddResult);
+        
+        return results.Any();
+
         void AddResult(IProcessUpdateRow process)
         {
             bool result = RetryProcess(process);
             lock (results) { results.Add(result); }
         }
-
-        Parallel.ForEach(erroredProcesses, AddResult);
-        
-        return results.Any();
     }
     
     public IProcessUpdateRowEnumerable RemoveAll(ProcessStatus processStatus)

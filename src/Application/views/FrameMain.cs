@@ -282,7 +282,13 @@ public partial class FrameMain : Form
       if (item is not ListViewItem listViewItem)
          return;
 
-      UpdateViewElement(() => ViewItems.Add(listViewItem));
+      UpdateViewElement(AddViewItem);
+      return;
+
+      void AddViewItem()
+      {
+         ViewItems.Add(listViewItem);
+      }
    }
 
    private void AddItems(IViewItemEnumerable items)
@@ -290,7 +296,14 @@ public partial class FrameMain : Form
       if (items.Cast<ListViewItem>() is not { } listViewItems)
          return;
 
-      UpdateViewElement(() => ViewItems.AddRange(listViewItems));
+      UpdateViewElement(AddViewItems);
+      return;
+
+      void AddViewItems()
+      {
+         // ReSharper disable once PossibleMultipleEnumeration
+         ViewItems.AddRange(listViewItems);
+      }
    }
 
    private void RemoveItem(IViewItem item)
@@ -298,7 +311,13 @@ public partial class FrameMain : Form
       if (item is not ListViewItem listViewItem)
          return;
 
-      UpdateViewElement(() => ViewItems.Remove(listViewItem));
+      UpdateViewElement(RemoveViewItem);
+      return;
+
+      void RemoveViewItem()
+      {
+         ViewItems.Remove(listViewItem);
+      }
    }
 
    private void RemoveItems(IViewItemEnumerable items)
@@ -306,7 +325,14 @@ public partial class FrameMain : Form
       if (items.Cast<ListViewItem>() is not { } listViewItems)
          return;
 
-      UpdateViewElement(() => ViewItems.RemoveRange(listViewItems));
+      UpdateViewElement(RemoveViewItems);
+      return;
+
+      void RemoveViewItems()
+      {
+         // ReSharper disable once PossibleMultipleEnumeration
+         ViewItems.RemoveRange(listViewItems);
+      }
    }
 
    private void StopUpdates()
