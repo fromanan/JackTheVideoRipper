@@ -34,10 +34,10 @@ public enum ProcessStatus
     Finalizing = 1 << 8,
     
     // Process finished (Error, Stopped, Cancelled, Succeeded)
-    Completed = (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5),
+    Completed = Error | Stopped | Cancelled | Succeeded,
     
     // Process failed (Error, Stopped, Cancelled)
-    Failed = (1 << 2) | (1 << 3) | (1 << 4)
+    Failed = Error | Stopped | Cancelled,
     
     // Process actively running
     Active = Starting | Running | Finalizing

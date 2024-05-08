@@ -189,7 +189,7 @@ public class MediaManager
     {
         if (FrameNewMediaBatch.GetMedia(urlString) is not { } items)
             return;
-
+        
         await Parallel.ForEachAsync(FilterExistingUrls(items), QueueDownloadTask);
         
         QueueUpdated();
@@ -205,7 +205,6 @@ public class MediaManager
     {
         if (FileSystem.ReadFileUsingDialog() is not { } fileContent)
             return;
-
         await DownloadBatch(Import.GetAllUrlsFromPayload(fileContent));
     }
 
@@ -213,7 +212,6 @@ public class MediaManager
     {
         if (await FrameImportPlaylist.GetMetadata() is not { } links)
             return;
-
         await DownloadBatch(links);
     }
 
@@ -238,7 +236,6 @@ public class MediaManager
     {
         if (FrameNewMedia.GetMedia(type) is not { } mediaItemRow)
             return;
-            
         await QueueProcessAsync(mediaItemRow, ProcessRowType.Download);
     }
 
@@ -246,7 +243,6 @@ public class MediaManager
     {
         if (FrameNewMediaSimple.GetMedia(type) is not { } mediaItemRow)
             return;
-            
         await QueueProcessAsync(mediaItemRow, ProcessRowType.Download);
     }
 
@@ -268,7 +264,6 @@ public class MediaManager
     {
         if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? process) || process is null)
             return;
-
         RemoveProcess(process);
     }
     
@@ -285,7 +280,6 @@ public class MediaManager
     {
         if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
             return;
-
         PauseProcess(result);
     }
     
@@ -301,7 +295,6 @@ public class MediaManager
     {
         if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
             return;
-
         ResumeProcess(result);
     }
     

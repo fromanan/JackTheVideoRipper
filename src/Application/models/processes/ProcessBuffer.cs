@@ -119,7 +119,7 @@ public class ProcessBuffer
     
     private void AppendResult(string? line)
     {
-        if (line != null && line.HasValue())
+        if (line is not null && line.HasValue())
         {
             AddResultLine(line, ProcessLogType.Log);
             ResultCount++;
@@ -128,7 +128,7 @@ public class ProcessBuffer
 
     private void AppendError(string? line)
     {
-        if (line != null && line.HasValue())
+        if (line is not null && line.HasValue())
         {
             AddResultLine(line, ProcessLogType.Error);
             ErrorCount++;
