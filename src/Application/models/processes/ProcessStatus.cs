@@ -38,4 +38,7 @@ public enum ProcessStatus
     
     // Process failed (Error, Stopped, Cancelled)
     Failed = (1 << 2) | (1 << 3) | (1 << 4)
+    
+    // Process actively running
+    Active = Starting | Running | Finalizing
 }
