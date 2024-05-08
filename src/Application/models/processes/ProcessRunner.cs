@@ -94,8 +94,11 @@ public abstract class ProcessRunner : IProcessRunner
 
     public virtual async Task<bool> Start()
     {
-        if (ProcessStatus is ProcessStatus.Running)
+        //if (ProcessStatus.HasFlag(ProcessStatus.Active))
+        if (ProcessStatus is ProcessStatus.Active)
             return false;
+        
+        SetProcessStatus(ProcessStatus.Starting);
         
         InitializeProcess();
 
