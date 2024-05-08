@@ -45,8 +45,14 @@
     <data name="Queued" xml:space="preserve">
         <value>Queued</value>
     </data>
+    <data name="Running" xml:space="preserve">
+        <value>Running</value>
+    </data>
     <data name="Starting" xml:space="preserve">
         <value>Starting</value>
+    </data>
+    <data name="Finalizing" xml:space="preserve">
+        <value>Finalizing</value>
     </data>
     <data name="Succeeded" xml:space="preserve">
         <value>Succeeded</value>

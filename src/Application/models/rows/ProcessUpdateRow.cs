@@ -189,7 +189,14 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     public int CompareProgress(string progress)
     {
-        return (int) (float.Parse(Progress.Remove("%")) - float.Parse(progress.Remove("%")));
+        if (!TryParseProgress(Progress, out float result1) || !TryParseProgress(progress, out float result2))
+            return -1;
+        return (int) (result1 - result2);
+    }
+
+    private static bool TryParseProgress(string progress, out float result)
+    {
+        return float.TryParse(progress.Remove("%"), out result);
     }
 
     #endregion
@@ -346,7 +353,9 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     private static readonly Dictionary<ProcessStatus, ViewField> _StatusToViewFieldsDict = new()
     {
+        { ProcessStatus.Starting,   ViewField.Status                                                        },
         { ProcessStatus.Running,    ViewField.Status                                                        },
+        { ProcessStatus.Finalizing, ViewField.Status                                                        },
         { ProcessStatus.Queued,     ViewField.Status                                                        },
         { ProcessStatus.Created,    ViewField.Dynamic                                                       },
         { ProcessStatus.Succeeded,  ViewField.Status | ViewField.Progress | ViewField.Speed | ViewField.Eta },
@@ -358,14 +367,16 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     
     private static readonly Dictionary<ProcessStatus, string> _StatusToMessageDict = new()
     {
-        { ProcessStatus.Running,    Statuses.Starting  },
-        { ProcessStatus.Queued,     Statuses.Queued    },
-        { ProcessStatus.Created,    Statuses.Waiting   },
-        { ProcessStatus.Succeeded,  Statuses.Succeeded },
-        { ProcessStatus.Error,      Statuses.Error     },
-        { ProcessStatus.Stopped,    Statuses.Stopped   },
-        { ProcessStatus.Cancelled,  Statuses.Cancelled },
-        { ProcessStatus.Paused,     Statuses.Paused    }
+        { ProcessStatus.Starting,   Statuses.Starting   },
+        { ProcessStatus.Running,    Statuses.Running    },
+        { ProcessStatus.Finalizing, Statuses.Finalizing },
+        { ProcessStatus.Queued,     Statuses.Queued     },
+        { ProcessStatus.Created,    Statuses.Waiting    },
+        { ProcessStatus.Succeeded,  Statuses.Succeeded  },
+        { ProcessStatus.Error,      Statuses.Error      },
+        { ProcessStatus.Stopped,    Statuses.Stopped    },
+        { ProcessStatus.Cancelled,  Statuses.Cancelled  },
+        { ProcessStatus.Paused,     Statuses.Paused     }
     };
 
     private void SetDefaultMessages(ProcessStatus processStatus)

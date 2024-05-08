@@ -27,6 +27,12 @@ public enum ProcessStatus
     // Process paused
     Paused = 1 << 6,
     
+    // Process initializing (pre-run tasks)
+    Starting = 1 << 7,
+    
+    // Process finishing (post-run tasks)
+    Finalizing = 1 << 8,
+    
     // Process finished (Error, Stopped, Cancelled, Succeeded)
     Completed = (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5),
     

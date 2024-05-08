@@ -96,6 +96,15 @@ namespace JackTheVideoRipper {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finalizing.
+        /// </summary>
+        internal static string Finalizing {
+            get {
+                return ResourceManager.GetString("Finalizing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Idle.
         /// </summary>
         internal static string Idle {
@@ -119,6 +128,15 @@ namespace JackTheVideoRipper {
         internal static string Queued {
             get {
                 return ResourceManager.GetString("Queued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Running.
+        /// </summary>
+        internal static string Running {
+            get {
+                return ResourceManager.GetString("Running", resourceCulture);
             }
         }
         
