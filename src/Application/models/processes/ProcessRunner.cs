@@ -165,6 +165,9 @@ public abstract class ProcessRunner : IProcessRunner
 
         if (!await PostRunTasks())
             return false;
+        
+        if (!Succeeded)
+            Output.WriteLine($"Exit Code: {ExitCode}");
 
         SetProcessStatus(Failed ? ProcessStatus.Error : ProcessStatus.Succeeded);
         
