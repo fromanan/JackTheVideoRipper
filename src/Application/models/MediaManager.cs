@@ -262,7 +262,7 @@ public class MediaManager
 
     public void RemoveProcess(string tag)
     {
-        if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? process) || process is null)
+        if (!_processPool.TryGetProcess(tag, out IProcessUpdateRow? process) || process is null)
             return;
         RemoveProcess(process);
     }
@@ -278,7 +278,7 @@ public class MediaManager
     
     public void PauseProcess(string tag)
     {
-        if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
+        if (!_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
             return;
         PauseProcess(result);
     }
@@ -293,7 +293,7 @@ public class MediaManager
 
     public void ResumeProcess(string tag)
     {
-        if (_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
+        if (!_processPool.TryGetProcess(tag, out IProcessUpdateRow? result) || result is null)
             return;
         ResumeProcess(result);
     }
