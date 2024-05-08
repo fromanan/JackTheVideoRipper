@@ -31,6 +31,8 @@ public readonly struct FfmpegFrame
     
     private static string GetField(IReadOnlyList<string> tokens, ref int count)
     {
+        if (count >= tokens.Count)
+            return string.Empty;
         string value = tokens[count++];
         if (value.ContainsNumber())
             return value.Split('=')[1];
