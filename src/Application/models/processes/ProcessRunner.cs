@@ -169,7 +169,7 @@ public abstract class ProcessRunner : IProcessRunner
         if (!Succeeded)
             Output.WriteLine($"Exit Code: {ExitCode}");
 
-        SetProcessStatus(Failed ? ProcessStatus.Error : ProcessStatus.Succeeded);
+        SetProcessStatus(Succeeded ? ProcessStatus.Succeeded : ProcessStatus.Error);
         
         Completed = true;
 
