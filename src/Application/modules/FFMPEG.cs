@@ -112,7 +112,7 @@ public static class FFMPEG
 
     public static FfmpegParameters Recode(string inputFilepath)
     {
-        return new FfmpegParameters(inputFilepath, hardwareAcceleration:true);
+        return new FfmpegParameters(inputFilepath, hardwareAcceleration:true).IgnoreErrors();
     }
 
     // https://unix.stackexchange.com/questions/28803/how-can-i-reduce-a-videos-size-with-ffmpeg
@@ -123,6 +123,7 @@ public static class FFMPEG
         return new FfmpegParameters(inputFilepath, hardwareAcceleration:true)
             .VideoCodec(VideoCodecs.H264)
             .ConstantRateFactor(compressionRating)
+            .IgnoreErrors()
             .OutputFromInput(Operation.Compress);
     }
 
