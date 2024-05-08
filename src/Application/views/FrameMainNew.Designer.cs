@@ -583,19 +583,19 @@
          // 
          retryDownloadToolStripMenuItem.Name = "retryDownloadToolStripMenuItem";
          retryDownloadToolStripMenuItem.Size = new Size(240, 24);
-         retryDownloadToolStripMenuItem.Text = "Retry Download";
+         retryDownloadToolStripMenuItem.Text = "Retry Process";
          // 
          // resumeDownloadToolStripMenuItem
          // 
          resumeDownloadToolStripMenuItem.Name = "resumeDownloadToolStripMenuItem";
          resumeDownloadToolStripMenuItem.Size = new Size(240, 24);
-         resumeDownloadToolStripMenuItem.Text = "Resume Download";
+         resumeDownloadToolStripMenuItem.Text = "Resume Process";
          // 
          // pauseDownloadToolStripMenuItem
          // 
          pauseDownloadToolStripMenuItem.Name = "pauseDownloadToolStripMenuItem";
          pauseDownloadToolStripMenuItem.Size = new Size(240, 24);
-         pauseDownloadToolStripMenuItem.Text = "Pause Download";
+         pauseDownloadToolStripMenuItem.Text = "Pause Process";
          // 
          // copyUrlToolStripMenuItem
          // 
@@ -607,7 +607,7 @@
          // 
          stopDownloadToolStripMenuItem.Name = "stopDownloadToolStripMenuItem";
          stopDownloadToolStripMenuItem.Size = new Size(240, 24);
-         stopDownloadToolStripMenuItem.Text = "Stop Download";
+         stopDownloadToolStripMenuItem.Text = "Stop Process";
          // 
          // deleteFromDiskToolStripMenuItem
          // 
