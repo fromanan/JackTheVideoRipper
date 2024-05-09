@@ -360,13 +360,14 @@ public static class FileSystem
 
     public static Process TryStartProcess(Process process)
     {
+
+        LogExceptions(LogIfFailed);
+        return process;
+
         void LogIfFailed()
         {
             if (!process.Start()) Log(RFileSystem.ProcessAlreadyRunning);
         }
-        
-        LogExceptions(LogIfFailed);
-        return process;
     }
     
     public static async Task<ProcessResult> TryStartProcessAsync(ProcessStartInfo processStartInfo, int timeoutPeriod = -1)

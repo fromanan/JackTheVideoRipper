@@ -119,20 +119,18 @@ public class ProcessBuffer
     
     private void AppendResult(string? line)
     {
-        if (line is not null && line.HasValue())
-        {
-            AddResultLine(line, ProcessLogType.Log);
-            ResultCount++;
-        }
+        if (line is null || !line.HasValue())
+            return;
+        AddResultLine(line, ProcessLogType.Log);
+        ResultCount++;
     }
 
     private void AppendError(string? line)
     {
-        if (line is not null && line.HasValue())
-        {
-            AddResultLine(line, ProcessLogType.Error);
-            ErrorCount++;
-        }
+        if (line is null || !line.HasValue())
+            return;
+        AddResultLine(line, ProcessLogType.Error);
+        ErrorCount++;
     }
 
     public void AddLog(string message, ProcessLogType logType)
