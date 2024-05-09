@@ -22,6 +22,9 @@ public class ExceptionModel
     [JsonProperty("stack_trace")]
     public string? StackTrace;
 
+    [JsonProperty("inner_exception")]
+    public ExceptionModel? InnerException;
+
     [JsonConstructor]
     public ExceptionModel(string message, string? source, string caller, string type, string? stackTrace)
     {
@@ -48,6 +51,11 @@ public class ExceptionModel
         Caller = exception.GetCaller();
         Type = exception.GetBaseTypeName();
         StackTrace = exception.StackTrace;
+        
+        if (exception.InnerException is not null)
+        {
+            InnerException = new ExceptionModel(exception.InnerException);
+        }
     }
     
     public ExceptionModel(Exception exception, Type type)
@@ -57,6 +65,11 @@ public class ExceptionModel
         Caller = exception.GetCaller();
         Type = type.ToString();
         StackTrace = exception.StackTrace;
+        
+        if (exception.InnerException is not null)
+        {
+            InnerException = new ExceptionModel(exception.InnerException);
+        }
     }
 
     public override string ToString()
@@ -69,6 +82,11 @@ public class ExceptionModel
         buffer.AppendLine($"Source: {Source}");
         buffer.AppendLine("Stack Trace:");
         buffer.AppendLine(StackTrace);
+
+        if (InnerException is not null)
+        {
+            buffer.AppendLine(InnerException.ToString());
+        }
         
         return buffer.ToString();
     }
