@@ -21,7 +21,7 @@ public interface IProcessRunner
 
     bool Completed { get; }
 
-    bool Running => Started && !Completed;
+    bool Running => Started && !Completed && !Finished;
     
     string ProcessFileName { get; }
     
