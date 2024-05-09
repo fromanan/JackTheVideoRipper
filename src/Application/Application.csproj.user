@@ -2,9 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="..\..\external\ConsoleControl\ConsoleControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="models\AsyncProcess.cs">
       <SubType>Component</SubType>
     </Compile>
