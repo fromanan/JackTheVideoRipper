@@ -743,7 +743,11 @@ public static class FileSystem
 
     public static bool TryDelete(string filepath)
     {
-        return LogExceptions(() => File.Delete(filepath));
+        // Return result? - {Success,Exception}
+        if (LogExceptions(() => File.Delete(filepath)))
+            return true;
+        Modals.Warning("Could not delete file!");
+        return false;
     }
     
     public static void SaveToFile(string filepath, string content)
