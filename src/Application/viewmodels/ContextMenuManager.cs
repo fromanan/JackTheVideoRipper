@@ -57,10 +57,9 @@ public class ContextMenuManager
         
         // Process Menu
         { ContextPaths.RETRY_PROCESS,           ProcessStatus.Error     },
-        { ContextPaths.STOP_PROCESS,            ProcessStatus.Running   },
+        { ContextPaths.STOP_PROCESS,            ProcessStatus.Running | ProcessStatus.Paused   },
         { ContextPaths.RESUME_PROCESS,          ProcessStatus.Paused    },
         { ContextPaths.PAUSE_PROCESS,           ProcessStatus.Running   },
-        { ContextPaths.PROCESS_MENU,            ProcessStatus.Running   },
         
         // Result Menu
         { ContextPaths.MOVE,                    ProcessStatus.Succeeded },
