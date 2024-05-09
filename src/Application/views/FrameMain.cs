@@ -28,11 +28,11 @@ public partial class FrameMain : Form
 
    private ListView.ListViewItemCollection ViewItems => listItems.Items;
 
-   public IViewItem? FirstSelected => !NoneSelected ? Selected[0].As<IViewItem>() : null;
+   public IViewItem? FirstSelected => AnySelected ? Selected[0].As<IViewItem>() : null;
 
-   public IViewItem? LastSelected => !NoneSelected ? Selected[^1].As<IViewItem>() : null;
-
-   public bool NoneSelected => Selected.Count <= 0;
+   public IViewItem? LastSelected => AnySelected ? Selected[^1].As<IViewItem>() : null;
+   
+   public bool AnySelected => Selected.Count > 0;
 
    public ListViewItem? FocusedItem => listItems.FocusedItem;
 
