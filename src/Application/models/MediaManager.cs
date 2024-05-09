@@ -379,7 +379,7 @@ public class MediaManager
             }
             case ContextActions.Remove:
             {
-                if (Selected.Completed || !Selected.Started || Modals.Confirmation(Messages.DeleteRunningProcess))
+                if (!Selected.Running || Modals.Confirmation(Messages.DeleteRunningProcess))
                     RemoveProcess(Selected);
                 break;
             }
