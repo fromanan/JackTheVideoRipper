@@ -192,14 +192,15 @@ public abstract class ProcessRunner : IProcessRunner
         if (ProcessStatus is not ProcessStatus.Running)
             return;
         Process?.Suspend();
+        SetProcessStatus(ProcessStatus.Paused);
     }
 
     public virtual void Resume()
     {
         if (ProcessStatus is not ProcessStatus.Paused)
             return;
-        SetProcessStatus(ProcessStatus.Running);
         Process?.Resume();
+        SetProcessStatus(ProcessStatus.Running);
     }
 
     #endregion
