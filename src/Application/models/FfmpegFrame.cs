@@ -34,7 +34,7 @@ public readonly struct FfmpegFrame
         if (count >= tokens.Count)
             return string.Empty;
         string value = tokens[count++];
-        if (value.ContainsNumber())
+        if (value.ContainsNumber() && value.Contains('='))
             return value.Split('=')[1];
         if (count >= tokens.Count)
             return string.Empty;
