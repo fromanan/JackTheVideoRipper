@@ -81,7 +81,7 @@ public abstract class FFMPEGProcessRow : ProcessUpdateRow
 
     protected override async Task<string> GetTitle()
     {
-        return await ExifTool.GetTag(Filepath, "Title");
+        return (await ExifTool.GetTag(Filepath, "Title")).ValueOrDefault(Filename);
     }
 
     protected static bool IsFileExistsLine(IEnumerable<string> tokens)
