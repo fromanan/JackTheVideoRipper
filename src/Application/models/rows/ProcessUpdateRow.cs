@@ -147,6 +147,12 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         return UpdateViewItemFields(status);
     }
 
+    public override async Task<bool> Initialize()
+    {
+        await RetrieveTitle();
+        return true;
+    }
+
     public override async Task<bool> Start()
     {
         if (!await base.Start())
@@ -155,7 +161,6 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
             return false;
         }
         
-        await RetrieveTitle();
         PostStartMessage();
         return true;
     }

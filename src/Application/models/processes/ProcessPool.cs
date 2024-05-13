@@ -310,6 +310,8 @@ public class ProcessPool
     {
         if (!_processTable.TryAdd(processUpdateRow))
             throw new ProcessPoolException(string.Format(Messages.FailedToAddProcess, processUpdateRow.Tag));
+        // TODO: Should check result... (requires async)
+        processUpdateRow.Initialize();
         _processQueue.Enqueue(processUpdateRow);
         processUpdateRow.Enqueue();
         queueCallback(processUpdateRow.ViewItem);

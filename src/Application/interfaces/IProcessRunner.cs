@@ -53,6 +53,8 @@ public interface IProcessRunner
 
     Task<ProcessUpdateArgs> Update();
 
+    Task<bool> Initialize();
+
     Task<bool> Start();
 
     void Stop();

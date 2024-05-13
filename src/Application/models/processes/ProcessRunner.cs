@@ -91,6 +91,11 @@ public abstract class ProcessRunner : IProcessRunner
 
         return ProcessUpdateArgs.Done();
     }
+    
+    public virtual async Task<bool> Initialize()
+    {
+        return true;
+    }
 
     public virtual async Task<bool> Start()
     {
