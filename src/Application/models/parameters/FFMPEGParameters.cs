@@ -189,6 +189,17 @@ public class FfmpegParameters : ProcessParameters<FfmpegParameters>, IRequiresFi
         return AddNoValue("y");
     }
 
+    // 1 = stdout ; 2 = stderr
+    public FfmpegParameters Progress(int pipe = 1)
+    {
+        return Add("progress", $"pipe:{pipe}");
+    }
+
+    public FfmpegParameters ExitOnError()
+    {
+        return AddNoValue("xerror");
+    }
+
     #endregion
 
     #region Overrides
