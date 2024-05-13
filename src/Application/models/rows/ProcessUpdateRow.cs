@@ -169,6 +169,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     {
         if (!await base.Complete())
             return false;
+        RefreshView();
         PostFinishMessage();
         return true;
     }
@@ -199,7 +200,12 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         return (int) (result1 - result2);
     }
 
+    public void RefreshView()
     {
+        SetViewField(() =>
+        {
+            SetDefaultMessages(ProcessStatus);
+        }, Global.Configurations.VIEW_UPDATE_TIMEOUT * 2);
     }
 
     #endregion
@@ -477,9 +483,9 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     public static readonly AutoResetEvent UpdateViewHandle = new(true);
 
     // TODO: Currently this is causing deadlock on the main thread, unless we run in the background as so...
-    protected static void SetViewField(Action setValueAction)
+    protected static void SetViewField(Action setValueAction, int timeout = -1)
     {
-        UpdateViewHandle.WaitOne(Global.Configurations.VIEW_UPDATE_TIMEOUT);
+        UpdateViewHandle.WaitOne(timeout is -1 ? Global.Configurations.VIEW_UPDATE_TIMEOUT : timeout);
         Threading.RunInMainContext(setValueAction);
         UpdateViewHandle.Reset();
     }
