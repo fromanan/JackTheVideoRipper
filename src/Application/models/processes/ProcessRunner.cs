@@ -62,7 +62,7 @@ public abstract class ProcessRunner : IProcessRunner
 
     #region Constructor
 
-    public ProcessRunner(string parameterString, Action<IProcessRunner> completionCallback)
+    protected ProcessRunner(string parameterString, Action<IProcessRunner> completionCallback)
     {
         ParameterString = parameterString;
         CompletionCallback = completionCallback;

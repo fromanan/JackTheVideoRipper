@@ -135,14 +135,6 @@ internal static class YouTubeDL
                _supportedServicesString.Contains(domainInfo.Domain, DEFAULT_COMPARISON);
     }
 
-    public static string GetDefaultTitle(string filepath)
-    {
-        return filepath.SplitCamelCase()
-            .ReplaceUnderscore()
-            .RemoveMultiSpace()
-            .Trim();
-    }
-
     #endregion
 
     #region Private Methods

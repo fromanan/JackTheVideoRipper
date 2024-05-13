@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using JackTheVideoRipper.models;
 using JackTheVideoRipper.models.containers;
 using JackTheVideoRipper.viewmodels;
 using Console = JackTheVideoRipper.models.Console;

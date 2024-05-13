@@ -71,7 +71,6 @@ public abstract class FFMPEGProcessRow : ProcessUpdateRow
             return Text.DefaultProgress;
 
         float progress = frame * 100f / _totalFrames;
-        
         return progress > 100 ? Text.ProgressComplete : $"{progress:F2}%";
     }
 

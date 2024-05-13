@@ -25,7 +25,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     #region Properties
     
-    private string DefaultTitle => YouTubeDL.GetDefaultTitle(Filename);
+    private string DefaultTitle => GetDefaultTitle(Filename);
 
     #endregion
 
@@ -155,8 +155,8 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
             return false;
         }
         
-        StartMessage();
         await RetrieveTitle();
+        PostStartMessage();
         return true;
     }
 
@@ -164,7 +164,7 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     {
         if (!await base.Complete())
             return false;
-        FinishMessage();
+        PostFinishMessage();
         return true;
     }
 
@@ -194,14 +194,20 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         return (int) (result1 - result2);
     }
 
-    private static bool TryParseProgress(string progress, out float result)
     {
-        return float.TryParse(progress.Remove("%"), out result);
     }
 
     #endregion
 
     #region Protected Methods
+    
+    protected static string GetDefaultTitle(string filepath)
+    {
+        return filepath.SplitCamelCase()
+            .ReplaceUnderscore()
+            .RemoveMultiSpace()
+            .Trim();
+    }
 
     protected ProcessUpdateArgs UpdateViewItemFields(string status)
     {
@@ -230,8 +236,9 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
     {
         if (Title.HasValue())
             return;
-        
-        SetTitle((await GetTitle()).ValueOrDefault(DefaultTitle));
+
+        string title = (await GetTitle()).ValueOrDefault(DefaultTitle);
+        SetViewField(() => Title = title);
     }
 
     #endregion
@@ -248,24 +255,19 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
 
     #region Private Methods
 
-    private void SetTitle(string title)
-    {
-        SetViewField(() => Title = title);
-    }
-
     private void AddToHistory(IMediaItem mediaItem)
     {
         History.Data.AddHistoryItem(Tag, mediaItem);
     }
     
-    private void StartMessage()
+    private void PostStartMessage()
     {
         History.Data.MarkStarted(Tag);
         Buffer.AddLog(Messages.ProcessStarted, ProcessLogType.Info);
         Output.WriteLine(string.Format(Messages.ProcessStartedTag, Tag));
     }
 
-    private void FinishMessage()
+    private void PostFinishMessage()
     {
         History.Data.MarkCompleted(Tag, result:ProcessStatus);
         Buffer.AddLog(Messages.ProcessCompleted, ProcessLogType.Info);
@@ -456,6 +458,11 @@ public abstract class ProcessUpdateRow : ProcessRunner, IProcessUpdateRow, IDyna
         }
 
         SetValues(flags, values);
+    }
+    
+    private static bool TryParseProgress(string progress, out float result)
+    {
+        return float.TryParse(progress.Remove("%"), out result);
     }
 
     #endregion

@@ -56,12 +56,11 @@ public class ContextMenuManager
         { ContextPaths.OPEN_IN_MEDIA_PLAYER,    ProcessStatus.Succeeded },
         
         // Process Menu
+        { ContextPaths.PROCESS_MENU,            ProcessStatus.Error | ProcessStatus.Running | ProcessStatus.Paused },
         { ContextPaths.RETRY_PROCESS,           ProcessStatus.Error     },
         { ContextPaths.STOP_PROCESS,            ProcessStatus.Running | ProcessStatus.Paused   },
         { ContextPaths.RESUME_PROCESS,          ProcessStatus.Paused    },
         { ContextPaths.PAUSE_PROCESS,           ProcessStatus.Running   },
-        
-        { ContextPaths.PROCESS_MENU,            ProcessStatus.Error | ProcessStatus.Running | ProcessStatus.Paused },
         
         // Result Menu
         { ContextPaths.MOVE,                    ProcessStatus.Succeeded },

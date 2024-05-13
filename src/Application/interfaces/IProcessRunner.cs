@@ -7,6 +7,8 @@ namespace JackTheVideoRipper.interfaces;
 
 public interface IProcessRunner
 {
+    #region Properties
+
     Process? Process { get; }
     
     ProcessStatus ProcessStatus { get; }
@@ -18,12 +20,22 @@ public interface IProcessRunner
     MediaProcessType ProcessType { get; init; }
 
     int ExitCode { get; }
+    
+    string ProcessFileName { get; }
+    
+    int ProcessId { get; }
+    
+    float Progress { get; }
+    
+    List<string> Dependencies { get; }
+
+    #endregion
+
+    #region Flags
 
     bool Completed { get; }
 
     bool Running => Started && !Completed && !Finished;
-    
-    string ProcessFileName { get; }
     
     bool Failed { get; }
     
@@ -34,12 +46,10 @@ public interface IProcessRunner
     bool Finished { get; }
     
     bool Paused { get; }
-    
-    int ProcessId { get; }
-    
-    float Progress { get; }
-    
-    List<string> Dependencies { get; }
+
+    #endregion
+
+    #region Methods
 
     Task<ProcessUpdateArgs> Update();
 
@@ -60,4 +70,6 @@ public interface IProcessRunner
     void Kill();
     
     void TryKillProcess();
+
+    #endregion
 }

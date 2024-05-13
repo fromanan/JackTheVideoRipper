@@ -67,7 +67,7 @@ public readonly struct ProcessLogNode : ILogNode
             new ConsoleLine($"{Date:G}") { Color = Color.Aquamarine }
         };
 
-        if (LogType != ProcessLogType.Log)
+        if (LogType is not ProcessLogType.Log)
         {
             list.Add(new ConsoleLine(" | "));
             
