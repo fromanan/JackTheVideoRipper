@@ -184,6 +184,8 @@ public abstract class ProcessRunner : IProcessRunner
     public virtual void Enqueue()
     {
         SetProcessStatus(ProcessStatus.Queued);
+        
+        // TODO: Insert metadata lookup (post to worker thread)
     }
 
     // Returns if the process succeeded / can proceed
