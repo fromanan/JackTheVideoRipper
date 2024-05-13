@@ -1,4 +1,5 @@
-﻿using JackTheVideoRipper.extensions;
+﻿using System.Collections.Concurrent;
+using JackTheVideoRipper.extensions;
 using JackTheVideoRipper.framework;
 using JackTheVideoRipper.interfaces;
 using JackTheVideoRipper.views;
@@ -19,7 +20,7 @@ public class Console : IDisposable
     
     private readonly List<ILogNode> _logHistory = new();
     
-    private readonly Queue<ILogNode> _messageQueue = new();
+    private readonly ConcurrentQueue<ILogNode> _messageQueue = new();
 
     #endregion
 
@@ -113,9 +114,9 @@ public class Console : IDisposable
 
     private void WriteFromQueue()
     {
-        while (Active && !_messageQueue.Empty() && Control is not null)
+        while (Active && Control is not null && !_messageQueue.Empty() && _messageQueue.TryDequeue(out ILogNode? value))
         {
-            Control?.WriteLog(_messageQueue.Dequeue());
+            Control.WriteLog(value);
         }
     }
 
