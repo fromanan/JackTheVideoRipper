@@ -1,3 +1,7 @@
 [submodule "external/ConsoleControl"]
 	path = external/ConsoleControl
 	url = https://github.com/fromanan/consolecontrol.git
+[submodule "external/NovaCore"]
+	path = external/NovaCore
+	url = https://github.com/fromanan/nova.git
+	branch = rippr.io
